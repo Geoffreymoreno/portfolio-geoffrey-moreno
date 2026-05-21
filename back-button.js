@@ -36,6 +36,23 @@
         <polyline points="12 19 5 12 12 5"></polyline>
       </svg>
     `;
+    /* Sur clic : si l'utilisateur est arrivé ici depuis la page d'accueil
+       (même origine), on utilise history.back() pour revenir via le bfcache
+       du navigateur — la home revient INSTANTANÉMENT dans son état précédent
+       (scroll inclus), sans rechargement, sans scroll animation visible.
+       Si pas de référent home (ex : visite directe via URL projet), on
+       laisse le href par défaut faire la navigation classique. */
+    back.addEventListener('click', (e) => {
+      const cameFromHome = document.referrer && (
+        document.referrer === window.location.origin + '/' ||
+        document.referrer.endsWith('/index.html') ||
+        document.referrer === window.location.origin
+      );
+      if (cameFromHome && window.history.length > 1) {
+        e.preventDefault();
+        window.history.back();
+      }
+    });
 
     /* Insertion : dès que body est dispo */
     if (document.body) {
