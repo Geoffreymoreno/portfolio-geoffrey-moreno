@@ -18,19 +18,28 @@
     if (!location.hash) window.scrollTo(0, 0);
   </script>
   <script>
-    /* Retour depuis page projet (mobile) — cache la page jusqu'à ce que le
-       scroll soit positionné sur la card cible, évite que l'utilisateur voie
-       le haut de la page puis un scroll vers la card. Le retour devient
-       instantané : on apparaît directement sur le projet. La classe est
-       retirée par back-button.js après scrollIntoView (avec safety timeout). */
-    if (location.hash.startsWith('#card-') && window.matchMedia('(max-width: 768px)').matches) {
+    /* Retour depuis page projet — couvre tout le viewport avec un overlay
+       paint-level (pseudo-élément ::before sur <html>) PENDANT la restauration
+       de scroll. Indépendant de l'inheritance visibility (qui n'hide pas les
+       éléments fixed/sticky sur iOS Safari) et de l'ordre de layout. La classe
+       est retirée par back-button.js APRÈS scrollTo (safety timeout 3s très
+       long pour ne JAMAIS retirer l'overlay avant que doScroll ait fini, même
+       si la galerie doit s'étendre et reflow). */
+    if (location.hash.startsWith('#card-')) {
       document.documentElement.classList.add('is-restoring-scroll');
-      setTimeout(() => document.documentElement.classList.remove('is-restoring-scroll'), 800);
+      setTimeout(() => document.documentElement.classList.remove('is-restoring-scroll'), 3000);
     }
   </script>
   <style>
     html.is-restoring-scroll { scroll-behavior: auto !important; }
-    html.is-restoring-scroll body { visibility: hidden; }
+    html.is-restoring-scroll::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #dfd0e6 0%, #e3ccd2 100%);
+      z-index: 2147483647;
+      pointer-events: none;
+    }
   </style>
   <script>
     /* ══ Hero intro — affiche les animations d'entrée uniquement si la

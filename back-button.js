@@ -36,22 +36,29 @@
         <polyline points="12 19 5 12 12 5"></polyline>
       </svg>
     `;
-    /* Sur clic : si l'utilisateur est arrivé ici depuis la page d'accueil
-       (même origine), on utilise history.back() pour revenir via le bfcache
-       du navigateur — la home revient INSTANTANÉMENT dans son état précédent
-       (scroll inclus), sans rechargement, sans scroll animation visible.
-       Si pas de référent home (ex : visite directe via URL projet), on
-       laisse le href par défaut faire la navigation classique. */
-    back.addEventListener('click', (e) => {
-      const cameFromHome = document.referrer && (
-        document.referrer === window.location.origin + '/' ||
-        document.referrer.endsWith('/index.html') ||
-        document.referrer === window.location.origin
-      );
-      if (cameFromHome && window.history.length > 1) {
-        e.preventDefault();
-        window.history.back();
-      }
+    /* Navigation classique via href avec hash #card-{slug} : la home reçoit
+       le hash, son <script> inline déclenche IMMÉDIATEMENT l'overlay paint-level
+       (pseudo-élément ::before sur <html>) qui masque tout le viewport. La
+       restauration de scroll a lieu sous le masque ; quand back-button.js
+       termine doScroll, il retire la classe et l'overlay disparaît, révélant
+       la home pile sur la card cliquée — aucun scroll visible.
+       Note : on n'utilise PAS history.back() car il ramène vers l'URL home
+       précédente SANS hash, donc l'overlay inline ne se déclenche pas et si
+       bfcache échoue (très fréquent sur iOS Safari quand des <video> tournent),
+       la home recharge au scroll 0 sans aucune restauration. La nav href est
+       toujours fiable. */
+
+    /* Au clic : on injecte un overlay paint-level FULLSCREEN identique à
+       celui de la home (mêmes pastel #dfd0e6 → #e3ccd2) AVANT que la nav ne
+       parte. Le user voit donc : page projet → overlay pastel (instantané) →
+       overlay pastel sur la home (continuité visuelle) → home révélée pile sur
+       la card. Aucun flash blanc entre les deux pages (le browser garde le
+       projet visible jusqu'à ce que la home soit prête à peindre, et notre
+       overlay couvre le projet pendant cet intervalle). */
+    back.addEventListener('click', () => {
+      const ov = document.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;background:linear-gradient(180deg,#dfd0e6 0%,#e3ccd2 100%);z-index:2147483647;pointer-events:none;';
+      document.documentElement.appendChild(ov);
     });
 
     /* Insertion : dès que body est dispo */
