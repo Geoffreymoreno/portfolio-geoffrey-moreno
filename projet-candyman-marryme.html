@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campagne d'influence Candyman & Marry Me — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Creepster&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* Styles partagés → projet.css */
+
+    /* 1. HERO BANNER */
+    .projet-hero {
+      min-height: 34vh;
+      height: 34vh;
+      background: linear-gradient(120deg, #1a0608 0%, #3a0a14 40%, #4a1224 70%, #2a0a14 100%);
+      padding: 0 0 0 8%;
+    }
+
+    /* Brouillard atmosphérique animé */
+    .projet-hero::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(229, 9, 20, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(200, 80, 120, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 60% 20%, rgba(180, 60, 80, 0.12) 0%, transparent 55%);
+      filter: blur(40px);
+      animation: heroFog 18s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes heroFog {
+      0%   { transform: translate(0, 0)       scale(1);    opacity: 0.85; }
+      50%  { transform: translate(3%, -2%)    scale(1.08); opacity: 1;    }
+      100% { transform: translate(-2%, 3%)    scale(1.04); opacity: 0.9;  }
+    }
+
+    /* Vignettage cinématographique */
+    .projet-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* RUCHE / NID D'ABEILLES — background pattern */
+    .hero-atmosphere {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-honeycomb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.28;
+    }
+
+    /* Couche d'ombrage 3D sur les cellules (donne de la profondeur) */
+    .hero-honeycomb--shadow {
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+    }
+
+    /* Halo doré ambiant qui pulse pour effet "lumière de cire" */
+    .hero-honeycomb-glow {
+      position: absolute;
+      inset: -10%;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 50%, rgba(220, 150, 60, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 75% 60%, rgba(200, 130, 50, 0.05) 0%, transparent 65%);
+      filter: blur(20px);
+      animation: honeycombGlow 7s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes honeycombGlow {
+      0%   { opacity: 0.55; }
+      100% { opacity: 0.85; }
+    }
+
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 20px;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+
+    .hero-thumb {
+      border: none;
+      filter: brightness(0.88) saturate(0.95);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .projet-hero__thumbs:hover .hero-thumb {
+      filter: blur(2px) brightness(0.55) saturate(0.7);
+      transform-origin: center;
+    }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(1) { transform: rotate(-6deg) scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(2) { transform: rotate(0deg)  scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(3) { transform: rotate(6deg)  scale(0.95); }
+
+    .projet-hero__thumbs .hero-thumb:hover {
+      filter: blur(0) brightness(1.05) saturate(1.05) !important;
+      box-shadow: 0 24px 56px rgba(0,0,0,0.65);
+      z-index: 10 !important;
+    }
+    .projet-hero__thumbs .hero-thumb:nth-child(1):hover { transform: rotate(-3deg) scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(2):hover { transform: rotate(0deg)  scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(3):hover { transform: rotate(3deg)  scale(1.08) translateY(-6px) !important; }
+
+    /* pulse retiré */
+
+    /* 3. MAIN CARD */
+    .projet-card {
+      width: 94%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .red-card {
+      position: relative;
+      background: linear-gradient(135deg, #1a0608 0%, #3a0a14 50%, #4a1224 100%);
+      border: 1.5px solid rgba(229, 9, 20, 0.45);
+      border-radius: 22px;
+      padding: 41px 31px 27px;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.55),
+        0 2px 0 rgba(255,255,255,0.06) inset,
+        0 -2px 0 rgba(0,0,0,0.25) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      filter: brightness(1.1);
+    }
+    /* Fond ruche (réutilise le pattern défini dans le hero) */
+    .red-card__bg {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .red-card__bg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.11;
+    }
+    .red-card > .red-card__text,
+    .red-card > .red-card__list,
+    .red-card > .results-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Séparateurs ornementaux entre sections (style faire-part de mariage) */
+    .section-separator {
+      width: 82%;
+      max-width: 420px;
+      margin: 8px auto;
+      display: block;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+    .section-separator svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ABEILLES réalistes qui gravitent sur toute la page */
+    main { position: relative; }
+    .page-bees {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+      overflow: hidden;
+    }
+    .bee-icon {
+      position: absolute;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+      will-change: transform;
+    }
+    .bee-icon svg { width: 100%; height: auto; display: block; }
+    .bee-icon__wings {
+      transform-origin: center 18px;
+      animation: beeWings 0.09s steps(2, end) infinite;
+    }
+    @keyframes beeWings {
+      from { transform: scaleY(1); }
+      to   { transform: scaleY(0.55); }
+    }
+
+    /* Positions + tailles + animations distinctes */
+    /* Distribution uniforme : 5 gauche, 5 centre (gaps entre éléments), 5 droite */
+    /* === COLONNE GAUCHE === */
+    .bee-icon--1  { top: 5%;   left: 4%;   width: 30px; animation: beeFlightA 14s ease-in-out infinite; }
+    .bee-icon--5  { top: 22%;  left: 3%;   width: 26px; animation: beeFlightA 12s ease-in-out infinite; }
+    .bee-icon--8  { top: 45%;  left: 4%;   width: 28px; animation: beeFlightB 13s ease-in-out infinite; }
+    .bee-icon--11 { top: 68%;  left: 3%;   width: 24px; animation: beeFlightC 14s ease-in-out infinite; opacity: 0.85; }
+    .bee-icon--17 { top: 90%;  left: 4%;   width: 18px; animation: beeFlightA 13s ease-in-out infinite; animation-delay: -2.8s; opacity: 0.75; }
+
+    /* === COLONNE CENTRE (uniquement dans les gaps : top hero, gap entre cartes, etc.) === */
+    .bee-icon--2  { top: 2%;   left: 50%;  width: 26px; animation: beeFlightC 13s ease-in-out infinite; opacity: 0.9;  }   /* hero top strip */
+    .bee-icon--4  { top: 17%;  left: 50%;  width: 22px; animation: beeFlightC 15s ease-in-out infinite; animation-delay: -1.5s; opacity: 0.85; }   /* gap entre Contexte/Missions */
+    .bee-icon--7  { top: 33%;  left: 50%;  width: 24px; animation: beeFlightA 14s ease-in-out infinite; animation-delay: -3s;   }   /* avant grille vidéos */
+    .bee-icon--10 { top: 56%;  left: 50%;  width: 22px; animation: beeFlightC 12s ease-in-out infinite; animation-delay: -2.4s; opacity: 0.9; }   /* entre rangées vidéos */
+    .bee-icon--15 { top: 65%;  left: 50%;  width: 26px; animation: beeFlightB 15s ease-in-out infinite; animation-delay: -4s;   }   /* avant carrousel */
+
+    /* === COLONNE DROITE === */
+    .bee-icon--3  { top: 8%;   left: 95%;  width: 22px; animation: beeFlightB 11s ease-in-out infinite; opacity: 0.85; }
+    .bee-icon--6  { top: 28%;  left: 96%;  width: 20px; animation: beeFlightB 16s ease-in-out infinite; opacity: 0.8; }
+    .bee-icon--9  { top: 50%;  left: 95%;  width: 18px; animation: beeFlightA 17s ease-in-out infinite; opacity: 0.75; }
+    .bee-icon--19 { top: 72%;  left: 96%;  width: 22px; animation: beeFlightB 14s ease-in-out infinite; animation-delay: -4.6s; opacity: 0.85; }
+    .bee-icon--21 { top: 92%;  left: 95%;  width: 26px; animation: beeFlightC 15s ease-in-out infinite; animation-delay: -2.1s; }
+
+    /* Trajectoires courtes pour rester dans les couloirs latéraux (max ~25px) */
+    @keyframes beeFlightA {
+      0%   { transform: translate(0, 0)         rotate(-6deg); }
+      20%  { transform: translate(18px, -22px)  rotate(20deg); }
+      40%  { transform: translate(24px, -6px)   rotate(-14deg); }
+      60%  { transform: translate(14px, 22px)   rotate(12deg); }
+      80%  { transform: translate(-8px, 14px)   rotate(-15deg); }
+      100% { transform: translate(0, 0)         rotate(-6deg); }
+    }
+    @keyframes beeFlightB {
+      0%   { transform: translate(0, 0)         rotate(8deg); }
+      25%  { transform: translate(-22px, 24px)  rotate(-22deg); }
+      50%  { transform: translate(-10px, 42px)  rotate(12deg); }
+      75%  { transform: translate(15px, 28px)   rotate(-15deg); }
+      100% { transform: translate(0, 0)         rotate(8deg); }
+    }
+    @keyframes beeFlightC {
+      0%   { transform: translate(0, 0)         rotate(0deg); }
+      33%  { transform: translate(22px, 18px)   rotate(18deg); }
+      66%  { transform: translate(-18px, 32px)  rotate(-12deg); }
+      100% { transform: translate(0, 0)         rotate(0deg); }
+    }
+
+    @media (max-width: 768px) {
+      .bee-icon { transform: scale(0.8); }
+      .bee-icon--3, .bee-icon--7, .bee-icon--10 { display: none; }
+    }
+
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.08rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 0.4px #ffffff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30);
+      padding: 11px 29px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, #4a1224 0%, #1a0608 100%);
+      border: 1.5px solid rgba(229, 9, 20, 0.65);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+      gap: 32px;
+    }
+
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.08vw, 18px);
+      line-height: 1.85;
+      letter-spacing: 0.05em;
+      color: #f5d4d8;
+      text-shadow: 0 1px 8px rgba(255, 100, 120, 0.2);
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text {
+      margin-top: 22px;
+    }
+    @media (min-width: 1025px) {
+      .red-card__text { font-size: clamp(16px, 1.24vw, 21px); }
+    }
+
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.08vw, 18px);
+      line-height: 1.85;
+      letter-spacing: 0.05em;
+      color: #f5d4d8;
+      text-shadow: 0 1px 8px rgba(255, 100, 120, 0.2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      text-align: center;
+      width: 100%;
+    }
+    .red-card__list li {
+      display: block;
+      text-align: center;
+    }
+    .red-card__list li::before {
+      content: "•  ";
+      display: inline;
+    }
+    .red-card__list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .red-card--results {
+      padding: 36px 18px 32px;
+      width: 65%;
+      align-self: center;
+    }
+    .results-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      width: 100%;
+      padding-top: 22px;
+    }
+    .results-item__number {
+      font-size: 1.32em;
+      vertical-align: middle;
+    }
+    .results-item__suffix-stack {
+      vertical-align: middle;
+    }
+    .results-item {
+      flex: 0 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 14px;
+    }
+    .results-item__value {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.30rem, 2.09vw, 1.92rem);
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 7px;
+      white-space: nowrap;
+    }
+    .results-item__value .results-item__suffix {
+      font-weight: 500;
+      font-size: 0.65em;
+    }
+    .results-item__suffix-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      vertical-align: middle;
+      line-height: 1.15;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.68rem, 0.82vw, 0.82rem);
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      line-height: 1.4;
+    }
+    .results-divider {
+      width: 1px;
+      height: 52px;
+      background: rgba(255, 255, 255, 0.35);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .red-card--results { width: 85%; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; width: 92%; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* BADGES */
+    .projet-badges {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .badge {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: #ffffff;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    /* CONTENUS */
+    .contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+      position: relative;
+    }
+    /* Rectangle de titre de section (Candyman / Marry Me) */
+    .grid-row-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(15px, 1.18vw, 18px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      padding: 10px 26px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #4a1224 0%, #1a0608 100%);
+      border: 1.5px solid rgba(229, 9, 20, 0.65);
+      box-shadow:
+        0 6px 18px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      filter: brightness(1.1);
+    }
+    .grid-row-title--marry {
+      background: linear-gradient(180deg, #d4187a 0%, #9c0d55 100%);
+      border-color: rgba(255, 20, 147, 0.75);
+      box-shadow:
+        0 6px 18px rgba(180, 0, 100, 0.50),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -2px 4px rgba(0,0,0,0.25);
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(17.25px, 1.32vw, 20.7px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #4a1224 0%, #1a0608 100%);
+      border: 1.5px solid rgba(229, 9, 20, 0.65);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      filter: brightness(1.1);
+    }
+    .contenus-title__logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contenus-title__logos img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 48px 36px;
+      width: 100%;
+      justify-items: center;
+      align-items: start;
+      position: relative;
+    }
+    .contenus-grid--cols-2 { grid-template-columns: repeat(2, 1fr); gap: 64px 80px; }
+    .contenus-grid--cols-2 .contenu-card { max-width: 283px; }
+    .contenus-grid--cols-2 .contenu-card { width: 85%; margin: 0 auto; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured { aspect-ratio: auto; min-height: 0; height: 48px; overflow: visible; }
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-value,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-separator,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-icon,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-prefix { font-size: 24px; }
+    .contenus-grid--cols-2 .contenu-card__metric-inline { gap: 4px; margin-left: 0; }
+    .contenus-grid--cols-2 .metric-press__inner { gap: 4px; padding: 0 28px 0 0; justify-content: center; box-shadow: none; }
+    .contenus-grid--cols-2 .metric-press__outer { box-shadow: none; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured { box-shadow: none; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured::after { display: none; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured img { width: 71px !important; height: 71px !important; margin: 0; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured:hover .metric-press__inner { clip-path: inset(0 0 0 0 round 8.77px); background: rgba(229,9,20,0.55); box-shadow: inset 0 0 6px rgba(229,9,20,0.45), inset 0 0 0 1px rgba(255,255,255,0.08); }
+    .contenus-grid--cols-2 .contenu-card__metric--featured:active .metric-press__inner { transform: scale(0.97); background: rgba(229,9,20,0.55); box-shadow: inset 0 0 6px rgba(229,9,20,0.45); }
+    .contenus-grid--cols-3 { grid-template-columns: repeat(6, 1fr); }
+    .contenus-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .contenus-grid--cols-2 > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+1) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid--cols-4 > .contenu-card:nth-last-child(2):nth-child(4n+1) { grid-column: 2 / 3; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+2) { grid-column: 3 / 4; }
+    /* Layout 3 colonnes : 2 vidéos centrées en ligne 1, 3 vidéos en ligne 2 (grille 6 colonnes, span 2) */
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .contenu-card { grid-column: span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-1 { grid-column: 2 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-2 { grid-column: 4 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-3 { grid-column: 1 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-4 { grid-column: 3 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-5 { grid-column: 5 / span 2; }
+    .contenus-grid > .grid-row-title { grid-column: 1 / -1; justify-self: center; }
+    @keyframes layoutFade {
+      from { opacity: 0.6; transform: scale(0.97); }
+      to   { opacity: 1;   transform: scale(1); }
+    }
+    .layout-changing .contenu-card { animation: layoutFade 0.32s ease forwards; }
+
+    .layout-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: linear-gradient(180deg, #4a1224 0%, #1a0608 100%);
+      border: 1.5px solid rgba(229, 9, 20, 0.65);
+      border-radius: 999px;
+      padding: 5px 7px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -2px 4px rgba(0,0,0,0.30);
+    }
+    .layout-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 999px; border: none;
+      background: transparent; cursor: pointer; padding: 0; transition: background 0.2s ease;
+    }
+    .layout-btn svg { width: 19px; height: 14px; fill: rgba(255,255,255,0.55); transition: fill 0.2s ease, filter 0.2s ease; }
+    .layout-btn.is-active { background: rgba(255,255,255,0.18); box-shadow: inset 0 0 10px rgba(255,255,255,0.12), 0 0 8px rgba(255,255,255,0.08); }
+    .layout-btn.is-active svg { fill: #ffffff; filter: drop-shadow(0 0 4px rgba(255,255,255,0.55)); }
+    .layout-btn:hover:not(.is-active) { background: rgba(255,255,255,0.09); }
+    .layout-btn:hover svg { fill: rgba(255,255,255,0.85); }
+    .layout-btn.is-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .layout-btn.is-disabled:hover { background: transparent; }
+
+    .contenu-card {
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; gap: 16px; width: 100%; max-width: 185px; z-index: 0;
+    }
+
+    .contenu-card__frame {
+      position: relative; width: 100%; aspect-ratio: 9 / 16;
+      border-radius: 12px; padding: 0; background: #3a0a14; border: 1.5px solid rgba(229, 9, 20, 0.45);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.3), 0 0 18px rgba(229, 9, 20, 0.15);
+      overflow: hidden; transition: transform 0.35s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.35s ease;
+    }
+    .contenu-card__frame:hover { transform: translateY(-3px); box-shadow: 0 28px 52px rgba(0,0,0,0.5), 0 12px 24px rgba(0,0,0,0.35), 0 0 26px rgba(229, 9, 20, 0.25); }
+    .contenu-card__frame::before {
+      content: ""; position: absolute; width: 14rem; height: 12rem; background: white;
+      filter: blur(50px); left: -50%; top: -50%; z-index: 0; pointer-events: none; border-radius: 0; opacity: 1;
+    }
+    .contenu-card__frame video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 9px; background: #000; position: relative; z-index: 2; }
+
+    .contenu-card__play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.85); display: flex; align-items: center;
+      justify-content: center; cursor: pointer; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .contenu-card__play::after { content: ""; width: 0; height: 0; border-left: 14px solid #ffffff; border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)); }
+    .contenu-card__frame:hover .contenu-card__play { transform: translate(-50%, -50%) scale(1.06); }
+    .contenu-card__frame.is-playing .contenu-card__play { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+
+    .contenu-card__frame--player { cursor: pointer; transition: transform 0.5s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.5s ease; }
+
+    .contenu-card__frame--test {
+      box-shadow:
+        0 20px 40px rgba(0,0,0,0.4),
+        0 8px 16px rgba(0,0,0,0.3),
+        0 0 22px rgba(229, 9, 20, 0.25),
+        inset 0 2px 0 rgba(255, 180, 180, 0.55);
+    }
+    .contenu-card__frame--test:hover {
+      box-shadow:
+        0 28px 52px rgba(0,0,0,0.5),
+        0 12px 24px rgba(0,0,0,0.35),
+        0 0 40px rgba(229, 9, 20, 0.5),
+        inset 0 2px 0 rgba(255, 180, 180, 0.55);
+    }
+    .contenu-card__frame--test video {
+      transition: transform 0.6s cubic-bezier(0.2,0.7,0.2,1);
+      transform-origin: center center;
+    }
+    .contenu-card__frame--test:hover video {
+      transform: scale(1.08);
+    }
+    .contenu-card__frame--player::after { content: ""; position: absolute; inset: 4px; background: #141414; border-radius: 9px; z-index: 1; opacity: 0.9; pointer-events: none; }
+
+    .contenu-card__blob { position: absolute; border-radius: 50%; filter: blur(28px); z-index: 3; pointer-events: none; mix-blend-mode: screen; opacity: 0.85; transition: transform 0.5s ease; }
+    .contenu-card__blob--blue { width: 56px; height: 56px; background: #f87171; top: 28%; right: 18%; }
+    .contenu-card__blob--orange { width: 44px; height: 44px; background: #fb923c; bottom: 32%; right: 22%; }
+    .contenu-card__frame--player:hover .contenu-card__blob--blue { transform: translate(44px, -44px); }
+    .contenu-card__frame--player:hover .contenu-card__blob--orange { transform: translate(44px, 64px); }
+    .contenu-card__frame--player video { position: relative; z-index: 2; }
+
+    .contenu-card__frame--player .contenu-card__play--toggle,
+    .contenu-card__frame--player .contenu-card__play { padding: 0; border-radius: 50%; background: rgba(40,10,10,0.75); border: 1px solid rgba(229, 9, 20, 0.55); box-shadow: 0 0 10px rgba(229, 9, 20, 0.3); width: 56px; height: 56px; opacity: 1; }
+    .contenu-card__frame--player .contenu-card__play--toggle::after,
+    .contenu-card__frame--player .contenu-card__play::after { border-left-color: #ff8c8c; }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle { opacity: 0; pointer-events: none; }
+    .contenu-card__frame--player:hover.is-playing .contenu-card__play--toggle { opacity: 0.85; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle::after { content: ""; width: 14px; height: 16px; border: 0; margin-left: 0; background: linear-gradient(#fff, #fff) left/4px 100% no-repeat, linear-gradient(#fff, #fff) right/4px 100% no-repeat; }
+
+    .contenu-card__sound { position: absolute; top: 10px; right: 10px; z-index: 5; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.52); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.15s ease; }
+    .contenu-card__sound:hover { background: rgba(0,0,0,0.78); transform: scale(1.1); }
+    .contenu-card__sound svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: block; }
+
+    .contenu-card__progress { position: absolute; left: 14px; right: 14px; bottom: 10px; height: 3px; border-radius: 999px; background: rgba(255,255,255,0.25); cursor: pointer; z-index: 4; overflow: hidden; transition: height 0.18s ease; }
+    .contenu-card__frame--player:hover .contenu-card__progress { height: 5px; }
+    .contenu-card__progress-fill { height: 100%; width: 0%; background: #e50914; border-radius: 999px; box-shadow: 0 0 6px rgba(229,9,20,0.6); transition: width 0.1s linear; }
+
+    .contenu-card__metric { display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.82rem; letter-spacing: 0.01em; color: #ffffff; padding: 8px 16px 8px 12px; border-radius: 12px; background: rgba(6,3,4,0.78); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: 1px solid rgba(229,9,20,0.30); box-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.06) inset, 0 -1px 0 rgba(0,0,0,0.5) inset; text-shadow: 0 1px 3px rgba(0,0,0,0.7); white-space: nowrap; }
+    .contenu-card__metric--player { height: auto; padding: 8px 16px 8px 12px; box-sizing: border-box; white-space: nowrap; }
+    .contenu-card__metric--featured {
+      width: 100%; max-width: 100%; min-width: 0; aspect-ratio: 235.76 / 44.49; height: auto;
+      align-self: center; justify-content: center; gap: 2px; padding: 0 !important; background: rgba(16,0,1,0.63);
+      border: 0; border-radius: 12px; box-shadow: -0.15em -0.15em 0.15em -0.075em rgba(5,5,5,0.25), 0.0375em 0.0375em 0.0675em 0 rgba(5,5,5,0.1);
+      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); box-sizing: border-box;
+      cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0); overflow: hidden;
+    }
+    .contenu-card__metric--featured::after { content: ""; position: absolute; z-index: 0; width: calc(100% + 0.3em); height: calc(100% + 0.3em); top: -0.15em; left: -0.15em; border-radius: inherit; background: linear-gradient(-135deg, rgba(5,5,5,0.5), transparent 20%, transparent 100%); filter: blur(0.0125em); opacity: 0.25; mix-blend-mode: multiply; pointer-events: none; }
+    .metric-press__outer { position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: box-shadow 300ms ease; will-change: box-shadow; box-shadow: 0 0.05em 0.05em -0.01em rgba(5,5,5,1), 0 0.01em 0.01em -0.01em rgba(5,5,5,0.5), 0.15em 0.3em 0.1em -0.01em rgba(5,5,5,0.25); }
+    .contenu-card__metric--featured:hover .metric-press__outer { box-shadow: 0 0 0 0 rgba(5,5,5,1), 0 0 0 0 rgba(5,5,5,0.5), 0 0 0 0 rgba(5,5,5,0.25); }
+    .metric-press__inner { position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 3px; padding: 10px 8px; transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease; will-change: box-shadow, clip-path, transform; overflow: clip; clip-path: inset(0 0 0 0 round 8.77px); box-shadow: 0 0 0 0 inset rgba(5,5,5,0.1), -0.05em -0.05em 0.05em 0 inset rgba(5,5,5,0.25), 0 0 0 0 inset rgba(5,5,5,0.1), 0 0 0.05em 0.2em inset rgba(255,255,255,0.08), 0.025em 0.05em 0.1em 0 inset rgba(255,255,255,0.15), 0.12em 0.12em 0.12em inset rgba(255,255,255,0.08), -0.075em -0.25em 0.25em 0.1em inset rgba(5,5,5,0.25); }
+    .contenu-card__metric--featured:hover .metric-press__inner { clip-path: inset(clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) round 8.77px); background: rgba(229,9,20,0.55); box-shadow: 0.1em 0.15em 0.05em 0 inset rgba(5,5,5,0.75), -0.025em -0.03em 0.05em 0.025em inset rgba(5,5,5,0.5), 0.25em 0.25em 0.2em 0 inset rgba(5,5,5,0.5), 0 0 0.05em 0.5em inset rgba(255,255,255,0.05), 0 0 0 0 inset rgba(255,255,255,1), 0.12em 0.12em 0.12em inset rgba(255,255,255,0.08), -0.075em -0.12em 0.2em 0.1em inset rgba(5,5,5,0.25), inset 0 0 12px rgba(229,9,20,0.4); }
+    .contenu-card__metric--featured:active .metric-press__inner { transform: scale(0.975); background: rgba(229,9,20,0.55); box-shadow: 0 0 0 0 inset rgba(5,5,5,0.1), inset 0 0 12px rgba(229,9,20,0.4), inset 0 0 4px rgba(255,80,80,0.3); }
+
+    .contenu-card__metric--featured img { width: 50px !important; height: 50px !important; flex-shrink: 0; filter: none; margin: 0 6px; object-fit: contain; }
+
+    .contenu-card__metric-inline { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 0; line-height: 1; white-space: nowrap; text-align: center; }
+    .contenu-card__metric-inline .metric-value, .contenu-card__metric-inline .metric-separator { font-family: 'PoppinsEB', 'Poppins', sans-serif; font-size: 11px; font-weight: 800; color: rgba(251,252,254,0.97); line-height: 1; display: inline-flex; align-items: center; text-transform: uppercase; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+    .contenu-card__metric-inline .metric-separator { letter-spacing: 0; }
+    .contenu-card__metric-inline .metric-icon { font-size: 11px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+    .contenu-card__metric-inline .metric-prefix { font-family: 'PoppinsEB', 'Poppins', sans-serif; font-size: 11px; font-weight: 800; color: rgba(251,252,254,0.97); line-height: 1; display: inline-flex; align-items: center; text-transform: uppercase; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+
+    .contenu-card__metric-stack { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; }
+    .contenu-card__metric--left .metric-press__inner { justify-content: flex-start; padding-left: 10px; }
+
+    /* Vue 3 colonnes (et défaut) : badge type "écran 1" — contenu centré, texte collé au logo */
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .metric-press__inner {
+      justify-content: center;
+      padding: 0 10px;
+      gap: 2px;
+    }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric--featured img {
+      width: 48px !important;
+      height: 48px !important;
+      margin: 0;
+    }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline {
+      gap: 3px;
+      margin-left: 0;
+    }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-value,
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-separator,
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-icon,
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-prefix {
+      font-size: 14px;
+    }
+
+    @media (max-width: 1280px) { .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) { grid-template-columns: repeat(6, 1fr); gap: 52px 38px; } }
+    @media (max-width: 1024px) {
+      .contenus-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 44px 32px; }
+      .contenus-grid > .contenu-card { grid-column: auto !important; }
+      .contenus-grid > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1 !important; justify-self: center; }
+      .contenus-section { width: 92%; }
+    }
+    @media (max-width: 640px) {
+      .contenus-grid { grid-template-columns: 1fr !important; gap: 36px; }
+      .contenus-grid > .contenu-card { grid-column: auto !important; }
+      .contenus-section { width: 94%; gap: 36px; }
+      .contenu-card { max-width: 230px; }
+    }
+
+    /* MES AUTRES CONTENUS */
+    .autres-contenus-section { width: 82%; max-width: 1200px; margin: 64px auto 0; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .autres-carousel-wrapper { width: 100%; display: flex; align-items: center; gap: 16px; position: relative; }
+    .autres-track-clip { flex: 1; overflow: hidden; }
+    .autres-track { display: flex; gap: 20px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .autres-card { flex-shrink: 0; width: calc((100% - 20px) / 2); aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; position: relative; cursor: default; box-shadow: 0 8px 32px rgba(0,0,0,0.28); transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .autres-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.34); }
+    .autres-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .autres-card__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.25s ease; }
+    .autres-card:hover .autres-card__overlay { opacity: 1; }
+    .autres-card__label { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; line-height: 1.5; text-align: center; }
+    .autres-arrow { flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(60,10,20,0.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s ease, transform 0.2s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+    .autres-arrow:hover { background: rgba(180,30,50,0.85); transform: scale(1.08); }
+    .autres-arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .autres-dots { display: flex; gap: 8px; align-items: center; }
+    .autres-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; padding: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .autres-dot.is-active { background: #aa3a3a; transform: scale(1.3); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1440px) {
+      .projet-hero { min-height: 32vh; height: 32vh; padding: 0 4%; }
+      .hero-thumb { height: 185px; width: auto; }
+      .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); }
+      .projet-card { width: 86%; }
+      .projet-main { padding-top: 40px; gap: 36px; }
+    }
+    @media (max-width: 1280px) {
+      .projet-hero { min-height: 28vh; height: 28vh; padding: 0 3%; }
+      .hero-thumb { height: 150px; width: auto; margin-left: -18px; }
+      .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); }
+      .projet-card { width: 90%; }
+      .projet-main { gap: 32px; }
+    }
+    @media (max-width: 1024px) {
+      .projet-hero { flex-direction: column; height: auto; min-height: auto; padding: 60px 5% 32px; align-items: flex-start; gap: 24px; }
+      .projet-hero__left { width: 100%; }
+      .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0 0 8px; height: auto; }
+      .hero-thumb { height: 190px; width: 114px; margin-left: -18px; }
+      .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); }
+      .projet-card { width: 94%; max-width: 94%; }
+    }
+    .title-br-mobile { display: none; }
+    @media (max-width: 768px) {
+      .projet-hero { padding: 56px 4% 24px; gap: 20px; }
+      .hero-thumb { height: 155px; width: 93px; margin-left: -14px; }
+      .hero-thumb:first-child { margin-left: 0; }
+      .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); }
+      .projet-card { width: 96%; max-width: 96%; }
+      .projet-main { padding-top: 24px; gap: 24px; }
+    }
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations Candyman/Marry Me : 3 résultats (2+1 large), TikTok seul (64×64),
+       palette dark red Candyman (#1a0608 → #4a1224) reprise du desktop. */
+    @media (max-width: 480px) {
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(17.36px, 4.96vw, 21.08px) !important;
+        line-height: 1.15 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .title-br-mobile { display: inline !important; }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* ───────── ESPACEMENT main ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ───────── RÉSULTATS CLÉS — 3 mini-cartes (2+1 large) ───────── */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.85rem !important;
+        padding: 7px 20px !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      .red-card--results .results-item:last-of-type { grid-column: 1 / -1 !important; }
+      /* Mini-cartes : palette DARK RED Candyman reprise du desktop */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        background:
+          radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          linear-gradient(135deg, #1a0608 0%, #3a0a14 50%, #4a1224 100%) !important;
+        border: 1.5px solid rgba(229, 9, 20, 0.55) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(0, 0, 0, 0.55),
+          0 2px 0 rgba(255,255,255,0.06) inset,
+          0 -2px 0 rgba(0,0,0,0.25) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.1) !important;
+        min-height: 92px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-item__value {
+        color: #ffffff !important;
+        font-size: clamp(1.30rem, 5vw, 1.92rem) !important;
+      }
+      .red-card--results .results-item__label {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-size: 0.62rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        letter-spacing: 0.10em !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok seul (64×64) ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .metric-press__inner,
+      .metric-press__inner {
+        padding: 0 6px 0 4px !important;
+        gap: 3px !important;
+        justify-content: flex-start !important;
+        transform: translateX(-3%) !important;
+      }
+      .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric--featured img,
+      .contenu-card__metric--featured img {
+        width: 58px !important;
+        height: 58px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 20px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-dark" data-page="candyman-marryme">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="candyman-marryme">
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- SYMBOLE ABEILLE réutilisable -->
+    <svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
+      <defs>
+        <symbol id="beeIcon" viewBox="0 0 44 30">
+          <!-- Ailes -->
+          <g class="bee-icon__wings">
+            <ellipse cx="14" cy="6" rx="8" ry="4.5" fill="rgba(220,235,250,0.6)" stroke="rgba(60,60,80,0.45)" stroke-width="0.4"/>
+            <ellipse cx="22" cy="5" rx="7.5" ry="4" fill="rgba(220,235,250,0.6)" stroke="rgba(60,60,80,0.45)" stroke-width="0.4"/>
+          </g>
+          <!-- Corps (oval doré) -->
+          <ellipse cx="21" cy="17" rx="13" ry="7" fill="#f5b800" stroke="#5a3a00" stroke-width="0.6"/>
+          <!-- Highlight clair -->
+          <ellipse cx="21" cy="14" rx="11" ry="3.5" fill="#fadc66" opacity="0.7"/>
+          <!-- Rayures noires -->
+          <ellipse cx="13" cy="16" rx="2" ry="6"   fill="#1a1a1a"/>
+          <ellipse cx="20" cy="17" rx="2.2" ry="6.5" fill="#1a1a1a"/>
+          <ellipse cx="27" cy="16" rx="2" ry="6"   fill="#1a1a1a"/>
+          <!-- Tête -->
+          <circle cx="8" cy="17" r="4" fill="#1a1a1a"/>
+          <!-- Antennes -->
+          <path d="M 6 14 Q 4 10 3 7" stroke="#1a1a1a" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+          <path d="M 8 12 Q 7 8 6 5"  stroke="#1a1a1a" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+          <circle cx="3" cy="7" r="0.8" fill="#1a1a1a"/>
+          <circle cx="6" cy="5" r="0.8" fill="#1a1a1a"/>
+          <!-- Reflet œil -->
+          <circle cx="9.5" cy="16" r="0.7" fill="rgba(255,255,255,0.85)"/>
+          <!-- Pattes -->
+          <line x1="12" y1="22" x2="11" y2="26" stroke="#1a1a1a" stroke-width="0.5"/>
+          <line x1="20" y1="23" x2="19" y2="27" stroke="#1a1a1a" stroke-width="0.5"/>
+          <line x1="28" y1="22" x2="29" y2="26" stroke="#1a1a1a" stroke-width="0.5"/>
+          <!-- Dard -->
+          <path d="M 33 17 L 38 17" stroke="#1a1a1a" stroke-width="0.7" stroke-linecap="round"/>
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ABEILLES qui gravitent sur toute la page -->
+    <div class="page-bees" aria-hidden="true">
+      <span class="bee-icon bee-icon--1"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--2"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--3"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--4"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--5"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--6"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--7"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--8"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--9"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--10"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--11"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--15"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--17"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--19"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+      <span class="bee-icon bee-icon--21"><svg viewBox="0 0 44 30"><use href="#beeIcon"/></svg></span>
+    </div>
+
+    <!-- HERO BANNER -->
+    <div class="projet-hero">
+      <div class="hero-atmosphere" aria-hidden="true">
+        <!-- RUCHE / NID D'ABEILLES -->
+        <svg class="hero-honeycomb" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Dégradé "cire" amber pour les parois des cellules -->
+            <linearGradient id="waxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"   stop-color="rgba(255, 210, 130, 0.65)"/>
+              <stop offset="50%"  stop-color="rgba(220, 150, 60, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(120, 70, 20, 0.45)"/>
+            </linearGradient>
+            <!-- Dégradé radial pour simuler la profondeur de la cellule (creux d'ombre) -->
+            <radialGradient id="cellDepth" cx="50%" cy="35%" r="70%">
+              <stop offset="0%"   stop-color="rgba(60, 14, 20, 0.0)"/>
+              <stop offset="60%"  stop-color="rgba(15, 3, 6, 0.35)"/>
+              <stop offset="100%" stop-color="rgba(5, 1, 2, 0.7)"/>
+            </radialGradient>
+
+            <!-- Tile honeycomb : 5 polygones drawn so the tile tessellates without seams -->
+            <pattern id="honeycombPattern" width="48" height="84" patternUnits="userSpaceOnUse">
+              <!-- Hex central (centre 24,28) -->
+              <polygon points="24,0 48,14 48,42 24,56 0,42 0,14"
+                       fill="url(#cellDepth)"
+                       stroke="url(#waxGrad)"
+                       stroke-width="1.4"
+                       stroke-linejoin="round"/>
+              <!-- Hex bas-gauche décalé (centre 0,70) -->
+              <polygon points="0,42 24,56 24,84 0,98 -24,84 -24,56"
+                       fill="url(#cellDepth)"
+                       stroke="url(#waxGrad)"
+                       stroke-width="1.4"
+                       stroke-linejoin="round"/>
+              <!-- Hex bas-droit décalé (centre 48,70) -->
+              <polygon points="48,42 72,56 72,84 48,98 24,84 24,56"
+                       fill="url(#cellDepth)"
+                       stroke="url(#waxGrad)"
+                       stroke-width="1.4"
+                       stroke-linejoin="round"/>
+              <!-- Hex haut-gauche wrap (centre 0,-14) — pour combler la jointure -->
+              <polygon points="0,-42 24,-28 24,0 0,14 -24,0 -24,-28"
+                       fill="url(#cellDepth)"
+                       stroke="url(#waxGrad)"
+                       stroke-width="1.4"
+                       stroke-linejoin="round"/>
+              <!-- Hex haut-droit wrap (centre 48,-14) -->
+              <polygon points="48,-42 72,-28 72,0 48,14 24,0 24,-28"
+                       fill="url(#cellDepth)"
+                       stroke="url(#waxGrad)"
+                       stroke-width="1.4"
+                       stroke-linejoin="round"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#honeycombPattern)"/>
+        </svg>
+
+        <!-- Halo doré ambiant (effet lumière de cire) -->
+        <div class="hero-honeycomb-glow"></div>
+      </div>
+
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Campagne d'influence sur<br class="title-br-mobile"> Candyman &amp; Marry Me</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">TikTok &amp; Influence</span>
+          <span class="badge">2022</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/candyman-marry/vignette-candyman.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/candyman-marry/vignette-candyman.webp" alt="Candyman vignette"></picture>
+        <picture><source srcset="assets/brand-projects/candyman-marry/vignette-marryme1.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/candyman-marry/vignette-marryme1.webp" alt="Marry Me vignette 1"></picture>
+        <picture><source srcset="assets/brand-projects/candyman-marry/vignette-maryme2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/candyman-marry/vignette-maryme2.webp" alt="Marry Me vignette 2"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <div class="projet-card">
+
+        <!-- CONTEXTE + MES MISSIONS -->
+        <div class="red-row">
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#honeycombPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">Universal France a missionné l'agence The Source pour promouvoir 2 de leurs films phares, Candyman et Marry Me sur TikTok en faisant appel à de l'influence.</p>
+          </div>
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#honeycombPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Sélection des créateur·rice·s.</li>
+              <li>Respect du budget alloué pour les campagnes.</li>
+              <li>Réalisation de l'idéation et des scripts pour chaque contenu.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS -->
+        <div class="red-card red-card--results">
+          <div class="red-card__bg" aria-hidden="true">
+            <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" fill="url(#honeycombPattern)"/>
+            </svg>
+          </div>
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row" style="justify-content:center;">
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+6,5</span> <span class="results-item__suffix">millions</span></span>
+              <span class="results-item__label">De vues générées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+345</span> <span class="results-item__suffix">K</span></span>
+              <span class="results-item__label">Likes cumulés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">5</span> <span class="results-item__suffix">contenus</span></span>
+              <span class="results-item__label">produits &amp; créés</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — cartes ↔ contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="rgba(255,240,215,0)"/>
+              <stop offset="20%" stop-color="rgba(255,240,215,0.7)"/>
+              <stop offset="50%" stop-color="rgba(255,240,215,0.7)"/>
+              <stop offset="80%" stop-color="rgba(255,240,215,0.7)"/>
+              <stop offset="100%" stop-color="rgba(255,240,215,0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade1)" stroke-width="0.9"/>
+            <path d="M 145 12 Q 152 5 158 12 Q 152 19 145 12 Z"
+                  fill="rgba(255,240,215,0.18)" stroke="rgba(255,240,215,0.7)" stroke-width="0.9"/>
+            <g transform="translate(190,12)">
+              <polygon points="0,-7 7,0 0,7 -7,0"
+                       fill="rgba(255,240,215,0.32)" stroke="rgba(255,240,215,0.85)" stroke-width="0.9"/>
+              <circle r="1.5" fill="rgba(255,250,230,0.95)"/>
+            </g>
+            <path d="M 235 12 Q 228 5 222 12 Q 228 19 235 12 Z"
+                  fill="rgba(255,240,215,0.18)" stroke="rgba(255,240,215,0.7)" stroke-width="0.9"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES CONTENUS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mes contenus sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+          </span>
+        </div>
+
+        <div class="layout-selector" role="group" aria-label="Nombre de colonnes">
+          <button class="layout-btn" data-cols="2" aria-label="2 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="10" height="16" rx="1.5"/>
+              <rect x="12" y="0" width="10" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-active" data-cols="3" aria-label="3 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"  y="0" width="6" height="16" rx="1.5"/>
+              <rect x="8"  y="0" width="6" height="16" rx="1.5"/>
+              <rect x="16" y="0" width="6" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-disabled" data-cols="4" aria-label="4 colonnes" disabled aria-disabled="true" tabindex="-1">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"  y="0" width="4" height="16" rx="1.5"/>
+              <rect x="6"  y="0" width="4" height="16" rx="1.5"/>
+              <rect x="12" y="0" width="4" height="16" rx="1.5"/>
+              <rect x="18" y="0" width="4" height="16" rx="1.5"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="grid-row-title grid-row-title--candy" style="align-self:center;">Candyman</div>
+
+        <div class="contenus-grid" id="contenusGrid">
+
+          <!-- CARD 1 — Candyman créateur -->
+          <div class="contenu-card cc-pos-1">
+            <div class="contenu-card__frame contenu-card__frame--player contenu-card__frame--test">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/candyman-marry/candyman-createur.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@nobuo_/video/7015585661218573573" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">750 K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">36 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 2 — Candyman créatrice -->
+          <div class="contenu-card cc-pos-2">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/candyman-marry/candyman-creatrice.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@lisa.bpro/video/7013757553381330182" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">2 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">83 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- Séparateur Marry Me -->
+          <div class="grid-row-title grid-row-title--marry">Marry Me</div>
+
+          <!-- CARD 3 — Marry Me Assoun -->
+          <div class="contenu-card cc-pos-3">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/candyman-marry/marryme-assoun.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@assountinaaa/video/7062746902013414662" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">2.3 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">113 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 4 — Marry Me duo -->
+          <div class="contenu-card cc-pos-4">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/candyman-marry/marryme-duo.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@lesmauvaisesherbes/video/7062757209255546117?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">560 K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">43 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 5 — Marry Me créatrice -->
+          <div class="contenu-card cc-pos-5">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/candyman-marry/marryme-creatrice.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@mademoiselleimanne/video/7062741173919681798" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">620 K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">31 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — contenus ↔ autres contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="rgba(255,240,215,0)"/>
+              <stop offset="20%" stop-color="rgba(255,240,215,0.7)"/>
+              <stop offset="50%" stop-color="rgba(255,240,215,0.7)"/>
+              <stop offset="80%" stop-color="rgba(255,240,215,0.7)"/>
+              <stop offset="100%" stop-color="rgba(255,240,215,0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade2)" stroke-width="0.9"/>
+            <path d="M 145 12 Q 152 5 158 12 Q 152 19 145 12 Z"
+                  fill="rgba(255,240,215,0.18)" stroke="rgba(255,240,215,0.7)" stroke-width="0.9"/>
+            <g transform="translate(190,12)">
+              <polygon points="0,-7 7,0 0,7 -7,0"
+                       fill="rgba(255,240,215,0.32)" stroke="rgba(255,240,215,0.85)" stroke-width="0.9"/>
+              <circle r="1.5" fill="rgba(255,250,230,0.95)"/>
+            </g>
+            <path d="M 235 12 Q 228 5 222 12 Q 228 19 235 12 Z"
+                  fill="rgba(255,240,215,0.18)" stroke="rgba(255,240,215,0.7)" stroke-width="0.9"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;background:linear-gradient(180deg,#4a1224 0%,#1a0608 100%);border-color:rgba(229,9,20,0.65);">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span></div>
+              </div>
+            </div>
+          </div>
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById('contenusGrid');
+      const btns = document.querySelectorAll('.layout-btn');
+      if (!grid || !btns.length) return;
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('is-disabled') || btn.disabled) return;
+          const cols = btn.dataset.cols;
+          btns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          grid.classList.remove('contenus-grid--cols-2', 'contenus-grid--cols-3', 'contenus-grid--cols-4');
+          grid.classList.add('contenus-grid--cols-' + cols);
+          grid.classList.add('layout-changing');
+          setTimeout(() => grid.classList.remove('layout-changing'), 350);
+        });
+      });
+    })();
+  </script>
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

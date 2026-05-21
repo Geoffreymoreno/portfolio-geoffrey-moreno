@@ -1,0 +1,32 @@
+# ════════════════════════════════════════════════════════════════
+# .vercelignore — fichiers et dossiers exclus du déploiement Vercel
+# ════════════════════════════════════════════════════════════════
+# Ces éléments restent sur ton ordi mais ne sont PAS envoyés en ligne.
+# Aucun fichier de production (index.html, style.css, *.js, assets/)
+# ne fait référence à ces zones — vérifié le 2026-05-20.
+
+# ─── Dossiers de sauvegarde (445 Mo au total) ─────────────────────
+_archives/
+_originals/
+_safety-launchagent/
+_safety-png-cleanup/
+_safety-posters/
+_safety-video-cleanup/
+
+# ─── Dossiers de travail / brouillons ─────────────────────────────
+preview/
+screens/
+.playwright-mcp/
+_fps-test/
+
+# ─── Fichiers obsolètes ou redondants ─────────────────────────────
+index.html.before-webp
+CLAUDE-old.md
+
+# ─── Documentation interne (utile au dev, inutile en ligne) ──────
+CLAUDE.md
+rules.md
+
+# ─── Saletés macOS automatiques (partout dans l'arborescence) ─────
+.DS_Store
+**/.DS_Store

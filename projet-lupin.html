@@ -1,0 +1,2861 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lupin Netflix TikTok — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* ── Background page : spotlight chaud (lampe de bureau d'enquêteur) ── */
+    body {
+      background-image:
+        radial-gradient(ellipse 75% 55% at 50% 18%, rgba(220, 130, 50, 0.18), transparent 60%),
+        radial-gradient(ellipse 90% 70% at 50% 25%, rgba(140, 60, 25, 0.28), transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(60, 12, 18, 0.30), transparent 75%),
+        linear-gradient(180deg, #1a0a08 0%, #120705 35%, #0a0507 100%) !important;
+      background-attachment: fixed !important;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.85'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    /* Styles partagés → projet.css */
+
+    /* 1. HERO BANNER — Ambiance plan d'enquête / dossier criminel */
+    .projet-hero {
+      position: relative;
+      min-height: 42vh;
+      height: 42vh;
+      background: linear-gradient(135deg, #1d0307 0%, #380710 35%, #4d0a16 60%, #2c0509 100%);
+      padding: 64px 0 0 8%;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Layer 1 : scène (plan de Paris + indices) en SVG */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg svg.hero-scene {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    /* Halo rouge sang au centre */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 45% 60%, rgba(170,0,15,0.30) 0%, rgba(229,9,20,0.08) 40%, transparent 70%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    /* Vignettage cinéma */
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.50) 78%, rgba(0,0,0,0.80) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.30) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.40) 100%);
+    }
+
+    /* Grain papier / dossier */
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      opacity: 0.12;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.85'/%3E%3C/svg%3E");
+    }
+
+    /* On garde le contenu (titre / badges / vignettes) au-dessus de tous les layers */
+    .projet-hero__left,
+    .projet-hero__thumbs { position: relative; z-index: 10; }
+    .projet-title,
+    .hero-badges { text-shadow: 0 2px 14px rgba(0,0,0,0.6), 0 0 30px rgba(0,0,0,0.45); }
+
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 10px;
+      margin-left: auto;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+
+    .hero-thumb { box-shadow: 0 16px 40px rgba(0,0,0,0.55); }
+
+    /* 3. MAIN CARD */
+    .projet-card {
+      width: 82%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .red-card {
+      position: relative;
+      background:
+        url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cdefs%3E%3Cfilter id='b' x='-30%25' y='-30%25' width='160%25' height='160%25'%3E%3CfeGaussianBlur stdDeviation='1.4'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M50 0H0V50' fill='none' stroke='rgba(255,55,75,0.13)' stroke-width='2.6' filter='url(%23b)'/%3E%3Cpath d='M50 0H0V50' fill='none' stroke='rgba(255,200,210,0.18)' stroke-width='0.7'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse at 45% 60%, rgba(170,0,15,0.42) 0%, rgba(229,9,20,0.12) 45%, transparent 75%),
+        linear-gradient(135deg, #1d0307 0%, #380710 35%, #4d0a16 60%, #2c0509 100%);
+      background-repeat: repeat, no-repeat, no-repeat;
+      background-size: 50px 50px, 100% 100%, 100% 100%;
+      background-clip: padding-box;
+      border: 1.5px solid rgba(255, 80, 90, 0.55);
+      border-radius: 22px;
+      padding: 38px 42px 34px;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.55),
+        0 2px 0 rgba(255,255,255,0.06) inset,
+        0 -2px 0 rgba(0,0,0,0.25) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      filter: brightness(1.05);
+    }
+    /* Vignettage interne + lisibilité — overlay sombre subtil */
+    .red-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, transparent 70%),
+        radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.30) 80%, rgba(0,0,0,0.55) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.22) 0%, transparent 35%, transparent 70%, rgba(0,0,0,0.25) 100%);
+      mix-blend-mode: multiply;
+      z-index: 0;
+    }
+    .red-card > * { position: relative; z-index: 1; }
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 0.4px #ffffff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30);
+      padding: 8px 24px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #8a0c1a 0%, #4a0a12 100%);
+      border: 1.5px solid rgba(255, 110, 120, 0.85);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        0 0 14px rgba(229, 9, 20, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #f0e4e4;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text {
+      margin-top: 14px;
+    }
+
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #f0e4e4;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      width: 100%;
+    }
+    .red-card__list li {
+      display: block;
+      text-align: center;
+    }
+    .red-card__list li::before {
+      content: "•  ";
+      display: inline;
+    }
+    .red-card__list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .red-card--results {
+      padding: 36px 40px 32px;
+    }
+    .results-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      width: 100%;
+      padding-top: 16px;
+    }
+    .results-item__number {
+      font-size: 1.32em;
+      vertical-align: middle;
+    }
+    .results-item__suffix-stack {
+      vertical-align: middle;
+    }
+    .results-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .results-item__value {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.1rem, 1.7vw, 1.6rem);
+      color: #f0e4e4;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+      line-height: 1.05;
+      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+    .results-item__value .results-item__suffix {
+      font-weight: 500;
+      font-size: 0.65em;
+    }
+    .results-item__suffix-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      vertical-align: middle;
+      line-height: 1.15;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.65rem, 0.82vw, 0.82rem);
+      color: #e6d6d6;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+    .results-divider {
+      width: 1px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.35);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* BADGES */
+    .projet-badges {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .badge {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: #ffffff;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .badge--blue   { color: #fff; }
+    .badge--red    { color: #fff; }
+    .badge--orange { color: #fff; }
+    .badge--purple { color: #fff; }
+
+    .projet-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      padding-bottom: 64px;
+    }
+
+    .projet-section {
+      position: relative;
+      background: #080808;
+      border: 1px solid rgba(229, 9, 20, 0.3);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .bento-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .bento-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      flex-shrink: 0;
+    }
+    .projet-section:hover .bento-card-icon {
+      background: rgba(229, 9, 20, 0.15);
+    }
+    .bento-card-status {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(4px);
+      transition: background 0.3s ease;
+    }
+    .projet-section:hover .bento-card-status {
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .bento-card-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+    .bento-card-meta {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    .bento-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .bento-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .bento-card-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(4px);
+      transition: background 0.2s ease;
+    }
+    .bento-card-tag:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .bento-card-cta {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.38);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .projet-section:hover .bento-card-cta {
+      opacity: 1;
+    }
+    .projet-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(
+        circle at center,
+        rgba(229, 9, 20, 0.035) 1px,
+        transparent 1px
+      );
+      background-size: 4px 4px;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+    }
+    .projet-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        to bottom right,
+        transparent 20%,
+        rgba(255, 255, 255, 0.04) 45%,
+        rgba(255, 255, 255, 0.07) 50%,
+        rgba(255, 255, 255, 0.04) 55%,
+        transparent 80%
+      );
+      pointer-events: none;
+      opacity: 1;
+    }
+    .projet-section:hover {
+      transform: translateY(-4px);
+      border-color: rgba(229, 9, 20, 0.6);
+      box-shadow:
+        0 0 20px rgba(229, 9, 20, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+    .projet-section-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      height: 100%;
+      justify-content: flex-start;
+    }
+    .projet-section-wrap--full {
+      width: 100%;
+    }
+    .projet-section-label {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1rem, 1.35vw, 1.4rem);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.60);
+      text-shadow: none;
+      text-align: center;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 20px;
+      border-radius: 14px;
+      background: rgba(229, 9, 20, 0.1);
+      box-shadow: none;
+    }
+    .projet-section-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(17px, 1.3vw, 20px);
+      line-height: 1.8;
+      color: rgba(245, 242, 238, 0.77);
+      text-align: justify;
+      margin: 20px 0 0 0;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .projet-section-text + .projet-section-text {
+      margin-top: 18px;
+    }
+
+    .projet-missions-list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(17px, 1.3vw, 20px);
+      line-height: 1.8;
+      color: rgba(245, 242, 238, 0.77);
+      margin: 20px 0 0 0;
+      padding: 0 32px 0 58px;
+      position: relative;
+      z-index: 1;
+      text-align: justify;
+      list-style-type: disc;
+      flex: 1;
+      text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .projet-missions-list li {
+      margin-bottom: 12px;
+      padding-left: 6px;
+    }
+    .projet-missions-list li::marker {
+      color: rgba(229, 9, 20, 0.85);
+    }
+
+    .projet-section--full {
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .projet-section--empty {
+      min-height: clamp(150px, 16vw, 185px);
+    }
+
+    .projet-section--full.projet-section--empty {
+      min-height: clamp(170px, 18vw, 220px);
+    }
+
+    /* 5. MES CONTENUS */
+    .contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(15.5px, 1.19vw, 18.6px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      padding: 10.8px 25.2px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, #8a0c1a 0%, #4a0a12 100%);
+      border: 1.5px solid rgba(255, 110, 120, 0.85);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        0 0 14px rgba(229, 9, 20, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      filter: brightness(1.1);
+    }
+    /* Screen 2 — titre "Mes contenus organiques" : encore plus petit pour matcher la taille des cards */
+    .contenus-grid .contenus-title {
+      gap: 10px;
+      font-size: clamp(13.5px, 1.02vw, 16px);
+      padding: 9px 21px;
+      border-radius: 11px;
+    }
+    .contenus-grid .contenus-title .contenus-title__logos img {
+      height: 26px;
+    }
+    .contenus-title__logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contenus-title__logos img {
+      height: 29px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px 72px;
+      width: 100%;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      justify-items: center;
+      justify-content: center;
+      align-items: start;
+      position: relative;
+    }
+    .contenus-grid--cols-2 { grid-template-columns: repeat(2, 1fr); gap: 64px 80px; max-width: 660px; }
+    .contenus-grid--cols-2 .contenu-card { max-width: 283px; }
+
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-value,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-separator,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-icon,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-prefix {
+      font-size: 20px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric-inline {
+      gap: 6px;
+      margin-left: -11px;
+    }
+    .contenus-grid--cols-2 .metric-press__inner {
+      gap: 3px;
+      padding: 0 8px 0 4px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured img {
+      width: 72px !important;
+      height: 72px !important;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+      width: 37px !important;
+      height: 46px !important;
+      margin-left: 12px;
+      margin-right: 3px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+      width: 43px !important;
+      height: 43px !important;
+      margin-left: 12px;
+      margin-right: 3px;
+    }
+    .contenus-grid--cols-3 { grid-template-columns: repeat(3, 1fr); max-width: 960px; }
+    .contenus-grid--cols-4 { grid-template-columns: repeat(4, 1fr); max-width: 1100px; }
+    /* Centrage automatique des cartes orphelines sur la dernière ligne */
+    .contenus-grid--cols-2 > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
+    /* 2-cols : la 3e vidéo (Ads orphan) est centrée entre vid1 et vid2 */
+    .contenus-grid--cols-2 > .contenu-card:nth-child(3) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .contenu-card:last-child:nth-child(3n+1) { grid-column: 1 / -1; justify-self: center; }
+    /* 3-cols : annule la règle orphan pour la dernière vidéo (qui n'est pas réellement orpheline à cause du titre intermédiaire) */
+    .contenus-grid--cols-3 > .contenu-card:nth-child(7):last-child { grid-column: auto !important; justify-self: center !important; }
+    /* Bouton "4 colonnes" désactivé */
+    .layout-btn.is-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+1) { grid-column: 1 / -1; justify-self: center; }
+    /* 2 cartes orphelines en vue 4 col → centrées sous col 2 et 3 */
+    .contenus-grid--cols-4 > .contenu-card:nth-last-child(2):nth-child(4n+1) { grid-column: 2 / 3; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+2) { grid-column: 3 / 4; }
+    @keyframes layoutFade {
+      from { opacity: 0.6; transform: scale(0.97); }
+      to   { opacity: 1;   transform: scale(1); }
+    }
+    .layout-changing .contenu-card {
+      animation: layoutFade 0.32s ease forwards;
+    }
+
+    .layout-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: linear-gradient(180deg, #e5091a 0%, #a8050f 100%);
+      border: 1.5px solid rgba(255, 110, 120, 0.75);
+      border-radius: 999px;
+      padding: 5px 7px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -2px 4px rgba(0,0,0,0.30);
+    }
+    .layout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease;
+    }
+    .layout-btn svg {
+      width: 19px;
+      height: 14px;
+      fill: rgba(255,255,255,0.55);
+      transition: fill 0.2s ease, filter 0.2s ease;
+    }
+    .layout-btn.is-active {
+      background: rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.12), 0 0 8px rgba(255,255,255,0.08);
+    }
+    .layout-btn.is-active svg {
+      fill: #ffffff;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.55));
+    }
+    .layout-btn:hover:not(.is-active) {
+      background: rgba(255,255,255,0.09);
+    }
+    .layout-btn:hover svg {
+      fill: rgba(255,255,255,0.85);
+    }
+
+    .contenu-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 185px;
+      z-index: 0;
+    }
+    .contenus-grid > .contenu-card:first-child::before,
+    .contenu-card--premium::before {
+      content: none;
+    }
+
+    .contenu-card__frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
+      padding: 0;
+      background: #E50914;
+      border: 1.5px solid #E50914;
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 0 18px rgba(229, 9, 20, 0.15);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+    }
+    .contenu-card__frame:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 28px 52px rgba(0, 0, 0, 0.5),
+        0 12px 24px rgba(0, 0, 0, 0.35),
+        0 0 26px rgba(229, 9, 20, 0.35);
+    }
+
+    .contenu-card__frame::before {
+      content: "";
+      position: absolute;
+      width: 14rem;
+      height: 12rem;
+      background: white;
+      filter: blur(50px);
+      left: -50%;
+      top: -50%;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 0;
+      mix-blend-mode: normal;
+      opacity: 1;
+    }
+
+    .contenu-card__frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 9px;
+      background: #000;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contenu-card__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .contenu-card__play::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 14px solid #ffffff;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 4px;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+    .contenu-card__frame:hover .contenu-card__play {
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+    .contenu-card__frame.is-playing .contenu-card__play {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    .contenu-card__frame--player {
+      cursor: pointer;
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 0.5s ease;
+    }
+    .contenu-card__frame--player::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      background: #141414;
+      border-radius: 9px;
+      z-index: 1;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .contenu-card__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(28px);
+      z-index: 3;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      transition: transform 0.5s ease;
+    }
+    .contenu-card__blob--blue {
+      width: 56px;
+      height: 56px;
+      background: #38bdf8;
+      top: 28%;
+      right: 18%;
+    }
+    .contenu-card__blob--orange {
+      width: 44px;
+      height: 44px;
+      background: #fb923c;
+      bottom: 32%;
+      right: 22%;
+    }
+    .contenu-card__frame--player:hover .contenu-card__blob--blue {
+      transform: translate(44px, -44px);
+    }
+    .contenu-card__frame--player:hover .contenu-card__blob--orange {
+      transform: translate(44px, 64px);
+    }
+
+    .contenu-card__frame--player video {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contenu-card__frame--player .contenu-card__play--toggle,
+    .contenu-card__frame--player .contenu-card__play {
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(229, 9, 20, 0.55);
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+      width: 56px;
+      height: 56px;
+      opacity: 1;
+    }
+
+    .contenu-card__frame--player .contenu-card__play--toggle::after,
+    .contenu-card__frame--player .contenu-card__play::after {
+      border-left-color: #E50914;
+    }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .contenu-card__frame--player:hover.is-playing .contenu-card__play--toggle {
+      opacity: 0.85;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle::after {
+      content: "";
+      width: 14px;
+      height: 16px;
+      border: 0;
+      margin-left: 0;
+      background:
+        linear-gradient(#fff, #fff) left/4px 100% no-repeat,
+        linear-gradient(#fff, #fff) right/4px 100% no-repeat;
+    }
+
+    .contenu-card__sound {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 5;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.52);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .contenu-card__sound:hover {
+      background: rgba(0, 0, 0, 0.78);
+      transform: scale(1.1);
+    }
+    .contenu-card__sound svg {
+      width: 13px;
+      height: 13px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+    }
+
+    /* CSS du bouton zoom + modale → centralisé dans style.css */
+
+    .contenu-card__progress {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 10px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      z-index: 4;
+      overflow: hidden;
+      transition: height 0.18s ease;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 5px;
+    }
+    .contenu-card__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #e50914;
+      border-radius: 999px;
+      box-shadow: 0 0 6px rgba(229, 9, 20, 0.6);
+      transition: width 0.1s linear;
+    }
+
+    .contenu-card__metric {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+      padding: 9px 14px 9px 12px;
+      border-radius: 12px;
+      background: rgba(6, 3, 4, 0.78);
+      backdrop-filter: blur(18px) saturate(1.6);
+      -webkit-backdrop-filter: blur(18px) saturate(1.6);
+      border: 1px solid rgba(229, 9, 20, 0.30);
+      box-shadow:
+        0 4px 16px rgba(0,0,0,0.55),
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 -1px 0 rgba(0,0,0,0.5) inset;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      white-space: nowrap;
+    }
+    .contenu-card__metric--reels {
+      background: linear-gradient(135deg, #8a0310 0%, #5c0009 100%);
+      border-color: rgba(255, 90, 110, 0.45);
+    }
+    .contenu-card__metric--shorts-red {
+      background: rgba(212, 62, 70, 0.63);
+      border-color: rgba(163, 38, 47, 0.7);
+      box-shadow:
+        0 2.51px 2.51px rgba(10, 0, 0, 0.7),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.42);
+    }
+    .contenu-card__metric--shorts-red img {
+      width: 24px !important;
+      height: 30px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+    }
+    .contenu-card__metric--shorts-red .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--shorts {
+      background: linear-gradient(135deg, #f5d7de 0%, #ebbfc8 100%);
+      color: #1a0306;
+      border-color: rgba(229, 9, 20, 0.25);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .contenu-card__metric--reels-white {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 239, 239, 0.96) 100%);
+      color: #2b0408;
+      border-color: rgba(176, 4, 16, 0.18);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+    }
+    .contenu-card__metric--reels-white img {
+      width: 28px !important;
+      height: 28px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+    }
+    .contenu-card__metric--reels-white .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--reels-white .metric-prefix,
+    .contenu-card__metric--reels-white .metric-value,
+    .contenu-card__metric--reels-white .metric-separator,
+    .contenu-card__metric--reels-white .metric-icon {
+      color: #2b0408;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+    }
+    .contenu-card__metric img {
+      height: 28px;
+      width: 28px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter:
+        drop-shadow(0 1px 2px rgba(0,0,0,0.75))
+        contrast(1.05);
+    }
+    .contenu-card__metric {
+      padding: 8px 16px 8px 12px;
+    }
+    .contenu-card__metric--player {
+      height: auto;
+      padding: 8px 16px 8px 12px;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .contenu-card__metric--player img {
+      height: 28px !important;
+      width: 28px !important;
+    }
+    .contenu-card__metric--player .likes {
+      font-weight: 700 !important;
+      font-size: 0.92em !important;
+      opacity: 1 !important;
+    }
+    .contenu-card__metric--featured {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      aspect-ratio: 235.76 / 44.49;
+      height: auto;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 5px 0 3px;
+      background: rgba(16, 0, 1, 0.63);
+      border: 0;
+      border-radius: 8.77px;
+      box-shadow:
+        0 2.51px 2.51px rgba(12, 0, 0, 0.9),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.59);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .contenu-card__metric--featured:hover {
+      animation: none;
+    }
+
+    .contenu-card__metric--featured {
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      overflow: visible !important;
+      box-shadow:
+        -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+        0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1);
+      padding: 0 !important;
+    }
+    .contenu-card__metric--featured::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      width: calc(100% + 0.3em);
+      height: calc(100% + 0.3em);
+      top: -0.15em;
+      left: -0.15em;
+      border-radius: inherit;
+      background: linear-gradient(
+        -135deg,
+        rgba(5, 5, 5, 0.5),
+        transparent 20%,
+        transparent 100%
+      );
+      filter: blur(0.0125em);
+      opacity: 0.25;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .metric-press__outer {
+      position: relative;
+      z-index: 1;
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 300ms ease;
+      will-change: box-shadow;
+      box-shadow:
+        0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1),
+        0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5),
+        0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__outer {
+      box-shadow:
+        0 0 0 0 rgba(5, 5, 5, 1),
+        0 0 0 0 rgba(5, 5, 5, 0.5),
+        0 0 0 0 rgba(5, 5, 5, 0.25);
+    }
+    .metric-press__inner {
+      position: relative;
+      z-index: 1;
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 5px 0 3px;
+      transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease;
+      will-change: box-shadow, clip-path, transform;
+      overflow: clip;
+      clip-path: inset(0 0 0 0 round 8.77px);
+      box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        -0.05em -0.05em 0.05em 0 inset rgba(5, 5, 5, 0.25),
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        0 0 0.05em 0.2em inset rgba(255, 255, 255, 0.08),
+        0.025em 0.05em 0.1em 0 inset rgba(255, 255, 255, 0.15),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.25em 0.25em 0.1em inset rgba(5, 5, 5, 0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__inner {
+      clip-path: inset(
+        clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px)
+        clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 8.77px
+      );
+      background: rgba(229, 9, 20, 0.55);
+      box-shadow:
+        0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+        -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+        0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+        0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.05),
+        0 0 0 0 inset rgba(255, 255, 255, 1),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25),
+        inset 0 0 12px rgba(229, 9, 20, 0.4);
+    }
+    .contenu-card__metric--featured:active .metric-press__inner {
+      transform: scale(0.975);
+      background: rgba(229, 9, 20, 0.55);
+      box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        inset 0 0 12px rgba(229, 9, 20, 0.4),
+        inset 0 0 4px rgba(255, 80, 80, 0.3);
+    }
+
+    @keyframes jello-horizontal {
+      0%   { transform: scale3d(1,    1,    1); }
+      30%  { transform: scale3d(1.25, 0.75, 1); }
+      40%  { transform: scale3d(0.75, 1.25, 1); }
+      50%  { transform: scale3d(1.15, 0.85, 1); }
+      65%  { transform: scale3d(0.95, 1.05, 1); }
+      75%  { transform: scale3d(1.05, 0.95, 1); }
+      100% { transform: scale3d(1,    1,    1); }
+    }
+
+    .contenu-card__metric--featured img {
+      width: 47px !important;
+      height: 47px !important;
+      flex-shrink: 0;
+      filter: none;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--shorts-red {
+      background: rgba(212, 62, 70, 0.63);
+      border: 1px solid rgba(163, 38, 47, 0.7);
+      box-shadow:
+        0 2.51px 2.51px rgba(10, 0, 0, 0.7),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.42);
+    }
+    .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+      width: 24px !important;
+      height: 30px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--shorts-red .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 239, 239, 0.96) 100%);
+      border: 1px solid rgba(176, 4, 16, 0.18);
+      box-shadow:
+        0 2.51px 2.51px rgba(10, 0, 0, 0.18),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.16);
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+      width: 28px !important;
+      height: 28px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+      filter: none;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-prefix,
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-value,
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-separator,
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-icon {
+      color: rgba(251, 252, 254, 0.97);
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25),
+        0 0 1px rgba(0, 0, 0, 0.95);
+    }
+    .contenu-card__metric-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-width: 0;
+      line-height: 1;
+      flex: 1 1 auto;
+      white-space: nowrap;
+      text-align: center;
+      margin-left: -7px;
+    }
+    .contenu-card__metric-inline .metric-value,
+    .contenu-card__metric-inline .metric-separator {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(251, 252, 254, 0.97);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25);
+    }
+    .contenu-card__metric-inline .metric-separator {
+      letter-spacing: 0;
+    }
+    .contenu-card__metric-inline .metric-icon {
+      font-size: 13px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25);
+    }
+    .contenu-card__metric-inline .metric-prefix {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(251, 252, 254, 0.97);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25);
+    }
+    .contenu-card__metric .stats {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      line-height: 1;
+      font-family: 'Poppins', sans-serif;
+    }
+    .contenu-card__metric .views {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 0.95em;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.95);
+    }
+    .contenu-card__metric .likes {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.88em;
+      color: rgba(255,255,255,0.80);
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .contenu-card__metric--clean {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .contenu-card__metric--clean > * {
+      flex-shrink: 0;
+    }
+    .contenu-card__metric--clean img {
+      height: 10px !important;
+      width: auto !important;
+      display: block;
+      margin-top: -1px;
+    }
+    .contenu-card__metric--clean .metric-value,
+    .contenu-card__metric--clean .metric-sep {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1;
+      color: #ffffff;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+    }
+    .contenu-card__metric--clean .metric-icon {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      margin-top: -1px;
+    }
+    .contenu-card__metric-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      width: 100%;
+    }
+
+    @media (max-width: 1280px) {
+      .contenus-grid { grid-template-columns: repeat(3, 1fr); gap: 52px 38px; }
+    }
+    @media (max-width: 1024px) {
+      .contenus-grid { grid-template-columns: repeat(2, 1fr); gap: 44px 32px; }
+      .contenus-section { width: 92%; }
+    }
+    @media (max-width: 640px) {
+      .contenus-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contenus-section { width: 94%; gap: 36px; }
+      .contenu-card { max-width: 230px; }
+      .contenu-card__frame { padding: 0; border-radius: 12px; }
+      .contenu-card__frame video { border-radius: 9px; }
+    }
+
+    .separateur-bloc {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+    }
+
+    .separateur-vertical {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(
+        to bottom,
+        rgba(229, 9, 20, 0.0) 0%,
+        rgba(229, 9, 20, 0.55) 50%,
+        rgba(229, 9, 20, 0.0) 100%
+      );
+      pointer-events: none;
+    }
+
+    .separateur-bloc .projet-row-2col {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .separateur-horizontal {
+      width: calc(100% + 96px);
+      margin-left: -48px;
+      height: 1.5px;
+      margin-top: 0;
+      flex-shrink: 0;
+      background: linear-gradient(
+        to right,
+        rgba(229, 9, 20, 0.0) 0%,
+        rgba(229, 9, 20, 0.55) 50%,
+        rgba(229, 9, 20, 0.0) 100%
+      );
+      box-shadow: none;
+    }
+
+    .bento-hover-btn {
+      position: relative;
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
+      margin-top: 0;
+      margin-bottom: 0;
+      z-index: 1;
+      background: rgba(229, 9, 20, 0.12);
+      box-shadow:
+        inset 0 0 0 1px rgba(229, 9, 20, 0.45),
+        inset 0 0 14px 0 rgba(229, 9, 20, 0.12),
+        inset 0 -3px 10px 0 rgba(229, 9, 20, 0.1),
+        0 2px 8px 0 rgba(0, 0, 0, 0.45),
+        0 4px 16px 0 rgba(229, 9, 20, 0.08);
+      transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
+      border: none;
+    }
+    .bento-card-title-row--meta {
+      margin-bottom: 0;
+    }
+    .bento-card-title-row--meta .bento-card-meta {
+      font-size: 12px;
+    }
+    .bento-hover-btn:hover {
+      background: rgba(229, 9, 20, 0.2);
+      box-shadow:
+        inset 0 0 0 1px rgba(229, 9, 20, 0.7),
+        inset 0 0 20px 0 rgba(229, 9, 20, 0.2),
+        0 4px 20px 0 rgba(229, 9, 20, 0.25),
+        0 8px 30px 0 rgba(0, 0, 0, 0.5);
+      transform: translateY(-1px);
+    }
+    .bento-hover-btn:active {
+      transform: scale(0.975);
+    }
+    .bento-hover-btn .btn-particle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(8px);
+      opacity: 0;
+      background: radial-gradient(circle, rgba(229,9,20,0.9), rgba(180,0,0,0.4));
+      transition: opacity 0.3s ease;
+    }
+    .bento-hover-btn .btn-particle.fade-in  { opacity: 0.7; }
+    .bento-hover-btn .btn-particle.fade-out {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    /* ── ≤ 1440px ── */
+    @media (max-width: 1440px) {
+      .projet-hero {
+        min-height: 32vh;
+        height: 32vh;
+        padding: 0 4%;
+      }
+      .projet-hero::before {
+        width: 400px;
+        height: 400px;
+      }
+      .hero-thumb { height: 185px; width: auto; }
+      .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); }
+      .projet-card { width: 86%; }
+      .projet-main { padding-top: 40px; gap: 36px; }
+      .concepts-section { width: 92%; max-width: 92%; }
+    }
+
+    /* ── ≤ 1280px ── */
+    @media (max-width: 1280px) {
+      .projet-hero {
+        min-height: 28vh;
+        height: 28vh;
+        padding: 0 3%;
+      }
+      .hero-thumb { height: 150px; width: auto; margin-left: -18px; }
+      .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); }
+      .projet-card { width: 90%; }
+      .projet-main { gap: 32px; }
+    }
+
+    /* ── ≤ 1024px ── */
+    @media (max-width: 1024px) {
+      .projet-hero {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        padding: 60px 5% 32px;
+        align-items: flex-start;
+        gap: 24px;
+      }
+      .projet-hero::before {
+        width: 300px;
+        height: 300px;
+        right: 10%;
+      }
+      .projet-hero__left { width: 100%; }
+      .projet-hero__thumbs {
+        width: 100%;
+        justify-content: center;
+        padding: 0 0 8px;
+        height: auto;
+      }
+      .hero-thumb { height: 190px; width: 114px; margin-left: -18px; }
+      .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); }
+      .projet-card { width: 94%; max-width: 94%; }
+      .concepts-section { width: 94%; max-width: 94%; }
+    }
+
+    /* ── ≤ 768px ── */
+    @media (max-width: 768px) {
+      .projet-hero { padding: 56px 4% 24px; gap: 20px; }
+      .hero-thumb { height: 155px; width: 93px; margin-left: -14px; }
+      .hero-thumb:first-child { margin-left: 0; }
+      .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); }
+      .projet-card { width: 96%; max-width: 96%; }
+      .projet-badges { flex-wrap: wrap; gap: 8px; }
+      .badge { font-size: 0.75rem; padding: 8px 14px; }
+      .concepts-section { width: 96%; max-width: 96%; }
+      .concepts-videos { grid-template-columns: 1fr; gap: 12px; }
+      .concepts-video { aspect-ratio: 9 / 16; max-width: 280px; margin: 0 auto; }
+      .projet-main { padding-top: 24px; gap: 24px; }
+      .bento-card-header { margin-bottom: 10px; }
+    }
+
+    /* ── Post-it mobile clone (caché par défaut) ── */
+    .lupin-postit-mobile { display: none; }
+    /* Découpe "Série en tendance" sur 2 lignes : spans inline par défaut */
+    .lupin-res-l1, .lupin-res-l2 { display: inline; }
+    /* Saut de ligne mobile-only : caché par défaut, activé ≤480px dans
+       le bloc @media plus bas (.br-mobile-only { display:inline }). */
+    .br-mobile-only { display: none; }
+
+    /* ── ≤ 480px ── */
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations Lupin : 4 résultats (2×2), TikTok+Shorts+Reels (64×64 / 64×39 / 64×41),
+       palette dark red Lupin (#1d0307 → #4d0a16) reprise du desktop. */
+    @media (max-width: 480px) {
+      /* ───────── POST-IT "SUSPECT" mobile ───────── */
+      .lupin-postit-svg { display: none !important; }
+      .lupin-postit-mobile {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 112px;
+        padding: 12px 10px 11px;
+        background: #f6d34a;
+        box-shadow: 0 8px 14px rgba(0,0,0,0.65);
+        transform: translate(-50%, -50%) translateY(-55%) rotate(-6deg) scale(0.36);
+        transform-origin: center center;
+        z-index: 20;
+        pointer-events: none;
+        font-family: Courier, 'Courier New', monospace;
+        color: #1a0a05;
+        line-height: 1.15;
+      }
+      .lupin-postit-mobile::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #d6a818;
+        opacity: 0.7;
+      }
+      .lupin-postit-mobile__tape {
+        position: absolute;
+        top: -9px;
+        left: 50%;
+        width: 38px;
+        height: 12px;
+        background: rgba(255, 250, 235, 0.55);
+        transform: translateX(-50%) rotate(-4deg);
+        z-index: 1;
+      }
+      .lupin-postit-mobile__title {
+        font-weight: bold;
+        font-size: 15px;
+        letter-spacing: 2px;
+        margin-top: 4px;
+      }
+      .lupin-postit-mobile__rule {
+        display: block;
+        width: 72px;
+        height: 1px;
+        background: #1a0a05;
+        margin: 6px 0 5px;
+      }
+      .lupin-postit-mobile__name {
+        font-size: 10.5px;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+      }
+      .lupin-postit-mobile__alias {
+        font-size: 9px;
+        color: #3a1a08;
+        margin-bottom: 2px;
+      }
+      .lupin-postit-mobile__num {
+        font-size: 8.5px;
+        color: #3a1a08;
+        letter-spacing: 1px;
+      }
+
+      /* ───────── Découpe "Série en tendance" sur 2 lignes ───────── */
+      .lupin-res-l1, .lupin-res-l2 { display: block !important; }
+
+      /* ───────── Trait jaune au-dessus du portable : halo blanc supprimé ───────── */
+      .contenu-card__frame::before { display: none !important; }
+
+      /* ───────── Logo TikTok du titre "Mes contenus organiques sur" : 29 px (44 px −35 %) ───────── */
+      .contenus-grid .contenus-title .contenus-title__logos img {
+        height: 29px !important;
+        width: auto !important;
+        flex-shrink: 0 !important;
+      }
+      .contenus-grid .contenus-title .contenus-title__logos { flex-shrink: 0 !important; }
+      /* Texte +18 % vs précédent, compensé par letter-spacing/gap/padding plus serrés
+         pour que le logo ne touche plus la bordure droite */
+      .contenus-grid .contenus-title {
+        font-size: 14.16px !important;
+        letter-spacing: 0.04em !important;
+        gap: 8px !important;
+        padding: 10px 12px 10px 14px !important;
+      }
+
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      /* <br class="br-mobile-only"> activé uniquement en mobile pour
+         imposer la coupe : "Les TikToks ads et organiques" / "sur la série Lupin". */
+      .br-mobile-only { display: inline !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(14.3px, 4.16vw, 17.55px) !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* ───────── ESPACEMENT main ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ───────── RÉSULTATS CLÉS — 4 mini-cartes 2×2 ───────── */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      .red-card--results::after { display: none !important; }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.85rem !important;
+        padding: 7px 20px !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      /* Mini-cartes : palette DARK RED Lupin reprise du desktop */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        background:
+          radial-gradient(circle at center, rgba(255,200,210,0.06) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          radial-gradient(ellipse at 45% 60%, rgba(170,0,15,0.30) 0%, rgba(229,9,20,0.08) 45%, transparent 75%),
+          linear-gradient(135deg, #1d0307 0%, #380710 35%, #4d0a16 60%, #2c0509 100%) !important;
+        border: 1.5px solid rgba(255, 80, 90, 0.55) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(0, 0, 0, 0.55),
+          0 2px 0 rgba(255,255,255,0.06) inset,
+          0 -2px 0 rgba(0,0,0,0.25) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.05) !important;
+        min-height: 92px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-item__value {
+        color: #f0e4e4 !important;
+        font-size: clamp(1.1rem, 4.8vw, 1.6rem) !important;
+      }
+      .red-card--results .results-item__label {
+        color: #e6d6d6 !important;
+        font-size: 0.62rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        letter-spacing: 0.10em !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok + Shorts + Reels ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      .contenu-card__metric--featured img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+        width: 64px !important;
+        height: 39px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+        width: 64px !important;
+        height: 41px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--shorts-red .contenu-card__metric-inline,
+      .contenu-card__metric--featured.contenu-card__metric--reels-white .contenu-card__metric-inline {
+        transform: translateX(-4px) !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+
+    /* ══ MES AUTRES CONTENUS ══ */
+    .autres-contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 64px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .autres-carousel-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .autres-track-clip {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .autres-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .autres-card {
+      flex-shrink: 0;
+      width: calc((100% - 20px) / 2);
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: default;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .autres-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.34);
+    }
+    .autres-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .autres-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .autres-card:hover .autres-card__overlay {
+      opacity: 1;
+    }
+    .autres-card__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.06em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .autres-arrow {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(30,10,10,0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .autres-arrow:hover {
+      background: rgba(229,9,26,0.85);
+      transform: scale(1.08);
+    }
+    .autres-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+      transform: none;
+    }
+
+    .autres-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .autres-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .autres-dot.is-active {
+      background: #e5091a;
+      transform: scale(1.3);
+    }
+  
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-dark" data-page="lupin">
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-pill">
+
+    <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+
+    <nav class="header-nav">
+      <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+      <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+      <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+    </nav>
+
+    <div class="header-socials">
+      <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+    </div>
+
+    </div><!-- /.header-pill -->
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="lupin">
+        <!-- Cartes par défaut (fallback statique) — JS randomise à chaque ouverture -->
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mercredi.html" class="hms-drawer__card" data-project="mercredi">
+          <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img src="assets/brand-projects/netflix/mercredi.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg></a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- 1. HERO BANNER — Plan d'enquête : carte de Paris, empreintes, post-it -->
+    <div class="projet-hero">
+      <!-- Layer 1 : scène (plan + indices) dessinée en SVG -->
+      <div class="hero-bg">
+        <svg class="hero-scene" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <!-- Grille laser rouge : double couche (lueur floue + cœur sharp) -->
+            <pattern id="lupinGridGlow" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 L 0 50" fill="none" stroke="rgba(255,55,75,0.45)" stroke-width="2.6"/>
+            </pattern>
+            <pattern id="lupinGridCore" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 L 0 50" fill="none" stroke="rgba(255,200,210,0.55)" stroke-width="0.7"/>
+            </pattern>
+            <filter id="laserBlur" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="1.4"/>
+            </filter>
+
+            <!-- Empreinte digitale ULTRA réaliste (boucle asymétrique + minutiae) -->
+            <symbol id="lupinFingerprint" viewBox="0 0 120 160">
+              <g fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round">
+                <!-- Périmètre extérieur -->
+                <path d="M 14,55 C 9,75 8,98 14,118 C 22,138 38,150 56,154 C 74,156 92,151 102,140 C 113,128 117,108 114,88 C 113,72 109,58 102,46"/>
+                <path d="M 22,52 C 16,72 16,95 22,114 C 28,131 42,143 58,146 C 74,148 89,143 98,133 C 107,122 110,104 108,86 C 106,71 102,58 96,48"/>
+                <path d="M 30,50 C 24,68 23,90 28,108 C 34,124 46,135 60,137 C 73,139 86,134 94,126 C 102,116 104,100 102,84 C 100,70 95,58 90,49"/>
+                <!-- Boucles intermédiaires -->
+                <path d="M 38,55 C 32,68 32,86 36,100 C 41,114 51,123 62,124 C 73,125 83,120 88,112 C 93,103 94,90 90,78 C 87,68 81,60 75,55"/>
+                <path d="M 46,60 C 41,70 41,84 44,95 C 48,105 56,112 64,112 C 72,112 79,108 82,100 C 84,93 84,82 81,73 C 78,66 73,60 68,58"/>
+                <path d="M 52,66 C 48,72 48,82 51,90 C 54,97 60,101 66,100 C 71,99 75,96 76,89 C 76,82 74,75 70,70 C 67,67 60,65 56,66"/>
+                <!-- Cœur de la boucle (centre) -->
+                <path d="M 56,75 C 54,79 55,86 58,90 C 61,93 65,93 68,89 C 70,85 69,78 65,75"/>
+                <path d="M 60,80 C 59,82 60,85 63,86 C 65,86 66,84 64,81"/>
+                <!-- Arches du haut -->
+                <path d="M 36,40 C 44,32 56,28 70,28 C 82,30 92,36 98,46"/>
+                <path d="M 44,34 C 52,28 62,25 72,26 C 82,28 89,34 92,42"/>
+                <!-- Bas du doigt -->
+                <path d="M 28,140 C 38,148 50,154 62,153 C 74,152 84,147 92,140"/>
+                <path d="M 36,148 C 44,153 53,156 62,156 C 71,155 80,152 86,148"/>
+                <!-- Bifurcations / minutiae -->
+                <path d="M 14,55 L 12,42"/>
+                <path d="M 102,46 L 106,38"/>
+                <path d="M 22,52 L 18,44"/>
+                <path d="M 96,48 L 102,40"/>
+                <path d="M 75,55 L 78,48"/>
+                <path d="M 35,135 L 30,140"/>
+                <path d="M 88,128 L 92,134"/>
+                <path d="M 50,128 L 48,134"/>
+                <path d="M 70,128 L 72,134"/>
+                <!-- Points d'arrêts de crête (minutiae) -->
+                <circle cx="44" cy="48" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="80" cy="50" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="20" cy="120" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="100" cy="115" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="62" cy="142" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="42" cy="80" r="0.7" fill="currentColor" stroke="none"/>
+                <circle cx="84" cy="92" r="0.7" fill="currentColor" stroke="none"/>
+                <!-- Petites coupures pour réalisme -->
+                <path d="M 30,75 Q 28,78 30,82" stroke-dasharray="2.5,3"/>
+                <path d="M 88,75 Q 90,78 88,82" stroke-dasharray="2.5,3"/>
+                <path d="M 42,108 Q 44,112 47,110" stroke-dasharray="2,2"/>
+              </g>
+            </symbol>
+          </defs>
+
+          <!-- ═════ GRILLE LASER ROUGE (background) ═════ -->
+          <rect width="1600" height="600" fill="url(#lupinGridGlow)" filter="url(#laserBlur)"/>
+          <rect width="1600" height="600" fill="url(#lupinGridCore)"/>
+
+          <!-- ═════ POST-IT "SUSPECT" (entre badge 2023 et première vignette) ═════ -->
+          <g class="lupin-postit-svg" transform="translate(1030,265) rotate(-6)">
+            <!-- Scotch -->
+            <rect x="-22" y="-12" width="44" height="14" fill="rgba(255,250,235,0.35)" transform="rotate(-4)"/>
+            <!-- Fiche jaune -->
+            <rect x="-74" y="0" width="148" height="124" fill="#f6d34a"
+                  filter="drop-shadow(0 8px 14px rgba(0,0,0,0.65))"/>
+            <rect x="-74" y="0" width="148" height="3.5" fill="#d6a818" opacity="0.7"/>
+            <text x="0" y="40" text-anchor="middle"
+                  font-family="Courier, monospace" font-weight="bold" font-size="19"
+                  fill="#1a0a05" letter-spacing="2">SUSPECT</text>
+            <line x1="-48" y1="52" x2="48" y2="52" stroke="#1a0a05" stroke-width="0.9"/>
+            <text x="0" y="74" text-anchor="middle"
+                  font-family="Courier, monospace" font-size="12"
+                  fill="#1a0a05" letter-spacing="1">A. DIOP</text>
+            <text x="0" y="93" text-anchor="middle"
+                  font-family="Courier, monospace" font-size="10"
+                  fill="#3a1a08">alias LUPIN</text>
+            <text x="0" y="112" text-anchor="middle"
+                  font-family="Courier, monospace" font-size="9"
+                  fill="#3a1a08" letter-spacing="1">N°5814</text>
+          </g>
+
+          <!-- ═════ EMPREINTES DIGITALES — éparpillées sur toute la bannière ═════ -->
+          <g style="color: rgba(255,235,222,0.32)">
+            <!-- haut-gauche, grande -->
+            <g transform="translate(110,95) rotate(18)" opacity="0.85">
+              <use href="#lupinFingerprint" x="-57.5" y="-76.5" width="115" height="153"/>
+            </g>
+            <!-- bas-gauche, petite -->
+            <g transform="translate(270,510) rotate(-22)" opacity="0.65">
+              <use href="#lupinFingerprint" x="-30" y="-40" width="60" height="80"/>
+            </g>
+            <!-- haut, légèrement à gauche du centre, très grande -->
+            <g transform="translate(480,70) rotate(-10)" opacity="0.75">
+              <use href="#lupinFingerprint" x="-67.5" y="-90" width="135" height="180"/>
+            </g>
+            <!-- bas-centre-gauche, moyenne -->
+            <g transform="translate(680,490) rotate(28)" opacity="0.80">
+              <use href="#lupinFingerprint" x="-45" y="-60" width="90" height="120"/>
+            </g>
+            <!-- centre légèrement haut, petite -->
+            <g transform="translate(850,140) rotate(-32)" opacity="0.60">
+              <use href="#lupinFingerprint" x="-27.5" y="-36.5" width="55" height="73"/>
+            </g>
+            <!-- bas-centre-droit, grande -->
+            <g transform="translate(1060,460) rotate(15)" opacity="0.78">
+              <use href="#lupinFingerprint" x="-57.5" y="-76.5" width="115" height="153"/>
+            </g>
+            <!-- haut-droite, moyenne-petite -->
+            <g transform="translate(1280,85) rotate(-20)" opacity="0.70">
+              <use href="#lupinFingerprint" x="-37.5" y="-50" width="75" height="100"/>
+            </g>
+            <!-- bas-droite, petite -->
+            <g transform="translate(1480,500) rotate(12)" opacity="0.58">
+              <use href="#lupinFingerprint" x="-27.5" y="-36.5" width="55" height="73"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Layer 5 : vignettage -->
+      <div class="hero-vignette"></div>
+
+      <!-- Layer 6 : grain papier -->
+      <div class="hero-grain"></div>
+
+      <!-- Gauche : titre + badges -->
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Les TikToks ads et organiques<br class="br-mobile-only"> sur la série Lupin</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenus Organiques - Ads</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+
+      <!-- Clone HTML du post-it "SUSPECT" — affiché uniquement en mobile (≤480px) -->
+      <div class="lupin-postit-mobile" aria-hidden="true">
+        <span class="lupin-postit-mobile__tape"></span>
+        <span class="lupin-postit-mobile__title">SUSPECT</span>
+        <span class="lupin-postit-mobile__rule"></span>
+        <span class="lupin-postit-mobile__name">A. DIOP</span>
+        <span class="lupin-postit-mobile__alias">alias LUPIN</span>
+        <span class="lupin-postit-mobile__num">N°5814</span>
+      </div>
+
+      <!-- Droite : 3 vignettes inclinées -->
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/lupin/vignette-lupin1.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/lupin/vignette-lupin1.webp" alt="Lupin vignette 1"></picture>
+        <picture><source srcset="assets/brand-projects/lupin/Vignette-lupin2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/lupin/Vignette-lupin2.webp" alt="Lupin vignette 2"></picture>
+        <picture><source srcset="assets/brand-projects/lupin/banniere-2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/lupin/banniere-2.webp" alt="Lupin banniere"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <!-- 3. MAIN CARD -->
+      <div class="projet-card">
+
+        <!-- CONTEXTE + MES MISSIONS -->
+        <div class="red-row">
+
+          <!-- CONTEXTE -->
+          <div class="red-card">
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">En 2023, Netflix France a mandaté l'agence The Source pour la promotion de la saison 3 de Lupin sur TikTok.</p>
+            <p class="red-card__text">L'objectif : créer des contenus ads et organiques percutants, en phase avec les codes de la plateforme, pour maximiser l'impact de la sortie de la série.</p>
+          </div>
+
+          <!-- MES MISSIONS -->
+          <div class="red-card">
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Idéation &amp; production de TikTok Ads pour la promotion de Lupin Part 3.</li>
+              <li>Création de contenus organiques autour de la sortie de la série.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS -->
+        <div class="red-card red-card--results">
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row">
+            <div class="results-item">
+              <span class="results-item__value"><span class="lupin-res-l1">Série </span><span class="lupin-res-l2">en <span class="results-item__suffix" style="font-weight:800;font-size:1em;">tendance</span></span></span>
+              <span class="results-item__label">Sur TikTok France</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+11</span> <span class="results-item__suffix">MILLIONS</span></span>
+              <span class="results-item__label">De vues cumulées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+400K</span> <span class="results-item__suffix">LIKES</span></span>
+              <span class="results-item__label">Cumulés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">6</span> <span class="results-item__suffix">CONTENUS</span></span>
+              <span class="results-item__label">Ads &amp; organiques produits</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 5. MES CONTENUS SUR TIKTOK -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mes Ads sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+          </span>
+        </div>
+
+        <div class="layout-selector" role="group" aria-label="Nombre de colonnes">
+          <button class="layout-btn" data-cols="2" aria-label="2 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="10" height="16" rx="1.5"/>
+              <rect x="12" y="0" width="10" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-active" data-cols="3" aria-label="3 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"    y="0" width="6" height="16" rx="1.5"/>
+              <rect x="8"    y="0" width="6" height="16" rx="1.5"/>
+              <rect x="16"   y="0" width="6" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-disabled" data-cols="4" aria-label="4 colonnes" disabled>
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"    y="0" width="4" height="16" rx="1.5"/>
+              <rect x="6"    y="0" width="4" height="16" rx="1.5"/>
+              <rect x="12"   y="0" width="4" height="16" rx="1.5"/>
+              <rect x="18"   y="0" width="4" height="16" rx="1.5"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="contenus-grid contenus-grid--cols-3" id="contenusGrid">
+
+          <!-- Vidéo 1 — Lupin Ads 1 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/lupin/lupin-ads-1.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vidéo 2 — Lupin Ads 2 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/lupin/lupin-ads-2.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vidéo 3 — Lupin Ads 3 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/lupin/lupin-ads-3.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Titre section organique -->
+          <div style="grid-column:1/-1; display:flex; justify-content:center; width:100%;">
+            <div class="contenus-title">
+              Mes contenus organiques sur
+              <span class="contenus-title__logos">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+              </span>
+            </div>
+          </div>
+
+          <!-- Vidéo 4 — Annonce Lupin -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/lupin/annonce-lupin.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7224134250398895386?_r=1&_t=ZN-8zzjn2AKE5e" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">1.2 M</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">88 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <!-- Vidéo 5 — Edit Lupin -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/lupin/edit-lupin.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7288966484439731488?_r=1&_t=ZN-8zzjBGjUig7" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">240 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">27 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <!-- Vidéo 6 — Pancarte Lupin -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/lupin/pancarte-lupin.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7223775646823107867?_r=1&_t=ZN-8zzjeZiyBWg" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">3.8 M</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">296 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 6. MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman Marry Me"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.querySelectorAll('.bento-hover-btn').forEach(btn => {
+      let isOver = false;
+      let lastTime = 0;
+
+      btn.addEventListener('pointerenter', () => { isOver = true; });
+      btn.addEventListener('pointerleave', () => { isOver = false; });
+
+      btn.addEventListener('pointermove', (e) => {
+        if (!isOver) return;
+        const now = Date.now();
+        if (now - lastTime < 100) return;
+        lastTime = now;
+
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const particle = document.createElement('div');
+        particle.className = 'btn-particle';
+        particle.style.left = x + 'px';
+        particle.style.top  = y + 'px';
+        btn.appendChild(particle);
+
+        requestAnimationFrame(() => particle.classList.add('fade-in'));
+
+        setTimeout(() => {
+          particle.classList.remove('fade-in');
+          particle.classList.add('fade-out');
+        }, 1000);
+
+        setTimeout(() => particle.remove(), 2200);
+      });
+    });
+  </script>
+
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById('contenusGrid');
+      const btns = document.querySelectorAll('.layout-btn');
+      if (!grid || !btns.length) return;
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled || btn.classList.contains('is-disabled')) return;
+          const cols = btn.dataset.cols;
+          btns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          grid.classList.remove('contenus-grid--cols-2', 'contenus-grid--cols-3', 'contenus-grid--cols-4');
+          grid.classList.add('contenus-grid--cols-' + cols);
+          grid.classList.add('layout-changing');
+          setTimeout(() => grid.classList.remove('layout-changing'), 350);
+        });
+      });
+    })();
+  </script>
+
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515-lupin"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

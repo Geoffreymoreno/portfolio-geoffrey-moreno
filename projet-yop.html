@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les contenus homemade pour le compte TikTok — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fredoka:wght@500;600;700&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* ── PAGE BACKGROUND — univers Yop pâle ── */
+    body {
+      background: linear-gradient(180deg, #f7d4e6 0%, #f0c8df 18%, #f5d4cf 50%, #fbe5d3 78%, #fff5e8 100%);
+      background-attachment: fixed;
+    }
+
+    /* ── HERO BANNER ── */
+    .projet-hero {
+      min-height: 36vh;
+      height: 36vh;
+      background: linear-gradient(120deg, #f7c8df 0%, #f4b8d8 25%, #f8d5c5 60%, #fde2c8 85%, #fff3e0 100%);
+      padding: 0 0 0 8%;
+      isolation: isolate;
+    }
+
+    /* Halo pulsant rose pâle */
+    .projet-hero::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(255, 120, 170, 0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(255, 200, 140, 0.20) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 60% 20%, rgba(255, 165, 200, 0.18) 0%, transparent 55%);
+      filter: blur(40px);
+      animation: heroFog 18s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes heroFog {
+      0%   { transform: translate(0, 0)       scale(1);    opacity: 0.85; }
+      50%  { transform: translate(3%, -2%)    scale(1.08); opacity: 1;    }
+      100% { transform: translate(-2%, 3%)    scale(1.04); opacity: 0.9;  }
+    }
+
+    /* Vignettage doux */
+    .projet-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 75% at center, transparent 50%, rgba(120, 60, 100, 0.15) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── PATTERN décoratif : éclaboussures de yop dans le hero ── */
+    .hero-atmosphere {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Grandes taches yop colorées dispersées dans la bannière */
+    .hero-splash {
+      position: absolute;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.08));
+      will-change: transform;
+    }
+    .hero-splash svg { width: 100%; height: auto; display: block; }
+    .hero-splash--1, .hero-splash--3, .hero-splash--4, .hero-splash--5 { display: none; }
+    .hero-splash--2 { top: 60%;  left: 2%;  width: 95px;  opacity: 0.30; transform: rotate(22deg);  animation: splashFloat 14s ease-in-out -3s infinite alternate; }
+    .hero-splash--6 { top: 55%;  left: 92%; width: 90px;  opacity: 0.28; transform: rotate(-10deg); animation: splashFloat 15s ease-in-out -3.5s infinite alternate; }
+
+    @keyframes splashFloat {
+      0%   { transform: translate(0, 0) rotate(var(--rot, 0deg)) scale(1); }
+      50%  { transform: translate(8px, -10px) rotate(var(--rot, 0deg)) scale(1.04); }
+      100% { transform: translate(-6px, 8px)  rotate(var(--rot, 0deg)) scale(0.98); }
+    }
+
+    /* Halo pastel ambiant */
+    .hero-honeycomb-glow {
+      position: absolute;
+      inset: -10%;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 50%, rgba(255, 180, 210, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 75% 60%, rgba(255, 220, 180, 0.10) 0%, transparent 65%);
+      filter: blur(20px);
+      animation: yopGlow 7s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes yopGlow {
+      0%   { opacity: 0.6; }
+      100% { opacity: 0.95; }
+    }
+
+    /* ── VIGNETTES HERO ── */
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 20px;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+
+    .hero-thumb {
+      border: none;
+      /* visible mais pas trop lumineuse — juste milieu */
+      filter: brightness(0.95) saturate(1.0) contrast(1.02);
+      box-shadow: 0 16px 40px rgba(120, 50, 90, 0.25), 0 4px 10px rgba(120, 50, 90, 0.10);
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .projet-hero__thumbs:hover .hero-thumb {
+      filter: blur(2px) brightness(0.7) saturate(0.85);
+      transform-origin: center;
+    }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(1) { transform: rotate(-6deg) scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(2) { transform: rotate(0deg)  scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(3) { transform: rotate(6deg)  scale(0.95); }
+
+    .projet-hero__thumbs .hero-thumb:hover {
+      filter: blur(0) brightness(1.05) saturate(1.1) !important;
+      box-shadow: 0 24px 56px rgba(120, 50, 90, 0.40);
+      z-index: 10 !important;
+    }
+    .projet-hero__thumbs .hero-thumb:nth-child(1):hover { transform: rotate(-3deg) scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(2):hover { transform: rotate(0deg)  scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(3):hover { transform: rotate(3deg)  scale(1.08) translateY(-6px) !important; }
+
+    /* Titre hero — blanc Poppins 800 (identique à projet-netflix-2.html) */
+    .projet-title {
+      color: #ffffff !important;
+      text-shadow:
+        0 2px 14px rgba(120, 50, 90, 0.70),
+        0 1px 3px rgba(74, 40, 24, 0.65),
+        0 0 1px rgba(74, 40, 24, 0.55) !important;
+    }
+    /* Capsules ultra-translucides — le hero rose traverse la capsule */
+    .hero-badges .badge {
+      color: #c44569;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1.5px solid rgba(196, 69, 105, 0.32);
+      box-shadow:
+        0 6px 18px rgba(120, 50, 90, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.60),
+        inset 0 -1px 2px rgba(196, 69, 105, 0.10);
+      backdrop-filter: blur(8px) saturate(1.3);
+      -webkit-backdrop-filter: blur(8px) saturate(1.3);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.55);
+    }
+
+    /* ── MAIN CARD ── */
+    .projet-card {
+      width: 94%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CARTES (Contexte / Missions / Résultats) — crème + accents chocolat ── */
+    .red-card {
+      position: relative;
+      background: linear-gradient(135deg, #fff8f0 0%, #fdebd9 50%, #f7dfca 100%);
+      border: 1.5px solid rgba(74, 40, 24, 0.22);
+      border-radius: 24px;
+      padding: 45px 34px 30px;
+      box-shadow:
+        0 18px 40px rgba(120, 50, 90, 0.18),
+        0 2px 0 rgba(255,255,255,0.55) inset,
+        0 -2px 0 rgba(74, 40, 24, 0.08) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Pattern subtil de mini-pois yop dans les cartes */
+    .red-card__bg {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .red-card__bg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.18;
+    }
+    .red-card > .red-card__text,
+    .red-card > .red-card__list,
+    .red-card > .results-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Label flottant (Contexte / Mes Missions / Mes Résultats) */
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(74, 40, 24, 0.30);
+      padding: 11px 29px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #6b3a1f 0%, #4a2818 100%);
+      border: 1.5px solid rgba(74, 40, 24, 0.85);
+      box-shadow:
+        0 6px 18px rgba(74, 40, 24, 0.30),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -2px 4px rgba(0,0,0,0.20);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+      gap: 32px;
+    }
+
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(15.4px, 1.188vw, 19.8px);
+      line-height: 1.85;
+      letter-spacing: 0.04em;
+      color: #4a2818;
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text { margin-top: 22px; }
+
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(15.4px, 1.188vw, 19.8px);
+      line-height: 1.85;
+      letter-spacing: 0.04em;
+      color: #4a2818;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      text-align: center;
+      width: 100%;
+    }
+    .red-card__list li { display: block; text-align: center; }
+    .red-card__list li::before { content: "• "; color: #c44569; font-weight: 900; }
+
+    /* ── CARTE RÉSULTATS (4 métriques) ── */
+    .red-card--results {
+      padding: 36px 22px 32px;
+      width: 78%;
+      align-self: center;
+    }
+    .results-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 18px;
+      width: 100%;
+      padding-top: 22px;
+      flex-wrap: nowrap;
+    }
+    .results-item {
+      flex: 0 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .results-item__value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.56rem, 2.40vw, 2.28rem);
+      color: #4a2818;
+      line-height: 1.05;
+      margin-bottom: 9px;
+      white-space: nowrap;
+    }
+    .results-item__number { font-size: 1.32em; vertical-align: middle; color: #c44569; }
+    .results-item__suffix {
+      font-weight: 700;
+      font-size: 0.62em;
+      color: #6b3a1f;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.86rem, 1.01vw, 1.01rem);
+      color: rgba(74, 40, 24, 0.78);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+    .results-divider {
+      width: 1px;
+      height: 68px;
+      background: rgba(74, 40, 24, 0.22);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .red-card--results { width: 92%; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; width: 96%; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* ── ÉLÉMENTS DÉCO PAGE ENTIÈRE : taches + fruits emoji flottants ── */
+    main { position: relative; }
+    .page-yop-deco {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Taches de yop colorées qui gravitent */
+    .yop-splash {
+      position: absolute;
+      pointer-events: none;
+      will-change: transform;
+      filter: drop-shadow(0 4px 8px rgba(120, 50, 90, 0.12));
+    }
+    .yop-splash svg { width: 100%; height: auto; display: block; }
+
+    /* Emojis fruits flottants */
+    .yop-fruit {
+      position: absolute;
+      font-size: 28px;
+      line-height: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(120, 50, 90, 0.18));
+      will-change: transform;
+      user-select: none;
+    }
+
+    /* === COLONNE GAUCHE === */
+    .yop-splash--1  { top: 4%;   left: 2%;   width: 70px; opacity: 0.55; --rot: -12deg; transform: rotate(-12deg); animation: yopFloatA 14s ease-in-out infinite; }
+    .yop-fruit--1   { top: 18%;  left: 3%;   font-size: 32px; animation: yopFloatB 13s ease-in-out infinite; }
+    .yop-splash--2  { top: 32%;  left: 1.5%; width: 60px; opacity: 0.50; --rot: 18deg;  transform: rotate(18deg);  animation: yopFloatC 16s ease-in-out infinite; }
+    .yop-fruit--2   { top: 48%;  left: 2.5%; font-size: 28px; animation: yopFloatA 15s ease-in-out -2s infinite; }
+    .yop-splash--3  { top: 62%;  left: 2%;   width: 55px; opacity: 0.45; --rot: -8deg;  transform: rotate(-8deg);  animation: yopFloatB 13s ease-in-out -3s infinite; }
+    .yop-fruit--3   { top: 78%;  left: 3%;   font-size: 30px; animation: yopFloatC 14s ease-in-out -1.5s infinite; }
+    .yop-splash--4  { top: 92%;  left: 2%;   width: 50px; opacity: 0.50; --rot: 22deg;  transform: rotate(22deg);  animation: yopFloatA 15s ease-in-out -4s infinite; }
+
+    /* === COLONNE CENTRE (entre sections) === */
+    .yop-splash--5  { top: 23%;  left: 50%;  width: 48px; opacity: 0.42; --rot: 10deg;  transform: translate(-50%, 0) rotate(10deg);  animation: yopFloatC 17s ease-in-out -1s infinite; }
+    .yop-fruit--4   { top: 40%;  left: 50%;  font-size: 26px; transform: translateX(-50%); animation: yopFloatB 14s ease-in-out -2.5s infinite; }
+    .yop-splash--6  { top: 56%;  left: 50%;  width: 52px; opacity: 0.45; --rot: -16deg; transform: translate(-50%, 0) rotate(-16deg); animation: yopFloatA 15s ease-in-out -3s infinite; }
+    .yop-fruit--5   { top: 71%;  left: 50%;  font-size: 28px; transform: translateX(-50%); animation: yopFloatC 13s ease-in-out -1.5s infinite; }
+
+    /* === COLONNE DROITE === */
+    .yop-splash--7  { top: 8%;   left: 95%;  width: 60px; opacity: 0.50; --rot: 14deg;  transform: translateX(-100%) rotate(14deg);  animation: yopFloatB 14s ease-in-out infinite; }
+    .yop-fruit--6   { top: 22%;  left: 96%;  font-size: 30px; transform: translateX(-100%); animation: yopFloatA 16s ease-in-out -2s infinite; }
+    .yop-splash--8  { top: 38%;  left: 95%;  width: 55px; opacity: 0.45; --rot: -20deg; transform: translateX(-100%) rotate(-20deg); animation: yopFloatC 15s ease-in-out -1s infinite; }
+    .yop-fruit--7   { top: 54%;  left: 96%;  font-size: 28px; transform: translateX(-100%); animation: yopFloatB 13s ease-in-out -3s infinite; }
+    .yop-splash--9  { top: 70%;  left: 95%;  width: 65px; opacity: 0.55; --rot: 18deg;  transform: translateX(-100%) rotate(18deg);  animation: yopFloatA 14s ease-in-out -4s infinite; }
+    .yop-fruit--8   { top: 86%;  left: 96%;  font-size: 32px; transform: translateX(-100%); animation: yopFloatC 15s ease-in-out -1.5s infinite; }
+
+    /* === ZONE DENSIFIÉE SOUS LE HERO + FRUITS SUPPLÉMENTAIRES === */
+    .yop-fruit--9   { top: 8%;   left: 14%;  font-size: 30px; animation: yopFloatA 14s ease-in-out -2s infinite; }
+    .yop-fruit--10  { top: 11%;  left: 32%;  font-size: 26px; animation: yopFloatB 16s ease-in-out -1s infinite; }
+    .yop-fruit--11  { top: 13%;  left: 66%;  font-size: 28px; animation: yopFloatC 15s ease-in-out -3s infinite; }
+    .yop-fruit--12  { top: 9%;   left: 84%;  font-size: 32px; animation: yopFloatA 13s ease-in-out -1s infinite; }
+    .yop-fruit--13  { top: 27%;  left: 19%;  font-size: 28px; animation: yopFloatB 14s ease-in-out -2.5s infinite; }
+    .yop-fruit--14  { top: 29%;  left: 76%;  font-size: 30px; animation: yopFloatC 16s ease-in-out -1.5s infinite; }
+    .yop-fruit--15  { top: 44%;  left: 22%;  font-size: 26px; animation: yopFloatA 15s ease-in-out -3.5s infinite; }
+    .yop-fruit--16  { top: 46%;  left: 78%;  font-size: 28px; animation: yopFloatB 14s ease-in-out -1s infinite; }
+    .yop-fruit--17  { top: 59%;  left: 18%;  font-size: 30px; animation: yopFloatC 13s ease-in-out -2s infinite; }
+    .yop-fruit--18  { top: 62%;  left: 80%;  font-size: 28px; animation: yopFloatA 16s ease-in-out -3s infinite; }
+    .yop-fruit--19  { top: 82%;  left: 22%;  font-size: 26px; animation: yopFloatB 15s ease-in-out -2.5s infinite; }
+    .yop-fruit--20  { top: 88%;  left: 76%;  font-size: 30px; animation: yopFloatC 14s ease-in-out -1s infinite; }
+
+    /* === 7 fruits supplémentaires hors hero, tailles variées === */
+    .yop-fruit--21  { top: 16%;  left: 8%;   font-size: 40px; animation: yopFloatA 17s ease-in-out -2s infinite; }
+    .yop-fruit--22  { top: 25%;  left: 88%;  font-size: 22px; animation: yopFloatB 13s ease-in-out -1s infinite; }
+    .yop-fruit--23  { top: 36%;  left: 38%;  font-size: 34px; animation: yopFloatC 15s ease-in-out -3s infinite; }
+    .yop-fruit--24  { top: 50%;  left: 12%;  font-size: 24px; animation: yopFloatA 14s ease-in-out -2.5s infinite; }
+    .yop-fruit--25  { top: 53%;  left: 60%;  font-size: 30px; animation: yopFloatB 16s ease-in-out -1.5s infinite; }
+    .yop-fruit--26  { top: 68%;  left: 88%;  font-size: 38px; animation: yopFloatC 14s ease-in-out -3.5s infinite; }
+    .yop-fruit--27  { top: 80%;  left: 42%;  font-size: 26px; animation: yopFloatA 15s ease-in-out -1s infinite; }
+
+    /* === 3 fruits diversifiés supplémentaires === */
+    .yop-fruit--28  { top: 21%;  left: 48%;  font-size: 42px; animation: yopFloatB 16s ease-in-out -2.5s infinite; }
+    .yop-fruit--29  { top: 73%;  left: 65%;  font-size: 22px; animation: yopFloatC 13s ease-in-out -1.5s infinite; }
+    .yop-fruit--30  { top: 92%;  left: 32%;  font-size: 32px; animation: yopFloatA 15s ease-in-out -3s infinite; }
+
+    /* === BOUTEILLES YOP RÉPARTIES SUR LE BAS DE PAGE (2 fraise + 2 chocolat + 2 vanille) === */
+    .yop-bottle-bottom {
+      position: absolute;
+      width: auto;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 10px 16px rgba(125, 10, 51, 0.22));
+      will-change: transform;
+    }
+    /* Répartition équilibrée du haut vers le bas (hors hero), alternance G/D et saveurs */
+    .yop-bottle-bottom--1 { top: 15%; left: 1%;  height: 57px; --rot: -10deg; animation: yopFloatA 14s ease-in-out infinite; }                 /* Fraise   — vers CONTEXTE */
+    .yop-bottle-bottom--2 { top: 28%; right: 1%; height: 63px; --rot: 9deg;   animation: yopFloatB 16s ease-in-out -1s infinite; }             /* Chocolat — vers RÉSULTATS */
+    .yop-bottle-bottom--3 { top: 42%; left: 1%;  height: 51px; --rot: 12deg;  animation: yopFloatC 13s ease-in-out -2s infinite; }             /* Vanille  — haut grille TikTok */
+    .yop-bottle-bottom--4 { top: 56%; right: 1%; height: 60px; --rot: -8deg;  animation: yopFloatA 15s ease-in-out -3s infinite; }             /* Fraise   — milieu grille TikTok */
+    .yop-bottle-bottom--5 { top: 73%; left: 1%;  height: 63px; --rot: 11deg;  animation: yopFloatB 14s ease-in-out -1.5s infinite; }           /* Chocolat — entre vidéo solo et carrousel */
+    .yop-bottle-bottom--6 { top: 90%; right: 1%; height: 54px; --rot: -13deg; animation: yopFloatC 16s ease-in-out -2.5s infinite; }           /* Vanille  — vers footer */
+
+    @media (max-width: 768px) {
+      .yop-bottle-bottom--3, .yop-bottle-bottom--4, .yop-bottle-bottom--6 { display: none; }
+      .yop-bottle-bottom--1 { height: 48px; }
+      .yop-bottle-bottom--2 { height: 48px; }
+      .yop-bottle-bottom--5 { height: 48px; }
+    }
+
+    /* Trajectoires de flottement organiques */
+    @keyframes yopFloatA {
+      0%   { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+      33%  { transform: translate(14px, -16px) rotate(calc(var(--rot, 0deg) + 8deg)); }
+      66%  { transform: translate(-10px, 12px) rotate(calc(var(--rot, 0deg) - 6deg)); }
+      100% { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+    }
+    @keyframes yopFloatB {
+      0%   { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+      50%  { transform: translate(-12px, 18px) rotate(calc(var(--rot, 0deg) - 10deg)); }
+      100% { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+    }
+    @keyframes yopFloatC {
+      0%   { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+      40%  { transform: translate(16px, 10px) rotate(calc(var(--rot, 0deg) + 12deg)); }
+      80%  { transform: translate(-8px, -12px) rotate(calc(var(--rot, 0deg) - 8deg)); }
+      100% { transform: translate(0, 0) rotate(var(--rot, 0deg)); }
+    }
+
+    /* Centre & droite : ne pas écraser translateX */
+    .yop-splash--5, .yop-splash--6, .yop-fruit--4, .yop-fruit--5 {
+      animation-name: yopFloatCenterA, yopFloatCenterB, yopFloatCenterC;
+    }
+    @keyframes yopFloatCenterA {
+      0%   { transform: translate(-50%, 0) rotate(var(--rot, 0deg)); }
+      50%  { transform: translate(calc(-50% + 12px), -14px) rotate(calc(var(--rot, 0deg) + 8deg)); }
+      100% { transform: translate(-50%, 0) rotate(var(--rot, 0deg)); }
+    }
+    .yop-splash--7, .yop-splash--8, .yop-splash--9,
+    .yop-fruit--6, .yop-fruit--7, .yop-fruit--8 {
+      animation-name: yopFloatRight;
+    }
+    @keyframes yopFloatRight {
+      0%   { transform: translateX(-100%) rotate(var(--rot, 0deg)); }
+      50%  { transform: translateX(calc(-100% - 14px)) translateY(-12px) rotate(calc(var(--rot, 0deg) + 10deg)); }
+      100% { transform: translateX(-100%) rotate(var(--rot, 0deg)); }
+    }
+
+    @media (max-width: 768px) {
+      .yop-splash, .yop-fruit { transform-origin: center; }
+      .yop-splash--3, .yop-splash--6, .yop-splash--8,
+      .yop-fruit--3, .yop-fruit--5, .yop-fruit--7,
+      .yop-fruit--10, .yop-fruit--12, .yop-fruit--14,
+      .yop-fruit--16, .yop-fruit--18, .yop-fruit--20,
+      .yop-fruit--22, .yop-fruit--25, .yop-fruit--27 { display: none; }
+    }
+
+    /* ── BADGES (contenus / autres contenus) ── */
+    .badge {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: #ffffff;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    /* ── CONTENUS (grille vidéos) ── */
+    .contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+      position: relative;
+    }
+
+    /* Titre de section "Mes contenus sur TikTok" */
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(17px, 1.32vw, 20px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #6b3a1f 0%, #4a2818 100%);
+      border: 1.5px solid rgba(74, 40, 24, 0.85);
+      box-shadow:
+        0 6px 18px rgba(74, 40, 24, 0.30),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -2px 4px rgba(0,0,0,0.20);
+      white-space: nowrap;
+    }
+    .contenus-title__logos { display: inline-flex; align-items: center; gap: 10px; }
+    .contenus-title__logos img {
+      height: 30px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    /* Grille adaptable 2 / 3 / 4 colonnes */
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 48px 36px;
+      width: 100%;
+      justify-items: center;
+      align-items: start;
+      position: relative;
+    }
+    .contenus-grid--cols-2 { grid-template-columns: repeat(2, 1fr); gap: 64px 80px; }
+    .contenus-grid--cols-2 .contenu-card { max-width: 283px; width: 85%; margin: 0 auto; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured { aspect-ratio: auto; min-height: 77px; }
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-value,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-separator,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-icon,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-prefix { font-size: 23px; }
+    .contenus-grid--cols-2 .contenu-card__metric-inline { gap: 4px; margin-left: 0; }
+    .contenus-grid--cols-2 .metric-press__inner { gap: 4px; padding: 0 14px; justify-content: center; box-shadow: none; }
+    .contenus-grid--cols-2 .metric-press__outer { box-shadow: none; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured { box-shadow: none; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured::after { display: none; }
+    .contenus-grid--cols-2 .contenu-card__metric--featured img { width: 62px !important; height: 62px !important; margin: 0; }
+
+    .contenus-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .contenus-grid--cols-2 > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
+
+    /* 3 colonnes : 2 + 3 + 2 = 7 vidéos */
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .contenu-card { grid-column: span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-1 { grid-column: 1 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-2 { grid-column: 3 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-3 { grid-column: 5 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-4 { grid-column: 1 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-5 { grid-column: 3 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-6 { grid-column: 5 / span 2; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .cc-pos-7 { grid-column: 3 / span 2; }
+
+    @keyframes layoutFade {
+      from { opacity: 0.6; transform: scale(0.97); }
+      to   { opacity: 1;   transform: scale(1); }
+    }
+    .layout-changing .contenu-card { animation: layoutFade 0.32s ease forwards; }
+
+    /* Sélecteur de colonnes */
+    .layout-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: linear-gradient(180deg, #6b3a1f 0%, #4a2818 100%);
+      border: 1.5px solid rgba(74, 40, 24, 0.85);
+      border-radius: 999px;
+      padding: 5px 7px;
+      box-shadow: 0 6px 18px rgba(74,40,24,0.30), inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -2px 4px rgba(0,0,0,0.20);
+    }
+    .layout-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 999px; border: none;
+      background: transparent; cursor: pointer; padding: 0; transition: background 0.2s ease;
+    }
+    .layout-btn svg { width: 19px; height: 14px; fill: rgba(255,255,255,0.55); transition: fill 0.2s ease, filter 0.2s ease; }
+    .layout-btn.is-active { background: rgba(255,255,255,0.18); box-shadow: inset 0 0 10px rgba(255,255,255,0.12), 0 0 8px rgba(255,255,255,0.08); }
+    .layout-btn.is-active svg { fill: #ffffff; filter: drop-shadow(0 0 4px rgba(255,255,255,0.55)); }
+    .layout-btn:hover:not(.is-active) { background: rgba(255,255,255,0.09); }
+    .layout-btn:hover svg { fill: rgba(255,255,255,0.85); }
+    .layout-btn.is-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .layout-btn.is-disabled:hover { background: transparent; }
+
+    /* Card vidéo */
+    .contenu-card {
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; gap: 16px; width: 100%; max-width: 185px; z-index: 0;
+    }
+    .contenu-card__frame {
+      position: relative; width: 100%; aspect-ratio: 9 / 16;
+      border-radius: 14px; padding: 0;
+      background: #2a1410;
+      border: 1.5px solid rgba(74, 40, 24, 0.45);
+      box-shadow: 0 20px 40px rgba(120, 50, 90, 0.25), 0 8px 16px rgba(120, 50, 90, 0.15), 0 0 18px rgba(255, 180, 200, 0.18);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.35s ease;
+    }
+    .contenu-card__frame:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 28px 52px rgba(120, 50, 90, 0.35), 0 12px 24px rgba(120, 50, 90, 0.20), 0 0 26px rgba(255, 180, 200, 0.30);
+    }
+    .contenu-card__frame::before {
+      content: ""; position: absolute; width: 14rem; height: 12rem; background: white;
+      filter: blur(50px); left: -50%; top: -50%; z-index: 0; pointer-events: none; border-radius: 0; opacity: 1;
+    }
+    .contenu-card__frame video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 11px; background: #000; position: relative; z-index: 2; }
+
+    .contenu-card__play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.85); display: flex; align-items: center;
+      justify-content: center; cursor: pointer; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .contenu-card__play::after { content: ""; width: 0; height: 0; border-left: 14px solid #ffffff; border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)); }
+    .contenu-card__frame:hover .contenu-card__play { transform: translate(-50%, -50%) scale(1.06); }
+    .contenu-card__frame.is-playing .contenu-card__play { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+
+    .contenu-card__frame--player { cursor: pointer; transition: transform 0.5s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.5s ease; }
+    .contenu-card__frame--player::after { content: ""; position: absolute; inset: 4px; background: #141414; border-radius: 11px; z-index: 1; opacity: 0.9; pointer-events: none; }
+
+    .contenu-card__blob { position: absolute; border-radius: 50%; filter: blur(28px); z-index: 3; pointer-events: none; mix-blend-mode: screen; opacity: 0.85; transition: transform 0.5s ease; }
+    .contenu-card__blob--blue   { width: 56px; height: 56px; background: #ff6b9d; top: 28%; right: 18%; }
+    .contenu-card__blob--orange { width: 44px; height: 44px; background: #ffaa7a; bottom: 32%; right: 22%; }
+    .contenu-card__frame--player:hover .contenu-card__blob--blue   { transform: translate(44px, -44px); }
+    .contenu-card__frame--player:hover .contenu-card__blob--orange { transform: translate(44px, 64px); }
+    .contenu-card__frame--player video { position: relative; z-index: 2; }
+
+    .contenu-card__frame--player .contenu-card__play--toggle,
+    .contenu-card__frame--player .contenu-card__play {
+      padding: 0; border-radius: 50%;
+      background: rgba(40,15,5,0.75);
+      border: 1px solid rgba(255, 180, 200, 0.55);
+      box-shadow: 0 0 10px rgba(255, 120, 170, 0.3);
+      width: 56px; height: 56px; opacity: 1;
+    }
+    .contenu-card__frame--player .contenu-card__play--toggle::after,
+    .contenu-card__frame--player .contenu-card__play::after { border-left-color: #ffe0c7; }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle { opacity: 0; pointer-events: none; }
+    .contenu-card__frame--player:hover.is-playing .contenu-card__play--toggle { opacity: 0.85; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle::after { content: ""; width: 14px; height: 16px; border: 0; margin-left: 0; background: linear-gradient(#fff, #fff) left/4px 100% no-repeat, linear-gradient(#fff, #fff) right/4px 100% no-repeat; }
+
+    .contenu-card__sound { position: absolute; top: 10px; right: 10px; z-index: 5; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.52); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.15s ease; }
+    .contenu-card__sound:hover { background: rgba(0,0,0,0.78); transform: scale(1.1); }
+    .contenu-card__sound svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: block; }
+
+    .contenu-card__progress { position: absolute; left: 14px; right: 14px; bottom: 10px; height: 3px; border-radius: 999px; background: rgba(255,255,255,0.25); cursor: pointer; z-index: 4; overflow: hidden; transition: height 0.18s ease; }
+    .contenu-card__frame--player:hover .contenu-card__progress { height: 5px; }
+    .contenu-card__progress-fill { height: 100%; width: 0%; background: #ff6b9d; border-radius: 999px; box-shadow: 0 0 6px rgba(255, 107, 157, 0.6); transition: width 0.1s linear; }
+
+    /* Métrique flottante sous chaque vidéo */
+    .contenu-card__metric { display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.82rem; letter-spacing: 0.01em; color: #ffffff; padding: 8px 16px 8px 12px; border-radius: 12px; background: rgba(40,15,5,0.78); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: 1px solid rgba(255, 180, 200, 0.30); box-shadow: 0 4px 16px rgba(120, 50, 90, 0.40), 0 1px 0 rgba(255,255,255,0.06) inset, 0 -1px 0 rgba(0,0,0,0.5) inset; text-shadow: 0 1px 3px rgba(0,0,0,0.7); white-space: nowrap; }
+    .contenu-card__metric--player { height: auto; padding: 8px 16px 8px 12px; box-sizing: border-box; white-space: nowrap; }
+    .contenu-card__metric--featured {
+      width: 100%; max-width: 100%; min-width: 0; aspect-ratio: 235.76 / 44.49; height: auto;
+      align-self: center; justify-content: center; gap: 2px; padding: 0 !important; background: rgba(20,5,5,0.63);
+      border: 0; border-radius: 999px; box-shadow: -0.15em -0.15em 0.15em -0.075em rgba(5,5,5,0.25), 0.0375em 0.0375em 0.0675em 0 rgba(5,5,5,0.1);
+      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); box-sizing: border-box;
+      cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0); overflow: hidden;
+    }
+    .contenu-card__metric--featured::after { content: ""; position: absolute; z-index: 0; width: calc(100% + 0.3em); height: calc(100% + 0.3em); top: -0.15em; left: -0.15em; border-radius: inherit; background: linear-gradient(-135deg, rgba(5,5,5,0.5), transparent 20%, transparent 100%); filter: blur(0.0125em); opacity: 0.25; mix-blend-mode: multiply; pointer-events: none; }
+    .metric-press__outer { position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: box-shadow 300ms ease; will-change: box-shadow; box-shadow: 0 0.05em 0.05em -0.01em rgba(5,5,5,1), 0 0.01em 0.01em -0.01em rgba(5,5,5,0.5), 0.15em 0.3em 0.1em -0.01em rgba(5,5,5,0.25); }
+    .contenu-card__metric--featured:hover .metric-press__outer { box-shadow: 0 0 0 0 rgba(5,5,5,1), 0 0 0 0 rgba(5,5,5,0.5), 0 0 0 0 rgba(5,5,5,0.25); }
+    .metric-press__inner { position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; gap: 3px; padding: 10px 8px; transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease; will-change: box-shadow, clip-path, transform; overflow: clip; clip-path: inset(0 0 0 0 round 999px); box-shadow: 0 0 0 0 inset rgba(5,5,5,0.1), -0.05em -0.05em 0.05em 0 inset rgba(5,5,5,0.25), 0 0 0 0 inset rgba(5,5,5,0.1), 0 0 0.05em 0.2em inset rgba(255,255,255,0.08), 0.025em 0.05em 0.1em 0 inset rgba(255,255,255,0.15), 0.12em 0.12em 0.12em inset rgba(255,255,255,0.08), -0.075em -0.25em 0.25em 0.1em inset rgba(5,5,5,0.25); }
+    .contenu-card__metric--featured:hover .metric-press__inner { clip-path: inset(clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) round 999px); background: rgba(255, 107, 157, 0.55); box-shadow: 0.1em 0.15em 0.05em 0 inset rgba(5,5,5,0.75), -0.025em -0.03em 0.05em 0.025em inset rgba(5,5,5,0.5), 0.25em 0.25em 0.2em 0 inset rgba(5,5,5,0.5), 0 0 0.05em 0.5em inset rgba(255,255,255,0.05), 0 0 0 0 inset rgba(255,255,255,1), 0.12em 0.12em 0.12em inset rgba(255,255,255,0.08), -0.075em -0.12em 0.2em 0.1em inset rgba(5,5,5,0.25), inset 0 0 12px rgba(255, 107, 157, 0.4); }
+    .contenu-card__metric--featured:active .metric-press__inner { transform: scale(0.975); background: rgba(255, 107, 157, 0.55); box-shadow: 0 0 0 0 inset rgba(5,5,5,0.1), inset 0 0 12px rgba(255, 107, 157, 0.4), inset 0 0 4px rgba(255,150,180,0.3); }
+
+    .contenu-card__metric--featured img { width: 50px !important; height: 50px !important; flex-shrink: 0; filter: none; margin: 0 6px; object-fit: contain; }
+
+    .contenu-card__metric-inline { display: inline-flex; align-items: center; justify-content: center; gap: 3px; min-width: 0; line-height: 1; white-space: nowrap; text-align: center; }
+    .contenu-card__metric-inline .metric-value, .contenu-card__metric-inline .metric-separator { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 800; color: rgba(251,252,254,0.97); line-height: 1; display: inline-flex; align-items: center; text-transform: uppercase; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+    .contenu-card__metric-inline .metric-separator { letter-spacing: 0; }
+    .contenu-card__metric-inline .metric-icon { font-size: 11px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+    .contenu-card__metric-inline .metric-prefix { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 800; color: rgba(251,252,254,0.97); line-height: 1; display: inline-flex; align-items: center; text-transform: uppercase; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+
+    /* 3 colonnes — taille du badge ajustée */
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .metric-press__inner { justify-content: center; padding: 0 10px; gap: 2px; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric--featured img { width: 48px !important; height: 48px !important; margin: 0; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline { gap: 3px; margin-left: 0; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-value,
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-separator,
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-icon,
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) .contenu-card__metric-inline .metric-prefix { font-size: 14px; }
+
+    @media (max-width: 1280px) { .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) { grid-template-columns: repeat(6, 1fr); gap: 52px 38px; } }
+    @media (max-width: 1024px) {
+      .contenus-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 44px 32px; }
+      .contenus-grid > .contenu-card { grid-column: auto !important; }
+      .contenus-grid > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1 !important; justify-self: center; }
+      .contenus-section { width: 92%; }
+    }
+    @media (max-width: 640px) {
+      .contenus-grid { grid-template-columns: 1fr !important; gap: 36px; }
+      .contenus-grid > .contenu-card { grid-column: auto !important; }
+      .contenus-section { width: 94%; gap: 36px; }
+      .contenu-card { max-width: 230px; }
+    }
+
+    /* ── SÉPARATEUR ORNEMENTAL adapté Yop (gouttes pastel) ── */
+    .section-separator {
+      width: 82%;
+      max-width: 420px;
+      margin: 8px auto;
+      display: block;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .section-separator svg { width: 100%; height: auto; display: block; }
+
+    /* ── MES AUTRES CONTENUS ── */
+    .autres-contenus-section { width: 82%; max-width: 1200px; margin: 64px auto 0; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .autres-carousel-wrapper { width: 100%; display: flex; align-items: center; gap: 16px; position: relative; }
+    .autres-track-clip { flex: 1; overflow: hidden; }
+    .autres-track { display: flex; gap: 20px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .autres-card { flex-shrink: 0; width: calc((100% - 20px) / 2); aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; position: relative; cursor: default; box-shadow: 0 8px 32px rgba(120, 50, 90, 0.20); transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .autres-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(120, 50, 90, 0.28); }
+    .autres-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .autres-card__overlay { position: absolute; inset: 0; background: rgba(40, 15, 5, 0.55); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.25s ease; }
+    .autres-card:hover .autres-card__overlay { opacity: 1; }
+    .autres-card__label { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; line-height: 1.5; text-align: center; }
+    .autres-arrow { flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(74, 40, 24, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s ease, transform 0.2s ease; box-shadow: 0 4px 14px rgba(74, 40, 24, 0.35); }
+    .autres-arrow:hover { background: rgba(196, 69, 105, 0.90); transform: scale(1.08); }
+    .autres-arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .autres-dots { display: flex; gap: 8px; align-items: center; }
+    .autres-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(74, 40, 24, 0.30); border: none; padding: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .autres-dot.is-active { background: #c44569; transform: scale(1.3); }
+
+    /* Bouton retour adapté fond clair */
+    .projet-back {
+      color: rgba(74, 40, 24, 0.85);
+      border-color: rgba(74, 40, 24, 0.40);
+    }
+    .projet-back:hover { border-color: rgba(74, 40, 24, 0.85); color: #4a2818; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1440px) {
+      .projet-hero { min-height: 32vh; height: 32vh; padding: 0 4%; }
+      .hero-thumb { height: 185px; width: auto; }
+      .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); }
+      .projet-card { width: 86%; }
+      .projet-main { padding-top: 40px; gap: 36px; }
+    }
+    @media (max-width: 1280px) {
+      .projet-hero { min-height: 28vh; height: 28vh; padding: 0 3%; }
+      .hero-thumb { height: 150px; width: auto; margin-left: -18px; }
+      .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); }
+      .projet-card { width: 90%; }
+      .projet-main { gap: 32px; }
+    }
+    @media (max-width: 1024px) {
+      .projet-hero { flex-direction: column; height: auto; min-height: auto; padding: 60px 5% 32px; align-items: flex-start; gap: 24px; }
+      .projet-hero__left { width: 100%; }
+      .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0 0 8px; height: auto; }
+      .hero-thumb { height: 190px; width: 114px; margin-left: -18px; }
+      .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); }
+      .projet-card { width: 94%; max-width: 94%; }
+    }
+    @media (max-width: 768px) {
+      .projet-hero { padding: 56px 4% 24px; gap: 20px; }
+      .hero-thumb { height: 155px; width: 93px; margin-left: -14px; }
+      .hero-thumb:first-child { margin-left: 0; }
+      .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); }
+      .projet-card { width: 96%; max-width: 96%; }
+      .projet-main { padding-top: 24px; gap: 24px; }
+    }
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations Yop : 4 résultats (2×2), TikTok seul (64×64),
+       palette crème/brun (#fff8f0 → #4a2818) reprise du desktop. */
+    @media (max-width: 480px) {
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(15.69px, 4.56vw, 19.26px) !important;
+        line-height: 1.15 !important;
+        /* Autorise le wrap pour les titres > ~45 caractères qui dépassent
+           la largeur 343px à 375px viewport. Sinon le titre est tronqué. */
+        white-space: normal !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* ───────── ESPACEMENT main ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ───────── RÉSULTATS CLÉS — 4 mini-cartes 2×2 ───────── */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.85rem !important;
+        padding: 7px 20px !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      /* Mini-cartes : palette CRÈME/BRUN reprise du desktop */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        background:
+          radial-gradient(circle at center, rgba(196,69,105,0.04) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          linear-gradient(135deg, #fff8f0 0%, #fdebd9 50%, #f7dfca 100%) !important;
+        border: 1.5px solid rgba(74, 40, 24, 0.30) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(120, 50, 90, 0.16),
+          0 2px 0 rgba(255,255,255,0.55) inset,
+          0 -2px 0 rgba(74, 40, 24, 0.08) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.05) !important;
+        min-height: 92px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-item__value {
+        color: #4a2818 !important;
+        font-size: clamp(1.56rem, 5vw, 2.28rem) !important;
+      }
+      .red-card--results .results-item__label {
+        color: rgba(74, 40, 24, 0.78) !important;
+        font-size: 0.62rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        letter-spacing: 0.10em !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok seul (64×64) ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      .contenu-card__metric--featured img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-light" data-page="yop">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="yop">
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- SYMBOLES SVG réutilisables : taches de Yop + pattern décoratif -->
+    <svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
+      <defs>
+        <!-- Tache de yaourt (forme blob organique avec gouttelettes) -->
+        <symbol id="yopSplash" viewBox="0 0 100 90">
+          <path d="M 50 6
+                   C 70 2, 88 14, 92 32
+                   C 96 48, 88 64, 72 72
+                   C 58 80, 38 82, 24 72
+                   C 10 62, 6 44, 12 28
+                   C 18 14, 32 8, 50 6 Z"
+                fill="currentColor"/>
+          <!-- gouttelettes satellites -->
+          <circle cx="14" cy="18" r="3"   fill="currentColor"/>
+          <circle cx="88" cy="58" r="2.5" fill="currentColor"/>
+          <ellipse cx="22" cy="84" rx="3" ry="2" fill="currentColor"/>
+          <circle cx="78" cy="14" r="2"   fill="currentColor"/>
+          <ellipse cx="94" cy="38" rx="2" ry="2.5" fill="currentColor"/>
+        </symbol>
+
+        <!-- Pattern de mini-pois pour fond des cartes -->
+        <pattern id="dotsPattern" width="36" height="36" patternUnits="userSpaceOnUse">
+          <circle cx="6"  cy="6"  r="1.6" fill="rgba(196, 69, 105, 0.55)"/>
+          <circle cx="22" cy="14" r="1.2" fill="rgba(255, 170, 122, 0.55)"/>
+          <circle cx="14" cy="26" r="1.5" fill="rgba(214, 51, 132, 0.45)"/>
+          <circle cx="30" cy="30" r="1.0" fill="rgba(107, 58, 31, 0.50)"/>
+        </pattern>
+      </defs>
+    </svg>
+
+    <!-- ÉLÉMENTS DÉCORATIFS qui flottent sur toute la page -->
+    <div class="page-yop-deco" aria-hidden="true">
+      <!-- Colonne gauche -->
+      <span class="yop-splash yop-splash--1" style="color:#ff6b9d;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--1">🍓</span>
+      <span class="yop-splash yop-splash--2" style="color:#ffd93d;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--2">🍌</span>
+      <span class="yop-splash yop-splash--3" style="color:#ffaa7a;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--3">🍑</span>
+      <span class="yop-splash yop-splash--4" style="color:#c44569;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+
+      <!-- Colonne centre (entre sections) -->
+      <span class="yop-splash yop-splash--5" style="color:#ff8fab;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--4">🥭</span>
+      <span class="yop-splash yop-splash--6" style="color:#ffc312;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--5">🍒</span>
+
+      <!-- Colonne droite -->
+      <span class="yop-splash yop-splash--7" style="color:#d63384;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--6">🍓</span>
+      <span class="yop-splash yop-splash--8" style="color:#ff7e5f;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--7">🍌</span>
+      <span class="yop-splash yop-splash--9" style="color:#ffaa7a;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+      <span class="yop-fruit yop-fruit--8">🍑</span>
+
+      <!-- Fruits supplémentaires : densification sous le hero & sur toute la page -->
+      <span class="yop-fruit yop-fruit--9">🍇</span>
+      <span class="yop-fruit yop-fruit--11">🍒</span>
+      <span class="yop-fruit yop-fruit--13">🍉</span>
+      <span class="yop-fruit yop-fruit--14">🍍</span>
+      <span class="yop-fruit yop-fruit--15">🥥</span>
+      <span class="yop-fruit yop-fruit--17">🥭</span>
+      <span class="yop-fruit yop-fruit--18">🍇</span>
+      <span class="yop-fruit yop-fruit--20">🥝</span>
+
+      <!-- Fruits supplémentaires de tailles variées hors hero -->
+      <span class="yop-fruit yop-fruit--21">🍉</span>
+      <span class="yop-fruit yop-fruit--22">🫐</span>
+      <span class="yop-fruit yop-fruit--24">🍇</span>
+      <span class="yop-fruit yop-fruit--25">🥭</span>
+      <span class="yop-fruit yop-fruit--26">🍓</span>
+
+      <!-- Fruits diversifiés supplémentaires (tailles & espèces variées) -->
+      <span class="yop-fruit yop-fruit--28">🍍</span>
+      <span class="yop-fruit yop-fruit--30">🥭</span>
+
+      <!-- 6 bouteilles Yop (2 fraise, 2 chocolat, 2 vanille) réparties sur le bas de page -->
+      <picture><source srcset="assets/brand-projects/yop/yop-bouteille-fraise.webp" type="image/webp"><img decoding="async" loading="lazy" class="yop-bottle-bottom yop-bottle-bottom--1"
+           src="assets/brand-projects/yop/yop-bouteille-fraise.webp" alt=""></picture>
+      <img decoding="async" loading="lazy" class="yop-bottle-bottom yop-bottle-bottom--2"
+           src="assets/brand-projects/yop/yop-bouteille-chocolat.webp" alt="">
+      <picture><source srcset="assets/brand-projects/yop/yop-bouteill-vanille.webp" type="image/webp"><img decoding="async" loading="lazy" class="yop-bottle-bottom yop-bottle-bottom--3"
+           src="assets/brand-projects/yop/yop-bouteill-vanille.webp" alt=""></picture>
+      <picture><source srcset="assets/brand-projects/yop/yop-bouteille-fraise.webp" type="image/webp"><img decoding="async" loading="lazy" class="yop-bottle-bottom yop-bottle-bottom--4"
+           src="assets/brand-projects/yop/yop-bouteille-fraise.webp" alt=""></picture>
+      <img decoding="async" loading="lazy" class="yop-bottle-bottom yop-bottle-bottom--5"
+           src="assets/brand-projects/yop/yop-bouteille-chocolat.webp" alt="">
+      <picture><source srcset="assets/brand-projects/yop/yop-bouteill-vanille.webp" type="image/webp"><img decoding="async" loading="lazy" class="yop-bottle-bottom yop-bottle-bottom--6"
+           src="assets/brand-projects/yop/yop-bouteill-vanille.webp" alt=""></picture>
+    </div>
+
+    <!-- HERO BANNER -->
+    <div class="projet-hero">
+      <div class="hero-atmosphere" aria-hidden="true">
+        <!-- Taches de yop colorées renversées dans la bannière -->
+        <span class="hero-splash hero-splash--1" style="color:#ff6b9d;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+        <span class="hero-splash hero-splash--2" style="color:#ffd93d;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+        <span class="hero-splash hero-splash--3" style="color:#ffaa7a;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+        <span class="hero-splash hero-splash--4" style="color:#c44569;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+        <span class="hero-splash hero-splash--5" style="color:#d63384;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+        <span class="hero-splash hero-splash--6" style="color:#ff7e5f;"><svg viewBox="0 0 100 90"><use href="#yopSplash"/></svg></span>
+        <!-- Halo pastel ambiant -->
+        <div class="hero-honeycomb-glow"></div>
+      </div>
+
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Les contenus homemade pour alimenter le compte TikTok</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenu organique &amp; Ads</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/yop/vignette-yop1.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/yop/vignette-yop1.webp" alt="Yop vignette 1"></picture>
+        <picture><source srcset="assets/brand-projects/yop/vignette-yop2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/yop/vignette-yop2.webp" alt="Yop vignette 2"></picture>
+        <picture><source srcset="assets/brand-projects/yop/vignette-yop3.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/yop/vignette-yop3.webp" alt="Yop vignette 3"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <div class="projet-card">
+
+        <!-- CONTEXTE + MES MISSIONS -->
+        <div class="red-row">
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">Après avoir gagné l'appel d'offres, The Source accompagne YOP sur TikTok au quotidien.</p>
+            <p class="red-card__text">L'agence a adopté une approche centrée sur l'engagement des jeunes via des formats natifs et interactifs.</p>
+          </div>
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Idéation de contenus TikTok.</li>
+              <li>Développement d'angles créatifs pour des contenus TikTok natifs.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS -->
+        <div class="red-card red-card--results">
+          <div class="red-card__bg" aria-hidden="true">
+            <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+            </svg>
+          </div>
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row">
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+60</span> <span class="results-item__suffix">K</span></span>
+              <span class="results-item__label">Abonnés gagnés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+9</span> <span class="results-item__suffix">millions</span></span>
+              <span class="results-item__label">De vues cumulées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+60</span> <span class="results-item__suffix">K</span></span>
+              <span class="results-item__label">Likes cumulés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+6</span> <span class="results-item__suffix">vidéos</span></span>
+              <span class="results-item__label">Produites</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — cartes ↔ contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(196, 69, 105, 0)"/>
+              <stop offset="20%"  stop-color="rgba(196, 69, 105, 0.55)"/>
+              <stop offset="50%"  stop-color="rgba(196, 69, 105, 0.55)"/>
+              <stop offset="80%"  stop-color="rgba(196, 69, 105, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(196, 69, 105, 0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade1)" stroke-width="0.9"/>
+            <!-- gouttelette gauche -->
+            <ellipse cx="150" cy="12" rx="6" ry="4" fill="rgba(255, 107, 157, 0.35)" stroke="rgba(196, 69, 105, 0.7)" stroke-width="0.9"/>
+            <!-- losange central -->
+            <g transform="translate(190,12)">
+              <polygon points="0,-7 7,0 0,7 -7,0"
+                       fill="rgba(255, 200, 140, 0.45)" stroke="rgba(196, 69, 105, 0.85)" stroke-width="0.9"/>
+              <circle r="1.5" fill="rgba(255, 250, 230, 0.95)"/>
+            </g>
+            <!-- gouttelette droite -->
+            <ellipse cx="230" cy="12" rx="6" ry="4" fill="rgba(255, 170, 122, 0.35)" stroke="rgba(196, 69, 105, 0.7)" stroke-width="0.9"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES CONTENUS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mes contenus sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+          </span>
+        </div>
+
+        <div class="layout-selector" role="group" aria-label="Nombre de colonnes">
+          <button class="layout-btn" data-cols="2" aria-label="2 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="10" height="16" rx="1.5"/>
+              <rect x="12" y="0" width="10" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-active" data-cols="3" aria-label="3 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"  y="0" width="6" height="16" rx="1.5"/>
+              <rect x="8"  y="0" width="6" height="16" rx="1.5"/>
+              <rect x="16" y="0" width="6" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-disabled" data-cols="4" aria-label="4 colonnes" disabled aria-disabled="true" tabindex="-1">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"  y="0" width="4" height="16" rx="1.5"/>
+              <rect x="6"  y="0" width="4" height="16" rx="1.5"/>
+              <rect x="12" y="0" width="4" height="16" rx="1.5"/>
+              <rect x="18" y="0" width="4" height="16" rx="1.5"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="contenus-grid" id="contenusGrid">
+
+          <!-- CARD 1 -->
+          <div class="contenu-card cc-pos-1">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop1.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@yop_france/video/7210061892952378629" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">1.5 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">6.5 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="contenu-card cc-pos-2">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop2.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@yop_france/video/7197738851861875973?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7281703021229770272" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">1.6 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">7 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="contenu-card cc-pos-3">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop3.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@yop_france/video/7192631617695845638" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">1.5 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">8 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="contenu-card cc-pos-4">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop4.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <div class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">— K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">— K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="contenu-card cc-pos-5">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop5.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@yop_france/video/7197737235800788230" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">1.6 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">18 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="contenu-card cc-pos-6">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop6.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@yop_france/video/7195949559393078534?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7281703021229770272" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">1.5 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">7.7 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 7 -->
+          <div class="contenu-card cc-pos-7">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/yop/yop7.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@yop_france/video/7197740996350856454?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7281703021229770272" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">1.5 M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">15 K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — contenus ↔ autres contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(196, 69, 105, 0)"/>
+              <stop offset="20%"  stop-color="rgba(196, 69, 105, 0.55)"/>
+              <stop offset="50%"  stop-color="rgba(196, 69, 105, 0.55)"/>
+              <stop offset="80%"  stop-color="rgba(196, 69, 105, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(196, 69, 105, 0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade2)" stroke-width="0.9"/>
+            <ellipse cx="150" cy="12" rx="6" ry="4" fill="rgba(255, 107, 157, 0.35)" stroke="rgba(196, 69, 105, 0.7)" stroke-width="0.9"/>
+            <g transform="translate(190,12)">
+              <polygon points="0,-7 7,0 0,7 -7,0"
+                       fill="rgba(255, 200, 140, 0.45)" stroke="rgba(196, 69, 105, 0.85)" stroke-width="0.9"/>
+              <circle r="1.5" fill="rgba(255, 250, 230, 0.95)"/>
+            </g>
+            <ellipse cx="230" cy="12" rx="6" ry="4" fill="rgba(255, 170, 122, 0.35)" stroke="rgba(196, 69, 105, 0.7)" stroke-width="0.9"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman & Marry Me"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span></div>
+              </div>
+            </div>
+          </div>
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById('contenusGrid');
+      const btns = document.querySelectorAll('.layout-btn');
+      if (!grid || !btns.length) return;
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('is-disabled') || btn.disabled) return;
+          const cols = btn.dataset.cols;
+          btns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          grid.classList.remove('contenus-grid--cols-2', 'contenus-grid--cols-3', 'contenus-grid--cols-4');
+          grid.classList.add('contenus-grid--cols-' + cols);
+          grid.classList.add('layout-changing');
+          setTimeout(() => grid.classList.remove('layout-changing'), 350);
+        });
+      });
+    })();
+  </script>
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

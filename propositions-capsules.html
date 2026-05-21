@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propositions — Capsules de filtres</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════
+       PAGE DE PROPOSITIONS — 15 variantes de capsules de filtres
+       Objectif : les capsules doivent se différencier visuellement
+       du titre "MES PROJETS" qui est lui-même une pilule blanche/lavande.
+       ═══════════════════════════════════════════════════════════════════ */
+
+    body {
+      padding-top: 40px;
+      padding-bottom: 120px;
+    }
+
+    .page-intro {
+      max-width: 980px;
+      margin: 0 auto 40px;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.78) 0%, rgba(245,240,255,0.70) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(160,130,230,0.30);
+      border-radius: 18px;
+      box-shadow:
+        0 6px 18px rgba(60,40,120,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+    .page-intro h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: #2a1f54;
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+    }
+    .page-intro p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14.5px;
+      color: rgba(40,25,70,0.78);
+      line-height: 1.55;
+      margin: 0 0 6px;
+    }
+    .page-intro .legend {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(60,40,120,0.18);
+      font-size: 13px;
+      color: rgba(40,25,70,0.6);
+    }
+
+    /* Conteneur de chaque proposition */
+    .proposal {
+      max-width: 1180px;
+      margin: 0 auto 36px;
+      padding: 36px 32px 44px;
+      background: rgba(255,255,255,0.42);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.55);
+      box-shadow: 0 8px 30px rgba(60,40,120,0.08);
+    }
+    .proposal-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .proposal-id {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #2a1f54;
+      background: rgba(255,255,255,0.7);
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(160,130,230,0.25);
+    }
+    .proposal-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #2a1f54;
+      margin: 0;
+    }
+    .proposal-desc {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13.5px;
+      color: rgba(40,25,70,0.68);
+      line-height: 1.5;
+      margin: 6px 0 26px;
+      max-width: 800px;
+    }
+
+    /* Recréation fidèle du titre "MES PROJETS" du portfolio */
+    .demo-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7.7px 16.5px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2a1f54;
+      background:
+        radial-gradient(ellipse at 20% -30%, rgba(140,110,220,0.18) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(245,240,255,0.78) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 13.2px;
+      border: 1.5px solid rgba(160,130,230,0.40);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.85),
+        inset 0 -1px 0 rgba(60,40,120,0.10),
+        0 6px 18px rgba(60,40,120,0.18),
+        0 2px 4px rgba(0,0,0,0.06);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    }
+
+    .demo-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 16px;
+    }
+    .demo-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Petit nuancier "tu cliques pour voir l'état actif" */
+    .demo-hint {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11.5px;
+      color: rgba(40,25,70,0.45);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Index/sommaire flottant */
+    .toc {
+      position: sticky;
+      top: 16px;
+      z-index: 40;
+      max-width: 1180px;
+      margin: 0 auto 28px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(160,130,230,0.25);
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(60,40,120,0.10);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .toc strong {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #2a1f54;
+      margin-right: 8px;
+    }
+    .toc a {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #2a1f54;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(160,130,230,0.25);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .toc a:hover {
+      background: rgba(160,130,230,0.20);
+      transform: translateY(-1px);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 01 — GHOST OUTLINE
+       Pilules transparentes, fin contour coloré par catégorie.
+       Hover : remplissage doux de la couleur catégorie.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v01 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.86);
+      background: transparent;
+      border: 1.5px solid rgba(var(--c), 0.55);
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .v01 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v01 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v01 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v01 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v01 .cap:hover {
+      background: rgba(var(--c), 0.10);
+      color: rgb(var(--c));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(var(--c),0.18);
+    }
+    .v01 .cap.is-active {
+      background: rgba(var(--c), 0.14);
+      color: rgb(var(--c));
+      border-color: rgb(var(--c));
+      box-shadow: inset 0 0 0 1px rgba(var(--c),0.4), 0 4px 14px rgba(var(--c),0.20);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 02 — UNDERLINE TABS
+       Pas de capsule du tout : juste du texte avec un trait animé.
+       Le contraste vient uniquement de la typographie/couleur.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v02 .demo-bar { gap: 28px; }
+    .v02 .cap {
+      --c: 100,80,160;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.6);
+      background: transparent;
+      border: none;
+      padding: 6px 4px 10px;
+      cursor: pointer;
+      transition: color 0.25s ease;
+    }
+    .v02 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v02 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v02 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v02 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v02 .cap::after {
+      content: "";
+      position: absolute;
+      left: 50%; bottom: 0;
+      width: 0; height: 2.5px;
+      background: rgb(var(--c));
+      border-radius: 2px;
+      transform: translateX(-50%);
+      transition: width 0.35s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .v02 .cap:hover { color: rgba(40,25,70,0.95); }
+    .v02 .cap:hover::after { width: 70%; }
+    .v02 .cap.is-active { color: rgb(var(--c)); }
+    .v02 .cap.is-active::after { width: 100%; }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 03 — DARK SLATE PILLS (inversion de contraste)
+       Fond sombre + texte clair, opposé du titre clair au-dessus.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v03 .cap {
+      --c: 196,175,255;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+      background: linear-gradient(135deg, #2a1f54 0%, #1a1230 100%);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(20,10,50,0.30), inset 0 1px 0 rgba(255,255,255,0.12);
+      transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .v03 .cap[data-f="organique"]      { --c: 255,90,100; }
+    .v03 .cap[data-f="publicitaire"]   { --c: 110,180,255; }
+    .v03 .cap[data-f="influence"]      { --c: 90,230,180; }
+    .v03 .cap[data-f="marque"]         { --c: 255,180,100; }
+    .v03 .cap:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(20,10,50,0.40), inset 0 1px 0 rgba(255,255,255,0.18), 0 0 0 1px rgba(var(--c),0.4);
+    }
+    .v03 .cap.is-active {
+      background: linear-gradient(135deg, rgba(var(--c),0.22) 0%, rgba(var(--c),0.08) 100%), linear-gradient(135deg, #2a1f54 0%, #1a1230 100%);
+      color: rgb(var(--c));
+      border-color: rgba(var(--c),0.55);
+      box-shadow: 0 0 24px rgba(var(--c),0.30), 0 6px 18px rgba(20,10,50,0.40);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 04 — FROSTED GLASS DEEP (verre dépoli quasi invisible)
+       Très transparent, très flou — une "vapeur" sur le fond.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v04 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.78);
+      background: rgba(255,255,255,0.20);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+    }
+    .v04 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v04 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v04 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v04 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v04 .cap:hover {
+      background: rgba(255,255,255,0.45);
+      color: rgb(var(--c));
+      transform: translateY(-2px);
+    }
+    .v04 .cap.is-active {
+      background: rgba(255,255,255,0.65);
+      color: rgb(var(--c));
+      border-color: rgba(var(--c),0.4);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 05 — BRUTALIST CHIPS (carrés, contour épais, ombre dure)
+       Coins droits + offset shadow. Très différent du pill arrondi du titre.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v05 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #2a1f54;
+      background: #fff;
+      border: 2px solid #2a1f54;
+      border-radius: 4px;
+      padding: 11px 20px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 #2a1f54;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
+    }
+    .v05 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v05 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v05 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v05 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v05 .cap:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 6px 6px 0 rgb(var(--c));
+      border-color: rgb(var(--c));
+      color: rgb(var(--c));
+    }
+    .v05 .cap.is-active {
+      background: rgb(var(--c));
+      color: #fff;
+      border-color: rgb(var(--c));
+      box-shadow: 4px 4px 0 #2a1f54;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 06 — TICKET / NOTCH
+       Pill avec encoches latérales (style billet/etiquette).
+       ═══════════════════════════════════════════════════════════════════ */
+    .v06 .cap {
+      --c: 100,80,160;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.85);
+      background: linear-gradient(135deg, #fdfbf7 0%, #f5f0f7 100%);
+      border: none;
+      padding: 12px 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(60,40,120,0.16);
+      transition: all 0.3s ease;
+      /* Encoches gauche/droite via mask */
+      -webkit-mask:
+        radial-gradient(circle 7px at 0 50%, transparent 98%, #000 100%),
+        radial-gradient(circle 7px at 100% 50%, transparent 98%, #000 100%);
+      -webkit-mask-composite: source-in;
+      mask:
+        radial-gradient(circle 7px at 0 50%, transparent 98%, #000 100%),
+        radial-gradient(circle 7px at 100% 50%, transparent 98%, #000 100%);
+      mask-composite: intersect;
+    }
+    .v06 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v06 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v06 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v06 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v06 .cap:hover {
+      background: linear-gradient(135deg, rgba(var(--c),0.10) 0%, #f5f0f7 100%);
+      color: rgb(var(--c));
+      transform: translateY(-2px);
+    }
+    .v06 .cap.is-active {
+      background: linear-gradient(135deg, rgba(var(--c),0.18) 0%, rgba(var(--c),0.08) 100%);
+      color: rgb(var(--c));
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 07 — DOT INDICATOR (texte seul + pastille colorée)
+       Aucun contenant. Juste un point de couleur + le label.
+       Très léger, élégant, totalement opposé au titre solide.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v07 .demo-bar { gap: 22px; }
+    .v07 .cap {
+      --c: 100,80,160;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.65);
+      background: transparent;
+      border: none;
+      padding: 8px 6px;
+      cursor: pointer;
+      transition: color 0.25s ease;
+    }
+    .v07 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v07 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v07 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v07 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v07 .cap::before {
+      content: "";
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(var(--c), 0.35);
+      transition: all 0.3s ease;
+    }
+    .v07 .cap:hover { color: rgba(40,25,70,0.95); }
+    .v07 .cap:hover::before {
+      background: rgb(var(--c));
+      box-shadow: 0 0 12px rgba(var(--c), 0.55);
+      transform: scale(1.25);
+    }
+    .v07 .cap.is-active {
+      color: rgb(var(--c));
+    }
+    .v07 .cap.is-active::before {
+      background: rgb(var(--c));
+      box-shadow: 0 0 12px rgba(var(--c), 0.55);
+      transform: scale(1.25);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 08 — SOLID COLOR PILLS
+       Chaque pilule remplie de sa couleur catégorie, texte blanc.
+       Tape-à-l'œil mais met en avant le code couleur.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v08 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(var(--c),0.92) 0%, rgba(var(--c),0.75) 100%);
+      border: 1px solid rgba(var(--c),0.55);
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(var(--c), 0.30), inset 0 1px 0 rgba(255,255,255,0.30);
+      text-shadow: 0 1px 1px rgba(0,0,0,0.22);
+      transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .v08 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v08 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v08 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v08 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v08 .cap[data-f="all"]            { --c: 100,80,160; }
+    .v08 .cap:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(var(--c),0.45), inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .v08 .cap.is-active {
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.6), 0 0 0 4.5px rgba(var(--c), 0.6), 0 8px 22px rgba(var(--c),0.45);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 09 — INSET / EMBOSSED (creusées dans la surface)
+       Inverse de la pilule "en relief" du titre — donne l'impression
+       d'être enfoncées/gravées dans la surface.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v09 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.72);
+      background: linear-gradient(135deg, rgba(220,210,235,0.55) 0%, rgba(235,225,245,0.65) 100%);
+      border: none;
+      border-radius: 999px;
+      padding: 13px 26px;
+      cursor: pointer;
+      box-shadow:
+        inset 2px 2px 6px rgba(60,40,120,0.18),
+        inset -2px -2px 6px rgba(255,255,255,0.85);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+      transition: all 0.3s ease;
+    }
+    .v09 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v09 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v09 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v09 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v09 .cap:hover {
+      color: rgb(var(--c));
+      box-shadow:
+        inset 2px 2px 6px rgba(var(--c),0.22),
+        inset -2px -2px 6px rgba(255,255,255,0.85);
+    }
+    .v09 .cap.is-active {
+      color: rgb(var(--c));
+      background: linear-gradient(135deg, rgba(var(--c),0.14) 0%, rgba(var(--c),0.06) 100%);
+      box-shadow:
+        inset 2px 2px 8px rgba(var(--c),0.32),
+        inset -2px -2px 6px rgba(255,255,255,0.55);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 10 — LIQUID BLOBS (border-radius asymétriques)
+       Chaque pill a une forme organique légèrement différente.
+       Le titre rectangulaire-arrondi tranche fort avec ces formes "fluides".
+       ═══════════════════════════════════════════════════════════════════ */
+    .v10 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.85);
+      background: linear-gradient(135deg, #fff 0%, #f0e8f5 100%);
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 13px 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(60,40,120,0.14);
+      transition: all 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .v10 .cap[data-f="all"]            { border-radius: 38% 62% 55% 45% / 60% 40% 60% 40%; }
+    .v10 .cap[data-f="organique"]      { --c: 229,9,20;   border-radius: 55% 45% 40% 60% / 40% 60% 40% 60%; }
+    .v10 .cap[data-f="publicitaire"]   { --c: 74,144,217; border-radius: 45% 55% 60% 40% / 50% 50% 50% 50%; }
+    .v10 .cap[data-f="influence"]      { --c: 46,204,143; border-radius: 60% 40% 50% 50% / 45% 55% 45% 55%; }
+    .v10 .cap[data-f="marque"]         { --c: 236,144,50; border-radius: 50% 50% 45% 55% / 55% 45% 60% 40%; }
+    .v10 .cap:hover {
+      transform: translateY(-3px) rotate(-1deg);
+      color: rgb(var(--c));
+      box-shadow: 0 12px 28px rgba(var(--c), 0.25);
+    }
+    .v10 .cap.is-active {
+      background: linear-gradient(135deg, rgba(var(--c),0.15) 0%, rgba(var(--c),0.05) 100%);
+      color: rgb(var(--c));
+      border-color: rgba(var(--c),0.4);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 11 — GRADIENT STROKE
+       Fond transparent + contour dégradé épais & vif.
+       Le titre a un contour fin pâle, ici c'est un trait franc et coloré.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v11 .cap {
+      --c: 100,80,160;
+      --c2: 196,175,255;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.86);
+      background: rgba(255,255,255,0.55);
+      border: none;
+      border-radius: 999px;
+      padding: 13px 26px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+    .v11 .cap::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(135deg, rgb(var(--c)) 0%, rgb(var(--c2)) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+    .v11 .cap[data-f="organique"]      { --c: 229,9,20;    --c2: 255,140,90; }
+    .v11 .cap[data-f="publicitaire"]   { --c: 74,144,217;  --c2: 130,200,255; }
+    .v11 .cap[data-f="influence"]      { --c: 46,204,143;  --c2: 130,240,180; }
+    .v11 .cap[data-f="marque"]         { --c: 236,144,50;  --c2: 255,200,120; }
+    .v11 .cap:hover {
+      transform: translateY(-2px);
+      color: rgb(var(--c));
+      box-shadow: 0 8px 22px rgba(var(--c), 0.22);
+    }
+    .v11 .cap.is-active {
+      background: linear-gradient(135deg, rgba(var(--c),0.10) 0%, rgba(var(--c2),0.10) 100%);
+      color: rgb(var(--c));
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 12 — NEON GLOW (slate + halo néon)
+       Capsule sombre avec un halo coloré qui s'intensifie au hover.
+       Très moderne / cyberpunk.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v12 .cap {
+      --c: 196,175,255;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      background: linear-gradient(180deg, rgba(35,25,70,0.95) 0%, rgba(20,12,45,0.95) 100%);
+      border: 1px solid rgba(var(--c), 0.30);
+      border-radius: 999px;
+      padding: 12px 24px;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(var(--c),0.15), 0 6px 16px rgba(20,10,50,0.30);
+      transition: all 0.3s ease;
+    }
+    .v12 .cap[data-f="organique"]      { --c: 255,80,90; }
+    .v12 .cap[data-f="publicitaire"]   { --c: 100,200,255; }
+    .v12 .cap[data-f="influence"]      { --c: 90,255,180; }
+    .v12 .cap[data-f="marque"]         { --c: 255,180,90; }
+    .v12 .cap:hover {
+      color: rgb(var(--c));
+      border-color: rgba(var(--c), 0.7);
+      box-shadow:
+        0 0 18px rgba(var(--c), 0.45),
+        0 0 36px rgba(var(--c), 0.18),
+        inset 0 0 12px rgba(var(--c), 0.10);
+    }
+    .v12 .cap.is-active {
+      color: rgb(var(--c));
+      border-color: rgb(var(--c));
+      box-shadow:
+        0 0 24px rgba(var(--c), 0.65),
+        0 0 48px rgba(var(--c), 0.28),
+        inset 0 0 16px rgba(var(--c), 0.18);
+      animation: neon-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes neon-pulse {
+      0%,100% { box-shadow: 0 0 20px rgba(var(--c),0.50), 0 0 38px rgba(var(--c),0.20), inset 0 0 14px rgba(var(--c),0.14); }
+      50%     { box-shadow: 0 0 30px rgba(var(--c),0.75), 0 0 60px rgba(var(--c),0.32), inset 0 0 20px rgba(var(--c),0.22); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 13 — RIBBON / TAG (coin coupé en biais comme une étiquette)
+       ═══════════════════════════════════════════════════════════════════ */
+    .v13 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.88);
+      background: linear-gradient(135deg, #fff 0%, #f5eef7 100%);
+      border: 1px solid rgba(60,40,120,0.18);
+      padding: 12px 22px 12px 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(60,40,120,0.14);
+      clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+      transition: all 0.3s ease;
+    }
+    .v13 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v13 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v13 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v13 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v13 .cap:hover {
+      transform: translateY(-2px);
+      color: rgb(var(--c));
+      box-shadow: 0 8px 22px rgba(var(--c), 0.22);
+    }
+    .v13 .cap.is-active {
+      background: linear-gradient(135deg, rgba(var(--c),0.16) 0%, rgba(var(--c),0.05) 100%);
+      color: rgb(var(--c));
+      border-color: rgba(var(--c), 0.4);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 14 — SEGMENTED CONTROL (style iOS, capsule unique partagée)
+       Toutes les pilules sont fusionnées dans un seul rail horizontal.
+       Très différent visuellement des pills isolées du titre.
+       ═══════════════════════════════════════════════════════════════════ */
+    .v14 .demo-bar {
+      gap: 0;
+      padding: 5px;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(160,130,230,0.30);
+      border-radius: 999px;
+      box-shadow: inset 0 2px 6px rgba(60,40,120,0.10), 0 4px 14px rgba(60,40,120,0.10);
+    }
+    .v14 .cap {
+      --c: 100,80,160;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.65);
+      background: transparent;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 22px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .v14 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v14 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v14 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v14 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v14 .cap:hover {
+      color: rgb(var(--c));
+      background: rgba(var(--c), 0.08);
+    }
+    .v14 .cap.is-active {
+      color: rgb(var(--c));
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(60,40,120,0.18), 0 0 0 1px rgba(var(--c), 0.18);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════
+       VARIANTE 15 — STAMP / SEAL (timbre vintage, contour double pointillé)
+       Texture papier, contour pointillé, esprit "tampon de validation".
+       ═══════════════════════════════════════════════════════════════════ */
+    .v15 .cap {
+      --c: 100,80,160;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(40,25,70,0.85);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.6) 0%, transparent 40%),
+        linear-gradient(135deg, #faf6ee 0%, #ede4d6 100%);
+      border: 2px dashed rgba(60,40,120,0.45);
+      border-radius: 6px;
+      padding: 12px 22px;
+      cursor: pointer;
+      box-shadow:
+        inset 0 0 0 4px rgba(255,255,255,0.5),
+        0 2px 6px rgba(60,40,90,0.16);
+      transition: all 0.3s ease;
+    }
+    .v15 .cap[data-f="organique"]      { --c: 229,9,20; }
+    .v15 .cap[data-f="publicitaire"]   { --c: 74,144,217; }
+    .v15 .cap[data-f="influence"]      { --c: 46,204,143; }
+    .v15 .cap[data-f="marque"]         { --c: 236,144,50; }
+    .v15 .cap:hover {
+      color: rgb(var(--c));
+      border-color: rgba(var(--c), 0.7);
+      transform: rotate(-1.5deg) translateY(-2px);
+    }
+    .v15 .cap.is-active {
+      color: rgb(var(--c));
+      border-color: rgb(var(--c));
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.6) 0%, transparent 40%),
+        linear-gradient(135deg, rgba(var(--c),0.12) 0%, rgba(var(--c),0.04) 100%),
+        linear-gradient(135deg, #faf6ee 0%, #ede4d6 100%);
+      transform: rotate(-1.5deg);
+      box-shadow:
+        inset 0 0 0 4px rgba(255,255,255,0.5),
+        0 0 0 1px rgba(var(--c), 0.4),
+        0 4px 14px rgba(var(--c), 0.20);
+    }
+
+    /* Footer questions */
+    .questions {
+      max-width: 980px;
+      margin: 60px auto 0;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.78) 0%, rgba(245,240,255,0.70) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(160,130,230,0.30);
+      border-radius: 18px;
+      box-shadow: 0 6px 18px rgba(60,40,120,0.10);
+    }
+    .questions h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: #2a1f54;
+      margin: 0 0 14px;
+    }
+    .questions ol {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      color: rgba(40,25,70,0.80);
+      line-height: 1.65;
+      padding-left: 22px;
+      margin: 0;
+    }
+    .questions li { margin-bottom: 10px; }
+    .questions li strong { color: #2a1f54; }
+  </style>
+</head>
+<body>
+
+  <div class="page-intro">
+    <h1>15 propositions de capsules de filtres</h1>
+    <p>L'objectif : différencier visuellement les filtres (<em>All / Contenus organiques / Contenus publicitaires / Campagnes d'influence / Marque personnelle</em>) du titre <strong>« MES PROJETS »</strong> qui, en l'état, partage une silhouette trop similaire (pilule blanche/lavande, contour pâle).</p>
+    <p>Chaque proposition est présentée avec le titre <em>en situation</em> au-dessus pour que la différenciation soit immédiatement lisible. Survole et clique chaque capsule pour tester les états <em>hover</em> et <em>actif</em>.</p>
+    <div class="legend">Couleurs catégorie conservées : All (neutre), Organique (rouge), Publicitaire (bleu), Influence (vert), Marque personnelle (orange).</div>
+  </div>
+
+  <nav class="toc">
+    <strong>Index</strong>
+    <a href="#v01">01 Ghost outline</a>
+    <a href="#v02">02 Underline tabs</a>
+    <a href="#v03">03 Dark slate</a>
+    <a href="#v04">04 Frosted deep</a>
+    <a href="#v05">05 Brutalist</a>
+    <a href="#v06">06 Ticket notch</a>
+    <a href="#v07">07 Dot indicator</a>
+    <a href="#v08">08 Solid colors</a>
+    <a href="#v09">09 Inset embossed</a>
+    <a href="#v10">10 Liquid blob</a>
+    <a href="#v11">11 Gradient stroke</a>
+    <a href="#v12">12 Neon glow</a>
+    <a href="#v13">13 Ribbon tag</a>
+    <a href="#v14">14 Segmented</a>
+    <a href="#v15">15 Stamp seal</a>
+  </nav>
+
+  <!-- ═══ 01 ═══ -->
+  <section class="proposal v01" id="v01">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Ghost Outline — pilules transparentes au contour coloré</h2>
+      <span class="proposal-id">01</span>
+    </div>
+    <p class="proposal-desc">Pilules entièrement transparentes avec un fin contour coloré par catégorie. Le titre garde son fond plein/structuré, les filtres s'effacent visuellement et laissent le code couleur parler. Très <em>léger</em>.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : remplissage doux + élévation • Actif : couleur catégorie</div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 ═══ -->
+  <section class="proposal v02" id="v02">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Underline Tabs — texte seul + trait animé</h2>
+      <span class="proposal-id">02</span>
+    </div>
+    <p class="proposal-desc">Aucune capsule. Du pur texte, et un trait coloré qui se déploie en hover/actif. La hiérarchie devient évidente : le titre est <strong>un objet</strong>, les filtres sont <strong>des liens</strong>.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : trait à 70% • Actif : trait plein 100%</div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 ═══ -->
+  <section class="proposal v03" id="v03">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Dark Slate — inversion de contraste</h2>
+      <span class="proposal-id">03</span>
+    </div>
+    <p class="proposal-desc">Capsules sombres (violet nuit), texte clair. Le titre clair en haut + capsules sombres en bas = contraste fort, hiérarchie immédiate. Idéal si tu veux que les filtres pèsent visuellement.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : élévation + halo coloré • Actif : teinte catégorie + glow</div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 ═══ -->
+  <section class="proposal v04" id="v04">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Frosted Glass Deep — verre dépoli quasi-invisible</h2>
+      <span class="proposal-id">04</span>
+    </div>
+    <p class="proposal-desc">Très transparent, très flouté. Les capsules deviennent une <em>vapeur</em> qui se dissout dans le fond. Le titre tranche par sa solidité.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : opacité +25% • Actif : opacité forte + couleur</div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 ═══ -->
+  <section class="proposal v05" id="v05">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Brutalist Chips — coins droits, ombre dure</h2>
+      <span class="proposal-id">05</span>
+    </div>
+    <p class="proposal-desc">Coins droits, contour épais noir, ombre <em>offset</em> non floutée. Tout l'opposé de la pilule arrondie/floutée du titre. Personnalité éditoriale forte.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : décale en diagonale • Actif : remplissage couleur</div>
+    </div>
+  </section>
+
+  <!-- ═══ 06 ═══ -->
+  <section class="proposal v06" id="v06">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Ticket Notch — billet/étiquette avec encoches</h2>
+      <span class="proposal-id">06</span>
+    </div>
+    <p class="proposal-desc">Pilule avec deux encoches latérales (style billet de cinéma). Forme <strong>identifiable au premier coup d'œil</strong> donc impossible à confondre avec le titre.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : élévation + teinte • Actif : remplissage doux catégorie</div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 ═══ -->
+  <section class="proposal v07" id="v07">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Dot Indicator — pastille colorée + label</h2>
+      <span class="proposal-id">07</span>
+    </div>
+    <p class="proposal-desc">Aucun contenant. Juste un point coloré qui sert de <em>pin</em> de catégorie + le label texte. Minimaliste, design "éditorial". Le titre reste l'unique objet "rond", les filtres deviennent une légende.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : pastille intensifiée + halo • Actif : couleur du label catégorie</div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 ═══ -->
+  <section class="proposal v08" id="v08">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Solid Colors — pilules pleines aux couleurs catégorie</h2>
+      <span class="proposal-id">08</span>
+    </div>
+    <p class="proposal-desc">Chaque pilule remplie de sa couleur catégorie, texte blanc. Punchy, le code couleur saute aux yeux. Le titre clair sert d'<em>en-tête neutre</em>, les filtres prennent toute l'attention chromatique.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : élévation +halo • Actif : double anneau blanc + couleur</div>
+    </div>
+  </section>
+
+  <!-- ═══ 09 ═══ -->
+  <section class="proposal v09" id="v09">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Inset / Embossed — capsules creusées dans la surface</h2>
+      <span class="proposal-id">09</span>
+    </div>
+    <p class="proposal-desc">Inverse du titre : le titre est <em>en relief</em>, les capsules sont <em>en creux</em>. Effet "neumorphisme" qui crée immédiatement deux niveaux distincts.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : ombre interne colorée • Actif : creux teinté catégorie</div>
+    </div>
+  </section>
+
+  <!-- ═══ 10 ═══ -->
+  <section class="proposal v10" id="v10">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Liquid Blob — formes organiques asymétriques</h2>
+      <span class="proposal-id">10</span>
+    </div>
+    <p class="proposal-desc">Chaque capsule a un border-radius asymétrique (forme "blob"). Le titre rectangulaire-arrondi rigide tranche fort avec ces formes <em>fluides</em>. Touche artistique.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : légère rotation + teinte • Actif : remplissage doux catégorie</div>
+    </div>
+  </section>
+
+  <!-- ═══ 11 ═══ -->
+  <section class="proposal v11" id="v11">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Gradient Stroke — contour dégradé épais et vif</h2>
+      <span class="proposal-id">11</span>
+    </div>
+    <p class="proposal-desc">Fond translucide + contour <em>en dégradé</em> de la couleur catégorie. Le titre porte un fin contour pâle, ici un trait franc et coloré. Lecture catégorielle immédiate.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : élévation + halo coloré • Actif : teinte intérieure dégradée</div>
+    </div>
+  </section>
+
+  <!-- ═══ 12 ═══ -->
+  <section class="proposal v12" id="v12">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Neon Glow — slate sombre + halo néon pulsant</h2>
+      <span class="proposal-id">12</span>
+    </div>
+    <p class="proposal-desc">Capsule sombre avec un halo coloré qui s'allume au hover et <em>pulse</em> à l'état actif. Esprit moderne / tech / cyberpunk. Très différent du titre pastel doux.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : halo s'allume • Actif : pulsation néon continue</div>
+    </div>
+  </section>
+
+  <!-- ═══ 13 ═══ -->
+  <section class="proposal v13" id="v13">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Ribbon Tag — coin coupé, esprit étiquette</h2>
+      <span class="proposal-id">13</span>
+    </div>
+    <p class="proposal-desc">Capsule avec un coin coupé en biais (style étiquette/ruban). Forme rectangulaire à coins droits + une oblique = très différent visuellement de toute pilule arrondie.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : élévation + teinte • Actif : remplissage doux catégorie</div>
+    </div>
+  </section>
+
+  <!-- ═══ 14 ═══ -->
+  <section class="proposal v14" id="v14">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Segmented Control — toutes les options dans un rail unique</h2>
+      <span class="proposal-id">14</span>
+    </div>
+    <p class="proposal-desc">Style iOS : un seul rail englobant, et seul l'item actif s'extrait avec un fond blanc. Le titre est isolé, les filtres forment <em>un seul objet groupé</em>. Hiérarchie nette.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : surbrillance teintée • Actif : pastille blanche détachée</div>
+    </div>
+  </section>
+
+  <!-- ═══ 15 ═══ -->
+  <section class="proposal v15" id="v15">
+    <div class="proposal-header">
+      <h2 class="proposal-name">Stamp / Seal — esprit tampon vintage, contour pointillé</h2>
+      <span class="proposal-id">15</span>
+    </div>
+    <p class="proposal-desc">Texture papier crème + contour pointillé + légère inclinaison au hover. Évoque le tampon de validation. Absolument rien à voir avec la pilule lavande du titre.</p>
+    <div class="demo-stage">
+      <span class="demo-title">Mes Projets</span>
+      <div class="demo-bar">
+        <button class="cap is-active" data-f="all">All</button>
+        <button class="cap" data-f="organique">Contenus organiques</button>
+        <button class="cap" data-f="publicitaire">Contenus publicitaires</button>
+        <button class="cap" data-f="influence">Campagnes d'influence</button>
+        <button class="cap" data-f="marque">Marque personnelle</button>
+      </div>
+      <div class="demo-hint">Hover : inclinaison + teinte • Actif : redressement + cadre coloré</div>
+    </div>
+  </section>
+
+  <!-- Questions de raffinement -->
+  <div class="questions">
+    <h2>Questions pour affiner la suite</h2>
+    <ol>
+      <li><strong>Direction générale</strong> — préfères-tu un parti-pris <em>discret/minimaliste</em> (02, 04, 07), <em>contrasté/affirmé</em> (03, 08, 12) ou <em>singulier/identitaire</em> (05, 06, 10, 13, 15) ?</li>
+      <li><strong>Place du code couleur</strong> — veux-tu que la couleur de catégorie soit <em>partout</em> (08, 11, 12) ou seulement <em>au survol/à l'actif</em> (01, 02, 07, 14) ?</li>
+      <li><strong>Forme</strong> — tu tiens à la forme arrondie (pill) ? Si non, ouvert aux coins droits (05), aux formes coupées (13), aux blobs (10) ?</li>
+      <li><strong>Animation au hover</strong> — préférence pour un effet <em>statique/sobre</em>, une <em>élévation</em>, un <em>halo lumineux</em>, ou quelque chose de plus <em>marqué</em> (rotation, déplacement, pulsation) ?</li>
+      <li><strong>État actif</strong> — doit-il rester très lisible à distance (08, 12) ou rester subtil pour ne pas voler la vedette aux projets (01, 02, 04, 07) ?</li>
+      <li><strong>Cohérence avec le reste du site</strong> — y a-t-il un autre élément qui partage la signature visuelle des filtres et qui devrait évoluer en parallèle (ex. les filtres de la section "Mon Parcours") ?</li>
+      <li><strong>Une fois la direction choisie</strong> — veux-tu que je décline la variante en 3-4 sous-options (taille, intensité, couleur du texte) avant de l'intégrer dans <code>index.html</code> ?</li>
+    </ol>
+  </div>
+
+  <script>
+    // Comportement "click pour activer" sur chaque demo, isolé par variante
+    document.querySelectorAll('.proposal .demo-bar').forEach(bar => {
+      bar.addEventListener('click', e => {
+        const btn = e.target.closest('.cap');
+        if (!btn) return;
+        bar.querySelectorAll('.cap').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+  </script>
+
+</body>
+</html>

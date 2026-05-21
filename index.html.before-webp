@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geoffrey Moreno — Creative Strategist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260506-2">
+  <style>
+    /* ══ PODIUM HERO ══ */
+    .podium-stage {
+      position: relative;
+      width: 614px;
+      height: 566px;
+      flex-shrink: 0;
+      transform: translate(20%, 5%) scale(1.03);
+    }
+    #podium-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+    .stage-loading {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(0,0,0,0.4); pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .stage-loading.is-hidden { opacity: 0; }
+    .podium-stage:not(.is-ready) .active-label { opacity: 0; }
+    .active-label {
+      transition: opacity 0.4s ease 0.2s;
+    }
+    .active-label {
+      position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #1a1a1a;
+      padding: 10px 22px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 999px;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+    .active-label { --dir: 1; }
+    .active-label.is-leaving {
+      animation: label-slide-out 520ms cubic-bezier(0.5, 0, 0.2, 1) forwards;
+    }
+    .active-label.is-entering {
+      animation: label-slide-in 380ms cubic-bezier(0.18, 0.9, 0.25, 1) both;
+    }
+    @keyframes label-slide-out {
+      0%   { opacity: 1; transform: translateX(-50%) translateX(0) scale(1); }
+      100% { opacity: 0; transform: translateX(-50%) translateX(calc(var(--dir) * 36px)) scale(0.94); }
+    }
+    @keyframes label-slide-in {
+      0%   { opacity: 0; transform: translateX(-50%) translateX(calc(var(--dir) * -36px)) scale(0.94); }
+      60%  { opacity: 1; }
+      100% { opacity: 1; transform: translateX(-50%) translateX(0) scale(1); }
+    }
+    .active-label.is-badge {
+      padding: 10px 18px 10px 14px;
+      font-size: 11.4px; letter-spacing: 0.04em; text-transform: none;
+      color: #ffffff;
+      border: 1px solid rgba(132, 188, 255, 0.22);
+      background:
+        radial-gradient(ellipse at 15% -20%, rgba(61,208,255,0.32) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 120%, rgba(175,125,255,0.22) 0%, transparent 55%),
+        linear-gradient(120deg, #001E54 0%, #003791 45%, #0070D1 75%, #003791 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -1px 0 rgba(0,0,0,0.25),
+        0 8px 24px rgba(0, 55, 145, 0.45),
+        0 2px 6px rgba(0,0,0,0.28);
+      border-radius: 10px;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      overflow: visible;
+      text-shadow: 0 1px 2px rgba(0, 8, 31, 0.55);
+    }
+    .active-label.is-badge .ps-symbols {
+      position: absolute; inset: 0; pointer-events: none;
+      overflow: hidden; border-radius: inherit;
+    }
+    .active-label.is-badge .ps-symbol {
+      position: absolute; font-family: 'Poppins', sans-serif;
+      font-weight: 700; line-height: 1; user-select: none;
+    }
+    .active-label.is-badge .ps-symbol--triangle { color: rgba(143,235,184,0.85); text-shadow: 0 0 6px rgba(143,235,184,0.55), 0 1px 2px rgba(0,0,0,0.4); }
+    .active-label.is-badge .ps-symbol--circle   { color: rgba(255,142,142,0.85); text-shadow: 0 0 6px rgba(255,142,142,0.55), 0 1px 2px rgba(0,0,0,0.4); }
+    .active-label.is-badge .ps-symbol--cross     { color: rgba(132,188,255,0.95); text-shadow: 0 0 6px rgba(132,188,255,0.65), 0 1px 2px rgba(0,0,0,0.4); }
+    .active-label.is-badge .ps-symbol--square    { color: rgba(238,168,235,0.85); text-shadow: 0 0 6px rgba(238,168,235,0.55), 0 1px 2px rgba(0,0,0,0.4); }
+    .active-label.is-badge::after {
+      content: ''; position: absolute; top: 0; left: -60%;
+      width: 50%; height: 100%;
+      background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
+      transform: skewX(-18deg); pointer-events: none; opacity: 0;
+    }
+    .active-label.is-badge.is-revealing::after {
+      animation: trophy-sheen 1100ms cubic-bezier(0.25, 0.8, 0.25, 1) 720ms both;
+    }
+    .active-label.is-badge .trophy-circle {
+      position: relative; width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(180deg, #f5d76e 0%, #d4a017 100%);
+      display: flex; align-items: center; justify-content: center; font-size: 13px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.2),
+        0 0 0 2px rgba(245,215,110,0.18), 0 0 8px rgba(245,215,110,0.0);
+      flex-shrink: 0;
+    }
+    .active-label.is-badge.is-revealing .trophy-circle {
+      animation: trophy-circle-pop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) 180ms both,
+                 trophy-glow 2400ms ease-in-out 1100ms infinite;
+    }
+    .active-label.is-badge .sparkle {
+      position: absolute; width: 4px; height: 4px; border-radius: 50%;
+      background: radial-gradient(circle, #fff8d4 0%, #f5d76e 50%, transparent 100%);
+      pointer-events: none; opacity: 0; left: 50%; top: 50%;
+      box-shadow: 0 0 6px rgba(245,215,110,0.9);
+    }
+    .active-label.is-badge.is-revealing .sparkle {
+      animation: sparkle-burst 900ms cubic-bezier(0.2, 0.8, 0.4, 1) 280ms both;
+    }
+    .active-label.is-badge .trophy-circle::before {
+      content: ''; position: absolute; inset: -6px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0; pointer-events: none;
+    }
+    .active-label.is-badge .trophy-text { display: inline-block; white-space: nowrap; overflow: hidden; }
+    .brand-chip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      padding: 5px 12px; border-radius: 6px;
+      display: inline-flex; align-items: center; justify-content: center;
+      pointer-events: none; opacity: 0;
+      transition: opacity 280ms ease-out 220ms;
+    }
+    .active-label.is-badge.is-revealing .brand-chip { opacity: 1; }
+    .brand-chip .brand-logo { height: auto; display: block; }
+    .brand-chip.is-ps {
+      border: 1px solid rgba(132,188,255,0.30);
+      background: radial-gradient(ellipse at 30% -30%, rgba(61,208,255,0.30) 0%, transparent 70%),
+        linear-gradient(120deg, #001E54 0%, #003791 60%, #0070D1 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 4px 12px rgba(0,55,145,0.45), 0 1px 3px rgba(0,0,0,0.25);
+    }
+    .brand-chip.is-ps .brand-logo { width: 80px; filter: brightness(0) invert(1) drop-shadow(0 1px 1px rgba(0,0,0,0.4)); }
+    .brand-chip.is-netflix {
+      border: 1px solid rgba(255,90,95,0.32);
+      background: radial-gradient(ellipse at 30% -30%, rgba(255,100,100,0.32) 0%, transparent 70%),
+        linear-gradient(120deg, #1a0000 0%, #5a0a0e 45%, #B81D24 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 4px 12px rgba(229,9,20,0.45), 0 1px 3px rgba(0,0,0,0.32);
+    }
+    .brand-chip.is-netflix .brand-logo { width: 56px; filter: brightness(0) invert(1) drop-shadow(0 1px 1px rgba(0,0,0,0.45)); }
+    .brand-chip.is-universal {
+      border: 1px solid rgba(140,175,255,0.28);
+      background: radial-gradient(ellipse at 30% -30%, rgba(120,165,255,0.32) 0%, transparent 70%),
+        linear-gradient(120deg, #050B26 0%, #0E1A4A 45%, #1B2A6B 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 4px 12px rgba(14,26,74,0.55), 0 1px 3px rgba(0,0,0,0.32);
+      padding: 4px 10px;
+    }
+    .brand-chip.is-universal .brand-logo { width: 68px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.55)); }
+    .brand-chip .brand-wordmark {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif; font-weight: 900;
+      font-size: 11.5px; letter-spacing: 0.18em; color: #ffffff; line-height: 1;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    .brand-chip.is-netflix .brand-wordmark { color: #fff; text-shadow: 0 1px 2px rgba(80,0,0,0.7); }
+    .active-label.is-badge .trophy-text .char { display: inline-block; opacity: 0; transform: translateY(2px); }
+    @keyframes trophy-slide-in {
+      0%   { opacity: 0; transform: translateX(-50%) translateX(calc(var(--dir) * -38px)) translateY(8px)  scale(0.92) rotate(calc(var(--dir) * -5deg)); }
+      55%  { opacity: 1; transform: translateX(-50%) translateX(calc(var(--dir) *  4px)) translateY(-3px) scale(1.03) rotate(calc(var(--dir) * 1.8deg)); }
+      75%  { opacity: 1; transform: translateX(-50%) translateX(calc(var(--dir) * -1px)) translateY(1px)  scale(0.99) rotate(calc(var(--dir) * -0.5deg)); }
+      100% { opacity: 1; transform: translateX(-50%) translateX(0) translateY(0) scale(1) rotate(0deg); }
+    }
+    @keyframes trophy-flash {
+      0%   { opacity: 0; transform: scale(0.4); }
+      50%  { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.6); }
+    }
+    @keyframes trophy-circle-pop {
+      0%   { transform: scale(0.2) rotate(-25deg); }
+      60%  { transform: scale(1.18) rotate(8deg); }
+      100% { transform: scale(1) rotate(0); }
+    }
+    @keyframes char-reveal {
+      0%   { opacity: 0; transform: translateY(6px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes trophy-sheen {
+      0%   { left: -60%; opacity: 0; }
+      30%  { opacity: 1; }
+      100% { left: 130%; opacity: 0; }
+    }
+    @keyframes trophy-glow {
+      0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 0 2px rgba(245,215,110,0.18), 0 0 8px rgba(245,215,110,0.0); }
+      50%       { box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 0 3px rgba(245,215,110,0.30), 0 0 14px rgba(245,215,110,0.55); }
+    }
+    @keyframes sparkle-burst {
+      0%   { opacity: 0; transform: translate(-50%, -50%) translate(0, 0) scale(0.4); }
+      30%  { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.2); }
+    }
+    .active-label.is-badge.is-revealing {
+      animation: trophy-slide-in 720ms cubic-bezier(0.18, 0.9, 0.25, 1) both,
+                 trophy-levitate 4200ms ease-in-out 720ms infinite;
+    }
+    @keyframes trophy-levitate {
+      0%, 100% { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.25), 0 8px 24px rgba(0,55,145,0.45), 0 2px 6px rgba(0,0,0,0.28); }
+      50%       { transform: translateX(-50%) translateY(-5px) scale(1) rotate(0deg); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.25), 0 16px 36px rgba(0,55,145,0.55), 0 4px 10px rgba(0,0,0,0.32); }
+    }
+    .active-label.is-badge.is-revealing .trophy-circle { animation: trophy-circle-pop 700ms cubic-bezier(0.34, 1.56, 0.64, 1) 180ms both; }
+    .active-label.is-badge.is-revealing .trophy-circle::before { animation: trophy-flash 650ms ease-out 220ms both; }
+    .active-label.is-badge.is-revealing .trophy-text .char {
+      animation: char-reveal 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      animation-delay: calc(380ms + var(--i) * 22ms);
+    }
+    .active-label.is-badge.is-netflix {
+      border: 1px solid rgba(255,90,95,0.22);
+      background: radial-gradient(ellipse at 15% -20%, rgba(255,100,100,0.32) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 120%, rgba(180,30,40,0.28) 0%, transparent 55%),
+        linear-gradient(120deg, #0a0000 0%, #5a0a0e 45%, #B81D24 75%, #5a0a0e 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.32), 0 8px 24px rgba(229,9,20,0.42), 0 2px 6px rgba(0,0,0,0.32);
+      text-shadow: 0 1px 2px rgba(40,0,0,0.65);
+    }
+    .active-label.is-badge.is-netflix .trophy-circle {
+      background: radial-gradient(circle at 30% 25%, #ffe89a 0%, #f5d76e 35%, #d49b2a 70%, #8a5a0f 100%);
+      border-color: rgba(255,220,140,0.85);
+    }
+    .active-label.is-badge.is-netflix.is-revealing {
+      animation: trophy-slide-in 720ms cubic-bezier(0.18, 0.9, 0.25, 1) both,
+                 trophy-levitate-netflix 4200ms ease-in-out 720ms infinite;
+    }
+    @keyframes trophy-levitate-netflix {
+      0%, 100% { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.32), 0 8px 24px rgba(229,9,20,0.42), 0 2px 6px rgba(0,0,0,0.32); }
+      50%       { transform: translateX(-50%) translateY(-5px) scale(1) rotate(0deg); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.32), 0 16px 36px rgba(229,9,20,0.55), 0 4px 10px rgba(0,0,0,0.36); }
+    }
+    .active-label.is-badge.is-universal {
+      border: 1px solid rgba(140,175,255,0.22);
+      background: radial-gradient(ellipse at 15% -20%, rgba(120,165,255,0.28) 0%, transparent 60%),
+        radial-gradient(ellipse at 90% 120%, rgba(75,100,200,0.22) 0%, transparent 55%),
+        linear-gradient(120deg, #050B26 0%, #0E1A4A 45%, #1B2A6B 75%, #0E1A4A 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.3), 0 8px 24px rgba(14,26,74,0.5), 0 2px 6px rgba(0,0,0,0.3);
+      text-shadow: 0 1px 2px rgba(0,5,30,0.7);
+    }
+    .active-label.is-badge.is-universal .trophy-circle {
+      background: radial-gradient(circle at 30% 25%, #ffe89a 0%, #f5d76e 35%, #d49b2a 70%, #8a5a0f 100%);
+      border-color: rgba(255,220,140,0.85);
+    }
+    .active-label.is-badge.is-universal.is-revealing {
+      animation: trophy-slide-in 720ms cubic-bezier(0.18, 0.9, 0.25, 1) both,
+                 trophy-levitate-universal 4200ms ease-in-out 720ms infinite;
+    }
+    @keyframes trophy-levitate-universal {
+      0%, 100% { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.3), 0 8px 24px rgba(14,26,74,0.5), 0 2px 6px rgba(0,0,0,0.3); }
+      50%       { transform: translateX(-50%) translateY(-5px) scale(1) rotate(0deg); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.3), 0 16px 36px rgba(14,26,74,0.65), 0 4px 10px rgba(0,0,0,0.36); }
+    }
+    .podium-nav {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 56px; z-index: 5;
+    }
+    .podium-nav__arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      color: rgba(0,0,0,0.7); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.22s ease, background 0.22s ease, color 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .podium-nav__arrow svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; fill: none; transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .podium-nav__arrow:hover { border-color: rgba(0,0,0,0.5); background: rgba(255,255,255,0.95); color: rgba(0,0,0,1); transform: scale(1.08); }
+    .podium-nav__arrow#prevBtn:hover svg { transform: translateX(-2px); }
+    .podium-nav__arrow#nextBtn:hover svg { transform: translateX(2px); }
+    .podium-nav__arrow:active { transform: scale(0.94); }
+    .podium-nav__arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .podium-nav__sep, .podium-nav__dots { display: none; }
+    .video-pool { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; left: -9999px; }
+
+    /* ─── Contrôles vidéo (centre uniquement) ─── */
+    .phone-controls {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 152px;   /* largeur ≈ écran iPhone central rendu */
+      height: 320px;  /* hauteur ≈ écran iPhone central rendu */
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 4;
+    }
+    .podium-stage.is-ready:not(.is-cycling) .phone-controls { opacity: 1; }
+    /* Bouton son en haut GAUCHE de l'écran */
+    .phone-ctrl__sound {
+      position: absolute;
+      top: 12px; left: 12px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.30);
+      background: rgba(0,0,0,0.42);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      cursor: pointer;
+      pointer-events: auto;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .phone-ctrl__sound:hover { background: rgba(0,0,0,0.65); transform: scale(1.08); }
+    .phone-ctrl__sound:active { transform: scale(0.94); }
+    .phone-ctrl__sound svg { width: 14px; height: 14px; fill: currentColor; }
+    .phone-ctrl__sound .icon-mute   { display: none; }
+    .phone-controls.is-muted .phone-ctrl__sound .icon-mute { display: block; }
+    .phone-controls.is-muted .phone-ctrl__sound .icon-on   { display: none; }
+
+    @media (max-width: 1100px) {
+      .podium-stage { width: 440px; height: 420px; }
+    }
+    @media (max-width: 900px) {
+      .podium-stage { width: min(520px, 90vw); height: 400px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-pill">
+
+    <!-- Gauche : logo -->
+    <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+
+    <!-- Centre : navigation -->
+    <nav class="header-nav">
+      <a href="index.html" class="nav-link" data-nav="projets">Mes projets</a>
+      <a href="mon-parcours.html" class="nav-link" data-nav="parcours">Mon parcours</a>
+      <a href="me-contacter.html" class="nav-link" data-nav="contact">Me contacter</a>
+    </nav>
+
+    <!-- Droite : icônes sociales -->
+    <div class="header-socials">
+      <a href="#" class="social-link" aria-label="LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a href="#" class="social-link" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/>
+        </svg>
+      </a>
+      <a href="#" class="social-link" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+
+    </div>
+
+    </div><!-- /.header-pill -->
+  </header>
+
+  <main>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero">
+      <div class="stats-bloc va2-bloc va2-stage">
+        <!-- Nuage de logos (3 couches de profondeur) -->
+        <div class="logo-cloud">
+          <div class="layer-back"></div>
+          <div class="layer-mid"></div>
+          <div class="layer-front"></div>
+        </div>
+
+        <!-- +300 + tags post-its à droite -->
+        <div class="va2-row">
+          <div class="va2-number">+300</div>
+          <div class="va2-tags">
+            <span class="va2-note va2-note--ads">ADS</span>
+            <span class="va2-note va2-note--inf">INFLUENCES</span>
+            <span class="va2-note va2-note--org">ORGANIQUES</span>
+          </div>
+        </div>
+
+        <!-- contenus imaginés -->
+        <div class="va2-line">contenus imaginés</div>
+
+        <!-- POUR LES MARQUES pill -->
+        <div class="va2-pill">POUR LES MARQUES</div>
+
+      </div>
+
+      <!-- ══ PODIUM 3D ══ -->
+      <div class="podium-stage">
+        <canvas id="podium-canvas"></canvas>
+        <div class="active-label is-badge" id="activeLabel"></div>
+        <div class="stage-loading is-hidden" id="stageLoading"></div>
+
+        <!-- Contrôles vidéo (centre uniquement) — son seul, le play est ancré dans la texture 3D -->
+        <div class="phone-controls is-muted" id="phoneControls">
+          <button class="phone-ctrl__sound" id="phoneCtrlSound" aria-label="Activer / couper le son">
+            <svg class="icon-on"   viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06A7 7 0 0 1 19 12a7 7 0 0 1-5 6.71v2.06A9 9 0 0 0 21 12 9 9 0 0 0 14 3.23z"/></svg>
+            <svg class="icon-mute" viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.93 8.93 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          </button>
+        </div>
+        <div class="podium-nav">
+          <button class="podium-nav__arrow" id="prevBtn" aria-label="Précédent">
+            <svg viewBox="0 0 24 24"><polyline points="14,6 8,12 14,18"/></svg>
+          </button>
+          <span class="podium-nav__sep" aria-hidden="true"></span>
+          <div class="podium-nav__dots" id="navDots"></div>
+          <span class="podium-nav__sep" aria-hidden="true"></span>
+          <button class="podium-nav__arrow" id="nextBtn" aria-label="Suivant">
+            <svg viewBox="0 0 24 24"><polyline points="10,6 16,12 10,18"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══ TICKER ══ -->
+    <div class="ticker-section">
+      <p class="ticker-label">Elles m'ont fait confiance</p>
+      <p class="ticker-sublabel">(+ 40 marques accompagnées)</p>
+      <div class="ticker-band" aria-label="Marques partenaires">
+        <div class="ticker-track">
+          <!-- Groupe 1 -->
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/netflix-logo.png" alt="Netflix" class="ticker-logo ticker-logo--lg"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/universal-logo.png" alt="Universal" class="ticker-logo ticker-logo--xl"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/logo-armee.png" alt="Armée de l'Air" class="ticker-logo ticker-logo--xl logo--armee-air"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/playstation-logo-2.png" alt="PlayStation" class="ticker-logo ticker-logo--xl"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/meilleurtaux-logo.png" alt="Meilleurtaux" class="ticker-logo ticker-logo--md ticker-logo--mono"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/emmaus-connect-logo-white.png" alt="Emmaüs Connect" class="ticker-logo ticker-logo--xl ticker-logo--white"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/carrefour-logo.png" alt="Carrefour" class="ticker-logo ticker-logo--xl"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/yop-logo.png" alt="Yop" class="ticker-logo ticker-logo--xl logo--yop"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/loreal-logo.png" alt="L'Oréal" class="ticker-logo ticker-logo--md ticker-logo--white"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/sncf-connect-logo.png" alt="SNCF Connect" class="ticker-logo ticker-logo--lg"></div>
+          <div class="ticker-capsule"><img src="assets/scrolling-logos/disneyland-paris-logo-2.png" alt="Disneyland Paris" class="ticker-logo ticker-logo--xl ticker-logo--white logo--disneyland"></div>
+          <!-- Groupe 2 — duplicate pour boucle seamless -->
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/netflix-logo.png" alt="" class="ticker-logo ticker-logo--lg"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/universal-logo.png" alt="" class="ticker-logo ticker-logo--xl"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/logo-armee.png" alt="" class="ticker-logo ticker-logo--xl logo--armee-air"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/playstation-logo-2.png" alt="" class="ticker-logo ticker-logo--xl"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/meilleurtaux-logo.png" alt="" class="ticker-logo ticker-logo--md ticker-logo--mono"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/emmaus-connect-logo-white.png" alt="" class="ticker-logo ticker-logo--xl ticker-logo--white"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/carrefour-logo.png" alt="" class="ticker-logo ticker-logo--xl"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/yop-logo.png" alt="" class="ticker-logo ticker-logo--xl logo--yop"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/loreal-logo.png" alt="" class="ticker-logo ticker-logo--md ticker-logo--white"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/sncf-connect-logo.png" alt="" class="ticker-logo ticker-logo--lg"></div>
+          <div class="ticker-capsule" aria-hidden="true"><img src="assets/scrolling-logos/disneyland-paris-logo-2.png" alt="" class="ticker-logo ticker-logo--xl ticker-logo--white logo--disneyland"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ FILTRES ══ -->
+    <section class="filters-section">
+      <p class="filters-title">Mes Projets</p>
+      <div class="filters-bar">
+        <button type="button" class="filter-btn is-active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="organique">Contenus organiques</button>
+        <button type="button" class="filter-btn" data-filter="publicitaire">Contenus publicitaires</button>
+        <button type="button" class="filter-btn" data-filter="influence">Campagnes d'influence</button>
+        <button type="button" class="filter-btn" data-filter="marque-personnelle">Marque personnelle</button>
+      </div>
+    </section>
+
+    <!-- ══ GALERIE ══ -->
+    <section class="gallery-section" id="projects">
+
+      <div class="gallery-controls">
+        <div class="gallery-controls__btns">
+          <button class="gallery-view-btn is-active" data-cols="2" aria-label="Vue 2 colonnes">
+            <svg width="26" height="20" viewBox="0 0 18 14" fill="none">
+              <rect x="0" y="0" width="8" height="14" rx="1.5" fill="currentColor"/>
+              <rect x="10" y="0" width="8" height="14" rx="1.5" fill="currentColor"/>
+            </svg>
+          </button>
+          <button class="gallery-view-btn" data-cols="3" aria-label="Vue 3 colonnes">
+            <svg width="26" height="20" viewBox="0 0 18 14" fill="none">
+              <rect x="0" y="0" width="4.5" height="14" rx="1.5" fill="currentColor"/>
+              <rect x="6.75" y="0" width="4.5" height="14" rx="1.5" fill="currentColor"/>
+              <rect x="13.5" y="0" width="4.5" height="14" rx="1.5" fill="currentColor"/>
+            </svg>
+          </button>
+          <button class="gallery-view-btn" data-cols="4" aria-label="Vue 4 colonnes">
+            <svg width="26" height="20" viewBox="0 0 18 14" fill="none">
+              <rect x="0" y="0" width="3" height="14" rx="1.5" fill="currentColor"/>
+              <rect x="5" y="0" width="3" height="14" rx="1.5" fill="currentColor"/>
+              <rect x="10" y="0" width="3" height="14" rx="1.5" fill="currentColor"/>
+              <rect x="15" y="0" width="3" height="14" rx="1.5" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="gallery-grid grid-view-2">
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix.html" style="--c:#E50914;--c2:#9c0710;">
+            <img src="assets/brand-projects/netflix/lancement-netflix.png" alt="Lancement Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">01</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3>
+              <span class="ov-year">2021 — 2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix-2.html" style="--c:#FF3B47;--c2:#b8232d;">
+            <img src="assets/brand-projects/netflix/annonces-netflix.png" alt="Annonces Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">02</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Les TikTok annonçant<br>les séries et films</h3>
+              <span class="ov-year">2022</span>
+            </div>
+          </div>
+
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-mercredi.html" style="--c:#5C2E91;--c2:#3a1c5e;">
+            <img src="assets/brand-projects/netflix/mercredi.png" alt="Mercredi Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">04</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Les TikTok et Reels<br>sur la série Mercredi</h3>
+              <span class="ov-year">2022</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix-events.html" style="--c:#7E1620;--c2:#4d0d14;">
+            <img src="assets/brand-projects/netflix/evenement-netflix.png" alt="Événement Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">05</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Les TikTok et Reels<br>sur les events Netflix</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix-stranger.html" style="--c:#C8102E;--c2:#7a0a1c;">
+            <img src="assets/brand-projects/netflix/stranger-things-affiche.png" alt="Stranger Things Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">06</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Les TikTok et Reels<br>sur Stranger Things</h3>
+              <span class="ov-year">2022</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-banlieusards.html" style="--c:#1A3A52;--c2:#0c2233;">
+            <img src="assets/brand-projects/netflix/banlieusards.png" alt="Banlieusards Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">07</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Les TikTok et Reels<br>sur Banlieusards 2</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire" data-href="projet-lupin.html" style="--c:#0E2C40;--c2:#061826;">
+            <img src="assets/brand-projects/netflix/lupin.png" alt="Lupin Netflix" class="gallery-card__img">
+            <span class="gallery-card__num">08</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Les TikTok Ads et organiques<br>sur la série Lupin</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence" data-href="projet-candyman-marryme.html" style="--c:#D4A03C;--c2:#8a6420;">
+            <img src="assets/brand-projects/universal/candyman-marry-me-banniere.png" alt="Candyman Marry Me Universal" class="gallery-card__img">
+            <span class="gallery-card__num">09</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3>
+              <span class="ov-year">2022</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique influence" data-href="projet-minions-trolls.html" style="--c:#E6A817;--c2:#a37700;">
+            <img src="assets/brand-projects/universal/minions-trolls-3-banniere.png" alt="Minions / Trolls 3 Universal" class="gallery-card__img">
+            <span class="gallery-card__num">10</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-playstation.html" style="--c:#0070D1;--c2:#003087;">
+            <img src="assets/brand-projects/other-banners/logo-playstation-fond-bleu.jpg" alt="PlayStation fond bleu" class="gallery-card__img">
+            <span class="gallery-card__num">11</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Short le + viral<br>sur le compte<br>PlayStationFR</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence organique" data-href="projet-emmaus.html" style="--c:#E85A1F;--c2:#a03b0c;">
+            <img src="assets/brand-projects/other-banners/emmaus-connect.png" alt="Emmaüs Connect" class="gallery-card__img">
+            <span class="gallery-card__num">12</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence" data-href="projet-armee-de-lair.html" style="--c:#1E5599;--c2:#0e3568;">
+            <img src="assets/brand-projects/other-banners/logo-armee-de-lair-et-de-lespace.jpg" alt="Armée de l'Air et de l'Espace" class="gallery-card__img">
+            <span class="gallery-card__num">13</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="organique publicitaire" data-href="projet-yop.html" style="--c:#E63946;--c2:#a01e2a;">
+            <img src="assets/brand-projects/other-banners/yop-affiche-.png" alt="Yop" class="gallery-card__img">
+            <span class="gallery-card__num">14</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Contenus homemade pour<br>alimenter le compte TikTok</h3>
+              <span class="ov-year">2023</span>
+            </div>
+          </div>
+
+          <div class="gallery-card gallery-card--preview" data-category="marque-personnelle" data-href="projet-collaborations-commerciales.html" style="--c:#7c5cb8;--c2:#5d3f9b;">
+            <img src="assets/collaborations/banniere-timberland.png" alt="Marque personnelle — twins_moreno" class="gallery-card__img">
+            <span class="gallery-card__num">15</span>
+            <div class="gallery-card__overlay">
+              <h3 class="ov-title">Mes collaborations<br>commerciales</h3>
+              <span class="ov-year">2025-2026</span>
+            </div>
+          </div>
+
+
+      </div>
+
+      <div class="parcours-block">
+
+      <p class="filters-title parcours-heading">Mon Parcours</p>
+
+      <div class="parcours-capsule">
+
+        <section class="tl-stage">
+          <!-- Chemin SVG dynamique : tracé droite/gauche autour des cartes
+               et coloré par section, avec glow progressif au scroll. -->
+          <svg class="tl-timeline-path" aria-hidden="true"></svg>
+
+          <!-- ─── 2020 — 2026 · Créateur fashion ─── -->
+          <article class="tl-row tl-row--phones">
+            <span class="tl-date">2020 — 2026</span>
+            <div class="tl-card tl-card--phones">
+              <div class="tl-card__body">
+                <div class="tl-card__title-row">
+                  <h2 class="tl-card__title">
+                    <span class="tl-card__title-main">Créateur fashion</span>
+                    <span class="tl-card__title-sep">·</span>
+                    <span class="tl-card__title-role">TikTok &amp; Instagram</span>
+                  </h2>
+                </div>
+                <span class="tl-label">Missions clés</span>
+                <p class="tl-text">· Création de contenus fashion avec mon frère jumeau.<br>· Collaboration commerciales avec les marques.</p>
+                <span class="tl-label">Résultats clés</span>
+                <div class="tl-tags">
+                  <span class="tl-tag">+330K abonnés</span>
+                  <span class="tl-tag">+300M vues</span>
+                  <span class="tl-tag">+45 collaborations commerciales</span>
+                </div>
+              </div>
+              <div class="tl-card__media tl-card__media--phones">
+                <figure class="tl-phone">
+                  <div class="tl-phone__screen"><img src="assets/mon-parcours/monparcour-photo/tiktok-compte.jpg" alt="Compte TikTok twins.studio"></div>
+                </figure>
+                <figure class="tl-phone">
+                  <div class="tl-phone__screen"><img src="assets/mon-parcours/monparcour-photo/insta-compte.jpg" alt="Compte Instagram twins.studio"></div>
+                </figure>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 2021 — 2023 · Creative Strategist · THE SOURCE ─── -->
+          <article class="tl-row tl-row--creative-strategist">
+            <span class="tl-date">2021 — 2023</span>
+            <div class="tl-card">
+              <div class="tl-card__body">
+                <div class="tl-card__title-row">
+                  <h2 class="tl-card__title">
+                    <span class="tl-card__title-main">Creative Strategist</span>
+                    <span class="tl-card__title-sep">·</span>
+                    <span class="tl-card__title-role">THE SOURCE</span>
+                  </h2>
+                </div>
+                <span class="tl-label">Missions clés</span>
+                <p class="tl-text">· Pilotage de stratégie créative, d'influence et de production de contenus pour les marques sur TikTok, Reels, Shorts.</p>
+                <span class="tl-label">Résultats clés</span>
+                <div class="tl-tags">
+                  <span class="tl-tag">NetflixFR n°1 sur TikTok FR</span>
+                  <span class="tl-tag">+25 campagnes d'influence</span>
+                  <span class="tl-tag">+300 contenus produits</span>
+                </div>
+              </div>
+              <div class="tl-card__media">
+                <div class="tl-media"><img src="assets/mon-parcours/monparcour-photo/antho-geo-netflix.png" alt="Tournage Netflix avec Antho et Geoffrey"></div>
+                <div class="tl-media"><img src="assets/mon-parcours/monparcour-photo/The-source-fabien.jpeg" alt="Geoffrey, Fabien et son frère devant l'enseigne THE SOURCE"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 2023 — 2024 · Au pair · Nouvelle-Zélande ─── -->
+          <article class="tl-row tl-row--au-pair">
+            <span class="tl-date">2023 — 2024</span>
+            <div class="tl-card">
+              <div class="tl-card__body">
+                <div class="tl-card__title-row">
+                  <h2 class="tl-card__title">
+                    <span class="tl-card__title-main">Au pair</span>
+                    <span class="tl-card__title-sep">·</span>
+                    <span class="tl-card__title-role">Nouvelle-Zélande</span>
+                  </h2>
+                </div>
+                <span class="tl-label">Missions clés</span>
+                <p class="tl-text">· Immersion à l'étranger pour renforcer mon anglais, mon autonomie et ma capacité d'adaptation.</p>
+                <span class="tl-label">Résultats clés</span>
+                <div class="tl-tags">
+                  <span class="tl-tag">7 mois d'immersion</span>
+                  <span class="tl-tag">8 familles accompagnées</span>
+                  <span class="tl-tag">Anglais renforcé</span>
+                </div>
+              </div>
+              <div class="tl-card__media">
+                <div class="tl-media"><img src="assets/mon-parcours/monparcour-photo/geo-nz.jpeg" alt="Geoffrey en Nouvelle-Zélande"></div>
+                <div class="tl-media"><img src="assets/mon-parcours/monparcour-photo/famille-nz-2.jpg" alt="Famille d'accueil en Nouvelle-Zélande"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 2024 — 2026 · Mannequin · 8 agences ─── -->
+          <article class="tl-row tl-row--mannequin">
+            <span class="tl-date">2024 — 2026</span>
+            <div class="tl-card">
+              <div class="tl-card__body">
+                <div class="tl-card__title-row">
+                  <h2 class="tl-card__title">
+                    <span class="tl-card__title-main">Mannequin</span>
+                    <span class="tl-card__title-sep">·</span>
+                    <span class="tl-card__title-role">8 agences</span>
+                  </h2>
+                </div>
+                <span class="tl-label">Missions clés</span>
+                <p class="tl-text">· Shootings, campagnes publicitaires et défilés pour les marques de mode.</p>
+                <span class="tl-label">Résultats clés</span>
+                <div class="tl-tags">
+                  <span class="tl-tag">+12 campagnes publicitaires</span>
+                  <span class="tl-tag">Hôte pour la fashionweek</span>
+                </div>
+              </div>
+              <div class="tl-card__media">
+                <div class="tl-media"><img src="assets/mon-parcours/monparcour-photo/post-insta1.jpg" alt="Shooting mannequin 1"></div>
+                <div class="tl-media"><img src="assets/mon-parcours/monparcour-photo/post-insta2.jpg" alt="Shooting mannequin 2"></div>
+              </div>
+            </div>
+          </article>
+
+        </section><!-- /.tl-stage -->
+
+      </div>
+
+      </div><!-- /.parcours-block -->
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
+  <!-- ══ PODIUM : vidéos cachées ══ -->
+  <div class="video-pool">
+    <video id="video-minions"     src="assets/hero-section/minions.mp4"     muted loop playsinline preload="metadata"></video>
+    <video id="video-playstation" src="assets/hero-section/playstation.mp4" muted loop playsinline preload="auto"></video>
+    <video id="video-mercredi"    src="assets/hero-section/mercredi.mp4"    muted loop playsinline preload="metadata"></video>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./assets/three/build/three.module.js",
+      "three/addons/": "./assets/three/addons/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
+    const SCREEN_MATERIAL_NAME = 'xRigXiQTgpqkIah_001';
+    const MODEL_URL = 'assets/3d-assets/iphone_16_pro_desert_titanium.draco.glb';
+    const SCENE_OFFSET_X = 0.136;
+
+    const TIMING = {
+      MOTION: 1800, WOBBLE: 700, LEAVING_DELAY: 0, ARRIVING_DELAY: 80, TRANSIT_DELAY: 160,
+    };
+
+    const PHONES = [
+      { id: 'minions',     videoId: 'video-minions',     label: 'Universal' },
+      { id: 'playstation', videoId: 'video-playstation', label: 'PlayStation' },
+      { id: 'mercredi',    videoId: 'video-mercredi',    label: 'Netflix' },
+    ];
+
+    const SLOTS = {
+      LEFT:   { x: -0.301, y: 0, z: -0.20, scale: 0.72, rotY:  0.55 },
+      CENTER: { x:  0.00,  y: 0, z:  0.00, scale: 1.00, rotY:  0.00 },
+      RIGHT:  { x:  0.213, y: 0, z: -0.20, scale: 0.72, rotY: -0.55 },
+    };
+    const SLOT_ORDER = ['LEFT', 'CENTER', 'RIGHT'];
+
+    const BREATH = { amplitude: 0.005, period: 4.0 };
+    const WOBBLE = { amplitude: 0, frequency: 3.5, decay: 9.0 };
+    const IDLE_SWING = { amplitude: 0.10, period: 5.5, tiltX: 0.04, periodX: 7.2 };
+    const BANK = { maxX: 0.08, maxZ: 0.18, velocityScale: 0.9, smoothing: 0.08 };
+
+    const canvas = document.getElementById('podium-canvas');
+    const loadingEl = document.getElementById('stageLoading');
+    const activeLabel = document.getElementById('activeLabel');
+    const navDots = document.getElementById('navDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(34, 1, 0.01, 100);
+    camera.position.set(0, 0, 1.45);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      renderer.setSize(rect.width, rect.height, false);
+      camera.aspect = rect.width / rect.height;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
+    keyLight.position.set(2, 3, 2.5); scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xfff1e0, 0.8);
+    fillLight.position.set(-2.5, 0.5, 1.5); scene.add(fillLight);
+    const rimLight = new THREE.DirectionalLight(0xb8d4ff, 0.7);
+    rimLight.position.set(0, -1, -2); scene.add(rimLight);
+
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envScene = new THREE.Scene();
+    envScene.background = new THREE.Color(0xf0e8dd);
+    scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+
+    function makeShadowTexture() {
+      const c = document.createElement('canvas');
+      c.width = c.height = 256;
+      const ctx = c.getContext('2d');
+      const g = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+      g.addColorStop(0,    'rgba(255,255,255,0.55)');
+      g.addColorStop(0.4,  'rgba(255,255,255,0.30)');
+      g.addColorStop(0.75, 'rgba(255,255,255,0.08)');
+      g.addColorStop(1,    'rgba(255,255,255,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, 256, 256);
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+    const shadowTex = makeShadowTexture();
+    const SHADOW_GROUND_Y = -0.32;
+
+    const BRAND_SHADOW_COLORS = {
+      'PlayStation': new THREE.Color(0x0070D1),
+      'Netflix':     new THREE.Color(0xE50914),
+      'Universal':   new THREE.Color(0x1B2A6B),
+    };
+    const SHADOW_BLACK = new THREE.Color(0x000000);
+    const SHADOW_COLOR_LERP = 0.04;
+
+    function cubicBezierEasing(p1x, p1y, p2x, p2y) {
+      const NEWTON_ITERATIONS = 4;
+      const A = (a1, a2) => 1 - 3 * a2 + 3 * a1;
+      const B = (a1, a2) => 3 * a2 - 6 * a1;
+      const C = (a1) => 3 * a1;
+      const calc = (t, a1, a2) => ((A(a1,a2)*t + B(a1,a2))*t + C(a1)) * t;
+      const slope = (t, a1, a2) => 3*A(a1,a2)*t*t + 2*B(a1,a2)*t + C(a1);
+      function getTForX(x) {
+        let t = x;
+        for (let i = 0; i < NEWTON_ITERATIONS; i++) {
+          const s = slope(t, p1x, p2x);
+          if (s === 0) break;
+          t -= (calc(t, p1x, p2x) - x) / s;
+        }
+        return t;
+      }
+      return (x) => {
+        if (x <= 0) return 0;
+        if (x >= 1) return 1;
+        return calc(getTForX(x), p1y, p2y);
+      };
+    }
+    const easeInOutSine = cubicBezierEasing(0.5, 0, 0.2, 1);
+    const clamp = (v, mn, mx) => Math.max(mn, Math.min(mx, v));
+
+    function bezier3D(t, P0, P1, P2, P3) {
+      const u = 1 - t, tt = t*t, uu = u*u, uuu = uu*u, ttt = tt*t;
+      return {
+        x: uuu*P0.x + 3*uu*t*P1.x + 3*u*tt*P2.x + ttt*P3.x,
+        y: uuu*P0.y + 3*uu*t*P1.y + 3*u*tt*P2.y + ttt*P3.y,
+        z: uuu*P0.z + 3*uu*t*P1.z + 3*u*tt*P2.z + ttt*P3.z,
+      };
+    }
+
+    function buildBezier(fromPos, toPos, role) {
+      const mid = { x: (fromPos.x+toPos.x)/2, y: (fromPos.y+toPos.y)/2, z: (fromPos.z+toPos.z)/2 };
+      let liftY = 0, pushZ = 0;
+      if (role === 'leaving-center' || role === 'arriving-center') { liftY = 0.085; pushZ = 0.06; }
+      else { liftY = -0.025; pushZ = -0.10; }
+      const P1 = { x: fromPos.x+(mid.x-fromPos.x)*0.45, y: mid.y+liftY, z: mid.z+pushZ };
+      const P2 = { x: toPos.x+(mid.x-toPos.x)*0.45,   y: mid.y+liftY, z: mid.z+pushZ };
+      return { P0: fromPos, P1, P2, P3: toPos };
+    }
+
+    function generatePlanarUVs(mesh) {
+      const geom = mesh.geometry, pos = geom.attributes.position, count = pos.count;
+      let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity,minZ=Infinity,maxZ=-Infinity;
+      for (let i=0;i<count;i++) {
+        const x=pos.getX(i),y=pos.getY(i),z=pos.getZ(i);
+        if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;if(z<minZ)minZ=z;if(z>maxZ)maxZ=z;
+      }
+      const ranges={x:maxX-minX,y:maxY-minY,z:maxZ-minZ};
+      const sortedAxes=Object.entries(ranges).sort((a,b)=>a[1]-b[1]);
+      const uAxis=sortedAxes[1][0],vAxis=sortedAxes[2][0];
+      const uMin=uAxis==='x'?minX:uAxis==='y'?minY:minZ,uMax=uAxis==='x'?maxX:uAxis==='y'?maxY:maxZ;
+      const vMin=vAxis==='x'?minX:vAxis==='y'?minY:minZ,vMax=vAxis==='x'?maxX:vAxis==='y'?maxY:maxZ;
+      const get={x:'getX',y:'getY',z:'getZ'};
+      const uvs=new Float32Array(count*2);
+      for(let i=0;i<count;i++){uvs[i*2]=(pos[get[uAxis]](i)-uMin)/(uMax-uMin);uvs[i*2+1]=1-(pos[get[vAxis]](i)-vMin)/(vMax-vMin);}
+      geom.setAttribute('uv',new THREE.BufferAttribute(uvs,2));
+    }
+
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+    const loader = new GLTFLoader();
+    loader.setDRACOLoader(dracoLoader);
+
+    const phoneInstances = [];
+    let scaleBase = 1;
+
+    // Ratio écran iPhone tel que rendu via les UVs planaires
+    const SCREEN_RATIO = 0.460;
+    // Résolution du canvas composite (hauteur fixe, largeur dérivée du ratio)
+    const SCREEN_TEX_H = 1024;
+    const SCREEN_TEX_W = Math.round(SCREEN_TEX_H * SCREEN_RATIO);
+
+    /**
+     * Crée une CanvasTexture qui composite la vidéo (en cover) + glyph play
+     * dessiné par-dessus quand `phoneRef.showPlay === true`.
+     */
+    function createScreenTexture(videoEl, phoneRef) {
+      const c = document.createElement('canvas');
+      c.width = SCREEN_TEX_W;
+      c.height = SCREEN_TEX_H;
+      const ctx = c.getContext('2d');
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.flipY = false;
+      tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+      tex.minFilter = tex.magFilter = THREE.LinearFilter;
+      tex.generateMipmaps = false;
+
+      // Triangle play semi-transparent avec blur des pixels vidéo derrière le glyph.
+      // Approche : on capture la zone du glyph, on la floute, et on la repose
+      // masquée par la forme du triangle. Puis on superpose un fill blanc translucide.
+      function drawPlayGlyph(opacity) {
+        const cx = SCREEN_TEX_W / 2;
+        const cy = SCREEN_TEX_H / 2;
+        const r  = SCREEN_TEX_W * 0.10;
+        const offsetX = r * 0.12;
+        const path = new Path2D();
+        path.moveTo(cx - r * 0.55 + offsetX, cy - r * 0.85);
+        path.lineTo(cx + r * 0.85 + offsetX, cy);
+        path.lineTo(cx - r * 0.55 + offsetX, cy + r * 0.85);
+        path.closePath();
+        renderGlassShape(path, opacity);
+      }
+
+      function drawPauseGlyph(opacity) {
+        const cx = SCREEN_TEX_W / 2;
+        const cy = SCREEN_TEX_H / 2;
+        const r  = SCREEN_TEX_W * 0.10;
+        const barW = r * 0.30, barH = r * 1.3, gap = r * 0.26;
+        const path = new Path2D();
+        path.rect(cx - gap - barW, cy - barH/2, barW, barH);
+        path.rect(cx + gap,        cy - barH/2, barW, barH);
+        renderGlassShape(path, opacity);
+      }
+
+      function renderGlassShape(path, opacity) {
+        ctx.save();
+        // Blur des pixels vidéo derrière la forme (effet givré)
+        ctx.save();
+        ctx.clip(path);
+        ctx.filter = 'blur(8px)';
+        // Re-dessine la zone vidéo floutée (déjà présente dans le canvas)
+        ctx.drawImage(c, 0, 0);
+        ctx.restore();
+        // Fill blanc semi-transparent par-dessus le blur
+        ctx.fillStyle = `rgba(255,255,255,${0.45 * opacity})`;
+        ctx.fill(path);
+        // Liseré fin
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = `rgba(255,255,255,${0.55 * opacity})`;
+        ctx.stroke(path);
+        ctx.restore();
+      }
+
+      tex._render = function () {
+        const vw = videoEl.videoWidth, vh = videoEl.videoHeight;
+        if (!vw || !vh) return;
+        // Stretch : la vidéo remplit toute la surface de l'écran (peut étirer légèrement)
+        ctx.drawImage(videoEl, 0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
+
+        // Glyph play/pause (uniquement sur le téléphone central)
+        if (phoneRef.showPlay) {
+          if (phoneRef.glyphMode === 'pause') drawPauseGlyph(phoneRef.glyphOpacity);
+          else                                 drawPlayGlyph(phoneRef.glyphOpacity);
+        }
+        tex.needsUpdate = true;
+      };
+      return tex;
+    }
+
+    loader.load(MODEL_URL, (gltf) => {
+      const template = gltf.scene;
+      const box = new THREE.Box3().setFromObject(template);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      template.position.sub(center);
+      template.traverse((obj) => {
+        if (obj.isMesh && obj.material) {
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((mat) => { if (mat.name === SCREEN_MATERIAL_NAME) generatePlanarUVs(obj); });
+        }
+      });
+      const maxDim = Math.max(size.x, size.y, size.z);
+      scaleBase = 0.55 / maxDim;
+
+      PHONES.forEach((phone, idx) => {
+        const clone = template.clone(true);
+        clone.traverse((obj) => { if (obj.isMesh && obj.material) obj.material = obj.material.clone(); });
+        const videoEl = document.getElementById(phone.videoId);
+        // Slot et state initiaux nécessaires à la texture composite
+        const slot = SLOT_ORDER[idx];
+        const cfg = SLOTS[slot];
+        const inst = {
+          wrapper: null, clone, videoEl, brand: phone.label, slotIndex: idx,
+          curX: cfg.x, curY: cfg.y, curZ: cfg.z, curScale: cfg.scale, curRotY: cfg.rotY,
+          hoverScale: 1.0, isHovered: false, pressScale: 1.0,
+          hoverTiltX: 0, hoverTiltY: 0, targetTiltX: 0, targetTiltY: 0,
+          swingFade: 1, residualLeanY: 0, breathPhase: idx * 1.3,
+          anim: null, wobble: null, velX: 0, velY: 0, prevX: cfg.x, prevY: cfg.y, prevZ: cfg.z, curBankX: 0, curBankZ: 0,
+          // Glyph play/pause dessiné dans la texture (centre uniquement)
+          showPlay: false, glyphMode: 'play', glyphOpacity: 0, targetGlyphOpacity: 0,
+        };
+        // Crée la texture composite (vidéo + glyph) liée à cette instance
+        const screenTex = createScreenTexture(videoEl, inst);
+        inst.screenTex = screenTex;
+        clone.traverse((obj) => {
+          if (obj.isMesh && obj.material) {
+            const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+            mats.forEach((mat) => {
+              if (mat.name === SCREEN_MATERIAL_NAME) obj.material = new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false });
+            });
+          }
+        });
+        const wrapper = new THREE.Group();
+        wrapper.add(clone);
+        clone.rotation.y = Math.PI;
+        inst.wrapper = wrapper;
+        wrapper.position.set(cfg.x, cfg.y, cfg.z);
+        wrapper.scale.setScalar(scaleBase * cfg.scale);
+        wrapper.rotation.y = cfg.rotY;
+        const shadowGeo = new THREE.PlaneGeometry(0.42, 0.18);
+        const shadowMat = new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false, opacity: 0.85, color: SHADOW_BLACK.clone() });
+        const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+        shadow.rotation.x = -Math.PI / 2;
+        shadow.position.set(cfg.x, SHADOW_GROUND_Y, cfg.z + 0.01);
+        scene.add(shadow);
+        inst.shadow = shadow;
+        if (idx === 1) { const initBrand = BRAND_SHADOW_COLORS[phone.label]; if (initBrand) shadowMat.color.copy(initBrand); }
+        scene.add(wrapper);
+        phoneInstances.push(inst);
+      });
+
+      initVideoStates();
+      buildDots();
+      updateUI(true);
+      loadingEl.classList.add('is-hidden');
+      document.querySelector('.podium-stage').classList.add('is-ready');
+    }, (xhr) => {
+      if (xhr.lengthComputable) loadingEl.textContent = `Chargement… ${Math.round((xhr.loaded/xhr.total)*100)}%`;
+    }, (err) => { console.error(err); loadingEl.textContent = 'Erreur de chargement'; });
+
+    // ─── État global des contrôles ───
+    const userControls = { muted: true, paused: false, hoveringCenter: false };
+    const phoneControlsEl = document.getElementById('phoneControls');
+    const phoneCtrlSound  = document.getElementById('phoneCtrlSound');
+    const podiumStageEl   = document.querySelector('.podium-stage');
+
+    function syncControlsUI() {
+      phoneControlsEl.classList.toggle('is-muted',  userControls.muted);
+      phoneControlsEl.classList.toggle('is-paused', userControls.paused);
+    }
+    syncControlsUI();
+
+    function applyAudioStateToCenter() {
+      const c = getCenterPhone();
+      if (!c) return;
+      phoneInstances.forEach((p) => {
+        // Toujours muet sauf le centre, et si l'utilisateur a activé le son
+        p.videoEl.muted = (p === c) ? userControls.muted : true;
+      });
+    }
+
+    function initVideoStates() {
+      phoneInstances.forEach((p) => {
+        try { p.videoEl.currentTime = 0; } catch(e) {}
+        p.videoEl.muted = true;
+        p.videoEl.pause();
+        // Auto-advance : à la fin de la vidéo du centre, on cycle vers le prochain
+        p.videoEl.addEventListener('ended', () => {
+          if (p.slotIndex !== 1) return;
+          if (isAnimating) return;
+          if (userControls.paused) return;
+          cycle('next');
+        });
+      });
+      const c = getCenterPhone();
+      if (c) {
+        c.videoEl.muted = userControls.muted;
+        if (!userControls.paused) {
+          const pl = c.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
+        }
+      }
+    }
+    function getCenterPhone() { return phoneInstances.find(p => p.slotIndex === 1); }
+
+    // Toggle play/pause via clic sur le téléphone central (pas de bouton overlay)
+    function toggleCenterPlayPause() {
+      const c = getCenterPhone();
+      if (!c) return;
+      userControls.paused = !userControls.paused;
+      if (userControls.paused) {
+        c.videoEl.pause();
+      } else {
+        const pl = c.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
+      }
+      syncControlsUI();
+    }
+
+    // Bouton son : toggle mute global, appliqué au centre
+    phoneCtrlSound.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userControls.muted = !userControls.muted;
+      applyAudioStateToCenter();
+      // Re-déclenche play() : un click utilisateur permet l'audio même si autoplay bloqué
+      const c = getCenterPhone();
+      if (c && !userControls.paused) {
+        const pl = c.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
+      }
+      syncControlsUI();
+    });
+
+    function buildDots() {
+      navDots.innerHTML = '';
+      PHONES.forEach((phone, i) => {
+        const d = document.createElement('button');
+        d.className = 'podium-nav__dot';
+        d.setAttribute('aria-label', phone.label);
+        d.dataset.brand = phone.label;
+        d.addEventListener('click', () => {
+          if (isAnimating) return;
+          const targetInstance = phoneInstances[i];
+          if (!targetInstance || targetInstance.slotIndex === 1) return;
+          if (targetInstance.slotIndex === 0) cycle('prev');
+          else if (targetInstance.slotIndex === 2) cycle('next');
+        });
+        navDots.appendChild(d);
+      });
+    }
+
+    const BADGE_CONFIG = {
+      'PlayStation': { text: 'Top créa du compte en 2022', chipClass: 'is-ps', chipLogo: 'assets/brand-projects/playstation/Logo-plays.svg', bgSymbols: true },
+      'Netflix':     { text: 'Top créa du compte en 2023', chipClass: 'is-netflix', chipWordmark: 'NETFLIX', bgSymbols: false },
+      'Universal':   { text: 'Top créa du compte en 2022', chipClass: 'is-universal', chipWordmark: 'UNIVERSAL', bgSymbols: false },
+    };
+
+    function buildTrophyHTML(cfg) {
+      const chars = [...cfg.text].map((c, i) => c === ' ' ? '<span class="char" style="--i:'+i+'">&nbsp;</span>' : '<span class="char" style="--i:'+i+'">'+c+'</span>').join('');
+      const sparkles = Array.from({ length: 8 }).map((_, i) => {
+        const angle = (i/8)*Math.PI*2+(Math.random()*0.4-0.2);
+        const dist = 18+Math.random()*10;
+        const dx = Math.cos(angle)*dist, dy = Math.sin(angle)*dist;
+        return '<span class="sparkle" style="--dx:'+dx.toFixed(1)+'px;--dy:'+dy.toFixed(1)+'px;animation-delay:'+(280+Math.random()*120)+'ms;"></span>';
+      }).join('');
+      const psBg = cfg.bgSymbols
+        ? '<span class="ps-symbols" aria-hidden="true"><span class="ps-symbol ps-symbol--triangle" style="font-size:9px;top:3px;left:38px;transform:rotate(-14deg);">▲</span><span class="ps-symbol ps-symbol--circle" style="font-size:8px;bottom:3px;left:46px;transform:rotate(10deg);">●</span><span class="ps-symbol ps-symbol--cross" style="font-size:10px;top:2px;right:8px;transform:rotate(-6deg);">✕</span><span class="ps-symbol ps-symbol--square" style="font-size:8px;bottom:3px;right:14px;transform:rotate(15deg);">■</span></span>'
+        : '';
+      const chipInner = cfg.chipLogo ? '<img class="brand-logo" src="'+cfg.chipLogo+'" alt="">' : '<span class="brand-wordmark">'+cfg.chipWordmark+'</span>';
+      const chip = '<span class="brand-chip '+cfg.chipClass+'" aria-hidden="true">'+chipInner+'</span>';
+      return chip + psBg + '<span class="trophy-circle">🏆'+sparkles+'</span><span class="trophy-text">'+chars+'</span>';
+    }
+
+    function setLabelContent(brand) {
+      activeLabel.classList.remove('is-revealing','is-entering','is-leaving','is-badge','is-netflix','is-universal');
+      const cfg = BADGE_CONFIG[brand];
+      if (cfg) {
+        activeLabel.classList.add('is-badge');
+        if (brand === 'Netflix')   activeLabel.classList.add('is-netflix');
+        if (brand === 'Universal') activeLabel.classList.add('is-universal');
+        activeLabel.innerHTML = buildTrophyHTML(cfg);
+        void activeLabel.offsetWidth;
+        activeLabel.classList.add('is-revealing');
+      } else {
+        activeLabel.textContent = brand;
+        void activeLabel.offsetWidth;
+        activeLabel.classList.add('is-entering');
+      }
+    }
+
+    function updateUI(initial = false) {
+      const c = getCenterPhone();
+      if (!c) return;
+      const centerIdx = phoneInstances.indexOf(c);
+      Array.from(navDots.children).forEach((dot, i) => dot.classList.toggle('is-active', i === centerIdx));
+      if (initial) { setLabelContent(c.brand); return; }
+      activeLabel.classList.remove('is-revealing','is-entering');
+      activeLabel.classList.add('is-leaving');
+      setTimeout(() => { activeLabel.classList.remove('is-leaving'); setLabelContent(c.brand); }, Math.round(TIMING.MOTION * 0.78));
+    }
+
+    let isAnimating = false;
+    function cycle(direction) {
+      if (isAnimating || phoneInstances.length < 3) return;
+      isAnimating = true;
+      podiumStageEl.classList.add('is-cycling');
+      const now = performance.now();
+      const slotShift = (direction === 'next') ? 1 : -1;
+      activeLabel.style.setProperty('--dir', direction === 'next' ? -1 : 1);
+      phoneInstances.forEach((p) => {
+        const oldSlot = p.slotIndex;
+        const newSlot = ((p.slotIndex - slotShift) + 3) % 3;
+        p.slotIndex = newSlot;
+        const cfg = SLOTS[SLOT_ORDER[newSlot]];
+        let role, baseDelay;
+        if (oldSlot === 1) { role = 'leaving-center'; baseDelay = TIMING.LEAVING_DELAY; }
+        else if (newSlot === 1) { role = 'arriving-center'; baseDelay = TIMING.ARRIVING_DELAY; }
+        else { role = 'transit'; baseDelay = TIMING.TRANSIT_DELAY; }
+        const fromPos = { x: p.curX, y: p.curY, z: p.curZ };
+        const toPos   = { x: cfg.x, y: cfg.y, z: cfg.z };
+        p.anim = { startTime: now+baseDelay, duration: TIMING.MOTION, bezier: buildBezier(fromPos, toPos, role), fromRotY: p.curRotY, toRotY: cfg.rotY, fromScale: p.curScale, toScale: cfg.scale, role, arrived: false };
+        p.swingFade = 0;
+        p.isHovered = false;
+        p.hoverScale = 1.0;
+        p.targetTiltX = 0; p.targetTiltY = 0;
+        p.hoverTiltX = 0; p.hoverTiltY = 0;
+        if (newSlot === 1) {
+          // Démarrage immédiat : la vidéo joue dès le clic, pendant la transition
+          try { p.videoEl.currentTime=0; } catch(e){}
+          p.videoEl.muted = userControls.muted;
+          if (!userControls.paused) {
+            const pl = p.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
+          }
+        }
+        if (oldSlot === 1) setTimeout(() => {
+          p.videoEl.pause();
+          p.videoEl.muted = true;
+          try { p.videoEl.currentTime=0; } catch(e){}
+        }, baseDelay+200);
+      });
+      updateUI();
+      const totalDur = TIMING.ARRIVING_DELAY + TIMING.MOTION + TIMING.WOBBLE;
+      setTimeout(() => {
+        isAnimating = false;
+        podiumStageEl.classList.remove('is-cycling');
+      }, totalDur);
+    }
+
+    prevBtn.addEventListener('click', () => cycle('next'));
+    nextBtn.addEventListener('click', () => cycle('prev'));
+
+    const raycaster = new THREE.Raycaster();
+    const ndc = new THREE.Vector2();
+    function pickPhoneAtEvent(e) {
+      const rect = canvas.getBoundingClientRect();
+      ndc.x = ((e.clientX-rect.left)/rect.width)*2-1;
+      ndc.y = -(((e.clientY-rect.top)/rect.height)*2-1);
+      raycaster.setFromCamera(ndc, camera);
+      for (const p of phoneInstances) { const hits = raycaster.intersectObject(p.wrapper, true); if (hits.length > 0) return p; }
+      return null;
+    }
+
+    const HOVER_TILT = { maxX: 0.28, maxY: 0.32, reach: 0.18 };
+    canvas.addEventListener('mousemove', (e) => {
+      if (isAnimating) { phoneInstances.forEach((p) => { p.isHovered=false; p.targetTiltX=0; p.targetTiltY=0; }); return; }
+      const hit = pickPhoneAtEvent(e);
+      const rect = canvas.getBoundingClientRect();
+      const ndcX = ((e.clientX-rect.left)/rect.width)*2-1;
+      const ndcY = -(((e.clientY-rect.top)/rect.height)*2-1);
+      phoneInstances.forEach((p) => {
+        const isBg = (p.slotIndex !== 1);
+        p.isHovered = (p === hit && isBg);
+        if (p.isHovered) {
+          const v = new THREE.Vector3(p.curX+SCENE_OFFSET_X, p.curY, p.curZ);
+          v.project(camera);
+          p.targetTiltY =  clamp((ndcX-v.x)/HOVER_TILT.reach,-1,1)*HOVER_TILT.maxY;
+          p.targetTiltX = -clamp((ndcY-v.y)/HOVER_TILT.reach,-1,1)*HOVER_TILT.maxX;
+        } else { p.targetTiltX=0; p.targetTiltY=0; }
+      });
+      userControls.hoveringCenter = !!(hit && hit.slotIndex === 1);
+      canvas.style.cursor = hit ? 'pointer' : 'default';
+    });
+    canvas.addEventListener('mouseleave', () => {
+      phoneInstances.forEach((p) => { p.isHovered=false; p.targetTiltX=0; p.targetTiltY=0; });
+      userControls.hoveringCenter = false;
+      canvas.style.cursor = 'default';
+    });
+    canvas.addEventListener('click', (e) => {
+      if (isAnimating) return;
+      const hit = pickPhoneAtEvent(e);
+      if (!hit) return;
+      if (hit.slotIndex === 1) {
+        // Toggle play/pause : aucun feedback de scale, le téléphone reste immobile
+        toggleCenterPlayPause();
+        return;
+      }
+      // Téléphones latéraux : on garde le press feedback + cycle
+      hit.pressScale = 0.96;
+      setTimeout(() => { hit.pressScale = 1.0; }, 130);
+      if (hit.slotIndex === 0) cycle('prev');
+      else if (hit.slotIndex === 2) cycle('next');
+    });
+
+    const tryPlayAll = () => {
+      if (userControls.paused) return;
+      const c=getCenterPhone();
+      if(c){const p=c.videoEl.play();if(p&&p.catch)p.catch(()=>{});}
+    };
+    document.addEventListener('click', tryPlayAll, { once: true });
+    document.addEventListener('touchstart', tryPlayAll, { once: true, passive: true });
+
+    const lerp = (a, b, t) => a + (b-a)*t;
+    const startTime = performance.now();
+    let prevTime = startTime;
+
+    function tick() {
+      const now = performance.now();
+      const elapsed = (now - startTime) / 1000;
+      const dt = Math.max(0.001, (now - prevTime) / 1000);
+      prevTime = now;
+
+      phoneInstances.forEach((p) => {
+        if (p.anim) {
+          const a = p.anim;
+          if (now >= a.startTime) {
+            const t = clamp((now-a.startTime)/a.duration, 0, 1);
+            const k = easeInOutSine(t);
+            const pos = bezier3D(k, a.bezier.P0, a.bezier.P1, a.bezier.P2, a.bezier.P3);
+            p.curX=pos.x; p.curY=pos.y; p.curZ=pos.z;
+            const kScale = 1 - Math.pow(1-t, 3);
+            p.curScale = a.fromScale + (a.toScale-a.fromScale)*kScale;
+            p.curRotY  = a.fromRotY + (a.toRotY-a.fromRotY)*k;
+            if (t >= 1 && !a.arrived) { a.arrived=true; if(a.role==='arriving-center')p.wobble={startTime:now}; p.anim=null; }
+          }
+        }
+        const newVelX=(p.curX-p.prevX)/dt, newVelY=(p.curY-p.prevY)/dt;
+        p.velX=lerp(p.velX,newVelX,BANK.smoothing); p.velY=lerp(p.velY,newVelY,BANK.smoothing);
+        p.prevX=p.curX; p.prevY=p.curY; p.prevZ=p.curZ;
+        const isAnim=!!p.anim;
+        const targetBankX=isAnim?clamp(-p.velY*BANK.velocityScale,-BANK.maxX,BANK.maxX):0;
+        const targetBankZ=isAnim?clamp(-p.velX*BANK.velocityScale,-BANK.maxZ,BANK.maxZ):0;
+        const bankLerp=isAnim?0.15:0.06;
+        p.curBankX=lerp(p.curBankX,targetBankX,bankLerp); p.curBankZ=lerp(p.curBankZ,targetBankZ,bankLerp);
+        let wobbleY=0;
+        if(p.wobble){const wt=(now-p.wobble.startTime)/1000;if(wt<TIMING.WOBBLE/1000){wobbleY=WOBBLE.amplitude*Math.sin(wt*WOBBLE.frequency*Math.PI*2)*Math.exp(-wt*WOBBLE.decay);}else{p.wobble=null;}}
+        const breathPeriod=(p.slotIndex!==1)?BREATH.period*2:BREATH.period;
+        const breathY=BREATH.amplitude*Math.sin((elapsed+p.breathPhase)*(Math.PI*2/breathPeriod));
+        const targetHover=(p.anim||p.isHovered===false)?1.0:(p.isHovered?1.06:1.0);
+        p.hoverScale=lerp(p.hoverScale,targetHover,0.18);
+        p.pressScale=lerp(p.pressScale,p.pressScale<1?p.pressScale:1.0,0.25);
+        let transitionLeanY=0;
+        if(p.anim){const a=p.anim,t=clamp((now-a.startTime)/a.duration,0,1),peak=0.35;const skew=t<peak?Math.sin((t/peak)*Math.PI*0.5):Math.cos(((t-peak)/(1-peak))*Math.PI*0.5);transitionLeanY=Math.sign(a.bezier.P3.x-a.bezier.P0.x)*0.22*skew;p.residualLeanY=transitionLeanY;}
+        else{p.residualLeanY=lerp(p.residualLeanY,0,0.08);transitionLeanY=p.residualLeanY;}
+        let swingRotY=0,swingRotX=0;
+        const isBackground=!p.anim&&p.slotIndex!==1;
+        if(isBackground){p.swingFade=lerp(p.swingFade,1,0.025);}
+        const tiltLerp=0.08,tiltGate=isBackground?p.swingFade:0;
+        p.hoverTiltX=lerp(p.hoverTiltX,p.targetTiltX*tiltGate,tiltLerp);
+        p.hoverTiltY=lerp(p.hoverTiltY,p.targetTiltY*tiltGate,tiltLerp);
+        const tiltMag=Math.min(1,Math.hypot(p.hoverTiltX,p.hoverTiltY)/0.3);
+        swingRotX*=(1-tiltMag*0.8); swingRotY*=(1-tiltMag*0.8);
+        const finalY=p.curY+wobbleY+breathY;
+        p.wrapper.position.set(p.curX+SCENE_OFFSET_X, finalY, p.curZ);
+        p.wrapper.scale.setScalar(scaleBase*p.curScale*p.hoverScale*p.pressScale);
+        p.wrapper.rotation.set(p.curBankX+swingRotX+p.hoverTiltX, p.curRotY+swingRotY+transitionLeanY+p.hoverTiltY, p.curBankZ);
+        if(p.shadow){
+          const elev=Math.max(0,finalY-SHADOW_GROUND_Y),elevNorm=clamp(elev/0.5,0,1);
+          const shadowScale=(0.85+elevNorm*0.35)*p.curScale,shadowOpacity=(0.55-elevNorm*0.30)*p.curScale;
+          p.shadow.position.set(p.curX+SCENE_OFFSET_X-0.131, SHADOW_GROUND_Y, p.curZ+0.01);
+          p.shadow.scale.set(shadowScale,shadowScale,1);
+          p.shadow.material.opacity=Math.max(0,shadowOpacity);
+          const targetCol=(p.slotIndex===1)?(BRAND_SHADOW_COLORS[p.brand]||SHADOW_BLACK):SHADOW_BLACK;
+          p.shadow.material.color.lerp(targetCol,SHADOW_COLOR_LERP);
+        }
+
+        // ─── Glyph play/pause dans la texture (centre uniquement) ───
+        const isCenter = (p.slotIndex === 1) && !p.anim;
+        if (isCenter) {
+          // mode = pause si l'user a mis pause OU vidéo en pause, sinon play (visible au hover)
+          p.glyphMode = userControls.paused ? 'play' : 'pause';
+          // visibilité : toujours visible si pause, sinon seulement au hover du téléphone
+          const visible = userControls.paused || userControls.hoveringCenter;
+          p.targetGlyphOpacity = visible ? 0.95 : 0;
+        } else {
+          p.targetGlyphOpacity = 0;
+        }
+        p.glyphOpacity = lerp(p.glyphOpacity, p.targetGlyphOpacity, 0.18);
+        p.showPlay = p.glyphOpacity > 0.01;
+
+        // Rendu de la texture composite (vidéo + glyph éventuel)
+        if (p.screenTex && p.screenTex._render) p.screenTex._render();
+      });
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
+
+  <script>
+    // ── VA2 logo-cloud generation ──
+    (function () {
+      const LOGOS = [
+        'assets/hero-section/logo-tiktok.png',
+        'assets/hero-section/logo-reels.png',
+        'assets/hero-section/logo-shorts.png',
+      ];
+      const PARTICLES = [
+        { layer: 'front', logo: 'tiktok',  x: 14, y: 14, size: 60, drift: [6, -8] },
+        { layer: 'front', logo: 'reels',   x: 86, y: 22, size: 48, drift: [-8, 6] },
+        { layer: 'front', logo: 'shorts',  x: 90, y: 78, size: 45, drift: [-6, -8] },
+        { layer: 'front', logo: 'tiktok',  x: 18, y: 86, size: 50, drift: [7, -7], blur: 1.5 },
+        { layer: 'mid',   logo: 'shorts',  x: 50, y: 8,  size: 36, drift: [-5, 7] },
+        { layer: 'mid',   logo: 'tiktok',  x: 92, y: 50, size: 38, drift: [-7, -6] },
+        { layer: 'mid',   logo: 'reels',   x: 50, y: 92, size: 34, drift: [5, -7] },
+        { layer: 'mid',   logo: 'shorts',  x: 6,  y: 50, size: 32, drift: [6, 6] },
+        { layer: 'back',  logo: 'reels',   x: 30, y: 4,  size: 20, drift: [-3, 5] },
+        { layer: 'back',  logo: 'tiktok',  x: 70, y: 6,  size: 22, drift: [4, 4] },
+        { layer: 'back',  logo: 'shorts',  x: 76, y: 96, size: 18, drift: [-4, -5] },
+        { layer: 'back',  logo: 'reels',   x: 28, y: 96, size: 22, drift: [3, -4] },
+      ];
+      const map = { tiktok: 0, reels: 1, shorts: 2 };
+      document.querySelectorAll('.va2-stage').forEach(stage => {
+        const layers = {
+          front: stage.querySelector('.layer-front'),
+          mid:   stage.querySelector('.layer-mid'),
+          back:  stage.querySelector('.layer-back'),
+        };
+        if (!layers.front) return;
+        PARTICLES.forEach((p, i) => {
+          const img = document.createElement('img');
+          img.className = 'logo-particle';
+          img.src = LOGOS[map[p.logo]];
+          img.alt = '';
+          img.style.left = p.x + '%';
+          img.style.top  = p.y + '%';
+          img.style.width = p.size + 'px';
+          img.style.height = p.size + 'px';
+          const period = 5 + Math.random() * 4;
+          const delay  = -Math.random() * period;
+          img.style.setProperty('--float-period', period + 's');
+          img.style.setProperty('--float-delay',  delay + 's');
+          img.style.setProperty('--drift-x', p.drift[0] + 'px');
+          img.style.setProperty('--drift-y', p.drift[1] + 'px');
+          img.style.animationDelay = `${0.3 + i * 0.04}s, ${delay}s`;
+          if (p.blur) img.style.filter = `blur(${p.blur}px) drop-shadow(0 6px 16px rgba(0,0,0,0.14))`;
+          layers[p.layer].appendChild(img);
+        });
+      });
+    })();
+  </script>
+
+  <script src="header.js"></script>
+
+  <!-- ══ TIMELINE EXPERIENCE — chemin SVG dynamique + glow au scroll ══ -->
+  <script>
+    (function () {
+      function drawTimelinePath() {
+        const stage = document.querySelector('.tl-stage');
+        if (!stage) return;
+        const svg = stage.querySelector('.tl-timeline-path');
+        if (!svg) return;
+        const rows = Array.from(stage.querySelectorAll('.tl-row'));
+        if (rows.length === 0) return;
+
+        const sw = stage.offsetWidth;
+        const sh = stage.offsetHeight;
+        svg.setAttribute('viewBox', '0 0 ' + sw + ' ' + sh);
+        svg.setAttribute('width', sw);
+        svg.setAttribute('height', sh);
+
+        svg.querySelectorAll('path').forEach((p) => p.remove());
+
+        const r = 24.2;
+        const SVG_NS = 'http://www.w3.org/2000/svg';
+
+        rows.forEach((row, i) => {
+          const cl = row.offsetLeft;
+          const ct = row.offsetTop;
+          const cw = row.offsetWidth;
+          const ch = row.offsetHeight;
+          const cx = cl + cw / 2;
+          const right = cl + cw;
+          const bottom = ct + ch;
+
+          let d = 'M ' + cx + ' ' + ct + ' ';
+          const goRight = (i % 2 === 0);
+          if (goRight) {
+            d += 'L ' + (right - r) + ' ' + ct + ' ';
+            d += 'A ' + r + ' ' + r + ' 0 0 1 ' + right + ' ' + (ct + r) + ' ';
+            d += 'L ' + right + ' ' + (bottom - r) + ' ';
+            d += 'A ' + r + ' ' + r + ' 0 0 1 ' + (right - r) + ' ' + bottom + ' ';
+            d += 'L ' + cx + ' ' + bottom + ' ';
+          } else {
+            d += 'L ' + (cl + r) + ' ' + ct + ' ';
+            d += 'A ' + r + ' ' + r + ' 0 0 0 ' + cl + ' ' + (ct + r) + ' ';
+            d += 'L ' + cl + ' ' + (bottom - r) + ' ';
+            d += 'A ' + r + ' ' + r + ' 0 0 0 ' + (cl + r) + ' ' + bottom + ' ';
+            d += 'L ' + cx + ' ' + bottom + ' ';
+          }
+
+          if (i < rows.length - 1) {
+            const next = rows[i + 1];
+            const nct = next.offsetTop;
+            const ncx = next.offsetLeft + next.offsetWidth / 2;
+            d += 'L ' + cx + ' ' + nct + ' ';
+            if (Math.abs(ncx - cx) > 0.5) d += 'L ' + ncx + ' ' + nct + ' ';
+          }
+
+          const base = document.createElementNS(SVG_NS, 'path');
+          base.setAttribute('d', d);
+          base.setAttribute('data-section', String(i));
+          base.setAttribute('class', 'tl-base');
+          svg.appendChild(base);
+
+          const glow = document.createElementNS(SVG_NS, 'path');
+          glow.setAttribute('d', d);
+          glow.setAttribute('data-section', String(i));
+          glow.setAttribute('class', 'tl-glow');
+          svg.appendChild(glow);
+          const len = glow.getTotalLength();
+          glow.dataset.len = String(len);
+          glow.style.strokeDasharray = String(len);
+          glow.style.strokeDashoffset = String(len);
+        });
+
+        updateScrollProgress();
+      }
+
+      let scrollTicking = false;
+      function onScrollTick() {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => { updateScrollProgress(); scrollTicking = false; });
+      }
+      function updateScrollProgress() {
+        const stage = document.querySelector('.tl-stage');
+        if (!stage) return;
+        const svg = stage.querySelector('.tl-timeline-path');
+        if (!svg) return;
+        const rows = Array.from(stage.querySelectorAll('.tl-row'));
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const startVH = 0.70;
+        const endVH   = 0.25;
+
+        rows.forEach((row, i) => {
+          const rect = row.getBoundingClientRect();
+          const top = rect.top;
+          const height = rect.height;
+          const startTrigger = vh * startVH;
+          const endTrigger   = vh * endVH;
+          let progress = 0;
+          if (top <= startTrigger) {
+            const traveled = startTrigger - top;
+            const total    = height + (startTrigger - endTrigger);
+            progress = Math.min(1, Math.max(0, traveled / total));
+          }
+          const glow = svg.querySelector('path.tl-glow[data-section="' + i + '"]');
+          if (glow && glow.dataset.len) {
+            const len = parseFloat(glow.dataset.len);
+            glow.style.strokeDashoffset = String(len * (1 - progress));
+          }
+        });
+      }
+      window.addEventListener('scroll', onScrollTick, { passive: true });
+
+      function scheduleDraw() {
+        requestAnimationFrame(() => requestAnimationFrame(drawTimelinePath));
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleDraw);
+      } else {
+        scheduleDraw();
+      }
+      window.addEventListener('load', scheduleDraw);
+      window.addEventListener('resize', scheduleDraw);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleDraw);
+
+      document.querySelectorAll('.tl-stage img').forEach((img) => {
+        if (!img.complete) img.addEventListener('load', scheduleDraw, { once: true });
+      });
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(scheduleDraw);
+        document.querySelectorAll('.tl-stage .tl-row').forEach((row) => ro.observe(row));
+        const stageEl = document.querySelector('.tl-stage');
+        if (stageEl) ro.observe(stageEl);
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campagne TikTok Les Minions 2 & Trolls 3 — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* Styles partagés → projet.css */
+
+    /* 1. HERO BANNER — palette Minions (jaune ambré) + Trolls (rose/magenta) — assombrie */
+    .projet-hero {
+      min-height: 34vh;
+      height: 34vh;
+      background:
+        radial-gradient(ellipse at 18% 30%, rgba(220, 160, 30, 0.55) 0%, rgba(220, 160, 30, 0) 55%),
+        radial-gradient(ellipse at 82% 70%, rgba(190, 40, 130, 0.65) 0%, rgba(160, 30, 170, 0) 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(70, 15, 110, 0.75) 0%, rgba(70, 15, 110, 0) 60%),
+        linear-gradient(115deg, #b88a00 0%, #c46e1a 25%, #b8307a 55%, #6a128a 82%, #3a0a5e 100%);
+      padding: 0 0 0 8%;
+      position: relative;
+      overflow: hidden;
+    }
+    /* voile sombre global — allégé pour plus de luminosité */
+    .projet-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0.16) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* petite bulle décorative douce */
+    .projet-hero::after {
+      content: '';
+      position: absolute;
+      width: 280px; height: 280px;
+      bottom: -110px; right: 18%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.18), rgba(255,90,180,0) 65%);
+      filter: blur(2px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 20px;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+    .hero-thumb {
+      box-shadow: 0 16px 40px rgba(40, 5, 50, 0.65);
+      filter: brightness(0.92) saturate(0.95) contrast(1.02);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .hero-thumb:hover { filter: brightness(0.95) saturate(1) contrast(1.04); transform: translateY(-2px); }
+
+    /* 3. MAIN CARD — cartes magenta/rose (thème Trolls) */
+    .projet-card {
+      width: 82%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * { position: relative; z-index: 1; }
+
+    .red-card {
+      position: relative;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1.5px) 0 0 / 14px 14px,
+        linear-gradient(135deg, #d31aa8 0%, #8b1180 50%, #5a0a64 100%);
+      border: 1.5px solid rgba(255, 130, 220, 0.55);
+      border-radius: 22px;
+      padding: 38px 42px 34px;
+      box-shadow: 0 18px 40px rgba(40, 0, 60, 0.55), 0 2px 0 rgba(255,255,255,0.08) inset, 0 -2px 0 rgba(0,0,0,0.25) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      filter: brightness(1.08);
+    }
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(150, 65, 0, 0.55), 0 2px 5px rgba(80, 25, 0, 0.35);
+      padding: 8px 28px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ffd83a 0%, #f4a300 100%);
+      border: 1.5px solid rgba(255, 230, 120, 0.85);
+      box-shadow: 0 6px 18px rgba(40, 0, 50, 0.55), inset 0 1px 0 rgba(255,255,255,0.40), inset 0 -2px 4px rgba(140,80,0,0.30);
+      white-space: nowrap;
+      z-index: 3;
+      font-size: 1.09rem;
+    }
+    .red-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #fff5ec;
+      text-shadow: 0 1px 8px rgba(120, 10, 100, 0.35);
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text { margin-top: 14px; }
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #fff5ec;
+      text-shadow: 0 1px 8px rgba(120, 10, 100, 0.35);
+      margin: 0; padding: 0;
+      list-style: none;
+      display: flex; flex-direction: column; gap: 12px;
+      text-align: center; width: 100%;
+      justify-content: center;
+    }
+    .red-card__list li { display: block; text-align: center; }
+    .red-card__list li::before { content: "•  "; display: inline; }
+
+    .red-card--results { padding: 38px 42px 34px; width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; overflow: visible; }
+    .results-row { display: flex; align-items: center; justify-content: center; gap: 18px; width: 100%; padding-top: 16px; flex-wrap: nowrap; }
+    .results-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 10px; }
+    .results-item__value {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.328rem, 1.992vw, 1.727rem);
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 7px;
+      white-space: nowrap;
+    }
+    .results-item__value .results-item__suffix { font-weight: 500; font-size: 0.8125em; }
+    .results-item__number { font-size: 1.25em; vertical-align: middle; }
+    .results-item__suffix-stack {
+      display: inline-flex; flex-direction: column; align-items: flex-start;
+      vertical-align: middle; line-height: 1.15;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.77rem, 0.99vw, 0.935rem);
+      color: rgba(255,255,255,0.88);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.35;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .results-item__label + .results-item__label {
+      margin-top: 2px;
+    }
+    .results-divider { width: 1px; height: 44px; background: rgba(255,255,255,0.4); flex-shrink: 0; }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* 5. MES CONTENUS */
+    .contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(15px, 1.15vw, 18px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 1px 0 rgba(150, 65, 0, 0.55), 0 2px 5px rgba(80, 25, 0, 0.35);
+      padding: 10px 28px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #ffd83a 0%, #f4a300 100%);
+      border: 1.5px solid rgba(255, 230, 120, 0.85);
+      box-shadow: 0 6px 18px rgba(40, 0, 50, 0.55), inset 0 1px 0 rgba(255,255,255,0.40), inset 0 -2px 4px rgba(140,80,0,0.30);
+      white-space: nowrap;
+      filter: brightness(1.05);
+      font-size: clamp(16px, 1.25vw, 20px);
+    }
+    .contenus-title__logos { display: inline-flex; align-items: center; gap: 9px; }
+    .contenus-title__logos img { height: 28px; width: auto; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)); }
+
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 64px 80px;
+      width: 100%;
+      justify-items: center;
+      align-items: start;
+      position: relative;
+    }
+    .contenus-grid--cols-2 { grid-template-columns: repeat(2, 1fr); gap: 64px 80px; }
+    .contenus-grid--cols-2 .contenu-card { max-width: 283px; }
+    .contenus-grid--cols-3 { grid-template-columns: repeat(3, 1fr); gap: 48px 36px; }
+    .contenus-grid--cols-4 { grid-template-columns: repeat(4, 1fr); gap: 48px 36px; }
+    /* 1 carte orpheline → centrée */
+    .contenus-grid--cols-2 > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid--cols-3 > .contenu-card:last-child:nth-child(3n+1) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid--cols-3 > .contenu-card:last-child:nth-child(3n+2) { grid-column: 3 / 4; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+1) { grid-column: 1 / -1; justify-self: center; }
+
+    @keyframes layoutFade {
+      from { opacity: 0.6; transform: scale(0.97); }
+      to   { opacity: 1;   transform: scale(1); }
+    }
+    .layout-changing .contenu-card { animation: layoutFade 0.32s ease forwards; }
+
+    .layout-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: linear-gradient(180deg, #ffd83a 0%, #f4a300 100%);
+      border: 1.5px solid rgba(255, 230, 120, 0.85);
+      border-radius: 999px;
+      padding: 5px 7px;
+      box-shadow: 0 6px 18px rgba(40, 0, 50, 0.55), inset 0 1px 0 rgba(255,255,255,0.40), inset 0 -2px 4px rgba(140,80,0,0.30);
+    }
+    .layout-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 999px; border: none; background: transparent;
+      cursor: pointer; padding: 0; transition: background 0.2s ease;
+    }
+    .layout-btn svg { width: 19px; height: 14px; fill: rgba(60,20,0,0.55); transition: fill 0.2s ease, filter 0.2s ease; }
+    .layout-btn.is-active { background: rgba(255,255,255,0.35); box-shadow: inset 0 0 10px rgba(255,255,255,0.20), 0 0 8px rgba(255,255,255,0.15); }
+    .layout-btn.is-active svg { fill: #2a0030; filter: drop-shadow(0 0 4px rgba(255,255,255,0.6)); }
+    .layout-btn:hover:not(.is-active):not([disabled]) { background: rgba(255,255,255,0.18); }
+    .layout-btn:hover:not([disabled]) svg { fill: rgba(40,10,50,0.85); }
+    .layout-btn[disabled] { cursor: not-allowed; opacity: 0.4; }
+    .layout-btn[disabled] svg { fill: rgba(60,20,0,0.4); }
+
+    .contenu-card {
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; gap: 16px; width: 100%; max-width: 283px; z-index: 0;
+    }
+    .contenu-card__frame {
+      position: relative; width: 100%; aspect-ratio: 9 / 16;
+      border-radius: 12px; padding: 0;
+      background: linear-gradient(135deg, #ffd400 0%, #ff5fa8 60%, #b026d6 100%);
+      border: 1.5px solid rgba(255, 200, 60, 0.7);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.3), 0 0 18px rgba(255, 90, 180, 0.20);
+      overflow: hidden; transition: transform 0.35s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.35s ease;
+    }
+    .contenu-card__frame:hover { transform: translateY(-3px); box-shadow: 0 28px 52px rgba(0,0,0,0.5), 0 12px 24px rgba(0,0,0,0.35), 0 0 26px rgba(255, 90, 180, 0.45); }
+    .contenu-card__frame::before {
+      content: ""; position: absolute; width: 14rem; height: 12rem;
+      background: white; filter: blur(50px); left: -50%; top: -50%;
+      z-index: 0; pointer-events: none; border-radius: 0; mix-blend-mode: normal; opacity: 1;
+    }
+    .contenu-card__frame video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      border-radius: 9px; background: #000; position: relative; z-index: 2;
+    }
+    .contenu-card__play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.85);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 2; box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .contenu-card__play::after {
+      content: ""; width: 0; height: 0;
+      border-left: 14px solid #ffffff;
+      border-top: 9px solid transparent; border-bottom: 9px solid transparent;
+      margin-left: 4px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+    .contenu-card__frame:hover .contenu-card__play { transform: translate(-50%, -50%) scale(1.06); }
+    .contenu-card__frame.is-playing .contenu-card__play { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+
+    .contenu-card__frame--player { cursor: pointer; transition: transform 0.5s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.5s ease; }
+    .contenu-card__frame--player::after {
+      content: ""; position: absolute; inset: 4px; background: #141414;
+      border-radius: 9px; z-index: 1; opacity: 0.9; pointer-events: none;
+    }
+    .contenu-card__blob { position: absolute; border-radius: 50%; filter: blur(28px); z-index: 3; pointer-events: none; mix-blend-mode: screen; opacity: 0.85; transition: transform 0.5s ease; }
+    .contenu-card__blob--blue { width: 56px; height: 56px; background: #ffd400; top: 28%; right: 18%; }
+    .contenu-card__blob--orange { width: 44px; height: 44px; background: #ff5fa8; bottom: 32%; right: 22%; }
+    .contenu-card__frame--player:hover .contenu-card__blob--blue { transform: translate(44px, -44px); }
+    .contenu-card__frame--player:hover .contenu-card__blob--orange { transform: translate(44px, 64px); }
+    .contenu-card__frame--player video { position: relative; z-index: 2; }
+    .contenu-card__frame--player .contenu-card__play--toggle,
+    .contenu-card__frame--player .contenu-card__play {
+      padding: 0; border-radius: 50%; background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255, 200, 60, 0.55); box-shadow: 0 0 10px rgba(255, 200, 60, 0.3);
+      width: 56px; height: 56px; opacity: 1;
+    }
+    .contenu-card__frame--player .contenu-card__play--toggle::after,
+    .contenu-card__frame--player .contenu-card__play::after { border-left-color: #ffd400; }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle { opacity: 0; pointer-events: none; }
+    .contenu-card__frame--player:hover.is-playing .contenu-card__play--toggle { opacity: 0.85; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle::after {
+      content: ""; width: 14px; height: 16px; border: 0; margin-left: 0;
+      background: linear-gradient(#fff,#fff) left/4px 100% no-repeat, linear-gradient(#fff,#fff) right/4px 100% no-repeat;
+    }
+    .contenu-card__sound {
+      position: absolute; top: 10px; right: 10px; z-index: 5;
+      width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .contenu-card__sound:hover { background: rgba(0,0,0,0.78); transform: scale(1.1); }
+    .contenu-card__sound svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: block; }
+    .contenu-card__progress {
+      position: absolute; left: 14px; right: 14px; bottom: 10px; height: 3px;
+      border-radius: 999px; background: rgba(255,255,255,0.25);
+      cursor: pointer; z-index: 4; overflow: hidden; transition: height 0.18s ease;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress { height: 5px; }
+    .contenu-card__progress-fill { height: 100%; width: 0%; background: #ffd400; border-radius: 999px; box-shadow: 0 0 6px rgba(255, 200, 60, 0.6); transition: width 0.1s linear; }
+
+    .contenu-card__metric {
+      display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 0.82rem;
+      letter-spacing: 0.01em; color: #ffffff; padding: 8px 16px 8px 12px;
+      border-radius: 12px; background: rgba(40, 0, 40, 0.78);
+      backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6);
+      border: 1px solid rgba(255, 200, 60, 0.30);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.06) inset, 0 -1px 0 rgba(0,0,0,0.5) inset;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7); white-space: nowrap;
+    }
+    .contenu-card__metric--featured {
+      width: 100%; max-width: 100%; min-width: 0; margin-left: auto; margin-right: auto;
+      aspect-ratio: 4.260 / 1; height: auto;
+      justify-content: center; gap: 2px; padding: 0 !important;
+      background: rgba(40, 0, 40, 0.63); border: 0; border-radius: 8.77px;
+      box-shadow: 0 2.51px 2.51px rgba(12,0,0,0.9), 0 0.49px 2.5px rgba(24,2,2,0.59);
+      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+      box-sizing: border-box; overflow: hidden;
+      cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0);
+      overflow: visible !important;
+      box-shadow: -0.15em -0.15em 0.15em -0.075em rgba(5,5,5,0.25), 0.0375em 0.0375em 0.0675em 0 rgba(5,5,5,0.1);
+    }
+    .contenu-card__metric--featured::after {
+      content: ""; position: absolute; z-index: 0;
+      width: calc(100% + 0.3em); height: calc(100% + 0.3em);
+      top: -0.15em; left: -0.15em; border-radius: inherit;
+      background: linear-gradient(-135deg, rgba(5,5,5,0.5), transparent 20%, transparent 100%);
+      filter: blur(0.0125em); opacity: 0.25; mix-blend-mode: multiply; pointer-events: none;
+    }
+    .contenu-card__metric--featured img { width: 34px !important; height: 34px !important; flex-shrink: 0; filter: none; align-self: center; margin-left: 8px; margin-right: 4px; object-fit: contain; }
+    .metric-press__outer {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 300ms ease; will-change: box-shadow;
+      box-shadow: 0 0.05em 0.05em -0.01em rgba(5,5,5,1), 0 0.01em 0.01em -0.01em rgba(5,5,5,0.5), 0.15em 0.3em 0.1em -0.01em rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__outer { box-shadow: 0 0 0 0 rgba(5,5,5,1), 0 0 0 0 rgba(5,5,5,0.5), 0 0 0 0 rgba(5,5,5,0.25); }
+    .metric-press__inner {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 8px 0 0;
+      transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease;
+      will-change: box-shadow, clip-path, transform; overflow: hidden; clip-path: inset(0 0 0 0 round 8.77px);
+      box-shadow: 0 0 0 0 inset rgba(5,5,5,0.1), -0.05em -0.05em 0.05em 0 inset rgba(5,5,5,0.25), 0 0 0 0 inset rgba(5,5,5,0.1), 0 0 0.05em 0.2em inset rgba(255,255,255,0.08), 0.025em 0.05em 0.1em 0 inset rgba(255,255,255,0.15), 0.12em 0.12em 0.12em inset rgba(255,255,255,0.08), -0.075em -0.25em 0.25em 0.1em inset rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__inner { clip-path: inset(clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) clamp(1px,0.0625em,2px) round 8.77px); background: rgba(255, 90, 180, 0.55); box-shadow: 0.1em 0.15em 0.05em 0 inset rgba(5,5,5,0.75), -0.025em -0.03em 0.05em 0.025em inset rgba(5,5,5,0.5), 0.25em 0.25em 0.2em 0 inset rgba(5,5,5,0.5), 0 0 0.05em 0.5em inset rgba(255,255,255,0.05), 0 0 0 0 inset rgba(255,255,255,1), 0.12em 0.12em 0.12em inset rgba(255,255,255,0.08), -0.075em -0.12em 0.2em 0.1em inset rgba(5,5,5,0.25), inset 0 0 12px rgba(255, 90, 180, 0.4); }
+    .contenu-card__metric--featured:active .metric-press__inner { transform: scale(0.975); background: rgba(255, 90, 180, 0.55); box-shadow: 0 0 0 0 inset rgba(5,5,5,0.1), inset 0 0 12px rgba(255, 90, 180, 0.4), inset 0 0 4px rgba(255, 200, 60, 0.3); }
+    .contenu-card__metric-inline {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 3px; min-width: 0; line-height: 1; flex: 1 1 auto;
+      white-space: nowrap; text-align: center; margin-left: 0;
+      overflow: hidden;
+    }
+    .contenu-card__metric-inline .metric-value,
+    .contenu-card__metric-inline .metric-separator {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif; font-size: clamp(11px, 1.2vw, 14px); font-weight: 800;
+      color: rgba(251,252,254,0.97); line-height: 1; display: inline-flex; align-items: center;
+      text-transform: uppercase; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25);
+    }
+    .contenu-card__metric-inline .metric-icon { font-size: clamp(11px, 1.2vw, 14px); line-height: 1; display: inline-flex; align-items: center; justify-content: center; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+    .contenu-card__metric-inline .metric-prefix { font-family: 'PoppinsEB','Poppins',sans-serif; font-size: clamp(11px, 1.2vw, 14px); font-weight: 800; color: rgba(251,252,254,0.97); line-height: 1; display: inline-flex; align-items: center; text-transform: uppercase; text-shadow: 0 6.86px 6.86px rgba(12,7,46,0.2), 0 2.68px 2.68px rgba(0,0,0,0.25); }
+    .contenu-card__metric-stack { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; }
+
+    /* Vue 2 colonnes : labels & logo agrandis (aligné sur projet-netflix) */
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-value,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-separator,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-icon,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-prefix {
+      font-size: 20px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric-inline {
+      gap: 6px;
+      margin-left: -11px;
+    }
+    .contenus-grid--cols-2 .metric-press__inner {
+      gap: 3px;
+      padding: 0 8px 0 4px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured img {
+      width: 72px !important;
+      height: 72px !important;
+    }
+
+    @media (max-width: 1024px) { .contenus-grid { grid-template-columns: repeat(2,1fr); gap: 44px 32px; } .contenus-section { width: 92%; } }
+    @media (max-width: 640px) { .contenus-grid { grid-template-columns: 1fr; gap: 36px; } .contenus-section { width: 94%; gap: 36px; } .contenu-card { max-width: 230px; } }
+
+    /* ══ MES AUTRES CONTENUS — CARROUSEL ══ */
+    .autres-contenus-section {
+      width: 82%; max-width: 1200px; margin: 64px auto 0;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+    .autres-carousel-wrapper { width: 100%; display: flex; align-items: center; gap: 16px; position: relative; }
+    .autres-track-clip { flex: 1; overflow: hidden; }
+    .autres-track { display: flex; gap: 20px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .autres-card {
+      flex-shrink: 0; width: calc((100% - 20px) / 2); aspect-ratio: 16/9;
+      border-radius: 20px; overflow: hidden; position: relative; cursor: default;
+      box-shadow: 0 8px 32px rgba(40, 0, 40, 0.28); transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .autres-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(40, 0, 40, 0.34); }
+    .autres-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .autres-card__overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.25s ease; }
+    .autres-card:hover .autres-card__overlay { opacity: 1; }
+    .autres-card__label { font-family: 'Poppins',sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; line-height: 1.5; text-align: center; }
+    .autres-arrow {
+      flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: none;
+      background: rgba(60, 10, 70, 0.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .autres-arrow:hover { background: rgba(255, 90, 180, 0.85); transform: scale(1.08); }
+    .autres-arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .autres-dots { display: flex; gap: 8px; align-items: center; }
+    .autres-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(120, 30, 130, 0.3); border: none; padding: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .autres-dot.is-active { background: #ff3aa8; transform: scale(1.3); }
+
+    /* ── Particules flottantes hero ── */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero-particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: particleFloat var(--dur, 7s) ease-in-out var(--delay, 0s) infinite;
+      opacity: 0;
+    }
+    @keyframes particleFloat {
+      0%   { opacity: 0;    transform: translateY(4px)  scale(0.9); }
+      18%  { opacity: var(--peak-op, 0.55); }
+      75%  { opacity: var(--peak-op, 0.55); transform: translateY(-22px) scale(1); }
+      100% { opacity: 0;    transform: translateY(-30px) scale(0.85); }
+    }
+
+    @media (max-width: 1440px) { .projet-hero { min-height: 32vh; height: 32vh; padding: 0 4%; } .hero-thumb { height: 185px; } .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); } .projet-card { width: 86%; } .projet-main { padding-top: 40px; gap: 36px; } }
+    @media (max-width: 1280px) { .projet-hero { min-height: 28vh; height: 28vh; padding: 0 3%; } .hero-thumb { height: 150px; margin-left: -18px; } .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); } .projet-card { width: 90%; } .projet-main { gap: 32px; } }
+    @media (max-width: 1024px) { .projet-hero { flex-direction: column; height: auto; min-height: auto; padding: 60px 5% 32px; align-items: flex-start; gap: 24px; } .projet-hero__left { width: 100%; } .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0 0 8px; height: auto; } .hero-thumb { height: 190px; width: 114px; margin-left: -18px; } .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); } .projet-card { width: 94%; max-width: 94%; } }
+    @media (max-width: 768px) { .projet-hero { padding: 56px 4% 24px; gap: 20px; } .hero-thumb { height: 155px; width: 93px; margin-left: -14px; } .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); } .projet-card { width: 96%; max-width: 96%; } .projet-main { padding-top: 24px; gap: 24px; } }
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations Minions/Trolls : 4 résultats (2×2), TikTok seul (64×64),
+       palette magenta/violet (#d31aa8 → #5a0a64) reprise du desktop. */
+    @media (max-width: 480px) {
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(18.76px, 5.46vw, 23.03px) !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      /* Titre sur 2 lignes uniquement en mobile */
+      .projet-title .mintroll-tl-1,
+      .projet-title .mintroll-tl-2 { display: block !important; }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* ───────── ESPACEMENT main ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ───────── RÉSULTATS CLÉS — 4 mini-cartes 2×2 ───────── */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.85rem !important;
+        padding: 7px 20px !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      /* Mini-cartes : palette MAGENTA/VIOLET reprise du desktop */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        background:
+          radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          linear-gradient(135deg, #d31aa8 0%, #8b1180 50%, #5a0a64 100%) !important;
+        border: 1.5px solid rgba(255, 130, 220, 0.55) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(40, 0, 60, 0.55),
+          0 2px 0 rgba(255,255,255,0.08) inset,
+          0 -2px 0 rgba(0,0,0,0.25) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.08) !important;
+        min-height: 92px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-item__value {
+        color: #ffffff !important;
+        font-size: clamp(1.328rem, 4.8vw, 1.727rem) !important;
+      }
+      .red-card--results .results-item__label {
+        color: rgba(255,255,255,0.88) !important;
+        font-size: 0.62rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        letter-spacing: 0.10em !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok seul (64×64) ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      .contenu-card__metric--featured img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+
+    /* ══ MIGNON & POPPY ANIMÉS ══ */
+    .hero-minion, .hero-poppy {
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* DUO dans le hero — centré entre Trolls 3 et les vignettes */
+    .hero-characters-duo {
+      position: absolute;
+      right: 36%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .hero-characters-duo .hero-minion { width: 46px; }
+    .hero-characters-duo .hero-minion__ground { width: 30px; height: 6px; }
+    .hero-characters-duo .hero-poppy  { width: 50px; }
+    .hero-characters-duo .hero-poppy__ground { width: 32px; height: 6px; }
+
+    /* Mini personnages disséminés sur la page (≈40% taille originale) — en background */
+    .page-mini {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      animation: pageMiniDrift 9s ease-in-out infinite;
+      opacity: 0.92;
+    }
+    /* Sections au-dessus des minis pour qu'ils restent en arrière-plan */
+    .projet-main > .projet-card,
+    .projet-main > .contenus-section,
+    .projet-main > .autres-contenus-section,
+    .projet-main > .projet-back { position: relative; z-index: 1; }
+    .page-mini--alt { animation-duration: 11s; animation-direction: alternate; }
+    .page-mini .hero-minion { width: 37px; }
+    .page-mini .hero-minion__ground { width: 24px; height: 5px; }
+    .page-mini .hero-poppy  { width: 40px; }
+    .page-mini .hero-poppy__ground { width: 26px; height: 5px; }
+    @keyframes pageMiniDrift {
+      0%, 100% { transform: translate(0, 0); }
+      33%      { transform: translate(6px, -8px); }
+      66%      { transform: translate(-4px, 5px); }
+    }
+    .projet-main { position: relative; }
+
+    .hero-minion__svg {
+      width: 100%; height: auto; display: block;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.45));
+      animation: minionFloat 3.8s ease-in-out infinite;
+    }
+    .hero-poppy__svg {
+      width: 100%; height: auto; display: block;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+      animation: poppyFloat 4.2s ease-in-out infinite;
+    }
+    .hero-minion__ground, .hero-poppy__ground {
+      height: 9px;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.32) 0%, transparent 72%);
+      margin-top: -3px;
+    }
+    .hero-minion__ground { width: 58px; animation: minionShadow 3.8s ease-in-out infinite; }
+    .hero-poppy__ground  { width: 62px; animation: poppyShadow 4.2s ease-in-out infinite; }
+
+    .minion-eye-inner { transform-box: fill-box; transform-origin: center; animation: minionBlink 5.5s ease-in-out 2s infinite; }
+    .minion-arm-left  { transform-origin: 15px 84px; animation: minionWave 3.8s ease-in-out 0.5s infinite; }
+    .minion-arm-right { transform-origin: 105px 84px; animation: minionArmRight 3.8s ease-in-out infinite; }
+    .minion-legs      { transform-box: fill-box; transform-origin: center top; animation: minionLegs 3.8s ease-in-out infinite; }
+    .minion-mouth     { transform-box: fill-box; transform-origin: center; animation: minionMouth 4.5s ease-in-out infinite; }
+
+    .poppy-hair       { transform-origin: 65px 115px; animation: poppyHair 4.2s ease-in-out infinite; }
+    .poppy-eye        { transform-box: fill-box; transform-origin: center; animation: poppyBlink 6s ease-in-out 1.2s infinite; }
+    .poppy-arm-right  { transform-origin: 100px 148px; animation: poppyWave 3.4s ease-in-out 0.3s infinite; }
+    .poppy-mouth      { transform-box: fill-box; transform-origin: center; animation: poppyMouth 5s ease-in-out infinite; }
+    .poppy-flower     { transform-origin: 72px 35px; animation: poppyFlower 5s ease-in-out infinite; }
+
+    @keyframes minionFloat   { 0%,100% { transform: translateY(0)    rotate(0deg); } 35% { transform: translateY(-11px) rotate(-2deg); } 70% { transform: translateY(-5px) rotate(1.3deg); } }
+    @keyframes minionBlink   { 0%,82%,100% { transform: scaleY(1); } 87% { transform: scaleY(0.05); } 92% { transform: scaleY(1); } 97% { transform: scaleY(0.05); } }
+    @keyframes minionWave    { 0%,100% { transform: rotate(0deg); } 22% { transform: rotate(-32deg); } 55% { transform: rotate(24deg); } 80% { transform: rotate(-20deg); } }
+    @keyframes minionArmRight{ 0%,100% { transform: rotate(0deg); } 35% { transform: rotate(-7deg); } 70% { transform: rotate(4deg); } }
+    @keyframes minionLegs    { 0%,100% { transform: translateY(0) scaleY(1); } 35% { transform: translateY(2px) scaleY(0.96); } 70% { transform: translateY(1px) scaleY(0.98); } }
+    @keyframes minionMouth   { 0%,100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.18) scaleX(1.06); } }
+    @keyframes minionShadow  { 0%,100% { transform: scaleX(1); opacity: 1; } 35% { transform: scaleX(0.68); opacity: 0.45; } 70% { transform: scaleX(0.82); opacity: 0.62; } }
+
+    @keyframes poppyFloat    { 0%,100% { transform: translateY(0) rotate(0deg); } 30% { transform: translateY(-9px) rotate(2deg); } 65% { transform: translateY(-4px) rotate(-1.5deg); } }
+    @keyframes poppyHair     { 0%,100% { transform: rotate(0deg); } 30% { transform: rotate(-3.5deg); } 65% { transform: rotate(2.5deg); } }
+    @keyframes poppyBlink    { 0%,85%,100% { transform: scaleY(1); } 90% { transform: scaleY(0.08); } 95% { transform: scaleY(1); } }
+    @keyframes poppyWave     { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(22deg); } 60% { transform: rotate(-14deg); } }
+    @keyframes poppyMouth    { 0%,100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.15) scaleX(1.05); } }
+    @keyframes poppyFlower   { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(8deg); } }
+    @keyframes poppyShadow   { 0%,100% { transform: scaleX(1); opacity: 1; } 30% { transform: scaleX(0.7); opacity: 0.5; } 65% { transform: scaleX(0.85); opacity: 0.65; } }
+
+    @media (max-width: 1024px) { .hero-minion, .hero-poppy { display: none; } }
+  
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-dark" data-page="minions-trolls">
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="minions-trolls">
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- 1. HERO BANNER -->
+    <div class="projet-hero">
+
+      <!-- Particules décoratives flottantes — codes Minions (jaune) + Trolls (rose/turquoise) -->
+      <div class="hero-particles" aria-hidden="true">
+        <!-- Minions — jaune or -->
+        <span class="hero-particle" style="width:13px;height:13px;background:radial-gradient(circle at 35% 35%,#ffe566,#ffd400);filter:blur(0.5px);top:38%;left:9%;--dur:7.2s;--delay:0s;--peak-op:0.55;"></span>
+        <span class="hero-particle" style="width:7px;height:7px;background:#ffd400;filter:blur(0.3px);top:22%;left:29%;--dur:8.5s;--delay:1.1s;--peak-op:0.45;"></span>
+        <span class="hero-particle" style="width:9px;height:9px;background:radial-gradient(circle at 35% 35%,#ffe566,#f4a300);filter:blur(0.4px);top:62%;left:15%;--dur:6.4s;--delay:3.6s;--peak-op:0.5;"></span>
+        <span class="hero-particle" style="width:5px;height:5px;background:#ffe566;filter:blur(0.2px);top:48%;left:38%;--dur:9s;--delay:2.3s;--peak-op:0.4;"></span>
+        <!-- Trolls — rose vif -->
+        <span class="hero-particle" style="width:10px;height:10px;background:radial-gradient(circle at 35% 35%,#ff9ee4,#ff5fa8);filter:blur(0.5px);top:28%;left:18%;--dur:5.8s;--delay:1.8s;--peak-op:0.6;"></span>
+        <span class="hero-particle" style="width:6px;height:6px;background:#ff3aa8;filter:blur(0.3px);top:68%;left:6%;--dur:7.8s;--delay:4.1s;--peak-op:0.45;"></span>
+        <span class="hero-particle" style="width:8px;height:8px;background:#ff5fa8;filter:blur(0.3px);top:55%;left:44%;--dur:6.9s;--delay:0.6s;--peak-op:0.5;"></span>
+        <!-- Trolls — turquoise/teal -->
+        <span class="hero-particle" style="width:11px;height:11px;background:radial-gradient(circle at 35% 35%,#7eeee4,#32d8c8);filter:blur(0.5px);top:58%;left:25%;--dur:7.5s;--delay:2.9s;--peak-op:0.5;"></span>
+        <span class="hero-particle" style="width:6px;height:6px;background:#40e0d0;filter:blur(0.2px);top:32%;left:48%;--dur:8.2s;--delay:5s;--peak-op:0.4;"></span>
+      </div>
+
+      <div class="projet-hero__left">
+        <h1 class="projet-title"><span class="mintroll-tl-1">Campagne TikTok Les </span><span class="mintroll-tl-2">Minions 2 &amp; Trolls 3</span></h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Campagne d'influence</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/minions2-trolls/vignette-minion1.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/minions2-trolls/vignette-minion1.webp" alt="Minions 2"></picture>
+        <picture><source srcset="assets/brand-projects/minions2-trolls/vignette-minion2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/minions2-trolls/vignette-minion2.webp" alt="Minions 2"></picture>
+        <picture><source srcset="assets/brand-projects/minions2-trolls/vignette-trolls.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/minions2-trolls/vignette-trolls.webp" alt="Trolls 3"></picture>
+      </div>
+
+      <!-- ── DUO Mignon + Poppy (centré entre titre Trolls 3 et vignettes) ── -->
+      <div class="hero-characters-duo">
+      <div class="hero-minion" aria-hidden="true">
+        <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="mgBody" cx="35%" cy="28%" r="70%">
+              <stop offset="0%" stop-color="#FFF0A0"/>
+              <stop offset="30%" stop-color="#FFE05A"/>
+              <stop offset="65%" stop-color="#F2BD00"/>
+              <stop offset="100%" stop-color="#A88200"/>
+            </radialGradient>
+            <radialGradient id="mgGoggle" cx="38%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="#D8D8D8"/>
+              <stop offset="55%" stop-color="#7A7A7A"/>
+              <stop offset="100%" stop-color="#3A3A3A"/>
+            </radialGradient>
+            <radialGradient id="mgIris" cx="38%" cy="33%" r="65%">
+              <stop offset="0%" stop-color="#B47A1E"/>
+              <stop offset="55%" stop-color="#7A4810"/>
+              <stop offset="100%" stop-color="#2E1A05"/>
+            </radialGradient>
+            <linearGradient id="mgOveralls" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%" stop-color="#6BB8F2"/>
+              <stop offset="50%" stop-color="#3E85D2"/>
+              <stop offset="100%" stop-color="#1F569E"/>
+            </linearGradient>
+            <radialGradient id="mgGlove" cx="35%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="60%" stop-color="#DCDCDC"/>
+              <stop offset="100%" stop-color="#A8A8A8"/>
+            </radialGradient>
+          </defs>
+
+          <!-- CORPS -->
+          <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+          <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+          <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+          <ellipse cx="48" cy="64" rx="14" ry="8" fill="rgba(255,255,255,0.22)"/>
+          <!-- Pli ventre -->
+          <path d="M 30 124 Q 60 134 90 124" stroke="rgba(0,0,0,0.10)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+          <!-- SALOPETTE -->
+          <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+          <path d="M 20 118 C 18 150 28 168 48 173 C 34 160 26 145 22 120 Z" fill="rgba(255,255,255,0.16)"/>
+          <path d="M 14 112 Q 60 122 106 112" stroke="rgba(0,0,0,0.18)" stroke-width="1.2" fill="none"/>
+          <!-- Bretelles -->
+          <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+          <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+          <rect x="45.5" y="64" width="4" height="50" rx="2" fill="rgba(255,255,255,0.32)"/>
+          <rect x="67.5" y="64" width="4" height="50" rx="2" fill="rgba(255,255,255,0.32)"/>
+          <!-- Boutons -->
+          <circle cx="49" cy="116" r="2.2" fill="#FFD400"/>
+          <circle cx="71" cy="116" r="2.2" fill="#FFD400"/>
+          <circle cx="49" cy="116" r="0.8" fill="#8B6F00"/>
+          <circle cx="71" cy="116" r="0.8" fill="#8B6F00"/>
+          <!-- Poche -->
+          <rect x="45" y="127" width="30" height="22" rx="5" fill="#3A7CC5" stroke="#2868AE" stroke-width="1.5"/>
+          <line x1="45" y1="136" x2="75" y2="136" stroke="#2562A8" stroke-width="1"/>
+          <rect x="47" y="128" width="26" height="4" rx="2" fill="rgba(255,255,255,0.20)"/>
+          <text x="60" y="146" font-family="Arial, sans-serif" font-size="6" font-weight="700" fill="rgba(255,255,255,0.75)" text-anchor="middle">G</text>
+
+          <!-- SANGLE GOGGLES -->
+          <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+          <rect x="13" y="59" width="94" height="6" rx="3" fill="rgba(255,255,255,0.22)"/>
+          <rect x="13" y="69" width="94" height="3" rx="1.5" fill="rgba(0,0,0,0.25)"/>
+
+          <!-- MONTURE GOGGLES -->
+          <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+          <circle cx="60" cy="66" r="22" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="0.8"/>
+          <path d="M 40 50 Q 60 41 80 50" stroke="rgba(255,255,255,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M 40 82 Q 60 90 80 82" stroke="rgba(0,0,0,0.22)" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Vis -->
+          <circle cx="38" cy="66" r="2" fill="#3A3A3A"/>
+          <circle cx="82" cy="66" r="2" fill="#3A3A3A"/>
+          <circle cx="38" cy="66" r="0.6" fill="#888"/>
+          <circle cx="82" cy="66" r="0.6" fill="#888"/>
+
+          <!-- VERRE -->
+          <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+          <circle cx="60" cy="66" r="18" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="2.5"/>
+          <ellipse cx="52" cy="57" rx="7" ry="5" fill="rgba(255,255,255,0.42)" transform="rotate(-15 52 57)"/>
+          <ellipse cx="68" cy="74" rx="3" ry="2" fill="rgba(255,255,255,0.30)"/>
+
+          <!-- ŒIL — animé (clignement) -->
+          <g class="minion-eye-inner">
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="12" fill="none" stroke="rgba(255,190,40,0.35)" stroke-width="1.5"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="rgba(255,255,255,0.96)"/>
+            <circle cx="55.5" cy="71" r="1.8" fill="rgba(255,255,255,0.6)"/>
+          </g>
+
+          <!-- BOUCHE — animée (sourire qui pulse) -->
+          <g class="minion-mouth">
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <path d="M 49 89 Q 52 97 55 92 Q 58 97 62 92 Q 65 97 68 89" fill="white" stroke="#DDD" stroke-width="0.8"/>
+            <path d="M 50 92 Q 60 99 70 92" stroke="rgba(0,0,0,0.15)" stroke-width="0.8" fill="none"/>
+          </g>
+
+          <!-- CHEVEUX -->
+          <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+          <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+          <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+          <ellipse cx="60" cy="31" rx="2" ry="6" fill="rgba(255,255,255,0.22)"/>
+          <ellipse cx="46" cy="31" rx="1.4" ry="4" fill="rgba(255,255,255,0.18)" transform="rotate(-22 46 31)"/>
+          <ellipse cx="74" cy="31" rx="1.4" ry="4" fill="rgba(255,255,255,0.18)" transform="rotate(22 74 31)"/>
+
+          <!-- BRAS GAUCHE — animé (salut) -->
+          <g class="minion-arm-left">
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="18" cy="102" rx="5" ry="13" fill="rgba(0,0,0,0.10)" transform="rotate(-15 18 102)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="6" cy="113" rx="6.5" ry="4" fill="rgba(255,255,255,0.45)"/>
+            <path d="M 4 117 Q 8 120 14 118" stroke="rgba(0,0,0,0.18)" stroke-width="0.7" fill="none"/>
+          </g>
+
+          <!-- BRAS DROIT — animé (sway) -->
+          <g class="minion-arm-right">
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="102" cy="102" rx="5" ry="13" fill="rgba(0,0,0,0.10)" transform="rotate(15 102 102)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="114" cy="113" rx="6.5" ry="4" fill="rgba(255,255,255,0.45)"/>
+            <path d="M 106 117 Q 112 120 116 118" stroke="rgba(0,0,0,0.18)" stroke-width="0.7" fill="none"/>
+          </g>
+
+          <!-- JAMBES + CHAUSSURES — animé (bob) -->
+          <g class="minion-legs">
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="40" cy="178" rx="7" ry="3.5" fill="rgba(255,255,255,0.24)"/>
+            <ellipse cx="70" cy="178" rx="7" ry="3.5" fill="rgba(255,255,255,0.24)"/>
+          </g>
+        </svg>
+        <div class="hero-minion__ground"></div>
+      </div>
+
+      <div class="hero-poppy" aria-hidden="true">
+        <svg class="hero-poppy__svg" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="pgSkin" cx="40%" cy="35%" r="70%">
+              <stop offset="0%" stop-color="#FFD9EA"/>
+              <stop offset="55%" stop-color="#F8A5C8"/>
+              <stop offset="100%" stop-color="#C46896"/>
+            </radialGradient>
+            <linearGradient id="pgHair" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%"  stop-color="#FF92C4"/>
+              <stop offset="45%" stop-color="#EC4F9A"/>
+              <stop offset="100%" stop-color="#A82A6E"/>
+            </linearGradient>
+            <linearGradient id="pgDress" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%"  stop-color="#FF6BAB"/>
+              <stop offset="60%" stop-color="#D9347D"/>
+              <stop offset="100%" stop-color="#8E1F58"/>
+            </linearGradient>
+            <radialGradient id="pgEye" cx="38%" cy="30%" r="70%">
+              <stop offset="0%"  stop-color="#A6F0FF"/>
+              <stop offset="50%" stop-color="#33B0DC"/>
+              <stop offset="100%" stop-color="#0A4F78"/>
+            </radialGradient>
+            <radialGradient id="pgFlower" cx="50%" cy="40%" r="60%">
+              <stop offset="0%"  stop-color="#FFFFFF"/>
+              <stop offset="100%" stop-color="#FFD2E6"/>
+            </radialGradient>
+          </defs>
+
+          <!-- CHEVEUX (couche arrière, animée) -->
+          <g class="poppy-hair">
+            <!-- Mèches de fond -->
+            <path d="M 30 110 C 22 90 25 60 35 38 C 40 25 55 18 60 25 C 55 40 50 70 40 105 Z" fill="#B82F73" opacity="0.65"/>
+            <path d="M 100 110 C 108 90 105 60 95 38 C 90 25 75 18 70 25 C 75 40 80 70 90 105 Z" fill="#B82F73" opacity="0.65"/>
+
+            <!-- Tour de cheveux principal (forme flamme) -->
+            <path d="M 65 8
+                     C 50 22 40 48 36 75
+                     C 32 92 30 108 38 118
+                     L 92 118
+                     C 100 108 98 92 94 75
+                     C 90 48 80 22 65 8 Z" fill="url(#pgHair)"/>
+
+            <!-- Mèches sur les côtés -->
+            <path d="M 36 80 C 24 82 18 95 28 105 C 30 95 32 88 36 80 Z" fill="url(#pgHair)"/>
+            <path d="M 94 80 C 106 82 112 95 102 105 C 100 95 98 88 94 80 Z" fill="url(#pgHair)"/>
+
+            <!-- Reflets brillants -->
+            <path d="M 50 25 C 44 50 40 80 44 110" stroke="rgba(255,255,255,0.32)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M 65 14 C 62 42 60 80 63 115" stroke="rgba(255,210,232,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <path d="M 80 25 C 86 50 90 80 86 110" stroke="rgba(255,255,255,0.22)" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+            <!-- Pointes de cheveux qui dépassent en haut -->
+            <path d="M 52 15 Q 56 4 60 16 Z" fill="url(#pgHair)"/>
+            <path d="M 62 8  Q 66 -2 70 10 Z" fill="url(#pgHair)"/>
+            <path d="M 72 14 Q 76 4 80 16 Z" fill="url(#pgHair)"/>
+
+            <!-- Petite fleur secondaire dans les cheveux -->
+            <g transform="translate(45 65)">
+              <circle r="3.5" cx="-3.5" cy="0"  fill="#FFE4F0"/>
+              <circle r="3.5" cx="3.5"  cy="0"  fill="#FFE4F0"/>
+              <circle r="3.5" cx="0"    cy="-3.5" fill="#FFE4F0"/>
+              <circle r="3.5" cx="0"    cy="3.5"  fill="#FFE4F0"/>
+              <circle r="2.2" cx="0"    cy="0"  fill="#FFC937"/>
+            </g>
+
+            <!-- Fleur principale (animée séparément) -->
+            <g class="poppy-flower">
+              <g transform="translate(72 35)">
+                <circle r="6.5" cx="-7" cy="0"   fill="url(#pgFlower)"/>
+                <circle r="6.5" cx="7"  cy="0"   fill="url(#pgFlower)"/>
+                <circle r="6.5" cx="0"  cy="-7"  fill="url(#pgFlower)"/>
+                <circle r="6.5" cx="0"  cy="7"   fill="url(#pgFlower)"/>
+                <circle r="6.5" cx="-5" cy="-5"  fill="url(#pgFlower)" opacity="0.85"/>
+                <circle r="6.5" cx="5"  cy="5"   fill="url(#pgFlower)" opacity="0.85"/>
+                <circle r="4.5" cx="0"  cy="0"   fill="#FFD400"/>
+                <circle r="2"   cx="-1" cy="-1"  fill="#FFEC8B"/>
+              </g>
+            </g>
+          </g>
+
+          <!-- TÊTE -->
+          <ellipse cx="65" cy="120" rx="29" ry="30" fill="url(#pgSkin)"/>
+          <ellipse cx="80" cy="124" rx="9" ry="20" fill="rgba(0,0,0,0.07)"/>
+          <ellipse cx="50" cy="110" rx="8" ry="13" fill="rgba(255,255,255,0.22)"/>
+          <ellipse cx="56" cy="103" rx="6" ry="3" fill="rgba(255,255,255,0.30)"/>
+
+          <!-- OREILLES -->
+          <ellipse cx="36" cy="121" rx="4.5" ry="6.5" fill="url(#pgSkin)"/>
+          <ellipse cx="94" cy="121" rx="4.5" ry="6.5" fill="url(#pgSkin)"/>
+          <ellipse cx="36" cy="121" rx="2"   ry="3.5" fill="rgba(180,80,120,0.4)"/>
+          <ellipse cx="94" cy="121" rx="2"   ry="3.5" fill="rgba(180,80,120,0.4)"/>
+
+          <!-- YEUX (animés clignement) -->
+          <g class="poppy-eye">
+            <!-- Sclera -->
+            <ellipse cx="55" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <ellipse cx="75" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <!-- Iris -->
+            <circle cx="55" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="75" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <!-- Pupille -->
+            <circle cx="55" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="75" cy="120" r="2.6" fill="#0A0A0A"/>
+            <!-- Reflets -->
+            <circle cx="56.6" cy="117" r="1.5" fill="white"/>
+            <circle cx="76.6" cy="117" r="1.5" fill="white"/>
+            <circle cx="53.5" cy="121.5" r="0.7" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="73.5" cy="121.5" r="0.7" fill="rgba(255,255,255,0.7)"/>
+            <!-- Cils gauche -->
+            <path d="M 49 110 Q 47 107 44.5 106" stroke="#3A1830" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+            <path d="M 51.5 108 Q 50.5 105 49.5 103" stroke="#3A1830" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <path d="M 54 107 Q 54 104 53.5 101.5" stroke="#3A1830" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <!-- Cils droit -->
+            <path d="M 76 107 Q 76 104 76.5 101.5" stroke="#3A1830" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <path d="M 78.5 108 Q 79.5 105 80.5 103" stroke="#3A1830" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <path d="M 81 110 Q 83 107 85.5 106" stroke="#3A1830" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+            <!-- Sourcils -->
+            <path d="M 49 102 Q 54 100 60 102" stroke="#8B2055" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M 70 102 Q 76 100 81 102" stroke="#8B2055" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <!-- NEZ -->
+          <ellipse cx="65" cy="129" rx="2" ry="1.5" fill="rgba(180,75,115,0.55)"/>
+          <ellipse cx="64.5" cy="128.5" rx="0.6" ry="0.4" fill="rgba(255,255,255,0.5)"/>
+
+          <!-- JOUES -->
+          <ellipse cx="46" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+          <ellipse cx="84" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+
+          <!-- BOUCHE (animée) -->
+          <g class="poppy-mouth">
+            <path d="M 57 138 Q 65 147 73 138" stroke="#931A4A" stroke-width="2" fill="rgba(220,55,108,0.7)" stroke-linecap="round"/>
+            <path d="M 60 139 Q 65 142.5 70 139" fill="white"/>
+            <path d="M 58 140 Q 65 144 72 140" stroke="rgba(150,20,55,0.4)" stroke-width="0.6" fill="none"/>
+          </g>
+
+          <!-- COU -->
+          <rect x="58" y="148" width="14" height="8" fill="url(#pgSkin)"/>
+
+          <!-- CORPS / ROBE -->
+          <path d="M 38 156
+                   C 30 168 26 188 35 200
+                   C 48 208 82 208 95 200
+                   C 104 188 100 168 92 156
+                   C 82 162 65 162 65 162
+                   C 65 162 48 162 38 156 Z" fill="url(#pgDress)"/>
+          <path d="M 44 162 C 40 175 38 190 44 198 C 50 192 47 178 46 162 Z" fill="rgba(255,255,255,0.22)"/>
+          <path d="M 38 156 Q 65 165 92 156" stroke="rgba(0,0,0,0.18)" stroke-width="1" fill="none"/>
+
+          <!-- Détails fleurs sur la robe -->
+          <g opacity="0.92">
+            <circle cx="55" cy="180" r="3"   fill="#FFD400"/>
+            <circle cx="51" cy="180" r="2.2" fill="#FFE4F0"/>
+            <circle cx="59" cy="180" r="2.2" fill="#FFE4F0"/>
+            <circle cx="55" cy="176" r="2.2" fill="#FFE4F0"/>
+            <circle cx="55" cy="184" r="2.2" fill="#FFE4F0"/>
+
+            <circle cx="78" cy="190" r="2.5" fill="#FFD400"/>
+            <circle cx="75" cy="190" r="1.8" fill="#FFE4F0"/>
+            <circle cx="81" cy="190" r="1.8" fill="#FFE4F0"/>
+            <circle cx="78" cy="187" r="1.8" fill="#FFE4F0"/>
+            <circle cx="78" cy="193" r="1.8" fill="#FFE4F0"/>
+          </g>
+
+          <!-- BRAS GAUCHE -->
+          <g>
+            <ellipse cx="32" cy="168" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(-12 32 168)"/>
+            <ellipse cx="29" cy="170" rx="3" ry="9" fill="rgba(0,0,0,0.07)" transform="rotate(-12 29 170)"/>
+            <circle cx="27" cy="183" r="5" fill="url(#pgSkin)"/>
+            <path d="M 25 184 Q 27 187 30 185" stroke="rgba(0,0,0,0.15)" stroke-width="0.6" fill="none"/>
+          </g>
+
+          <!-- BRAS DROIT — animé (salut) -->
+          <g class="poppy-arm-right">
+            <ellipse cx="100" cy="162" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(18 100 162)"/>
+            <ellipse cx="103" cy="164" rx="3" ry="9" fill="rgba(0,0,0,0.07)" transform="rotate(18 103 164)"/>
+            <circle cx="106" cy="175" r="5" fill="url(#pgSkin)"/>
+            <path d="M 104 176 Q 107 179 109 177" stroke="rgba(0,0,0,0.15)" stroke-width="0.6" fill="none"/>
+          </g>
+
+          <!-- JAMBES + CHAUSSURES -->
+          <ellipse cx="55" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+          <ellipse cx="75" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+          <ellipse cx="55" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+          <ellipse cx="75" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+          <ellipse cx="52" cy="212" rx="4" ry="1.5" fill="rgba(255,255,255,0.30)"/>
+          <ellipse cx="72" cy="212" rx="4" ry="1.5" fill="rgba(255,255,255,0.30)"/>
+        </svg>
+        <div class="hero-poppy__ground"></div>
+      </div>
+      </div><!-- /.hero-characters-duo -->
+    </div>
+
+    <div class="projet-main">
+
+      <!-- ── MINI PERSONNAGES disséminés (≈40% taille originale) ── -->
+      <div class="page-mini" style="top: 75px; left: 24%;">
+        <div class="hero-minion" aria-hidden="true">
+          <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+            <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+            <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+            <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+            <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+            <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+            <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="white"/>
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+            <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+            <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+          </svg>
+          <div class="hero-minion__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini page-mini--alt" style="top: 460px; left: 24%;">
+        <div class="hero-poppy" aria-hidden="true">
+          <svg class="hero-poppy__svg" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 65 8 C 50 22 40 48 36 75 C 32 92 30 108 38 118 L 92 118 C 100 108 98 92 94 75 C 90 48 80 22 65 8 Z" fill="url(#pgHair)"/>
+            <path d="M 65 14 C 62 42 60 80 63 115" stroke="rgba(255,210,232,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <g transform="translate(72 35)">
+              <circle r="6.5" cx="-7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="-7" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="7" fill="url(#pgFlower)"/>
+              <circle r="4.5" cx="0" cy="0" fill="#FFD400"/>
+            </g>
+            <ellipse cx="65" cy="120" rx="29" ry="30" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <ellipse cx="75" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <circle cx="55" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="75" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="55" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="75" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="56.6" cy="117" r="1.5" fill="white"/>
+            <circle cx="76.6" cy="117" r="1.5" fill="white"/>
+            <ellipse cx="46" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <ellipse cx="84" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <path d="M 57 138 Q 65 147 73 138" stroke="#931A4A" stroke-width="2" fill="rgba(220,55,108,0.7)" stroke-linecap="round"/>
+            <path d="M 38 156 C 30 168 26 188 35 200 C 48 208 82 208 95 200 C 104 188 100 168 92 156 C 82 162 65 162 65 162 C 65 162 48 162 38 156 Z" fill="url(#pgDress)"/>
+            <circle cx="65" cy="180" r="3" fill="#FFD400"/>
+            <ellipse cx="32" cy="168" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(-12 32 168)"/>
+            <circle cx="27" cy="183" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="100" cy="162" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(18 100 162)"/>
+            <circle cx="106" cy="175" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="75" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+            <ellipse cx="75" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+          </svg>
+          <div class="hero-poppy__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini" style="top: 800px; right: 32%;">
+        <div class="hero-minion" aria-hidden="true">
+          <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+            <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+            <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+            <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+            <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+            <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+            <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="white"/>
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+            <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+            <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+          </svg>
+          <div class="hero-minion__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini page-mini--alt" style="top: 1290px; left: 38%;">
+        <div class="hero-poppy" aria-hidden="true">
+          <svg class="hero-poppy__svg" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 65 8 C 50 22 40 48 36 75 C 32 92 30 108 38 118 L 92 118 C 100 108 98 92 94 75 C 90 48 80 22 65 8 Z" fill="url(#pgHair)"/>
+            <path d="M 65 14 C 62 42 60 80 63 115" stroke="rgba(255,210,232,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <g transform="translate(72 35)">
+              <circle r="6.5" cx="-7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="-7" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="7" fill="url(#pgFlower)"/>
+              <circle r="4.5" cx="0" cy="0" fill="#FFD400"/>
+            </g>
+            <ellipse cx="65" cy="120" rx="29" ry="30" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <ellipse cx="75" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <circle cx="55" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="75" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="55" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="75" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="56.6" cy="117" r="1.5" fill="white"/>
+            <circle cx="76.6" cy="117" r="1.5" fill="white"/>
+            <ellipse cx="46" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <ellipse cx="84" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <path d="M 57 138 Q 65 147 73 138" stroke="#931A4A" stroke-width="2" fill="rgba(220,55,108,0.7)" stroke-linecap="round"/>
+            <path d="M 38 156 C 30 168 26 188 35 200 C 48 208 82 208 95 200 C 104 188 100 168 92 156 C 82 162 65 162 65 162 C 65 162 48 162 38 156 Z" fill="url(#pgDress)"/>
+            <circle cx="65" cy="180" r="3" fill="#FFD400"/>
+            <ellipse cx="32" cy="168" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(-12 32 168)"/>
+            <circle cx="27" cy="183" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="100" cy="162" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(18 100 162)"/>
+            <circle cx="106" cy="175" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="75" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+            <ellipse cx="75" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+          </svg>
+          <div class="hero-poppy__ground"></div>
+        </div>
+      </div>
+
+      <!-- 4 minis supplémentaires (total: 8) -->
+      <div class="page-mini page-mini--alt" style="top: 8px; right: 30%;">
+        <div class="hero-poppy" aria-hidden="true">
+          <svg class="hero-poppy__svg" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 65 8 C 50 22 40 48 36 75 C 32 92 30 108 38 118 L 92 118 C 100 108 98 92 94 75 C 90 48 80 22 65 8 Z" fill="url(#pgHair)"/>
+            <path d="M 65 14 C 62 42 60 80 63 115" stroke="rgba(255,210,232,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <g transform="translate(72 35)">
+              <circle r="6.5" cx="-7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="-7" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="7" fill="url(#pgFlower)"/>
+              <circle r="4.5" cx="0" cy="0" fill="#FFD400"/>
+            </g>
+            <ellipse cx="65" cy="120" rx="29" ry="30" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <ellipse cx="75" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <circle cx="55" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="75" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="55" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="75" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="56.6" cy="117" r="1.5" fill="white"/>
+            <circle cx="76.6" cy="117" r="1.5" fill="white"/>
+            <ellipse cx="46" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <ellipse cx="84" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <path d="M 57 138 Q 65 147 73 138" stroke="#931A4A" stroke-width="2" fill="rgba(220,55,108,0.7)" stroke-linecap="round"/>
+            <path d="M 38 156 C 30 168 26 188 35 200 C 48 208 82 208 95 200 C 104 188 100 168 92 156 C 82 162 65 162 65 162 C 65 162 48 162 38 156 Z" fill="url(#pgDress)"/>
+            <circle cx="65" cy="180" r="3" fill="#FFD400"/>
+            <ellipse cx="32" cy="168" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(-12 32 168)"/>
+            <circle cx="27" cy="183" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="100" cy="162" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(18 100 162)"/>
+            <circle cx="106" cy="175" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="75" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+            <ellipse cx="75" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+          </svg>
+          <div class="hero-poppy__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini" style="top: 470px; right: 26%;">
+        <div class="hero-minion" aria-hidden="true">
+          <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+            <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+            <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+            <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+            <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+            <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+            <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="white"/>
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+            <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+            <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+          </svg>
+          <div class="hero-minion__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini page-mini--alt" style="top: 1440px; right: 16%;">
+        <div class="hero-poppy" aria-hidden="true">
+          <svg class="hero-poppy__svg" viewBox="0 0 130 220" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 65 8 C 50 22 40 48 36 75 C 32 92 30 108 38 118 L 92 118 C 100 108 98 92 94 75 C 90 48 80 22 65 8 Z" fill="url(#pgHair)"/>
+            <path d="M 65 14 C 62 42 60 80 63 115" stroke="rgba(255,210,232,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <g transform="translate(72 35)">
+              <circle r="6.5" cx="-7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="7" cy="0" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="-7" fill="url(#pgFlower)"/>
+              <circle r="6.5" cx="0" cy="7" fill="url(#pgFlower)"/>
+              <circle r="4.5" cx="0" cy="0" fill="#FFD400"/>
+            </g>
+            <ellipse cx="65" cy="120" rx="29" ry="30" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <ellipse cx="75" cy="118" rx="6.5" ry="8.5" fill="white"/>
+            <circle cx="55" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="75" cy="119" r="5.2" fill="url(#pgEye)"/>
+            <circle cx="55" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="75" cy="120" r="2.6" fill="#0A0A0A"/>
+            <circle cx="56.6" cy="117" r="1.5" fill="white"/>
+            <circle cx="76.6" cy="117" r="1.5" fill="white"/>
+            <ellipse cx="46" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <ellipse cx="84" cy="132" rx="5" ry="3" fill="rgba(232,80,140,0.4)"/>
+            <path d="M 57 138 Q 65 147 73 138" stroke="#931A4A" stroke-width="2" fill="rgba(220,55,108,0.7)" stroke-linecap="round"/>
+            <path d="M 38 156 C 30 168 26 188 35 200 C 48 208 82 208 95 200 C 104 188 100 168 92 156 C 82 162 65 162 65 162 C 65 162 48 162 38 156 Z" fill="url(#pgDress)"/>
+            <circle cx="65" cy="180" r="3" fill="#FFD400"/>
+            <ellipse cx="32" cy="168" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(-12 32 168)"/>
+            <circle cx="27" cy="183" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="100" cy="162" rx="6" ry="14" fill="url(#pgSkin)" transform="rotate(18 100 162)"/>
+            <circle cx="106" cy="175" r="5" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="75" cy="208" rx="6" ry="6" fill="url(#pgSkin)"/>
+            <ellipse cx="55" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+            <ellipse cx="75" cy="213" rx="9" ry="4" fill="#5A1F44"/>
+          </svg>
+          <div class="hero-poppy__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini" style="top: 1670px; left: 50%;">
+        <div class="hero-minion" aria-hidden="true">
+          <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+            <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+            <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+            <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+            <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+            <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+            <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="white"/>
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+            <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+            <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+          </svg>
+          <div class="hero-minion__ground"></div>
+        </div>
+      </div>
+
+      <!-- 2 minis additionnels (corner contexte + bas carrousel candyman) -->
+      <div class="page-mini" style="top: 30px; left: 46%;">
+        <div class="hero-minion" aria-hidden="true">
+          <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+            <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+            <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+            <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+            <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+            <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+            <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="white"/>
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+            <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+            <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+          </svg>
+          <div class="hero-minion__ground"></div>
+        </div>
+      </div>
+
+      <div class="page-mini page-mini--alt" style="top: 1655px; left: 25%;">
+        <div class="hero-minion" aria-hidden="true">
+          <svg class="hero-minion__svg" viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="98" rx="47" ry="62" fill="url(#mgBody)"/>
+            <ellipse cx="36" cy="82" rx="12" ry="34" fill="rgba(255,255,255,0.16)"/>
+            <ellipse cx="85" cy="108" rx="18" ry="50" fill="rgba(0,0,0,0.09)"/>
+            <path d="M 14 112 C 12 155 25 175 60 178 C 95 175 108 155 106 112 C 90 120 60 122 60 122 C 60 122 30 120 14 112 Z" fill="url(#mgOveralls)"/>
+            <rect x="43" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="65" y="62" width="12" height="54" rx="6" fill="#4A90D8"/>
+            <rect x="13" y="58" width="94" height="16" rx="8" fill="#5C5C5C"/>
+            <circle cx="60" cy="66" r="24" fill="url(#mgGoggle)"/>
+            <circle cx="60" cy="66" r="18" fill="#F4F2FA"/>
+            <circle cx="60" cy="66" r="12" fill="url(#mgIris)"/>
+            <circle cx="60" cy="66" r="7" fill="#0A0A0A"/>
+            <circle cx="65.5" cy="60.5" r="3.8" fill="white"/>
+            <path d="M 46 88 Q 60 100 74 88" stroke="#9A7508" stroke-width="2.5" fill="rgba(170,120,0,0.18)" stroke-linecap="round"/>
+            <ellipse cx="60" cy="33" rx="5" ry="14" fill="#1C1C1C"/>
+            <ellipse cx="47" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(-22 47 44)"/>
+            <ellipse cx="73" cy="36" rx="4.5" ry="12" fill="#1C1C1C" transform="rotate(22 73 44)"/>
+            <ellipse cx="15" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(-15 15 100)"/>
+            <ellipse cx="105" cy="100" rx="9" ry="18" fill="url(#mgBody)" transform="rotate(15 105 100)"/>
+            <ellipse cx="8" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <ellipse cx="112" cy="116" rx="10" ry="7" fill="url(#mgGlove)"/>
+            <rect x="36" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <rect x="66" y="170" width="18" height="14" rx="6" fill="#EEB800"/>
+            <ellipse cx="45" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+            <ellipse cx="75" cy="181" rx="15" ry="7.5" fill="#1A1A1A"/>
+          </svg>
+          <div class="hero-minion__ground"></div>
+        </div>
+      </div>
+
+      <!-- CONTEXTE + MES MISSIONS -->
+      <div class="projet-card">
+        <div class="red-row">
+
+          <div class="red-card">
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">Universal France a confié la promotion des Minions 2 et Trolls 3 sur TikTok à The Source, en misant sur le talent de leurs célèbres doubleurs à travers des contenus créatifs.</p>
+          </div>
+
+          <div class="red-card">
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Imaginé et supervisé 2 concepts créatifs avec les voix françaises des différents personnages.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS -->
+        <div class="red-card red-card--results">
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row">
+            <div class="results-item">
+              <span class="results-item__value">TikTok n°<span class="results-item__suffix" style="font-weight:800;font-size:1.25em;">1</span></span>
+              <span class="results-item__label">Le + viral du compte</span>
+              <span class="results-item__label">@universalfr (Minions 2)</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+3.8</span> <span class="results-item__suffix">millions</span></span>
+              <span class="results-item__label">De vues cumulées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+350</span> <span class="results-item__suffix">k</span></span>
+              <span class="results-item__label">De likes cumulés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+9</span> <span class="results-item__suffix">%</span></span>
+              <span class="results-item__label">De taux d'engagement</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MES CONTENUS SUR TIKTOK / REELS / SHORTS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mes contenus sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+          </span>
+        </div>
+
+        <div class="layout-selector" role="group" aria-label="Nombre de colonnes">
+          <button class="layout-btn is-active" data-cols="2" aria-label="2 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="10" height="16" rx="1.5"/><rect x="12" y="0" width="10" height="16" rx="1.5"/></svg>
+          </button>
+          <button class="layout-btn" data-cols="3" aria-label="3 colonnes" disabled title="Indisponible pour ce projet">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="6" height="16" rx="1.5"/><rect x="8" y="0" width="6" height="16" rx="1.5"/><rect x="16" y="0" width="6" height="16" rx="1.5"/></svg>
+          </button>
+          <button class="layout-btn" data-cols="4" aria-label="4 colonnes" disabled title="Indisponible pour ce projet">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="4" height="16" rx="1.5"/><rect x="6" y="0" width="4" height="16" rx="1.5"/><rect x="12" y="0" width="4" height="16" rx="1.5"/><rect x="18" y="0" width="4" height="16" rx="1.5"/></svg>
+          </button>
+        </div>
+
+        <div class="contenus-grid contenus-grid--cols-2" id="contenusGrid">
+
+          <!-- CARD 1 — Minions 2 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/hero-section/minions.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@universalfr/video/7116811650891549957?is_from_webapp=1&sender_device=pc&web_id=7281703021229770272" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">3.2 M</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">275 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <!-- CARD 2 — Trolls 3 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/minions2-trolls/stars-trolls.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@universalfr/video/7278588477480897824?is_from_webapp=1&sender_device=pc&web_id=7281703021229770272" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">650 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">80 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman Marry Me"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span></div>
+              </div>
+            </div>
+          </div>
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    /* ── Layout selector ── */
+    (function () {
+      const grid = document.getElementById('contenusGrid');
+      const btns = document.querySelectorAll('.layout-btn');
+      if (!grid || !btns.length) return;
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled) return;
+          const cols = btn.dataset.cols;
+          btns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          grid.classList.remove('contenus-grid--cols-2', 'contenus-grid--cols-3', 'contenus-grid--cols-4');
+          grid.classList.add('contenus-grid--cols-' + cols);
+          grid.classList.add('layout-changing');
+          setTimeout(() => grid.classList.remove('layout-changing'), 350);
+        });
+      });
+    })();
+  </script>
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

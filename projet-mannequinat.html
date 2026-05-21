@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes collaborations dans le mannequinat — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Poppins:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* ════════════════════════════════════════════════════
+       UNIVERS « ALBUM PHOTO PREMIUM » — ROSE POUDRÉ
+       Palette :
+         Fond           #E5CED1
+         Encadrés       #EDDCDD
+         Bordures       #F3E1DD
+         Bande logos    #E7D6D7
+         Or doux        #C9A66B / #B0894C
+       ════════════════════════════════════════════════════ */
+
+    body {
+      background-color: #E5CED1;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 12% 10%, rgba(255,255,255,0.45) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 88% 90%, rgba(255,255,255,0.35) 0%, transparent 60%),
+        repeating-linear-gradient(118deg, rgba(201,166,107,0.045) 0 2px, transparent 2px 9px),
+        repeating-linear-gradient(28deg,  rgba(255,255,255,0.05) 0 1px, transparent 1px 6px),
+        linear-gradient(180deg, #E9D2D4 0%, #E5CED1 50%, #E0C7CB 100%);
+      background-attachment: fixed;
+    }
+
+    /* ── Veinures dorées discrètes en surimpression ── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(201,166,107,0.06) 0px, transparent 1px),
+        radial-gradient(circle at 75% 60%, rgba(201,166,107,0.05) 0px, transparent 1px),
+        radial-gradient(circle at 45% 80%, rgba(201,166,107,0.05) 0px, transparent 1px);
+      background-size: 220px 220px, 280px 280px, 320px 320px;
+      mix-blend-mode: overlay;
+      opacity: 0.55;
+    }
+
+    /* ── HERO BANNER ── */
+    .projet-hero {
+      min-height: 34vh;
+      height: 34vh;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 50%, rgba(255,255,255,0.18) 0%, transparent 70%),
+        linear-gradient(135deg, #D9BBC0 0%, #C8A2A8 55%, #B8959B 100%);
+      padding: 0 0 0 8%;
+      isolation: isolate;
+      box-shadow: inset 0 -10px 30px rgba(120,80,90,0.18);
+    }
+    .projet-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(118deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 9px),
+        radial-gradient(ellipse 90% 75% at center, transparent 60%, rgba(80,40,50,0.20) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .projet-hero__left {
+      z-index: 4;
+      max-width: 60%;
+      justify-content: flex-start;
+      padding-top: 8px;
+    }
+
+    .projet-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+      text-transform: none;
+      letter-spacing: 0.005em;
+      color: #FFF6F1;
+      text-shadow: 0 2px 14px rgba(80,40,50,0.45), 0 0 30px rgba(201,166,107,0.20);
+      white-space: nowrap;
+      margin-bottom: 14px;
+    }
+    .projet-title::after {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 1px;
+      margin-top: 12px;
+      background: linear-gradient(90deg, transparent, #C9A66B 30%, #C9A66B 70%, transparent);
+    }
+
+    .hero-badges .badge {
+      font-family: 'Inter', sans-serif;
+      font-weight: 642;
+      letter-spacing: 0.16em;
+      background: rgba(243,225,221,0.18);
+      border: 1px solid rgba(243,225,221,0.55);
+      color: #FFF6F1;
+      backdrop-filter: blur(10px) saturate(1.3);
+      -webkit-backdrop-filter: blur(10px) saturate(1.3);
+      box-shadow:
+        0 4px 16px rgba(80,40,50,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.22);
+    }
+
+    /* ── VIGNETTES POLAROID DU HERO ── */
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 14px 30px 14px 20px;
+      margin-right: 0;
+      gap: 14px;
+      z-index: 4;
+      position: relative;
+    }
+    .hero-thumb {
+      height: 165px;
+      width: 130px;
+      object-fit: cover;
+      border-radius: 2px;
+      padding: 8px 8px 28px 8px;
+      background: #E2DBD6;
+      border: 1px solid #DBCBC7;
+      box-shadow:
+        0 16px 32px rgba(80,40,50,0.28),
+        0 4px 10px rgba(80,40,50,0.16),
+        inset 0 0 0 1px rgba(255,255,255,0.54);
+      filter: brightness(1.02) saturate(0.96);
+      transition: transform 0.6s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s ease, filter 0.4s ease;
+    }
+    .hero-thumb:nth-child(1) { transform: rotate(-7deg); z-index: 1; object-position: center 15%; }
+    .hero-thumb:nth-child(2) { transform: rotate(2deg);  z-index: 3; margin: 0 -10px; }
+    .hero-thumb:nth-child(3) { transform: rotate(8deg);  z-index: 2; }
+
+    .projet-hero__thumbs:hover .hero-thumb {
+      filter: blur(1.5px) brightness(0.85) saturate(0.7);
+    }
+    .projet-hero__thumbs .hero-thumb:hover {
+      filter: blur(0) brightness(1.06) saturate(1.05) !important;
+      transform: rotate(0deg) scale(1.1) translateY(-8px) !important;
+      box-shadow:
+        0 30px 56px rgba(80,40,50,0.40),
+        0 0 0 2px #C9A66B;
+      z-index: 10 !important;
+    }
+
+    /* ── MAIN ── */
+    .projet-main {
+      padding-top: 58px;
+      padding-bottom: 100px;
+      gap: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── PROJET CARD wrapper ── */
+    .projet-card {
+      width: 78%;
+      max-width: 1180px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── CARTE SCRAPBOOK ── */
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .red-card {
+      position: relative;
+      background: #EDDCDD;
+      border-radius: 10px;
+      padding: 58px 32px 36px;
+      border: 1px solid #F3E1DD;
+      box-shadow:
+        0 18px 40px rgba(120,80,90,0.18),
+        0 2px 8px rgba(120,80,90,0.10),
+        inset 0 0 0 6px #FBF3EE,
+        inset 0 0 0 7px #F3E1DD;
+      isolation: isolate;
+      overflow: visible;
+    }
+    .red-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(118deg, rgba(201,166,107,0.05) 0 2px, transparent 2px 11px),
+        radial-gradient(ellipse 60% 80% at 30% 20%, rgba(255,255,255,0.55) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* ── PASTILLE LABEL — Option 4 : Tampon rose mat ── */
+    .red-card__label {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      padding: 12px 30px;
+      background: #B8959B;
+      border: 1px solid rgba(80,40,50,0.30);
+      border-radius: 8px;
+      box-shadow:
+        0 4px 14px rgba(120,80,90,0.25),
+        0 1px 3px rgba(80,40,50,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        inset 0 -2px 6px rgba(80,40,50,0.15);
+      font-family: 'Poppins', sans-serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #FFF6F1;
+      text-shadow: 0 1px 3px rgba(80,40,50,0.40);
+      white-space: nowrap;
+      margin: 0;
+    }
+    .red-card__text {
+      position: relative;
+      z-index: 1;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: #4D2C36;
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__list {
+      position: relative;
+      z-index: 1;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.85;
+      color: #4D2C36;
+      text-align: center;
+    }
+    .red-card__list li + li { margin-top: 18px; }
+    /* Centrage vertical de la liste Mes missions dans sa carte */
+    .red-row .red-card:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .red-card__list li::before {
+      content: "✦  ";
+      color: #C9A66B;
+      font-weight: 700;
+    }
+    .red-card__text strong,
+    .red-card__list strong {
+      font-weight: 700;
+      color: #5A2E38;
+    }
+
+    /* ── CARTE RÉSULTATS — Variante A ── */
+    .red-card--results {
+      width: 100%;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 36px 36px 30px;
+    }
+    .results-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 33px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+      position: relative;
+      z-index: 1;
+    }
+    .results-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 146px;
+    }
+    .results-item__value {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 3.47rem;
+      line-height: 1;
+      color: #6B3A45;
+      display: flex;
+      align-items: baseline;
+      letter-spacing: -0.02em;
+      -webkit-text-stroke: 0.95px currentColor;
+    }
+    .results-item__number { color: #B0894C; }
+    .results-item__suffix { font-size: 0.7em; color: #B0894C; margin-left: 2px; }
+    .results-item__label {
+      margin-top: 9px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.86rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8B5564;
+      text-align: center;
+      -webkit-text-stroke: 0.3px currentColor;
+    }
+    /* Atténuation du gras sur les mots de support (laisse les mots-clés en gras actuel) */
+    .results-item__label .rl-soft {
+      font-weight: 400;
+      -webkit-text-stroke: 0;
+    }
+    .results-divider {
+      width: 1px;
+      height: 55px;
+      background: linear-gradient(180deg, transparent, #C9A66B, transparent);
+    }
+    .results-note {
+      position: relative;
+      z-index: 1;
+      margin: 22px auto 0;
+      max-width: 651px;
+      padding-top: 17px;
+      border-top: 1px dashed rgba(201,166,107,0.55);
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.3rem;
+      color: #6B3A45;
+      line-height: 1.4;
+      letter-spacing: 0.01em;
+    }
+    .results-note span {
+      color: #C9A66B;
+      margin: 0 14px;
+      font-size: 0.85em;
+    }
+    /* Desktop : on garde la phrase originale ; le variant mobile reste masqué */
+    .results-note .results-note__desktop { color: inherit; margin: 0; font-size: inherit; }
+    .results-note .results-note__mobile { display: none; }
+
+    /* ── SECTION LOGOS — titre + bande ── */
+    .logos-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── TITRE BANDE LOGOS ── */
+    .logos-band-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 570;
+      font-style: italic;
+      font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+      color: #60343E;
+      letter-spacing: 0.01em;
+      margin: 0 0 28px 0;
+    }
+
+    /* ── BANDE LOGOS — Option 3 : Frise minimaliste ── */
+    .logos-band {
+      width: 82%;
+      max-width: 1240px;
+      padding: 36px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .logos-band::before,
+    .logos-band::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,166,107,0.55) 25%, rgba(201,166,107,0.55) 75%, transparent);
+    }
+    .logos-band::before { top: 0; }
+    .logos-band::after  { bottom: 0; }
+    .logos-band__cell {
+      flex: 1;
+      min-width: 150px;
+      min-height: 72px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    /* Trait doré vertical à GAUCHE et à DROITE de chaque cellule.
+       Aux frontières internes, le ::after de la cellule N et le ::before de
+       la cellule N+1 se superposent visuellement → un seul trait visible. */
+    .logos-band__cell::before,
+    .logos-band__cell::after {
+      content: "";
+      position: absolute;
+      top: 18%;
+      bottom: 18%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(201,166,107,0.45) 30%, rgba(201,166,107,0.45) 70%, transparent);
+    }
+    .logos-band__cell::before { left: 0; }
+    .logos-band__cell::after { right: 0; }
+    .logos-band__cell img {
+      height: 44px;
+      max-width: 150px;
+      object-fit: contain;
+      filter: brightness(0.18) sepia(0.06);
+      opacity: 0.88;
+      transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+    /* Équilibrage visuel par logo : compenser les ratios différents */
+    .logos-band__cell:nth-child(1) img,
+    .logos-band__cell:nth-child(2) img { height: 53px; max-width: 180px; }  /* Carhartt + Ralph Lauren +20% (44→53) */
+    .logos-band__cell:nth-child(3) img { height: 36px; max-width: 105px; }  /* Lacoste -5% (38→36, 110→105) */
+    .logos-band__cell:nth-child(4) img { height: 50px; max-width: 175px; } /* Le Tanneur — compense le « 1898 » */
+    .logos-band__cell:nth-child(5) img { height: 46px; }                    /* Vilebrequin — wordmark fin */
+    .logos-band__cell:nth-child(6) img { height: 36px; max-width: 151px; }  /* Jungles Jungles cumul -24% puis +10% (44→33→36, 180→137→151) */
+    .logos-band__cell img:hover {
+      filter: brightness(0.05) sepia(0.4) saturate(1.3);
+      opacity: 1;
+      transform: scale(1.06);
+    }
+
+    /* ── SECTION ALBUM ── */
+    .album-section {
+      width: 82%;
+      max-width: 1240px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+    .album-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 570;
+      font-style: italic;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      color: #60343E;
+      letter-spacing: 0.01em;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .album-title__underline {
+      display: block;
+      width: clamp(180px, 22vw, 260px);
+      height: auto;
+      color: #C9A66B;
+      opacity: 0.85;
+    }
+    /* Sous-titre par section de marque */
+    .album-brand__title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 525;
+      font-style: italic;
+      /* +17% : 1.4/2vw/1.8 → 1.638/2.34vw/2.106 */
+      font-size: clamp(1.638rem, 2.34vw, 2.106rem);
+      color: #60343E;
+      letter-spacing: 0.01em;
+      margin: 0 0 32px 0;
+      position: relative;
+      z-index: 1;
+    }
+    /* Étoile dorée discrète encadrant le titre (✦ — desktop + mobile) */
+    .album-brand__title-star {
+      display: inline-block;
+      color: #C9A66B;
+      font-size: 0.62em;
+      margin: 0 0.55em;
+      opacity: 0.78;
+      vertical-align: 0.18em;
+      font-style: normal;
+    }
+
+    /* ── BLOC MARQUE ── */
+    .album-brand {
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 15%, rgba(255,255,255,0.5) 0%, transparent 65%),
+        #EDDCDD;
+      border: 1px solid #F3E1DD;
+      border-radius: 12px;
+      padding: 40px 36px 50px;
+      box-shadow:
+        0 18px 40px rgba(120,80,90,0.16),
+        inset 0 0 0 6px #FBF3EE,
+        inset 0 0 0 7px #F3E1DD;
+    }
+    .album-brand::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(118deg, rgba(201,166,107,0.04) 0 2px, transparent 2px 11px);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    /* En-tête de chaque marque */
+    .album-brand__header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .album-brand__header::before,
+    .album-brand__header::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A66B, transparent);
+      max-width: 200px;
+    }
+    /* Header en 3 colonnes (1 + 2) pour la section Carhartt + Lacoste */
+    .album-brand__header-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 38px 24px;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+    /* Quand un header-row suit une grille (rangée intermédiaire), on aère */
+    .album-grid + .album-brand__header-row {
+      margin-top: 40px;
+    }
+    /* Idem entre 2 grilles consécutives (section sans logos intermédiaires) */
+    .album-grid + .album-grid {
+      margin-top: 40px;
+    }
+    .album-brand__sub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+    }
+    .album-brand__sub::before,
+    .album-brand__sub::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A66B, transparent);
+      max-width: 80px;
+    }
+    .album-brand__sub--span2 { grid-column: span 2; }
+    .album-brand__sub--span2::before,
+    .album-brand__sub--span2::after { max-width: 200px; }
+    .album-brand__logo {
+      height: 38px;
+      max-width: 180px;
+      object-fit: contain;
+      filter: brightness(0.12);
+    }
+    /* 2ᵉ rangée logos campagnes : Vilebrequin + Le Tanneur agrandis (+25% puis +7%) pour s'aligner sur Jungles Jungles */
+    .album-grid + .album-brand__header-row .album-brand__sub:nth-child(1) .album-brand__logo,
+    .album-grid + .album-brand__header-row .album-brand__sub:nth-child(2) .album-brand__logo {
+      height: 51px;
+      max-width: 241px;
+    }
+    /* Jungles Jungles (3ᵉ slot) : -7% pour rééquilibrage visuel */
+    .album-grid + .album-brand__header-row .album-brand__sub:nth-child(3) .album-brand__logo {
+      height: 35px;
+      max-width: 167px;
+    }
+    .album-brand__date {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: #8B5564;
+      transform: rotate(-3deg);
+    }
+
+    /* ── GRILLE POLAROIDS ── */
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 38px 24px;
+      justify-items: center;
+      padding: 12px 0;
+      position: relative;
+      z-index: 1;
+    }
+    .polaroid {
+      position: relative;
+      background: #FBF3EE;
+      padding: 14px 14px 48px 14px;
+      border: 1px solid #F3E1DD;
+      box-shadow:
+        0 16px 32px rgba(120,80,90,0.22),
+        0 3px 8px rgba(120,80,90,0.14),
+        inset 0 0 0 1px rgba(255,255,255,0.6);
+      transition: transform 0.45s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s ease, z-index 0.01s linear;
+      max-width: 240px;
+      width: 100%;
+      cursor: pointer;
+    }
+    .polaroid:nth-child(4n+1) { transform: rotate(-3deg); }
+    .polaroid:nth-child(4n+2) { transform: rotate(2deg); }
+    .polaroid:nth-child(4n+3) { transform: rotate(-1.5deg); }
+    .polaroid:nth-child(4n+4) { transform: rotate(3.5deg); }
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.06) translateY(-6px);
+      z-index: 5;
+      box-shadow:
+        0 28px 48px rgba(120,80,90,0.32),
+        0 0 0 2px #C9A66B,
+        0 4px 12px rgba(201,166,107,0.20);
+    }
+    .polaroid img,
+    .polaroid video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 1px;
+      filter: brightness(0.99) saturate(0.96);
+    }
+    /* Variante : image / vidéo affichée en entier (pas de crop) */
+    .polaroid--full img,
+    .polaroid--full video {
+      object-fit: contain;
+      background: #FBF3EE;
+    }
+
+    /* ── VIDÉO POLAROID — contrôles personnalisés ── */
+    .polaroid--video { position: relative; }
+    .polaroid__media {
+      position: relative;
+      line-height: 0;
+    }
+    .polaroid__btn {
+      position: absolute;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5A2E38;
+      transition: transform 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+      z-index: 3;
+    }
+    .polaroid__btn:hover { transform: scale(1.08); }
+    .polaroid__btn svg { width: 56%; height: 56%; }
+    .polaroid__play {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,246,241,0.85);
+      box-shadow:
+        0 4px 12px rgba(80,40,50,0.30),
+        inset 0 0 0 1px rgba(201,166,107,0.55);
+      backdrop-filter: blur(6px);
+    }
+    .polaroid__play:hover {
+      background: rgba(255,246,241,0.95);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .polaroid--video.is-playing .polaroid__play {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .polaroid--video.is-playing:hover .polaroid__play {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .polaroid--video .icon-play { display: block; margin-left: 4px; }
+    .polaroid--video .icon-pause { display: none; }
+    .polaroid--video.is-playing .icon-play { display: none; }
+    .polaroid--video.is-playing:hover .icon-play { display: none; }
+    .polaroid--video.is-playing:hover .icon-pause { display: block; margin-left: 0; }
+    .polaroid__sound {
+      bottom: 60px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,246,241,0.85);
+      box-shadow:
+        0 4px 10px rgba(80,40,50,0.25),
+        inset 0 0 0 1px rgba(201,166,107,0.45);
+      backdrop-filter: blur(6px);
+    }
+    .polaroid__sound .icon-sound-on { display: none; }
+    .polaroid__sound .icon-sound-off { display: block; }
+    .polaroid--video.has-sound .polaroid__sound .icon-sound-on { display: block; }
+    .polaroid--video.has-sound .polaroid__sound .icon-sound-off { display: none; }
+    .polaroid__caption {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Caveat', cursive;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #6B3A45;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+    }
+    /* Washi tape sur quelques polaroids */
+    .polaroid--tape::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-4deg);
+      width: 70px;
+      height: 22px;
+      background:
+        linear-gradient(135deg, rgba(229,200,150,0.8) 0%, rgba(201,166,107,0.7) 100%);
+      box-shadow: 0 2px 4px rgba(120,80,40,0.25);
+      border-left: 1px dashed rgba(255,255,255,0.5);
+      border-right: 1px dashed rgba(255,255,255,0.5);
+      z-index: 3;
+    }
+    .polaroid--tape-corner::after {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      width: 40px;
+      height: 16px;
+      background: linear-gradient(135deg, rgba(243,225,221,0.85) 0%, rgba(229,200,150,0.65) 100%);
+      transform: rotate(35deg);
+      box-shadow: 0 1px 3px rgba(120,80,40,0.20);
+      z-index: 3;
+    }
+
+    /* ── SÉPARATEUR ORNEMENTAL ── */
+    .section-separator {
+      width: 60%;
+      max-width: 380px;
+      margin: 6px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .section-separator__line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C9A66B 30%, #C9A66B 70%, transparent);
+    }
+    .section-separator__diamond {
+      width: 8px;
+      height: 8px;
+      background: #C9A66B;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(201,166,107,0.5);
+    }
+
+    /* ── BOUTON RETOUR ── */
+    .projet-back {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B3A45;
+      background: rgba(251,243,238,0.6);
+      border: 1px solid #C9A66B;
+      border-radius: 999px;
+      padding: 14px 32px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+    .projet-back:hover {
+      background: #C9A66B;
+      color: #FBF3EE;
+      transform: translateY(-2px);
+    }
+
+    /* ── HEADER OVERRIDE (badges en clair sur fond rosé sombre) ── */
+    body.header-dark .header-pill { color: inherit; }
+
+    /* ── HEADER OVERRIDE — éléments en noir (page rosé poudré) ── */
+    body.header-dark .header-logo,
+    body.header-dark .nav-link,
+    body.header-dark .social-link { color: #000; }
+    body.header-dark .nav-link.is-active {
+      background: rgba(0,0,0,0.10);
+      color: #000;
+      border: 1px solid rgba(0,0,0,0.25);
+    }
+    body.header-dark .nav-link:not(.is-active):hover {
+      background: rgba(0,0,0,0.06);
+      color: #000;
+    }
+    body.header-dark .social-link:hover {
+      background: rgba(0,0,0,0.08);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .projet-hero { min-height: 30vh; height: 30vh; padding: 0 4% 0; }
+      .hero-thumb { height: 145px; width: 115px; }
+      .projet-card, .logos-band, .album-section { width: 90%; }
+    }
+    @media (max-width: 850px) {
+      .projet-hero {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        padding: 60px 5% 32px;
+        align-items: flex-start;
+        gap: 24px;
+      }
+      .projet-hero__left { max-width: 100%; }
+      .projet-title { white-space: normal; font-size: 1.6rem; }
+      .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0; }
+      .red-row { grid-template-columns: 1fr; gap: 20px; }
+      .logos-band { gap: 20px; padding: 22px 24px; }
+      .logos-band img { height: 30px; max-width: 110px; }
+      /* Mobile : mêmes proportions desktop répercutées */
+      .logos-band__cell:nth-child(1) img,
+      .logos-band__cell:nth-child(2) img { height: 36px; max-width: 132px; } /* Carhartt + Ralph Lauren +20% */
+      .logos-band__cell:nth-child(3) img { height: 29px; max-width: 105px; } /* Lacoste -5% */
+      .logos-band__cell:nth-child(6) img { height: 25px; max-width: 92px; }  /* Jungles cumul -24% puis +10% */
+      .album-brand { padding: 28px 18px 36px; }
+      .album-brand__header { flex-wrap: wrap; gap: 14px; }
+      .results-row { gap: 18px; }
+      .results-divider { display: none; }
+    }
+    @media (max-width: 520px) {
+      .hero-thumb { height: 130px; width: 100px; }
+      .projet-title { font-size: 1.4rem; }
+      .album-grid { gap: 32px 16px; }
+    }
+
+    /* ─── RESPONSIVE MOBILE ≤480px (skill responsive-mobile-portfolio) ─── */
+    @media (max-width: 480px) {
+      /* ── HERO : titre → badges → polaroïdes, alignés verticalement ── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        /* padding latéral 12 (au lieu de 16) pour laisser respirer le titre +40% */
+        padding: 70px 12px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        /* +5% cumul puis +9% = +14.45% sur la baseline 1-ligne-fit originale :
+           18.9/5.67vw/24.57 → 21.64/6.486vw/28.12.
+           Vérifié canvas @390 : 25.30px → texte 366px dans 375px hero usable.
+           Marge ~9px à 390vp ✓ ; tight à 360vp (~2px overflow) ;
+           overflow ~17px à 320vp (iPhone SE) — accepté. */
+        font-size: clamp(21.64px, 6.486vw, 28.12px) !important;
+        line-height: 1.15 !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .projet-title::after { display: none !important; }
+
+      .hero-badges {
+        order: 2 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge {
+        /* -10% : 8.5 → 7.65 ; padding 5/8 → 4.5/7.2 */
+        font-size: 7.65px !important;
+        padding: 4.5px 7px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* Polaroïdes : conservées, situées au plus bas du hero, centrées */
+      .projet-hero__thumbs {
+        order: 3 !important;
+        width: 100% !important;
+        justify-content: center !important;
+        align-items: flex-end !important;
+        padding: 0 !important;
+        margin: 4px 0 0 0 !important;
+        gap: 8px !important;
+        position: relative !important;
+        z-index: 4 !important;
+      }
+      .projet-hero__thumbs > picture {
+        display: block !important;
+        flex: 0 0 80px !important;
+        width: 80px !important;
+      }
+      .projet-hero__thumbs picture .hero-thumb { transform: none !important; }
+      .hero-thumb {
+        height: 105px !important;
+        width: 80px !important;
+        padding: 4px 4px 14px 4px !important;
+        max-width: 80px !important;
+      }
+      /* Rotations + overlap appliqués aux flex items (picture ou img) */
+      .projet-hero__thumbs > *:nth-child(1) { transform: rotate(-7deg) !important; z-index: 1 !important; }
+      .projet-hero__thumbs > *:nth-child(2) { transform: rotate(2deg) !important;  z-index: 3 !important; margin: 0 -6px !important; }
+      .projet-hero__thumbs > *:nth-child(3) { transform: rotate(8deg) !important;  z-index: 2 !important; }
+
+      /* ── MAIN — espacement uniforme hero↔contexte ET contexte↔missions ── */
+      .projet-main { padding-top: 44px !important; }
+
+      /* ── CONTEXTE + MES MISSIONS ── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row { gap: 44px !important; }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ── RÉSULTATS CLÉS (2 items, côte à côte) ── */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      .red-card--results::before { display: none !important; }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+
+      /* Mini-cartes — palette desktop : rose poudré + or + cadre crème
+         + égalisation hauteur (height:100% remplit la grid row) */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        height: 100% !important;
+        background:
+          radial-gradient(ellipse 75% 60% at 30% 20%, rgba(255,255,255,0.5) 0%, transparent 65%),
+          linear-gradient(135deg, #EDDCDD 0%, #E5CED1 55%, #D9BBC0 100%) !important;
+        border: 1.5px solid rgba(201,166,107,0.45) !important;
+        border-radius: 14px !important;
+        padding: 18px 10px !important;
+        justify-content: center !important;
+        min-height: 102px !important;
+        box-shadow:
+          inset 0 0 0 3px rgba(251,243,238,0.55),
+          inset 0 0 0 4px rgba(243,225,221,0.5),
+          0 10px 22px rgba(120,80,90,0.18) !important;
+      }
+      .red-card--results .results-item__value {
+        /* +5% supplémentaire : 2.16/8.62vw/2.74 → 2.268/9.051vw/2.877 */
+        font-size: clamp(2.268rem, 9.051vw, 2.877rem) !important;
+      }
+      .red-card--results .results-item__label {
+        margin-top: 7px !important;
+        /* +10% : 0.6 → 0.66 */
+        font-size: 0.66rem !important;
+        letter-spacing: 0.14em !important;
+        line-height: 1.35 !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+      }
+
+      /* Note italique sous les résultats — encapsulée (capsule rose poudré + or)
+         block + 100% width = capsule pleine largeur ; sinon inline-block s'ajuste
+         à la ligne la plus large (= wrap auto) et empêche la ligne 1 de tenir.
+         padding latéral 32px pour laisser la place aux ✦ en absolu (vertical-center) */
+      .results-note {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+        margin: 18px auto 0 !important;
+        padding: 10px 32px !important;
+        background:
+          radial-gradient(ellipse 75% 60% at 30% 20%, rgba(255,255,255,0.55) 0%, transparent 65%),
+          linear-gradient(135deg, #EDDCDD 0%, #E5CED1 100%) !important;
+        border: 1.5px solid rgba(201,166,107,0.45) !important;
+        border-top: 1.5px solid rgba(201,166,107,0.45) !important; /* override le dashed top desktop */
+        border-radius: 14px !important;
+        box-shadow:
+          inset 0 0 0 3px rgba(251,243,238,0.55),
+          0 6px 14px rgba(120,80,90,0.18) !important;
+        max-width: 100% !important;
+        /* -13% supplémentaire : 0.871rem → 0.758rem (cumul -29% depuis 1.066rem) */
+        font-size: 0.758rem !important;
+        line-height: 1.35 !important;
+      }
+      .results-note span { margin: 0 6px !important; }
+      /* ✦ flottants en absolu (vertical-center) — ne déplacent plus la ligne 1 */
+      .results-note > span[aria-hidden="true"] {
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+      }
+      .results-note > span[aria-hidden="true"]:first-of-type { left: 10px !important; }
+      .results-note > span[aria-hidden="true"]:last-of-type { right: 10px !important; }
+      /* Mobile : on bascule sur la variante 2 lignes UPPERCASE */
+      .results-note .results-note__desktop { display: none !important; }
+      .results-note .results-note__mobile {
+        display: inline !important;
+        font-size: inherit !important;
+        color: inherit !important;
+        margin: 0 !important;
+        letter-spacing: 0.02em !important;
+      }
+
+      /* Titre album : forcer 1 ligne en mobile.
+         À 390vp section width = 338px ; à 1.95rem (31.2px), texte ≈ 331px (7px margin).
+         À 320vp section width = 288px ; à 8vw = 25.6px, texte ≈ 272px (16px margin). */
+      .album-title {
+        font-size: clamp(1.6rem, 8vw, 1.95rem) !important;
+      }
+      .album-title > span {
+        white-space: nowrap !important;
+      }
+
+      /* ─── ALBUM : strip logo (2 traits dorés + logo marque) au-dessus
+             des 4 polaroïdes cibles (Carhartt / Lacoste Summer /
+             Vilebrequin / Le Tanneur) — CSS-only via pseudos ─── */
+
+      /* Espace réservé au-dessus de chaque polaroïde cible pour accueillir le strip
+         (Carhartt / Lacoste Summer / Vilebrequin / Le Tanneur / Jungles Jungles) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(2) > .polaroid:nth-child(1),
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(2) > .polaroid:nth-child(2),
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(1),
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(2),
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(3) {
+        margin-top: 62px !important;
+      }
+
+      /* Propriétés communes des 5 strips (Carhartt+Vilebrequin+Jungles via ::after,
+         Lacoste Summer+Le Tanneur via ::before) ; box élargie pour accueillir
+         les logos Vilebrequin/Le Tanneur cumul +32% +17% = 37px de haut */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(2) > .polaroid:nth-child(1)::after,
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(1)::after,
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(3)::after,
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(2) > .polaroid:nth-child(2)::before,
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(2)::before {
+        content: '' !important;
+        position: absolute !important;
+        top: -56px !important;
+        left: -4px !important;
+        right: -4px !important;
+        height: 46px !important;
+        pointer-events: none !important;
+        background-position: center center, center center !important;
+        background-size: auto 24px, 100% 1.5px !important;
+        background-repeat: no-repeat, no-repeat !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        transform: none !important;
+        z-index: 2 !important;
+        width: auto !important;
+      }
+
+      /* Carhartt — ::after (+25% : 24px → 30px ; gradient avec milieu
+         transparent élargi 26%-74% pour que le logo (75px de large)
+         ne touche pas les traits dorés latéraux — marge ~26px chaque côté) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(2) > .polaroid:nth-child(1)::after {
+        background-image:
+          url('assets/mannequinat/logos/logo-carhartt.png'),
+          linear-gradient(90deg,
+            transparent 0%,
+            #C9A66B 4%, #C9A66B 22%,
+            transparent 26%, transparent 74%,
+            #C9A66B 78%, #C9A66B 96%,
+            transparent 100%) !important;
+        background-size: auto 30px, 100% 1.5px !important;
+      }
+      /* Lacoste Summer — ::before (+25% : 24px → 30px) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(2) > .polaroid:nth-child(2)::before {
+        background-image:
+          url('assets/mannequinat/logos/logo-lacoste.png'),
+          linear-gradient(90deg,
+            transparent 0%,
+            #C9A66B 4%, #C9A66B 32%,
+            transparent 36%, transparent 64%,
+            #C9A66B 68%, #C9A66B 96%,
+            transparent 100%) !important;
+        background-size: auto 30px, 100% 1.5px !important;
+      }
+      /* Vilebrequin — ::after (cumul +32% puis +17% : 24px → 37px ;
+         gradient avec milieu transparent élargi (26%-74%) pour que le logo
+         plus large ne touche pas les traits dorés latéraux) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(1)::after {
+        background-image:
+          url('assets/mannequinat/logos/logo-vilebrequin.png'),
+          linear-gradient(90deg,
+            transparent 0%,
+            #C9A66B 4%, #C9A66B 22%,
+            transparent 26%, transparent 74%,
+            #C9A66B 78%, #C9A66B 96%,
+            transparent 100%) !important;
+        background-size: auto 37px, 100% 1.5px !important;
+      }
+      /* Le Tanneur — ::before (cumul +32% puis +17% : 24px → 37px ;
+         même gradient élargi que Vilebrequin) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(2)::before {
+        background-image:
+          url('assets/mannequinat/logos/logo-le-tanneur.png'),
+          linear-gradient(90deg,
+            transparent 0%,
+            #C9A66B 4%, #C9A66B 22%,
+            transparent 26%, transparent 74%,
+            #C9A66B 78%, #C9A66B 96%,
+            transparent 100%) !important;
+        background-size: auto 37px, 100% 1.5px !important;
+      }
+      /* Jungles Jungles — ::after (logo très large 9.75:1 → 12px = 117px
+         de large ; zone transparente 26%-74% (~127px sur strip 264px) →
+         marge ~5px de chaque côté avec les traits dorés latéraux) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) > .polaroid:nth-child(3)::after {
+        background-image:
+          url('assets/mannequinat/logos/jungles-logo.webp'),
+          linear-gradient(90deg,
+            transparent 0%,
+            #C9A66B 4%, #C9A66B 22%,
+            transparent 26%, transparent 74%,
+            #C9A66B 78%, #C9A66B 96%,
+            transparent 100%) !important;
+        background-size: auto 12px, 100% 1.5px !important;
+      }
+
+      /* ─── Section Campagnes publicitaires : nettoyage des headers de marque ─── */
+      /* En mobile, les 2 header-rows de la 1ʳᵉ section sont entièrement masqués :
+         les logos de marque vivent uniquement sur les strips au-dessus de chaque polaroïde.
+         NB : :nth-of-type compte parmi les <div> frères (h3 / row1 / grid1 / row2 / grid2). */
+      .album-section .album-brand:nth-of-type(1) > .album-brand__header-row:nth-of-type(1),
+      .album-section .album-brand:nth-of-type(1) > .album-brand__header-row:nth-of-type(3) {
+        display: none !important;
+      }
+      /* Compense l'espacement vertical perdu entre les 2 grilles (header-row masqué) */
+      .album-section .album-brand:nth-of-type(1) > .album-grid:nth-of-type(4) {
+        margin-top: 56px !important;
+      }
+    }
+  </style>
+</head>
+<body class="header-dark" data-page="mannequinat">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="mannequinat">
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-yop.html" class="hms-drawer__card" data-project="yop">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-yop.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="projet-hero">
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Mes collaborations dans le mannequinat</h1>
+        <div class="hero-badges">
+          <span class="badge">8 agences</span>
+          <span class="badge">Mannequinat</span>
+          <span class="badge">2024 — 2026</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/mannequinat/photo-geo-2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/mannequinat/photo-geo-2.jpeg" alt="Shooting mode 1"></picture>
+        <picture><source srcset="assets/mannequinat/geo-saint-laurent.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/mannequinat/geo-saint-laurent.jpeg" alt="Shooting Saint Laurent"></picture>
+        <img decoding="async" class="hero-thumb" src="assets/mannequinat/geooo-phtoo.jpeg" alt="Shooting éditorial">
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <!-- BLOC CONTEXTE / MISSIONS / RÉSULTATS -->
+      <div class="projet-card">
+
+        <div class="red-row">
+          <div class="red-card">
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">
+              Durant 2 belles années, j'ai eu la chance d'être <strong>mannequin photo</strong>, <strong>cabine</strong>, <strong>publicitaire</strong> pour de nombreuses marques d'univers différents. (mode, food, entertainment)
+            </p>
+            <p class="red-card__text" style="margin-top:16px;">
+              J'avais à cœur de participer et de collaborer à des projets vraiment intéressants et à fort impact.
+            </p>
+          </div>
+
+          <div class="red-card">
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Incarnation en tant que mannequin de <strong>briefs créatifs</strong> et <strong>publicitaires</strong>.</li>
+              <li>Travailler en coordination avec les <strong>équipes de production</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="red-card red-card--results">
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row">
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__suffix">+</span><span class="results-item__number">20</span></span>
+              <span class="results-item__label"><span class="rl-soft">marques accompagnées<br>en </span>mannequin cabine</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__suffix">+</span><span class="results-item__number">12</span></span>
+              <span class="results-item__label">campagnes publicitaires<br><span class="rl-soft">réalisées</span></span>
+            </div>
+          </div>
+          <p class="results-note">
+            <span aria-hidden="true">✦</span>
+            <span class="results-note__desktop">Compréhension renforcée de l'univers du casting publicitaire</span>
+            <span class="results-note__mobile">COMPRÉHENSION RENFORCÉE DE<br>L'UNIVERS DU CASTING PUBLICITAIRE</span>
+            <span aria-hidden="true">✦</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- BLOC LOGOS (titre + bande regroupés pour un gap interne propre) -->
+      <section class="logos-section">
+        <h2 class="logos-band-title">Elles m'ont fait confiance</h2>
+        <div class="logos-band">
+          <div class="logos-band__cell"><img decoding="async" loading="lazy" src="assets/mannequinat/logos/logo-carhartt.png" alt="Carhartt"></div>
+          <div class="logos-band__cell"><img decoding="async" loading="lazy" src="assets/mannequinat/logos/logo-ralph-lauren.png" alt="Ralph Lauren"></div>
+          <div class="logos-band__cell"><img decoding="async" loading="lazy" src="assets/mannequinat/logos/logo-lacoste.png" alt="Lacoste"></div>
+          <div class="logos-band__cell"><img decoding="async" loading="lazy" src="assets/mannequinat/logos/logo-le-tanneur.png" alt="Le Tanneur"></div>
+          <div class="logos-band__cell"><img decoding="async" loading="lazy" src="assets/mannequinat/logos/logo-vilebrequin.png" alt="Vilebrequin"></div>
+          <div class="logos-band__cell"><img decoding="async" loading="lazy" src="assets/mannequinat/logos/jungles-logo.webp" alt="Jungles"></div>
+        </div>
+      </section>
+
+      <!-- ALBUM PHOTO -->
+      <div class="album-section">
+
+        <h2 class="album-title">
+          <span>Mon album de collaborations</span>
+          <svg class="album-title__underline" viewBox="0 0 260 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 11 C 40 4, 80 16, 130 9 S 220 4, 256 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+        </h2>
+
+        <!-- Carhartt + Lacoste (header split) -->
+        <div class="album-brand">
+          <h3 class="album-brand__title"><span class="album-brand__title-star" aria-hidden="true">✦</span>Campagnes publicitaires<span class="album-brand__title-star" aria-hidden="true">✦</span></h3>
+          <div class="album-brand__header-row">
+            <div class="album-brand__sub">
+              <img decoding="async" loading="lazy" class="album-brand__logo" src="assets/mannequinat/logos/logo-carhartt.png" alt="Carhartt">
+            </div>
+            <div class="album-brand__sub album-brand__sub--span2">
+              <img decoding="async" loading="lazy" class="album-brand__logo" src="assets/mannequinat/logos/logo-lacoste.png" alt="Lacoste">
+            </div>
+          </div>
+          <div class="album-grid">
+            <div class="polaroid polaroid--full polaroid--tape">
+              <img loading="lazy" decoding="async" src="assets/mannequinat/post-cahartt.webp" alt="Carhartt post" loading="lazy">
+              <span class="polaroid__caption">campagne Carhartt</span>
+            </div>
+            <div class="polaroid polaroid--full">
+              <img loading="lazy" decoding="async" src="assets/mannequinat/post-lacoste.webp" alt="Lacoste post" loading="lazy">
+              <span class="polaroid__caption">Summer campaign — Lacoste</span>
+            </div>
+            <div class="polaroid polaroid--full polaroid--video polaroid--tape-corner" id="polaroid-adele">
+              <div class="polaroid__media">
+                <video class="polaroid__video" src="assets/mannequinat/video-adele.mp4" loop muted playsinline preload="metadata"></video>
+                <button type="button" class="polaroid__btn polaroid__play" aria-label="Lecture / Pause">
+                  <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+                </button>
+                <button type="button" class="polaroid__btn polaroid__sound" aria-label="Activer / couper le son">
+                  <svg class="icon-sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.17v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/></svg>
+                  <svg class="icon-sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/></svg>
+                </button>
+              </div>
+              <span class="polaroid__caption">Adèle × Lacoste</span>
+            </div>
+          </div>
+
+          <!-- Deuxième rangée : Vilebrequin + Le Tanneur + Jungles Jungles -->
+          <div class="album-brand__header-row">
+            <div class="album-brand__sub">
+              <img decoding="async" loading="lazy" class="album-brand__logo" src="assets/mannequinat/logos/logo-vilebrequin.png" alt="Vilebrequin">
+            </div>
+            <div class="album-brand__sub">
+              <img decoding="async" loading="lazy" class="album-brand__logo" src="assets/mannequinat/logos/logo-le-tanneur.png" alt="Le Tanneur">
+            </div>
+            <div class="album-brand__sub">
+              <img decoding="async" loading="lazy" class="album-brand__logo" src="assets/mannequinat/logos/jungles-logo.webp" alt="Jungles Jungles">
+            </div>
+          </div>
+          <div class="album-grid">
+            <div class="polaroid polaroid--full polaroid--tape">
+              <picture><source srcset="assets/mannequinat/publi-villebrequin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/publi-villebrequin.jpeg" alt="Vilebrequin publi" loading="lazy"></picture>
+              <span class="polaroid__caption">Fête des pères — Vilebrequin</span>
+            </div>
+            <div class="polaroid polaroid--full polaroid--video polaroid--tape-corner" id="polaroid-letanneur">
+              <div class="polaroid__media">
+                <video class="polaroid__video" src="assets/mannequinat/video-letanneur.mp4" loop muted playsinline preload="metadata"></video>
+                <button type="button" class="polaroid__btn polaroid__play" aria-label="Lecture / Pause">
+                  <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+                </button>
+                <button type="button" class="polaroid__btn polaroid__sound" aria-label="Activer / couper le son">
+                  <svg class="icon-sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.17v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/></svg>
+                  <svg class="icon-sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/></svg>
+                </button>
+              </div>
+              <span class="polaroid__caption">Collaboration — Le Tanneur</span>
+            </div>
+            <div class="polaroid polaroid--full">
+              <picture><source srcset="assets/mannequinat/post-insta4.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/post-insta4.jpg" alt="Jungles Jungles post" loading="lazy"></picture>
+              <span class="polaroid__caption">Campagne — Jungles Jungles</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shootings éditoriaux -->
+        <div class="album-brand">
+          <h3 class="album-brand__title"><span class="album-brand__title-star" aria-hidden="true">✦</span>Shootings éditoriaux<span class="album-brand__title-star" aria-hidden="true">✦</span></h3>
+
+          <div class="album-grid">
+            <div class="polaroid polaroid--full polaroid--tape">
+              <img loading="lazy" decoding="async" src="assets/mannequinat/geooo-phtoo.jpeg" alt="Shooting éditorial" loading="lazy">
+            </div>
+            <div class="polaroid polaroid--full">
+              <picture><source srcset="assets/mannequinat/photo-geo-21.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/photo-geo-21.jpeg" alt="Shooting Lanieri" loading="lazy"></picture>
+              <span class="polaroid__caption">Lanieri</span>
+            </div>
+            <div class="polaroid polaroid--full polaroid--tape-corner">
+              <picture><source srcset="assets/mannequinat/geo-shooting.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/geo-shooting.jpeg" alt="Shooting éditorial Paris" loading="lazy"></picture>
+            </div>
+          </div>
+
+          <div class="album-grid">
+            <div class="polaroid polaroid--full polaroid--tape">
+              <picture><source srcset="assets/mannequinat/devin-magasine.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/devin-magasine.jpeg" alt="Devin Magazine" loading="lazy"></picture>
+              <span class="polaroid__caption">Devin Magazine</span>
+            </div>
+            <div class="polaroid polaroid--full">
+              <picture><source srcset="assets/mannequinat/duo_1.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/duo_1.jpeg" alt="Shooting duo" loading="lazy"></picture>
+            </div>
+            <div class="polaroid polaroid--full polaroid--tape-corner">
+              <picture><source srcset="assets/mannequinat/duo-3.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/mannequinat/duo-3.jpeg" alt="Shooting duo 2" loading="lazy"></picture>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+  <script>
+    // Contrôles vidéo polaroid (play/pause + son)
+    function initPolaroidVideo(wrapId) {
+      const wrap = document.getElementById(wrapId);
+      if (!wrap) return;
+      const video = wrap.querySelector('.polaroid__video');
+      const playBtn = wrap.querySelector('.polaroid__play');
+      const soundBtn = wrap.querySelector('.polaroid__sound');
+
+      function syncPlayState() {
+        wrap.classList.toggle('is-playing', !video.paused);
+      }
+      function syncSoundState() {
+        wrap.classList.toggle('has-sound', !video.muted);
+      }
+
+      playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (video.paused) video.play(); else video.pause();
+      });
+      soundBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        if (video.muted === false && video.paused) video.play();
+        syncSoundState();
+      });
+      // Clic sur la vidéo : toggle play / pause (le son se gère via le bouton dédié)
+      video.addEventListener('click', () => {
+        if (video.paused) video.play(); else video.pause();
+      });
+      video.addEventListener('play', syncPlayState);
+      video.addEventListener('pause', syncPlayState);
+
+      syncPlayState();
+      syncSoundState();
+    }
+
+    initPolaroidVideo('polaroid-adele');
+    initPolaroidVideo('polaroid-letanneur');
+  </script>
+</body>
+</html>

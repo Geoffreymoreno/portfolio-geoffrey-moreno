@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Preview — 4 concepts bannière Netflix</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="projet.css">
+<style>
+  /* ─────────────────────────────────────────────
+     PAGE PREVIEW
+     ───────────────────────────────────────────── */
+  body { background:#08080c; color:#fff; font-family:'Poppins',sans-serif; margin:0; padding:0; }
+  .pv-page { padding: 24px 0 96px; }
+  .pv-head { text-align:center; padding: 24px 24px 32px; }
+  .pv-head .pill { display:inline-block; background:#e50914; padding:5px 14px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:0.22em; margin-bottom:14px; }
+  .pv-head h1 { font-size:28px; font-weight:800; letter-spacing:-0.01em; margin:0; }
+  .pv-head p { color:#9aa0aa; margin-top:10px; font-size:14px; }
+  .pv-concept { margin-bottom: 64px; }
+  .pv-label { display:flex; align-items:baseline; gap:14px; padding: 0 8% 12px; }
+  .pv-num { font-family:'Poppins',sans-serif; font-weight:900; font-size:34px; line-height:1; color:#e50914; min-width:54px; }
+  .pv-title { font-size:18px; font-weight:700; }
+  .pv-desc { color:#9aa0aa; font-size:13px; flex:1; text-align:right; max-width:60%; }
+
+  /* ─────────────────────────────────────────────
+     BANNIÈRE — gabarit identique projet-netflix-events.html
+     ───────────────────────────────────────────── */
+  .projet-hero {
+    min-height: 34vh;
+    height: 34vh;
+    padding: 0 0 0 8%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    gap: 24px;
+    margin: 0;
+  }
+  .hero-watermark { position:absolute; inset:0; pointer-events:none; user-select:none; z-index:0; overflow:hidden; }
+  .hero-watermark img {
+    position:absolute;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6)) drop-shadow(0 8px 20px rgba(0,0,0,0.35)) drop-shadow(0 -1px 2px rgba(255,255,255,0.04));
+  }
+  .hero-watermark img:nth-child(1)  { width: 160px; opacity: 0.38; top: -18%;  left: -3%;   transform: rotate(-18deg) perspective(500px) rotateY(22deg); }
+  .hero-watermark img:nth-child(2)  { width:  90px; opacity: 0.30; top:  58%;  left:  6%;   transform: rotate(12deg)  perspective(500px) rotateY(-18deg); }
+  .hero-watermark img:nth-child(3)  { width: 210px; opacity: 0.35; top:  15%;  left: 18%;   transform: rotate(-6deg)  perspective(500px) rotateY(28deg); }
+  .hero-watermark img:nth-child(4)  { width:  80px; opacity: 0.32; top:  65%;  left: 32%;   transform: rotate(20deg)  perspective(500px) rotateX(12deg); }
+  .hero-watermark img:nth-child(5)  { width: 130px; opacity: 0.37; top:  -8%;  left: 44%;   transform: rotate(-14deg) perspective(500px) rotateY(-22deg); }
+  .hero-watermark img:nth-child(6)  { width: 100px; opacity: 0.31; top:  52%;  left: 56%;   transform: rotate(8deg)   perspective(500px) rotateY(18deg); }
+  .hero-watermark img:nth-child(7)  { width: 185px; opacity: 0.36; top:  20%;  left: 66%;   transform: rotate(-10deg) perspective(500px) rotateY(-26deg); }
+  .hero-watermark img:nth-child(8)  { width:  75px; opacity: 0.30; top:  72%;  left: 78%;   transform: rotate(16deg)  perspective(500px) rotateX(8deg); }
+  .hero-watermark img:nth-child(9)  { width: 145px; opacity: 0.38; top:  -5%;  left: 88%;   transform: rotate(-20deg) perspective(500px) rotateY(24deg); }
+  .hero-watermark img:nth-child(10) { width: 110px; opacity: 0.33; top:  50%;  left: 96%;   transform: rotate(6deg)   perspective(500px) rotateY(-14deg); }
+
+  /* OVERRIDE : ramener les 3 vignettes complètement dans le viewport */
+  .projet-hero .projet-hero__thumbs {
+    display:flex; align-items:center; flex-shrink:0;
+    padding: 28px 16px 28px 20px;
+    margin-right: 16px;       /* annule le -40px du gabarit pour visibilité 3 cartes */
+    z-index: 4;
+    position: relative;
+    overflow: visible;
+    gap: 10px;
+  }
+  .hero-thumb { box-shadow: 0 16px 40px rgba(0,0,0,0.55); filter: brightness(1.16); }
+  .projet-hero__left { z-index: 4; position: relative; }
+
+  /* ─────────────────────────────────────────────
+     COUCHE ACCESSOIRES (containers = position du N concerné)
+     ───────────────────────────────────────────── */
+  .hero-accessory { position:absolute; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+  .acc { position:absolute; }
+
+  /* === BOUQUET DE ROSES (sur le N, visible et plus gros) === */
+  .acc-rose img {
+    width: 100%;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    opacity: 0.92;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.60)) drop-shadow(0 0 22px rgba(220,140,170,0.32));
+  }
+
+  /* === CHAPEAU DE PAILLE (recouvre le haut du N, façon humain portant un chapeau) ===
+     Le bord/rim du chapeau descend bas dans le N (couvre ~40% du haut),
+     comme un chapeau enfilé sur la tête qui couvre une partie du crâne */
+  .acc-hat img {
+    width: 110%;
+    position: absolute;
+    bottom: 58%;
+    left: -5%;
+    filter: drop-shadow(0 5px 14px rgba(0,0,0,0.60)) drop-shadow(0 0 16px rgba(240,200,120,0.25));
+  }
+
+  /* === MINI-GUIRLANDE STRANGER THINGS QUI ENROULE LE N === */
+  .acc-lights .lights-wire {
+    position:absolute; inset:0; width:100%; height:100%;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.7));
+  }
+  .acc-lights .lights-wire path {
+    fill:none; stroke:#1a0a06; stroke-width:1.6;
+    vector-effect:non-scaling-stroke; opacity:0.95; stroke-linecap:round;
+  }
+  .acc-lights .bulb {
+    position:absolute;
+    width: 10px; height: 14px;
+    border-radius: 50% 50% 38% 38% / 62% 62% 38% 38%;
+    transform: translate(-50%, -50%);
+    animation: bulbFlicker 5s ease-in-out infinite;
+    will-change: opacity;
+  }
+  .acc-lights .bulb::before {
+    content:""; position:absolute;
+    top:-4px; left:50%;
+    width:4px; height:4px;
+    background:#1a0a06; border-radius:1px 1px 0 0;
+    transform: translateX(-50%);
+  }
+  .bulb--red    { background: radial-gradient(circle at 35% 30%, #ffb0b0, #e5091a 55%, #4a0008 100%); box-shadow: 0 0 7px rgba(229,9,20,0.70), 0 0 16px rgba(229,9,20,0.35); }
+  .bulb--blue   { background: radial-gradient(circle at 35% 30%, #b0d8ff, #2a78d8 55%, #061a3a 100%); box-shadow: 0 0 7px rgba(60,140,240,0.70), 0 0 16px rgba(60,140,240,0.35); }
+  .bulb--green  { background: radial-gradient(circle at 35% 30%, #b8ffb0, #2cc44a 55%, #084818 100%); box-shadow: 0 0 7px rgba(60,210,90,0.65), 0 0 16px rgba(60,210,90,0.32); }
+  .bulb--yellow { background: radial-gradient(circle at 35% 30%, #fff0b0, #ffc628 55%, #6a4808 100%); box-shadow: 0 0 7px rgba(255,200,60,0.65), 0 0 16px rgba(255,200,60,0.32); }
+  .bulb--orange { background: radial-gradient(circle at 35% 30%, #ffd0a8, #ff7a18 55%, #6a1808 100%); box-shadow: 0 0 7px rgba(255,140,40,0.65), 0 0 16px rgba(255,140,40,0.32); }
+  .bulb--purple { background: radial-gradient(circle at 35% 30%, #e0b0ff, #8a2ad8 55%, #2a0848 100%); box-shadow: 0 0 7px rgba(160,80,230,0.65), 0 0 16px rgba(160,80,230,0.32); }
+
+  @keyframes bulbFlicker {
+    0%, 38%, 60%, 100% { opacity: 1; }
+    42%, 56%           { opacity: 0.40; }
+    45%, 53%           { opacity: 0.92; }
+    48%                { opacity: 0.60; }
+  }
+
+  /* ─────────────────────────────────────────────
+     POSITIONS PARTAGÉES sur les 4 concepts
+     N°1 (Stranger guirlande, haut-gauche extrême)
+     N°7 OVERRIDE (One Piece chapeau, entre titre et carte, en haut)
+     N°6 OVERRIDE (Bridgerton bouquet, entre titre et carte, en bas — plus gros)
+     ───────────────────────────────────────────── */
+  /* N°1 boosté : Stranger guirlande, haut-gauche extrême */
+  .b-base .hero-watermark img:nth-child(1) { opacity:0.70; width:200px; transform: rotate(-18deg); filter: drop-shadow(0 0 14px rgba(120,180,255,0.62)) drop-shadow(0 4px 10px rgba(0,0,0,0.55)); }
+  /* N°7 OVERRIDE : One Piece chapeau, entre titre et 1ère carte (haut-centre-droit) */
+  .b-base .hero-watermark img:nth-child(7) { opacity:0.72; width:160px; top:18%; left:60%; transform: rotate(-10deg); filter: drop-shadow(0 0 14px rgba(240,200,120,0.65)) drop-shadow(0 4px 10px rgba(0,0,0,0.55)); }
+  /* N°4 OVERRIDE : Bridgerton bouquet, milieu-bas sous les badges */
+  .b-base .hero-watermark img:nth-child(4) { opacity:0.70; width:160px; top:62%; left:30%; transform: rotate(20deg); filter: drop-shadow(0 0 14px rgba(220,160,180,0.58)) drop-shadow(0 4px 10px rgba(0,0,0,0.55)); }
+  /* Atténuer les autres */
+  .b-base .hero-watermark img:nth-child(2),
+  .b-base .hero-watermark img:nth-child(3),
+  .b-base .hero-watermark img:nth-child(5),
+  .b-base .hero-watermark img:nth-child(6),
+  .b-base .hero-watermark img:nth-child(8),
+  .b-base .hero-watermark img:nth-child(9),
+  .b-base .hero-watermark img:nth-child(10) { opacity:0.13; }
+
+  /* Containers accessoires partagés (mêmes positions que les N stars boostés) */
+  .b-base .acc-lights { top:-18%; left:-3%; width:200px; height:200px; transform: rotate(-18deg); }
+  .b-base .acc-hat    { top:18%;  left:60%; width:160px; height:160px; transform: rotate(-10deg); }
+  .b-base .acc-rose   { top:62%;  left:30%; width:160px; height:160px; transform: rotate(20deg); }
+
+  /* ═════════════════════════════════════════════
+     FONDS — 4 variations
+     ═════════════════════════════════════════════ */
+
+  /* C1 — Trois zones colorées subtiles (Stranger / Bridgerton / One Piece) */
+  .b1 {
+    background: linear-gradient(90deg,
+      #1d2348 0%, #28284a 22%, #3b2944 42%, #482638 50%, #3c2a3c 58%, #2a3a42 78%, #1f444a 100%);
+  }
+  .b1::before {
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(40% 80% at 18% 50%, rgba(80,130,210,0.12), transparent 70%),
+      radial-gradient(36% 80% at 50% 50%, rgba(180,90,130,0.12), transparent 70%),
+      radial-gradient(40% 80% at 82% 50%, rgba(90,170,160,0.12), transparent 70%);
+  }
+
+  /* C2 — Cinéma profond navy (le préféré) */
+  .b2 { background: radial-gradient(ellipse at 35% 50%, #1c2034 0%, #10131e 60%, #08090f 100%); }
+  .b2::before {
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(55% 100% at 50% 110%, rgba(140,50,80,0.18), transparent 70%),
+      radial-gradient(40% 80% at 100% 0%, rgba(60,100,150,0.16), transparent 70%),
+      radial-gradient(35% 70% at 0% 0%, rgba(160,120,60,0.10), transparent 70%);
+  }
+
+  /* C3 — Aurora diagonale (mauve → bordeaux → teal) */
+  .b3 { background: linear-gradient(125deg, #1d1a36 0%, #28203c 28%, #3b2438 52%, #2c2a38 76%, #1c3438 100%); }
+  .b3::before {
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(70% 120% at 0% 0%, rgba(110,90,180,0.16), transparent 60%),
+      radial-gradient(60% 120% at 100% 100%, rgba(80,150,150,0.16), transparent 60%),
+      radial-gradient(50% 80% at 50% 50%, rgba(180,90,130,0.12), transparent 70%);
+  }
+
+  /* C4 — Velours chaud (théâtral, Bridgerton-coded) */
+  .b4 { background: radial-gradient(ellipse at 50% 80%, #3a1a28 0%, #2a1322 35%, #150e1c 70%, #08080f 100%); }
+  .b4::before {
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(40% 90% at 8% 50%, rgba(60,90,160,0.14), transparent 70%),
+      radial-gradient(40% 90% at 92% 50%, rgba(180,140,70,0.16), transparent 70%),
+      radial-gradient(60% 100% at 50% 100%, rgba(180,80,110,0.20), transparent 70%);
+  }
+
+  @media (max-width: 980px) {
+    .pv-desc { display:none; }
+    .projet-hero { height: auto; min-height: 0; padding: 32px 6%; flex-direction: column; align-items: stretch; }
+    .projet-hero .projet-hero__thumbs { margin-right:0; padding: 16px 0 0; }
+  }
+</style>
+</head>
+<body>
+<div class="pv-page">
+  <div class="pv-head">
+    <span class="pill">PREVIEW · 4 CONCEPTS V3</span>
+    <h1>Bannière hero — Bridgerton × Stranger Things × One Piece</h1>
+    <p>Mêmes accessoires sur les 4 concepts — seul le fond varie. Guirlande haut-gauche extrême · Chapeau imbriqué sur le N entre titre et 1ère carte · Bouquet (plus gros) entre titre et 1ère carte en bas · 3 vignettes complètement visibles.</p>
+  </div>
+
+  <!-- ═══════════════ CONCEPT 1 — Trois zones ═══════════════ -->
+  <div class="pv-concept">
+    <div class="pv-label">
+      <div class="pv-num">01</div>
+      <div class="pv-title">Trois zones colorées subtiles</div>
+      <div class="pv-desc">Bleu Stranger gauche → bordeaux Bridgerton centre → teal One Piece droite, fondu doux.</div>
+    </div>
+    <div class="projet-hero b-base b1">
+      <div class="hero-watermark">
+        <img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt="">
+      </div>
+      <div class="hero-accessory">
+        <div class="acc acc-lights">
+          <svg class="lights-wire" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50,2 Q 95,12 50,25 Q 5,38 50,50 Q 95,62 50,75 Q 5,88 50,98"/>
+          </svg>
+          <span class="bulb bulb--red"    style="top:8%;  left:75%; animation-delay:0s;"></span>
+          <span class="bulb bulb--blue"   style="top:20%; left:55%; animation-delay:0.7s;"></span>
+          <span class="bulb bulb--yellow" style="top:32%; left:25%; animation-delay:1.5s;"></span>
+          <span class="bulb bulb--green"  style="top:44%; left:50%; animation-delay:2.2s;"></span>
+          <span class="bulb bulb--orange" style="top:56%; left:80%; animation-delay:0.4s;"></span>
+          <span class="bulb bulb--purple" style="top:68%; left:55%; animation-delay:1.9s;"></span>
+          <span class="bulb bulb--red"    style="top:80%; left:22%; animation-delay:3.1s;"></span>
+          <span class="bulb bulb--blue"   style="top:92%; left:48%; animation-delay:0.9s;"></span>
+        </div>
+        <div class="acc acc-hat"><img src="assets/brand-projects/event-netflix/chapeau-one-piece.webp" alt=""></div>
+        <div class="acc acc-rose"><img src="assets/brand-projects/event-netflix/rose-1.webp" alt=""></div>
+      </div>
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Les TikToks et Reels sur les events Netflix</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenus Organiques</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+      <div class="projet-hero__thumbs">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-stranger.webp" alt="Stranger Things">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-bridgerton.webp" alt="Bridgerton" style="filter: brightness(1.04) drop-shadow(0 16px 40px rgba(0,0,0,0.55));">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-onepiece.webp" alt="One Piece">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CONCEPT 2 — Cinéma navy ═══════════════ -->
+  <div class="pv-concept">
+    <div class="pv-label">
+      <div class="pv-num">02</div>
+      <div class="pv-title">Cinéma profond navy</div>
+      <div class="pv-desc">Bleu nuit sourd avec halos chauds (bordeaux en bas) et froids (bleu en haut-droite). Ambiance feutrée.</div>
+    </div>
+    <div class="projet-hero b-base b2">
+      <div class="hero-watermark">
+        <img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt="">
+      </div>
+      <div class="hero-accessory">
+        <div class="acc acc-lights">
+          <svg class="lights-wire" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50,2 Q 95,12 50,25 Q 5,38 50,50 Q 95,62 50,75 Q 5,88 50,98"/>
+          </svg>
+          <span class="bulb bulb--red"    style="top:8%;  left:75%; animation-delay:0s;"></span>
+          <span class="bulb bulb--blue"   style="top:20%; left:55%; animation-delay:0.7s;"></span>
+          <span class="bulb bulb--yellow" style="top:32%; left:25%; animation-delay:1.5s;"></span>
+          <span class="bulb bulb--green"  style="top:44%; left:50%; animation-delay:2.2s;"></span>
+          <span class="bulb bulb--orange" style="top:56%; left:80%; animation-delay:0.4s;"></span>
+          <span class="bulb bulb--purple" style="top:68%; left:55%; animation-delay:1.9s;"></span>
+          <span class="bulb bulb--red"    style="top:80%; left:22%; animation-delay:3.1s;"></span>
+          <span class="bulb bulb--blue"   style="top:92%; left:48%; animation-delay:0.9s;"></span>
+        </div>
+        <div class="acc acc-hat"><img src="assets/brand-projects/event-netflix/chapeau-one-piece.webp" alt=""></div>
+        <div class="acc acc-rose"><img src="assets/brand-projects/event-netflix/rose-1.webp" alt=""></div>
+      </div>
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Les TikToks et Reels sur les events Netflix</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenus Organiques</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+      <div class="projet-hero__thumbs">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-stranger.webp" alt="Stranger Things">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-bridgerton.webp" alt="Bridgerton" style="filter: brightness(1.04) drop-shadow(0 16px 40px rgba(0,0,0,0.55));">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-onepiece.webp" alt="One Piece">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CONCEPT 3 — Aurora diagonale ═══════════════ -->
+  <div class="pv-concept">
+    <div class="pv-label">
+      <div class="pv-num">03</div>
+      <div class="pv-title">Aurora diagonale</div>
+      <div class="pv-desc">Diagonale mauve → bordeaux → teal. Plus dynamique que le tryptique horizontal.</div>
+    </div>
+    <div class="projet-hero b-base b3">
+      <div class="hero-watermark">
+        <img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt="">
+      </div>
+      <div class="hero-accessory">
+        <div class="acc acc-lights">
+          <svg class="lights-wire" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50,2 Q 95,12 50,25 Q 5,38 50,50 Q 95,62 50,75 Q 5,88 50,98"/>
+          </svg>
+          <span class="bulb bulb--red"    style="top:8%;  left:75%; animation-delay:0s;"></span>
+          <span class="bulb bulb--blue"   style="top:20%; left:55%; animation-delay:0.7s;"></span>
+          <span class="bulb bulb--yellow" style="top:32%; left:25%; animation-delay:1.5s;"></span>
+          <span class="bulb bulb--green"  style="top:44%; left:50%; animation-delay:2.2s;"></span>
+          <span class="bulb bulb--orange" style="top:56%; left:80%; animation-delay:0.4s;"></span>
+          <span class="bulb bulb--purple" style="top:68%; left:55%; animation-delay:1.9s;"></span>
+          <span class="bulb bulb--red"    style="top:80%; left:22%; animation-delay:3.1s;"></span>
+          <span class="bulb bulb--blue"   style="top:92%; left:48%; animation-delay:0.9s;"></span>
+        </div>
+        <div class="acc acc-hat"><img src="assets/brand-projects/event-netflix/chapeau-one-piece.webp" alt=""></div>
+        <div class="acc acc-rose"><img src="assets/brand-projects/event-netflix/rose-1.webp" alt=""></div>
+      </div>
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Les TikToks et Reels sur les events Netflix</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenus Organiques</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+      <div class="projet-hero__thumbs">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-stranger.webp" alt="Stranger Things">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-bridgerton.webp" alt="Bridgerton" style="filter: brightness(1.04) drop-shadow(0 16px 40px rgba(0,0,0,0.55));">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-onepiece.webp" alt="One Piece">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CONCEPT 4 — Velours chaud ═══════════════ -->
+  <div class="pv-concept">
+    <div class="pv-label">
+      <div class="pv-num">04</div>
+      <div class="pv-title">Velours chaud théâtral</div>
+      <div class="pv-desc">Fond bordeaux profond avec halos bleu (gauche) et doré (droite) — ambiance théâtre/régence Bridgerton.</div>
+    </div>
+    <div class="projet-hero b-base b4">
+      <div class="hero-watermark">
+        <img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt=""><img src="assets/hero-section/logo-netflix.png" alt="">
+      </div>
+      <div class="hero-accessory">
+        <div class="acc acc-lights">
+          <svg class="lights-wire" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50,2 Q 95,12 50,25 Q 5,38 50,50 Q 95,62 50,75 Q 5,88 50,98"/>
+          </svg>
+          <span class="bulb bulb--red"    style="top:8%;  left:75%; animation-delay:0s;"></span>
+          <span class="bulb bulb--blue"   style="top:20%; left:55%; animation-delay:0.7s;"></span>
+          <span class="bulb bulb--yellow" style="top:32%; left:25%; animation-delay:1.5s;"></span>
+          <span class="bulb bulb--green"  style="top:44%; left:50%; animation-delay:2.2s;"></span>
+          <span class="bulb bulb--orange" style="top:56%; left:80%; animation-delay:0.4s;"></span>
+          <span class="bulb bulb--purple" style="top:68%; left:55%; animation-delay:1.9s;"></span>
+          <span class="bulb bulb--red"    style="top:80%; left:22%; animation-delay:3.1s;"></span>
+          <span class="bulb bulb--blue"   style="top:92%; left:48%; animation-delay:0.9s;"></span>
+        </div>
+        <div class="acc acc-hat"><img src="assets/brand-projects/event-netflix/chapeau-one-piece.webp" alt=""></div>
+        <div class="acc acc-rose"><img src="assets/brand-projects/event-netflix/rose-1.webp" alt=""></div>
+      </div>
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Les TikToks et Reels sur les events Netflix</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenus Organiques</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+      <div class="projet-hero__thumbs">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-stranger.webp" alt="Stranger Things">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-bridgerton.webp" alt="Bridgerton" style="filter: brightness(1.04) drop-shadow(0 16px 40px rgba(0,0,0,0.55));">
+        <img class="hero-thumb" src="assets/brand-projects/event-netflix/vignette-onepiece.webp" alt="One Piece">
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

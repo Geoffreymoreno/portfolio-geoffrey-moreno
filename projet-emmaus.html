@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campagne d'influence Emmaüs Connect — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fredoka:wght@500;600;700&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* ── PAGE BACKGROUND — crème lumineux + dots teal subtils (Option 4) ── */
+    body {
+      background-color: #FAF6F0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(0, 161, 154, 0.18) 1px, transparent 0),
+        linear-gradient(180deg, #FAF6F0 0%, #F6F1E8 60%, #EAF5F4 100%);
+      background-size: 28px 28px, 100% 100%;
+      background-attachment: fixed;
+    }
+
+    /* ── HERO BANNER — connexion humaine ── */
+    .projet-hero {
+      min-height: 36vh;
+      height: 36vh;
+      background: linear-gradient(120deg, #EAF5F4 0%, #D8EEEC 30%, #F4E8D0 70%, #FAF1DD 100%);
+      padding: 0 0 0 8%;
+      isolation: isolate;
+    }
+
+    /* Halo radial teal diffus dans un coin */
+    .projet-hero::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(ellipse 55% 45% at 18% 30%, rgba(0, 161, 154, 0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 82% 70%, rgba(243, 146, 0, 0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 60% 20%, rgba(0, 161, 154, 0.14) 0%, transparent 55%);
+      filter: blur(40px);
+      animation: heroFog 18s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes heroFog {
+      0%   { transform: translate(0, 0)       scale(1);    opacity: 0.85; }
+      50%  { transform: translate(3%, -2%)    scale(1.08); opacity: 1;    }
+      100% { transform: translate(-2%, 3%)    scale(1.04); opacity: 0.9;  }
+    }
+
+    /* Vignettage doux */
+    .projet-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 75% at center, transparent 50%, rgba(14, 42, 59, 0.12) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── ATMOSPHÈRE HERO : ondes wifi + signaux ── */
+    .hero-atmosphere {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Cercles concentriques (ondes wifi) */
+    .hero-wave {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 161, 154, 0.28);
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    .hero-wave--1 { top: 30%; left: 55%; width: 180px; height: 180px; animation: waveExpand 6s ease-out infinite; }
+    .hero-wave--2 { top: 30%; left: 55%; width: 180px; height: 180px; animation: waveExpand 6s ease-out -2s infinite; }
+    .hero-wave--3 { top: 30%; left: 55%; width: 180px; height: 180px; animation: waveExpand 6s ease-out -4s infinite; }
+    .hero-wave--4 { top: 30%; left: 55%; width: 150px; height: 150px; animation: waveExpand 7s ease-out -1s infinite; }
+    .hero-wave--5 { top: 30%; left: 55%; width: 150px; height: 150px; animation: waveExpand 7s ease-out -3.5s infinite; }
+    @keyframes waveExpand {
+      0%   { transform: scale(0.4); opacity: 0.7; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* Halo pastel ambiant */
+    .hero-honeycomb-glow {
+      position: absolute;
+      inset: -10%;
+      background:
+        radial-gradient(ellipse 70% 60% at 30% 50%, rgba(0, 161, 154, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 75% 60%, rgba(243, 146, 0, 0.10) 0%, transparent 65%);
+      filter: blur(20px);
+      animation: emmausGlow 7s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes emmausGlow {
+      0%   { opacity: 0.6; }
+      100% { opacity: 0.95; }
+    }
+
+    /* ── ICÔNES NUMÉRIQUES FLOTTANTES (hero) ── */
+    .hero-icon {
+      position: absolute;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(14, 42, 59, 0.15));
+      will-change: transform;
+      user-select: none;
+      font-size: 32px;
+      line-height: 1;
+    }
+    .hero-icon--1 { top: 22%; left: 8%;  font-size: 36px; opacity: 0.9; animation: iconFloat 14s ease-in-out infinite; }
+    .hero-icon--2 { top: 70%; left: 12%; font-size: 30px; opacity: 0.85; animation: iconFloat 13s ease-in-out -3s infinite; }
+    .hero-icon--3 { top: 18%; left: 42%; font-size: 28px; opacity: 0.85; animation: iconFloat 16s ease-in-out -1.5s infinite; }
+    .hero-icon--4 { top: 72%; left: 38%; font-size: 32px; opacity: 0.9;  animation: iconFloat 15s ease-in-out -4s infinite; }
+    .hero-icon--5 { top: 22%; left: 60%; font-size: 30px; opacity: 0.85; animation: iconFloat 14s ease-in-out -2s infinite; }
+    @keyframes iconFloat {
+      0%   { transform: translate(0, 0) rotate(-4deg); }
+      50%  { transform: translate(8px, -10px) rotate(4deg); }
+      100% { transform: translate(-6px, 6px) rotate(-2deg); }
+    }
+
+    /* ── VIGNETTES HERO ── */
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 20px;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+
+    .hero-thumb {
+      border: none;
+      filter: brightness(0.97) saturate(1.0) contrast(1.02);
+      box-shadow: 0 16px 40px rgba(14, 42, 59, 0.22), 0 4px 10px rgba(14, 42, 59, 0.10);
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .projet-hero__thumbs:hover .hero-thumb {
+      filter: blur(2px) brightness(0.7) saturate(0.85);
+      transform-origin: center;
+    }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(1) { transform: rotate(-6deg) scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(2) { transform: rotate(0deg)  scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(3) { transform: rotate(6deg)  scale(0.95); }
+
+    .projet-hero__thumbs .hero-thumb:hover {
+      filter: blur(0) brightness(1.05) saturate(1.1) !important;
+      box-shadow: 0 24px 56px rgba(0, 161, 154, 0.40);
+      z-index: 10 !important;
+    }
+    .projet-hero__thumbs .hero-thumb:nth-child(1):hover { transform: rotate(-3deg) scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(2):hover { transform: rotate(0deg)  scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(3):hover { transform: rotate(3deg)  scale(1.08) translateY(-6px) !important; }
+
+    /* Titre & badges hero — teal/crème */
+    .projet-title {
+      color: #0E2A3B !important;
+      text-shadow: 0 2px 12px rgba(255, 255, 255, 0.55), 0 1px 2px rgba(14, 42, 59, 0.10);
+    }
+    .hero-badges .badge {
+      color: #00867F;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(0, 161, 154, 0.28);
+      box-shadow:
+        0 4px 14px rgba(14, 42, 59, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(10px) saturate(1.4);
+      -webkit-backdrop-filter: blur(10px) saturate(1.4);
+      text-shadow: none;
+    }
+
+    /* ── MAIN CARD ── */
+    .projet-card {
+      width: 94%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CARTES (Contexte / Missions / Résultats) — crème + accents teal ── */
+    .red-card {
+      position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #F4FAF9 50%, #E8F2F0 100%);
+      border: 1.5px solid rgba(0, 161, 154, 0.22);
+      border-radius: 24px;
+      padding: 45px 34px 30px;
+      box-shadow:
+        0 18px 40px rgba(14, 42, 59, 0.14),
+        0 2px 0 rgba(255,255,255,0.65) inset,
+        0 -2px 0 rgba(0, 161, 154, 0.08) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+
+    /* Pattern subtil de mini-pois teal/orange dans les cartes */
+    .red-card__bg {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .red-card__bg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.22;
+    }
+    .red-card > .red-card__text,
+    .red-card > .red-card__list,
+    .red-card > .results-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Label flottant (Contexte / Mes Missions / Mes Résultats) */
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(14, 42, 59, 0.30);
+      padding: 11px 29px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #00A19A 0%, #00867F 100%);
+      border: 1.5px solid rgba(0, 134, 127, 0.85);
+      box-shadow:
+        0 6px 18px rgba(0, 134, 127, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+      gap: 32px;
+    }
+
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(15.4px, 1.188vw, 19.8px);
+      line-height: 1.85;
+      letter-spacing: 0.04em;
+      color: #0E2A3B;
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text { margin-top: 22px; }
+
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(15.4px, 1.188vw, 19.8px);
+      line-height: 1.85;
+      letter-spacing: 0.04em;
+      color: #0E2A3B;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      text-align: center;
+      width: 100%;
+    }
+    .red-card__list li { display: block; text-align: center; }
+    .red-card__list li::before { content: "• "; color: #00A19A; font-weight: 900; }
+
+    /* ── CARTE RÉSULTATS ── */
+    .red-card--results {
+      padding: 36px 22px 32px;
+      width: 64.74%;
+      align-self: center;
+      min-height: 180px;
+    }
+    .results-row {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 18px;
+      width: 100%;
+      padding-top: 22px;
+      flex-wrap: nowrap;
+    }
+    .results-item {
+      flex: 0 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .results-item__label {
+      min-height: 2.8em;
+    }
+    .results-item__value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.56rem, 2.40vw, 2.28rem);
+      color: #0E2A3B;
+      line-height: 1.05;
+      margin-bottom: 9px;
+      white-space: nowrap;
+    }
+    .results-item__number { font-size: 1.32em; vertical-align: middle; color: #00A19A; }
+    .results-item__suffix {
+      font-weight: 800;
+      font-size: 0.8395em;
+      color: #0E2A3B;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.86rem, 1.01vw, 1.01rem);
+      color: rgba(14, 42, 59, 0.78);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+    .results-divider {
+      width: 1px;
+      height: 68px;
+      background: rgba(0, 161, 154, 0.28);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .red-card--results { width: 92%; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; width: 96%; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* ── ÉLÉMENTS DÉCO PAGE ENTIÈRE : icônes numériques flottantes ── */
+    main { position: relative; }
+    .page-emmaus-deco {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* Icônes flottantes (téléphone, signal, message, ampoule, mains, sim, wifi) */
+    .em-icon {
+      position: absolute;
+      font-size: 28px;
+      line-height: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(14, 42, 59, 0.15));
+      will-change: transform;
+      user-select: none;
+      opacity: 0.65;
+    }
+
+    /* Petits "dots" lumineux teal supplémentaires */
+    .em-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(0, 161, 154, 0.45);
+      box-shadow: 0 0 12px rgba(0, 161, 154, 0.55);
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    /* === COLONNE GAUCHE === */
+    .em-icon--1  { top: 4%;   left: 2%;   font-size: 30px; animation: emFloatA 14s ease-in-out infinite; }
+    .em-icon--2  { top: 18%;  left: 3%;   font-size: 32px; animation: emFloatB 13s ease-in-out -2s infinite; }
+    .em-icon--3  { top: 32%;  left: 1.5%; font-size: 28px; animation: emFloatC 16s ease-in-out -1s infinite; }
+    .em-icon--4  { top: 48%;  left: 2.5%; font-size: 30px; animation: emFloatA 15s ease-in-out -3s infinite; }
+    .em-icon--5  { top: 62%;  left: 2%;   font-size: 26px; animation: emFloatB 13s ease-in-out -2.5s infinite; }
+    .em-icon--6  { top: 78%;  left: 3%;   font-size: 32px; animation: emFloatC 14s ease-in-out -1.5s infinite; }
+    .em-icon--7  { top: 92%;  left: 2%;   font-size: 28px; animation: emFloatA 15s ease-in-out -4s infinite; }
+
+    /* === COLONNE CENTRE === */
+    .em-icon--8  { top: 23%;  left: 50%;  font-size: 26px; transform: translateX(-50%); animation: emFloatC 17s ease-in-out -1s infinite; }
+    .em-icon--9  { top: 40%;  left: 50%;  font-size: 28px; transform: translateX(-50%); animation: emFloatB 14s ease-in-out -2.5s infinite; }
+    .em-icon--10 { top: 56%;  left: 50%;  font-size: 30px; transform: translateX(-50%); animation: emFloatA 15s ease-in-out -3s infinite; }
+    .em-icon--11 { top: 71%;  left: 50%;  font-size: 26px; transform: translateX(-50%); animation: emFloatC 13s ease-in-out -1.5s infinite; }
+
+    /* === COLONNE DROITE === */
+    .em-icon--12 { top: 8%;   left: 95%;  font-size: 30px; transform: translateX(-100%); animation: emFloatB 14s ease-in-out infinite; }
+    .em-icon--13 { top: 22%;  left: 96%;  font-size: 28px; transform: translateX(-100%); animation: emFloatA 16s ease-in-out -2s infinite; }
+    .em-icon--14 { top: 38%;  left: 95%;  font-size: 32px; transform: translateX(-100%); animation: emFloatC 15s ease-in-out -1s infinite; }
+    .em-icon--15 { top: 54%;  left: 96%;  font-size: 26px; transform: translateX(-100%); animation: emFloatB 13s ease-in-out -3s infinite; }
+    .em-icon--16 { top: 70%;  left: 95%;  font-size: 30px; transform: translateX(-100%); animation: emFloatA 14s ease-in-out -4s infinite; }
+    .em-icon--17 { top: 86%;  left: 96%;  font-size: 28px; transform: translateX(-100%); animation: emFloatC 15s ease-in-out -1.5s infinite; }
+
+    /* === Icônes diversifiées dispersées === */
+    .em-icon--18 { top: 13%;  left: 18%;  font-size: 24px; animation: emFloatB 16s ease-in-out -1s infinite; }
+    .em-icon--19 { top: 27%;  left: 80%;  font-size: 26px; animation: emFloatC 14s ease-in-out -2s infinite; }
+    .em-icon--20 { top: 44%;  left: 22%;  font-size: 28px; animation: emFloatA 15s ease-in-out -3.5s infinite; }
+    .em-icon--21 { top: 60%;  left: 78%;  font-size: 24px; animation: emFloatB 14s ease-in-out -1s infinite; }
+    .em-icon--22 { top: 75%;  left: 20%;  font-size: 30px; animation: emFloatC 13s ease-in-out -2s infinite; }
+    .em-icon--23 { top: 89%;  left: 78%;  font-size: 26px; animation: emFloatA 16s ease-in-out -3s infinite; }
+
+    /* === Petits dots lumineux === */
+    .em-dot--1 { top: 10%; left: 30%; animation: emDotPulse 4s ease-in-out infinite; }
+    .em-dot--2 { top: 22%; left: 65%; animation: emDotPulse 5s ease-in-out -1s infinite; }
+    .em-dot--3 { top: 35%; left: 14%; animation: emDotPulse 4.5s ease-in-out -2s infinite; }
+    .em-dot--4 { top: 50%; left: 70%; animation: emDotPulse 5.5s ease-in-out -1.5s infinite; }
+    .em-dot--5 { top: 65%; left: 30%; animation: emDotPulse 4s ease-in-out -2.5s infinite; }
+    .em-dot--6 { top: 80%; left: 60%; animation: emDotPulse 5s ease-in-out -3s infinite; }
+
+    @keyframes emFloatA {
+      0%   { transform: translate(0, 0)       rotate(-4deg); }
+      50%  { transform: translate(8px, -10px) rotate(4deg);  }
+      100% { transform: translate(-6px, 6px)  rotate(-2deg); }
+    }
+    @keyframes emFloatB {
+      0%   { transform: translate(0, 0)        rotate(3deg);  }
+      50%  { transform: translate(-6px, -8px)  rotate(-3deg); }
+      100% { transform: translate(8px, 4px)    rotate(2deg);  }
+    }
+    @keyframes emFloatC {
+      0%   { transform: translate(0, 0)        rotate(-2deg); }
+      50%  { transform: translate(4px, -12px)  rotate(2deg);  }
+      100% { transform: translate(-8px, 8px)   rotate(-4deg); }
+    }
+    @keyframes emDotPulse {
+      0%, 100% { transform: scale(1);    opacity: 0.45; }
+      50%      { transform: scale(1.4);  opacity: 0.85; }
+    }
+
+    /* Préserver les positions translateX pour les colonnes centre/droite */
+    .em-icon--8, .em-icon--9, .em-icon--10, .em-icon--11 {
+      animation-name: emFloatCenter !important;
+    }
+    .em-icon--12, .em-icon--13, .em-icon--14, .em-icon--15, .em-icon--16, .em-icon--17 {
+      animation-name: emFloatRight !important;
+    }
+    @keyframes emFloatCenter {
+      0%   { transform: translateX(-50%) translateY(0)    rotate(-3deg); }
+      50%  { transform: translateX(-50%) translateY(-10px) rotate(3deg); }
+      100% { transform: translateX(-50%) translateY(6px)   rotate(-2deg); }
+    }
+    @keyframes emFloatRight {
+      0%   { transform: translateX(-100%) translateY(0)    rotate(-3deg); }
+      50%  { transform: translateX(-100%) translateY(-10px) rotate(3deg); }
+      100% { transform: translateX(-100%) translateY(6px)   rotate(-2deg); }
+    }
+
+    /* ── PROJET MAIN ── */
+    .projet-main {
+      position: relative;
+      z-index: 1;
+      padding-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    /* ── SECTION CONTENUS ── */
+    .contenus-section {
+      width: 80%;
+      max-width: 1300px;
+      margin: 24px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(14, 42, 59, 0.30);
+      padding: 11px 29px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #00A19A 0%, #00867F 100%);
+      border: 1.5px solid rgba(0, 134, 127, 0.85);
+      box-shadow:
+        0 6px 18px rgba(0, 134, 127, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+      white-space: nowrap;
+      text-align: center;
+    }
+    .contenus-title__logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contenus-title__logos img {
+      height: 28px;
+      width: auto;
+      vertical-align: middle;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    /* ── SÉPARATEUR ORNEMENTAL adapté Emmaüs (signal wifi + dot teal) ── */
+    .section-separator {
+      width: 82%;
+      max-width: 420px;
+      margin: 8px auto;
+      display: block;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .section-separator svg { width: 100%; height: auto; display: block; }
+
+    /* ── MES AUTRES CONTENUS ── */
+    .autres-contenus-section { width: 82%; max-width: 1200px; margin: 64px auto 0; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .autres-carousel-wrapper { width: 100%; display: flex; align-items: center; gap: 16px; position: relative; }
+    .autres-track-clip { flex: 1; overflow: hidden; }
+    .autres-track { display: flex; gap: 20px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .autres-card { flex-shrink: 0; width: calc((100% - 20px) / 2); aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; position: relative; cursor: default; box-shadow: 0 8px 32px rgba(14, 42, 59, 0.18); transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .autres-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0, 161, 154, 0.25); }
+    .autres-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .autres-card__overlay { position: absolute; inset: 0; background: rgba(14, 42, 59, 0.62); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.25s ease; }
+    .autres-card:hover .autres-card__overlay { opacity: 1; }
+    .autres-card__label { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.06em; color: #fff; text-transform: uppercase; line-height: 1.5; text-align: center; }
+    .autres-arrow { flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(14, 42, 59, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s ease, transform 0.2s ease; box-shadow: 0 4px 14px rgba(14, 42, 59, 0.30); }
+    .autres-arrow:hover { background: rgba(0, 161, 154, 0.92); transform: scale(1.08); }
+    .autres-arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .autres-dots { display: flex; gap: 8px; align-items: center; }
+    .autres-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(14, 42, 59, 0.30); border: none; padding: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .autres-dot.is-active { background: #00A19A; transform: scale(1.3); }
+
+    /* Bouton retour adapté fond clair */
+    .projet-back {
+      color: rgba(14, 42, 59, 0.85);
+      border-color: rgba(14, 42, 59, 0.40);
+    }
+    .projet-back:hover { border-color: #00A19A; color: #00A19A; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1440px) {
+      .projet-hero { min-height: 32vh; height: 32vh; padding: 0 4%; }
+      .hero-thumb { height: 185px; width: auto; }
+      .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); }
+      .projet-card { width: 86%; }
+      .projet-main { padding-top: 40px; gap: 36px; }
+    }
+    @media (max-width: 1280px) {
+      .projet-hero { min-height: 28vh; height: 28vh; padding: 0 3%; }
+      .hero-thumb { height: 150px; width: auto; margin-left: -18px; }
+      .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); }
+      .projet-card { width: 90%; }
+      .projet-main { gap: 32px; }
+    }
+    @media (max-width: 1024px) {
+      .projet-hero { flex-direction: column; height: auto; min-height: auto; padding: 60px 5% 32px; align-items: flex-start; gap: 24px; }
+      .projet-hero__left { width: 100%; }
+      .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0 0 8px; height: auto; }
+      .hero-thumb { height: 190px; width: 114px; margin-left: -18px; }
+      .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); }
+      .projet-card { width: 94%; max-width: 94%; }
+    }
+    @media (max-width: 768px) {
+      .projet-hero { padding: 56px 4% 24px; gap: 20px; }
+      .hero-thumb { height: 155px; width: 93px; margin-left: -14px; }
+      .hero-thumb:first-child { margin-left: 0; }
+      .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); }
+      .projet-card { width: 96%; max-width: 96%; }
+      .projet-main { padding-top: 24px; gap: 24px; }
+    }
+    .title-br-mobile { display: none; }
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations Emmaüs : 3 résultats (2+1 large), TikTok seul (64×64),
+       palette pastel crème/teal reprise du desktop, typo variante C
+       (clamp 1.56→2.28rem desktop conservé). */
+    @media (max-width: 480px) {
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(17.36px, 4.96vw, 21.08px) !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .title-br-mobile { display: inline !important; }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* ───────── ESPACEMENT main (hero → 1ère capsule) ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ───────── RÉSULTATS CLÉS — 3 mini-cartes (2+1 large) ───────── */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.85rem !important;
+        padding: 7px 20px !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      .red-card--results .results-item:last-of-type { grid-column: 1 / -1 !important; }
+      /* Mini-cartes : palette CRÈME/TEAL reprise du desktop (.red-card) */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        background:
+          radial-gradient(circle at center, rgba(0,161,154,0.05) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          linear-gradient(135deg, #ffffff 0%, #F4FAF9 50%, #E8F2F0 100%) !important;
+        border: 1.5px solid rgba(0, 161, 154, 0.30) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(14, 42, 59, 0.14),
+          0 2px 0 rgba(255,255,255,0.65) inset,
+          0 -2px 0 rgba(0, 161, 154, 0.08) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.05) !important;
+        min-height: 92px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-item__value {
+        color: #0E2A3B !important;
+        font-size: clamp(1.56rem, 5vw, 2.28rem) !important;
+      }
+      .red-card--results .results-item__label {
+        color: rgba(14, 42, 59, 0.78) !important;
+        font-size: 0.62rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        letter-spacing: 0.10em !important;
+        min-height: 0 !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok seul (64×64) ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      .contenu-card__metric--featured img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+
+    /* ── CARDS VIDÉO (2 vidéos centrées) ── */
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(220px, 320px));
+      gap: 40px;
+      justify-content: center;
+      width: 100%;
+    }
+    .contenu-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .contenu-card__frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #0E2A3B;
+      box-shadow: 0 20px 50px rgba(14, 42, 59, 0.25), 0 4px 12px rgba(0, 161, 154, 0.15);
+      isolation: isolate;
+    }
+    .contenu-card__frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+    .contenu-card__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .contenu-card__blob--blue   { top: -20%; left: -20%; width: 70%; height: 70%; background: rgba(0, 161, 154, 0.5); }
+    .contenu-card__blob--orange { bottom: -20%; right: -20%; width: 60%; height: 60%; background: rgba(243, 146, 0, 0.45); }
+
+    .contenu-card__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.92);
+      cursor: pointer;
+      z-index: 3;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.30);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .contenu-card__play::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-left: 18px solid #00A19A;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+    .contenu-card__play:hover { transform: translate(-50%, -50%) scale(1.08); }
+    .contenu-card__frame.is-playing .contenu-card__play { opacity: 0; pointer-events: none; }
+
+    .contenu-card__sound {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(14, 42, 59, 0.75);
+      cursor: pointer;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .contenu-card__sound:hover { background: rgba(0, 161, 154, 0.9); }
+    .contenu-card__sound svg { width: 18px; height: 18px; stroke: #fff; fill: #fff; stroke-width: 2; }
+
+    .contenu-card__progress {
+      position: absolute;
+      bottom: 14.5px;
+      left: 14px;
+      right: 14px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.32);
+      cursor: pointer;
+      z-index: 3;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 -2px 8px rgba(0, 0, 0, 0.25);
+      touch-action: none;
+    }
+    /* Hit-zone invisible au-dessus de la barre pour faciliter la prise */
+    .contenu-card__progress::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 100%;
+      height: 14px;
+    }
+    .contenu-card__progress-fill {
+      position: relative;
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #00A19A 0%, #F39200 100%);
+      transition: width 0.1s linear;
+      box-shadow: 0 0 6px rgba(0, 161, 154, 0.45);
+    }
+    /* Curseur (thumb) — visible au hover ou pendant le drag */
+    .contenu-card__progress-fill::after {
+      content: "";
+      position: absolute;
+      right: -7px;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 2px #00A19A;
+      opacity: 0;
+      transform: translateY(-50%) scale(0.6);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .contenu-card__frame:hover .contenu-card__progress-fill::after,
+    .contenu-card__progress.is-scrubbing .contenu-card__progress-fill::after {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Badge métrique sous chaque vidéo */
+    .contenu-card__metric {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .contenu-card__metric--featured {
+      width: 100%; max-width: 100%; min-width: 0;
+      aspect-ratio: 235.76 / 44.49; height: auto;
+      justify-content: center; gap: 2px; padding: 0 !important;
+      background: rgba(16, 0, 1, 0.63);
+      border: 0;
+      border-radius: 8.77px;
+      box-shadow:
+        0 2.51px 2.51px rgba(12, 0, 0, 0.9),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.59);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      box-sizing: border-box;
+      cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0);
+      overflow: visible !important;
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+      text-decoration: none;
+    }
+    .contenu-card__metric--featured:hover { transform: translateY(-1px); }
+    .metric-press__outer {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 300ms ease; will-change: box-shadow;
+      box-shadow: 0 0.05em 0.05em -0.01em rgba(5,5,5,1), 0 0.01em 0.01em -0.01em rgba(5,5,5,0.5), 0.15em 0.3em 0.1em -0.01em rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__outer { box-shadow: 0 0 0 0 rgba(5,5,5,1), 0 0 0 0 rgba(5,5,5,0.5), 0 0 0 0 rgba(5,5,5,0.25); }
+    .metric-press__inner {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 3px; padding: 0 8px 0 4px;
+      transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease;
+      will-change: box-shadow, clip-path, transform; overflow: clip;
+      clip-path: inset(0 0 0 0 round 8.77px);
+      box-shadow:
+        0 0 0 0 inset rgba(5,5,5,0.1),
+        -0.05em -0.05em 0.05em 0 inset rgba(5,5,5,0.25),
+        0 0 0 0 inset rgba(5,5,5,0.1),
+        0 0 0.05em 0.2em inset rgba(255,255,255,0.08),
+        0.025em 0.05em 0.1em 0 inset rgba(255,255,255,0.15),
+        0.12em 0.12em 0.12em inset rgba(255,255,255,0.08),
+        -0.075em -0.25em 0.25em 0.1em inset rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__inner {
+      clip-path: inset(clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 8.77px);
+      background: rgba(0, 161, 154, 0.55);
+      box-shadow:
+        0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+        -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+        0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+        0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.05),
+        0 0 0 0 inset rgba(255, 255, 255, 1),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25),
+        inset 0 0 12px rgba(0, 161, 154, 0.4);
+    }
+    .contenu-card__metric--featured:active .metric-press__inner {
+      transform: scale(0.975);
+      background: rgba(0, 161, 154, 0.55);
+      box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        inset 0 0 12px rgba(0, 161, 154, 0.4),
+        inset 0 0 4px rgba(80, 230, 220, 0.3);
+    }
+    .contenu-card__metric--featured img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: none;
+    }
+    .contenu-card__metric-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: -11px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .contenu-card__metric-inline .metric-value,
+    .contenu-card__metric-inline .metric-separator,
+    .contenu-card__metric-inline .metric-icon,
+    .contenu-card__metric-inline .metric-prefix { font-size: 20px; }
+    .metric-prefix { opacity: 0.85; }
+    .metric-separator { opacity: 0.65; }
+
+    @media (max-width: 768px) {
+      .contenus-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contenu-card { max-width: 280px; margin: 0 auto; }
+      .contenus-section { width: 92%; gap: 32px; }
+    }
+  
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-light" data-page="emmaus">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="emmaus">
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- SYMBOLES SVG réutilisables : pattern dots teal/orange pour les cartes -->
+    <svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
+      <defs>
+        <pattern id="dotsPattern" width="36" height="36" patternUnits="userSpaceOnUse">
+          <circle cx="6"  cy="6"  r="1.6" fill="rgba(0, 161, 154, 0.55)"/>
+          <circle cx="22" cy="14" r="1.2" fill="rgba(243, 146, 0, 0.50)"/>
+          <circle cx="14" cy="26" r="1.5" fill="rgba(0, 161, 154, 0.45)"/>
+          <circle cx="30" cy="30" r="1.0" fill="rgba(14, 42, 59, 0.45)"/>
+        </pattern>
+      </defs>
+    </svg>
+
+    <!-- ÉLÉMENTS DÉCORATIFS qui flottent sur toute la page -->
+    <div class="page-emmaus-deco" aria-hidden="true">
+      <!-- Colonne gauche -->
+      <span class="em-icon em-icon--1">📱</span>
+      <span class="em-icon em-icon--2">📶</span>
+      <span class="em-icon em-icon--3">💬</span>
+      <span class="em-icon em-icon--4">💡</span>
+      <span class="em-icon em-icon--5">🤝</span>
+      <span class="em-icon em-icon--6">📡</span>
+      <span class="em-icon em-icon--7">📲</span>
+
+      <!-- Colonne centre -->
+      <span class="em-icon em-icon--8">💬</span>
+      <span class="em-icon em-icon--9">📶</span>
+      <span class="em-icon em-icon--10">📱</span>
+      <span class="em-icon em-icon--11">💡</span>
+
+      <!-- Colonne droite -->
+      <span class="em-icon em-icon--12">🤝</span>
+      <span class="em-icon em-icon--13">📲</span>
+      <span class="em-icon em-icon--14">📱</span>
+      <span class="em-icon em-icon--15">📡</span>
+      <span class="em-icon em-icon--16">💬</span>
+      <span class="em-icon em-icon--17">📶</span>
+
+      <!-- Icônes diversifiées dispersées -->
+      <span class="em-icon em-icon--18">💡</span>
+      <span class="em-icon em-icon--19">📱</span>
+      <span class="em-icon em-icon--20">📡</span>
+      <span class="em-icon em-icon--21">🤝</span>
+      <span class="em-icon em-icon--22">💬</span>
+      <span class="em-icon em-icon--23">📲</span>
+
+      <!-- Petits dots lumineux teal -->
+      <span class="em-dot em-dot--1"></span>
+      <span class="em-dot em-dot--2"></span>
+      <span class="em-dot em-dot--3"></span>
+      <span class="em-dot em-dot--4"></span>
+      <span class="em-dot em-dot--5"></span>
+      <span class="em-dot em-dot--6"></span>
+    </div>
+
+    <!-- HERO -->
+    <div class="projet-hero">
+      <div class="hero-atmosphere" aria-hidden="true">
+        <!-- Ondes wifi concentriques -->
+        <span class="hero-wave hero-wave--1"></span>
+        <span class="hero-wave hero-wave--2"></span>
+        <span class="hero-wave hero-wave--3"></span>
+        <span class="hero-wave hero-wave--4"></span>
+        <span class="hero-wave hero-wave--5"></span>
+
+        <!-- Halo ambiant -->
+        <div class="hero-honeycomb-glow"></div>
+
+        <!-- Icônes flottantes (téléphone, signal, message, ampoule, mains) -->
+        <span class="hero-icon hero-icon--1">📱</span>
+        <span class="hero-icon hero-icon--2">📶</span>
+        <span class="hero-icon hero-icon--3">💬</span>
+        <span class="hero-icon hero-icon--4">💡</span>
+        <span class="hero-icon hero-icon--5">🤝</span>
+      </div>
+
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Campagne d'influence<br class="title-br-mobile"> Emmaüs Connect</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Campagne d'influence</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/emmaus/vignette-emaus1.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/emmaus/vignette-emaus1.webp" alt="Emmaüs Connect vignette 1"></picture>
+        <picture><source srcset="assets/brand-projects/emmaus/vignette-emaus2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/emmaus/vignette-emaus2.webp" alt="Emmaüs Connect vignette 2"></picture>
+        <picture><source srcset="assets/brand-projects/emmaus/vignette-emaus3.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/emmaus/vignette-emaus3.webp" alt="Emmaüs Connect vignette 3"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <div class="projet-card">
+
+        <!-- CONTEXTE + MES MISSIONS -->
+        <div class="red-row">
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">Dans le cadre d'une campagne de considération, Emmaüs Connect a mandaté l'agence The Source pour engager les jeunes autour des enjeux d'exclusion numérique et stimuler leur mobilisation.</p>
+          </div>
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Mes Missions</div>
+            <p class="red-card__text">Pilotage complet de la campagne d'influence, de la conception créative à la sélection des créateurs.</p>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS -->
+        <div class="red-card red-card--results">
+          <div class="red-card__bg" aria-hidden="true">
+            <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+            </svg>
+          </div>
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row" style="justify-content:center;gap:32px;">
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">598</span><span class="results-item__suffix">K</span></span>
+              <span class="results-item__label">Vues cumulées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">92</span><span class="results-item__suffix">K</span></span>
+              <span class="results-item__label">Likes cumulés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">15,3</span><span class="results-item__suffix">%</span></span>
+              <span class="results-item__label">Taux d'engagement<br>moyen</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — cartes ↔ contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(0, 161, 154, 0)"/>
+              <stop offset="20%"  stop-color="rgba(0, 161, 154, 0.55)"/>
+              <stop offset="50%"  stop-color="rgba(0, 161, 154, 0.55)"/>
+              <stop offset="80%"  stop-color="rgba(0, 161, 154, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(0, 161, 154, 0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade1)" stroke-width="0.9"/>
+            <!-- Onde wifi gauche -->
+            <g transform="translate(150,12)" fill="none" stroke="rgba(0, 161, 154, 0.7)" stroke-width="0.9">
+              <path d="M -8 2 Q -4 -2 0 2"/>
+              <path d="M -5 4 Q -2.5 1 0 4"/>
+              <circle cx="0" cy="6" r="1.2" fill="rgba(0, 161, 154, 0.85)" stroke="none"/>
+            </g>
+            <!-- Losange central teal/orange -->
+            <g transform="translate(190,12)">
+              <polygon points="0,-7 7,0 0,7 -7,0"
+                       fill="rgba(243, 146, 0, 0.45)" stroke="rgba(0, 161, 154, 0.85)" stroke-width="0.9"/>
+              <circle r="1.5" fill="rgba(255, 250, 230, 0.95)"/>
+            </g>
+            <!-- Onde wifi droite -->
+            <g transform="translate(230,12) scale(-1,1)" fill="none" stroke="rgba(0, 161, 154, 0.7)" stroke-width="0.9">
+              <path d="M -8 2 Q -4 -2 0 2"/>
+              <path d="M -5 4 Q -2.5 1 0 4"/>
+              <circle cx="0" cy="6" r="1.2" fill="rgba(0, 161, 154, 0.85)" stroke="none"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES CONTENUS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mes contenus sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+          </span>
+        </div>
+
+        <div class="contenus-grid" id="contenusGrid">
+
+          <!-- CARD 1 : Créateur -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/emmaus/emmaus-createur.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@charlie_haid/video/7284284939195960609" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">230K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">32K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 2 : Créatrice -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/emmaus/emmaus-creatrice.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@mariappymeal1/video/7287274280130301217" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">368K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">60K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — contenus ↔ autres contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(0, 161, 154, 0)"/>
+              <stop offset="20%"  stop-color="rgba(0, 161, 154, 0.55)"/>
+              <stop offset="50%"  stop-color="rgba(0, 161, 154, 0.55)"/>
+              <stop offset="80%"  stop-color="rgba(0, 161, 154, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(0, 161, 154, 0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade2)" stroke-width="0.9"/>
+            <g transform="translate(150,12)" fill="none" stroke="rgba(0, 161, 154, 0.7)" stroke-width="0.9">
+              <path d="M -8 2 Q -4 -2 0 2"/>
+              <path d="M -5 4 Q -2.5 1 0 4"/>
+              <circle cx="0" cy="6" r="1.2" fill="rgba(0, 161, 154, 0.85)" stroke="none"/>
+            </g>
+            <g transform="translate(190,12)">
+              <polygon points="0,-7 7,0 0,7 -7,0"
+                       fill="rgba(243, 146, 0, 0.45)" stroke="rgba(0, 161, 154, 0.85)" stroke-width="0.9"/>
+              <circle r="1.5" fill="rgba(255, 250, 230, 0.95)"/>
+            </g>
+            <g transform="translate(230,12) scale(-1,1)" fill="none" stroke="rgba(0, 161, 154, 0.7)" stroke-width="0.9">
+              <path d="M -8 2 Q -4 -2 0 2"/>
+              <path d="M -5 4 Q -2.5 1 0 4"/>
+              <circle cx="0" cy="6" r="1.2" fill="rgba(0, 161, 154, 0.85)" stroke="none"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman & Marry Me"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span></div>
+              </div>
+            </div>
+          </div>
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

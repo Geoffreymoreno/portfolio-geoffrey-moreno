@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short le + viral sur le compte PlayStationFR — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* ══ PALETTE PLAYSTATION ══ */
+    :root {
+      --ps-deep: #001E54;
+      --ps-navy: #003791;
+      --ps-blue: #0070D1;
+      --ps-light: #1E5BC4;
+      --ps-cyan: #3DD0FF;
+      --ps-cyan-soft: rgba(61, 208, 255, 0.55);
+      --ps-cyan-glow: rgba(61, 208, 255, 0.45);
+      --ps-violet: #AF7DFF;
+    }
+
+    /* ══ FOND DE PAGE — OPTION 6 : CONTINUITÉ HERO + GRAIN CINÉMA ══ */
+    body {
+      background: linear-gradient(180deg, #003791 0%, #001E54 35%, #000d2a 75%, #00081f 100%) !important;
+      background-attachment: fixed !important;
+      color: #e3f1ff;
+      overflow-x: hidden;
+    }
+    /* Grain cinématographique sur tout le viewport */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.20 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      opacity: 0.55;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+    /* S'assurer que tout le contenu reste au-dessus du grain */
+    body > * { position: relative; z-index: 1; }
+
+    /* 1. HERO BANNER */
+    .projet-hero {
+      min-height: 34vh;
+      height: 34vh;
+      background: linear-gradient(120deg, #001E54 0%, #003791 40%, #0070D1 70%, #003791 100%);
+      padding: 0 0 0 8%;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Léger halo cyan en haut du hero pour profondeur */
+    .projet-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 18% -10%, rgba(61,208,255,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 88% 110%, rgba(175,125,255,0.14) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Watermark : symboles manette PlayStation ▲ ○ ✕ ▢ */
+    .hero-watermark {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-symbol {
+      position: absolute;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.18);
+      text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        0 0 18px rgba(61, 208, 255, 0.15);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      will-change: transform;
+    }
+    .hero-symbol--triangle { color: rgba(143, 235, 184, 0.22); }
+    .hero-symbol--circle   { color: rgba(255, 142, 142, 0.22); }
+    .hero-symbol--cross    { color: rgba(132, 188, 255, 0.26); }
+    .hero-symbol--square   { color: rgba(238, 168, 235, 0.22); }
+
+    .hero-symbol:nth-child(1)  { font-size: 130px; opacity: 0.65; top: -8%;  left: 1%;   transform: rotate(-14deg); }
+    .hero-symbol:nth-child(2)  { font-size:  72px; opacity: 0.55; top: 60%;  left:  8%;  transform: rotate(10deg); }
+    .hero-symbol:nth-child(3)  { font-size: 165px; opacity: 0.55; top: 18%;  left: 19%;  transform: rotate(-6deg); }
+    .hero-symbol:nth-child(4)  { font-size:  64px; opacity: 0.60; top: 68%;  left: 33%;  transform: rotate(18deg); }
+    .hero-symbol:nth-child(5)  { font-size: 105px; opacity: 0.62; top:  -6%; left: 44%;  transform: rotate(-12deg); }
+    .hero-symbol:nth-child(6)  { font-size:  82px; opacity: 0.55; top: 55%;  left: 56%;  transform: rotate(8deg); }
+    .hero-symbol:nth-child(7)  { font-size: 145px; opacity: 0.58; top: 22%;  left: 64%;  transform: rotate(-10deg); }
+    .hero-symbol:nth-child(8)  { font-size:  60px; opacity: 0.55; top: 72%;  left: 76%;  transform: rotate(15deg); }
+    .hero-symbol:nth-child(9)  { font-size: 115px; opacity: 0.62; top:  -3%; left: 86%;  transform: rotate(-18deg); }
+    .hero-symbol:nth-child(10) { font-size:  88px; opacity: 0.55; top: 50%;  left: 94%;  transform: rotate(6deg); }
+
+    /* projet-hero__left, projet-title, hero-badges → projet.css */
+    .ps-title-mobile-br { display: none; }
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 20px;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+    .hero-thumb {
+      filter: brightness(1) contrast(1.05) saturate(1.05);
+      box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(61, 208, 255, 0.35),
+        0 0 22px rgba(61, 208, 255, 0.22);
+    }
+
+    /* ══ ADAPTATION DES BADGES ══ */
+    .projet-hero .badge {
+      background: rgba(0, 30, 84, 0.55);
+      border: 1px solid rgba(61, 208, 255, 0.45);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    /* 3. MAIN CARDS — adaptées en bleu PlayStation (renommé .ps-card) */
+    .projet-card {
+      width: 82%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * { position: relative; z-index: 1; }
+
+    .ps-card {
+      position: relative;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1.5px) 0 0 / 14px 14px,
+        linear-gradient(135deg, #0a4cb8 0%, #003791 50%, #001E54 100%);
+      border: 1.5px solid var(--ps-cyan-soft);
+      border-radius: 22px;
+      padding: 38px 42px 34px;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.55),
+        0 0 32px rgba(61, 208, 255, 0.10),
+        0 2px 0 rgba(255,255,255,0.06) inset,
+        0 -2px 0 rgba(0,0,0,0.25) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      filter: brightness(1.08);
+    }
+    .ps-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 0.4px #ffffff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30);
+      padding: 8px 24px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--ps-blue) 0%, var(--ps-navy) 100%);
+      border: 1.5px solid rgba(61, 208, 255, 0.7);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        0 0 14px rgba(61, 208, 255, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      z-index: 3;
+    }
+    .ps-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ps-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #e3f1ff;
+      text-shadow: 0 1px 8px rgba(0, 30, 84, 0.4);
+      text-align: center;
+      margin: 0;
+    }
+    .ps-card__text + .ps-card__text { margin-top: 14px; }
+    .ps-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #e3f1ff;
+      text-shadow: 0 1px 8px rgba(0, 30, 84, 0.4);
+      margin: 0; padding: 0;
+      list-style: none;
+      display: flex; flex-direction: column; gap: 12px;
+      text-align: center; width: 100%;
+    }
+    .ps-card__list li { display: block; text-align: center; }
+    .ps-card__list li::before { content: "•  "; display: inline; color: var(--ps-cyan); }
+
+    /* ── MES RÉSULTATS — CHIFFRES XXL SANS BOÎTE (Option B compact -23%) ── */
+    .ps-card--results {
+      padding: 23px 32px 20px;
+      width: fit-content;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: visible;
+    }
+    .ps-stats-clean {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 0;
+      padding: 5px 6px;
+    }
+    .ps-stat-clean {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 11px;
+    }
+    .ps-stat-clean__halo {
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 138px;
+      height: 138px;
+      border-radius: 50%;
+      filter: blur(31px);
+      opacity: 0.45;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .ps-stat-clean--platine .ps-stat-clean__halo { background: radial-gradient(circle, #9bd6f5 0%, transparent 60%); }
+    .ps-stat-clean--or      .ps-stat-clean__halo { background: radial-gradient(circle, #f5c74e 0%, transparent 60%); }
+    .ps-stat-clean--argent  .ps-stat-clean__halo { background: radial-gradient(circle, #c8d2dd 0%, transparent 60%); }
+
+    .ps-stat-clean__value {
+      position: relative;
+      z-index: 1;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.7rem, 3.1vw, 2.6rem);
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 0 3px 11px rgba(0, 30, 84, 0.6);
+      letter-spacing: -0.02em;
+    }
+    .ps-stat-clean__value .ps-suffix {
+      font-size: 0.42em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      vertical-align: super;
+      margin-left: 3px;
+      color: rgba(227, 241, 255, 0.85);
+    }
+    .ps-stat-clean__divider {
+      position: relative;
+      z-index: 1;
+      width: 28px;
+      height: 1.2px;
+      background: linear-gradient(90deg, transparent 0%, var(--ps-cyan) 50%, transparent 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 5px rgba(61, 208, 255, 0.5);
+    }
+    .ps-stat-clean__label {
+      position: relative;
+      z-index: 1;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.7rem, 0.85vw, 0.77rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(227, 241, 255, 0.88);
+      text-align: center;
+      max-width: 170px;
+      line-height: 1.4;
+    }
+    .ps-stats-clean__sep {
+      position: relative;
+      z-index: 1;
+      width: 1px;
+      height: 70px;
+      background: linear-gradient(180deg, transparent 0%, rgba(61, 208, 255, 0.4) 50%, transparent 100%);
+    }
+
+    @media (max-width: 1024px) {
+      .ps-row { grid-template-columns: 1fr; gap: 48px; }
+      .ps-stats-clean { grid-template-columns: 1fr; gap: 32px; padding: 8px; }
+      .ps-stats-clean__sep { display: none; }
+    }
+    @media (max-width: 640px) {
+      .ps-card { padding: 36px 22px 28px; }
+      .ps-card--results { padding: 26px 18px 22px; }
+    }
+
+    /* 5. MES CONTENUS */
+    .contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(15px, 1.15vw, 18px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      padding: 10px 24px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--ps-blue) 0%, var(--ps-navy) 100%);
+      border: 1.5px solid rgba(61, 208, 255, 0.7);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        0 0 14px rgba(61, 208, 255, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      filter: brightness(1.08);
+    }
+    .contenus-title__logos { display: inline-flex; align-items: center; gap: 9px; }
+    .contenus-title__logos img { height: 28px; width: auto; object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)); }
+
+    /* Carte vidéo unique + piliers holographiques (gauche/droite) */
+    .contenu-solo {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 36px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .contenu-solo__side {
+      display: flex;
+      align-items: center;
+      min-height: 100%;
+    }
+    .contenu-solo__side--left  { justify-content: flex-end; }
+    .contenu-solo__side--right { justify-content: flex-start; }
+    .contenu-card.contenu-card--solo {
+      max-width: 272px;
+      width: 100%;
+    }
+    .contenu-card--solo .contenu-card__frame {
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      background: var(--ps-blue);
+      border: 1.5px solid var(--ps-blue);
+      box-shadow:
+        0 28px 56px rgba(0, 0, 0, 0.5),
+        0 12px 24px rgba(0, 0, 0, 0.4),
+        0 0 32px rgba(61, 208, 255, 0.35);
+      position: relative;
+      overflow: visible;
+    }
+    .contenu-card--solo .contenu-card__frame::before {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--ps-cyan) 0%, var(--ps-blue) 35%, var(--ps-violet) 70%, var(--ps-cyan) 100%);
+      filter: blur(22px);
+      opacity: 0.55;
+      z-index: -1;
+      animation: psPulse 3.6s ease-in-out infinite;
+      width: auto;
+      height: auto;
+      mix-blend-mode: normal;
+      left: -16px;
+      top: -16px;
+    }
+    .contenu-card--solo .contenu-card__frame::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 17px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--ps-cyan) 0%, var(--ps-blue) 50%, var(--ps-violet) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.9;
+      animation: psBorderShift 6s linear infinite;
+      background-size: 200% 200%;
+    }
+    @keyframes psPulse {
+      0%, 100% { opacity: 0.42; transform: scale(1); }
+      50%      { opacity: 0.75; transform: scale(1.04); }
+    }
+    @keyframes psBorderShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .contenu-card--solo .contenu-card__frame video {
+      border-radius: 13px;
+      position: relative;
+      z-index: 2;
+    }
+    /* Suppression de tous les contrôles natifs WebKit / overlays système */
+    .contenu-card--solo video::-webkit-media-controls,
+    .contenu-card--solo video::-webkit-media-controls-enclosure,
+    .contenu-card--solo video::-webkit-media-controls-panel,
+    .contenu-card--solo video::-webkit-media-controls-overlay-play-button,
+    .contenu-card--solo video::-webkit-media-controls-start-playback-button,
+    .contenu-card--solo video::-webkit-media-controls-current-time-display,
+    .contenu-card--solo video::-webkit-media-controls-time-remaining-display,
+    .contenu-card--solo video::-webkit-media-controls-timeline,
+    .contenu-card--solo video::-webkit-media-controls-mute-button,
+    .contenu-card--solo video::-webkit-media-controls-volume-slider,
+    .contenu-card--solo video::-webkit-media-controls-fullscreen-button {
+      display: none !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    .contenu-card--solo .contenu-card__metric-stack {
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    /* ── PILLIERS PS (stats Shorts/Reels sur les côtés) — ÉCHELLE 72% ── */
+    .holo {
+      position: relative;
+      width: 144px;
+      padding: 16px 13px;
+      background: linear-gradient(135deg, #0070D1 0%, #003791 50%, #001E54 100%);
+      border: 1.5px solid rgba(61, 208, 255, 0.65);
+      border-radius: 16px;
+      box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.55),
+        0 0 28px rgba(0, 112, 209, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      transform: perspective(900px) rotateY(6deg) scale(0.85);
+      transform-origin: right center;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .holo--right {
+      transform: perspective(900px) rotateY(-6deg) scale(0.85);
+      transform-origin: left center;
+    }
+    .holo:hover {
+      transform: perspective(900px) rotateY(0deg) translateY(-4px) scale(0.85);
+      box-shadow:
+        0 20px 44px rgba(0, 0, 0, 0.6),
+        0 0 38px rgba(61, 208, 255, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+    }
+    .holo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        transparent 4px,
+        rgba(61, 208, 255, 0.05) 4px,
+        rgba(61, 208, 255, 0.05) 5px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+    .holo::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      height: 30%;
+      top: -30%;
+      background: linear-gradient(180deg, transparent 0%, rgba(61, 208, 255, 0.10) 50%, transparent 100%);
+      pointer-events: none;
+      animation: holoScan 5s linear infinite;
+      z-index: 1;
+    }
+    @keyframes holoScan {
+      0%   { top: -30%; }
+      100% { top: 130%; }
+    }
+    .holo__corner {
+      position: absolute;
+      width: 11px; height: 11px;
+      border: 1.5px solid var(--ps-cyan);
+      z-index: 3;
+      opacity: 0.85;
+    }
+    .holo__corner--tl { top: 6px;    left: 6px;     border-right: none; border-bottom: none; }
+    .holo__corner--tr { top: 6px;    right: 6px;    border-left: none;  border-bottom: none; }
+    .holo__corner--bl { bottom: 6px; left: 6px;     border-right: none; border-top: none; }
+    .holo__corner--br { bottom: 6px; right: 6px;    border-left: none;  border-top: none; }
+
+    .holo__inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 11px;
+    }
+    .holo__logo {
+      width: 32px; height: 32px;
+      border-radius: 7px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    .holo__logo img { width: 24.73px; height: 24.73px; object-fit: contain; }
+    .holo__platform {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      margin-top: -2px;
+    }
+    .holo__sep {
+      width: 36px; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 50%, transparent 100%);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    }
+    .holo__stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+    .holo__num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.66rem;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-shadow:
+        0 0 11px rgba(61, 208, 255, 0.6),
+        0 2px 11px rgba(0, 30, 84, 0.7);
+    }
+    .holo__lbl {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(227, 241, 255, 0.75);
+      margin-top: 1px;
+    }
+
+    /* Conserve les styles génériques contenu-card (issus de la page Netflix-2) */
+    .contenu-card {
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; gap: 16px; width: 100%; max-width: 185px; z-index: 0;
+    }
+    .contenu-card__frame {
+      position: relative; width: 100%; aspect-ratio: 9 / 16;
+      border-radius: 12px; padding: 0;
+      background: var(--ps-blue);
+      border: 1.5px solid var(--ps-blue);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 0 18px rgba(61, 208, 255, 0.18);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.35s ease;
+    }
+    .contenu-card__frame video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      border-radius: 9px; background: #000; position: relative; z-index: 2;
+    }
+    .contenu-card__play {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 56px; height: 56px; border-radius: 50%; background: rgba(0, 30, 84, 0.55);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(61, 208, 255, 0.85);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 4;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 14px rgba(61, 208, 255, 0.35);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .contenu-card__play::after {
+      content: ""; width: 0; height: 0;
+      border-left: 14px solid #ffffff;
+      border-top: 9px solid transparent; border-bottom: 9px solid transparent;
+      margin-left: 4px; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+    }
+    .contenu-card__frame:hover .contenu-card__play { transform: translate(-50%, -50%) scale(1.06); }
+    .contenu-card__frame.is-playing .contenu-card__play { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle { opacity: 0; pointer-events: none; }
+    .contenu-card__frame--player:hover.is-playing .contenu-card__play--toggle { opacity: 0.85; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle::after {
+      content: ""; width: 14px; height: 16px; border: 0; margin-left: 0;
+      background: linear-gradient(#fff,#fff) left/4px 100% no-repeat, linear-gradient(#fff,#fff) right/4px 100% no-repeat;
+    }
+    .contenu-card__sound {
+      position: absolute; top: 10px; right: 10px; z-index: 5;
+      width: 30px; height: 30px; border-radius: 50%; background: rgba(0, 30, 84, 0.6);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(61, 208, 255, 0.35);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; padding: 0; transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .contenu-card__sound:hover { background: rgba(0, 30, 84, 0.85); transform: scale(1.1); }
+    .contenu-card__sound svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; display: block; }
+    .contenu-card__progress {
+      position: absolute; left: 14px; right: 14px; bottom: 12px; height: 3px;
+      border-radius: 999px; background: rgba(255, 255, 255, 0.22);
+      cursor: pointer; z-index: 4; overflow: hidden; transition: height 0.18s ease;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress { height: 5px; }
+    .contenu-card__progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--ps-cyan) 0%, var(--ps-blue) 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 8px rgba(61, 208, 255, 0.7);
+      transition: width 0.1s linear;
+    }
+
+    .contenu-card__metric-stack { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; }
+
+    /* ── Boutons metrics adaptés PlayStation ── */
+    .contenu-card__metric--featured {
+      width: 100%; max-width: 100%; min-width: 0;
+      aspect-ratio: 235.76 / 44.49; height: auto;
+      justify-content: center; gap: 2px; padding: 0 !important;
+      border-radius: 8.77px;
+      box-sizing: border-box; overflow: hidden;
+      cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0);
+      overflow: visible !important;
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+    }
+    .contenu-card__metric--featured:hover { transform: translateY(-1px); }
+
+    /* Variante Shorts (rouge YouTube → conservé pour cohérence plateforme) */
+    .contenu-card__metric--shorts-red {
+      background: rgba(212,62,70,0.7);
+      border: 1px solid rgba(163,38,47,0.7);
+      box-shadow:
+        0 2.51px 2.51px rgba(10,0,0,0.7),
+        0 0.49px 2.5px rgba(24,2,2,0.42);
+    }
+    .contenu-card__metric--shorts-red img { width: 24px !important; height: 30px !important; align-self: center; margin-left: 8px; margin-right: 2px; }
+
+    /* Variante Reels (blanc Instagram) */
+    .contenu-card__metric--reels-white {
+      background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(244,239,239,0.96) 100%);
+      border: 1px solid rgba(0, 55, 145, 0.18);
+      box-shadow:
+        0 2.51px 2.51px rgba(10,0,0,0.18),
+        0 0.49px 2.5px rgba(24,2,2,0.16);
+    }
+    .contenu-card__metric--reels-white img { width: 28px !important; height: 28px !important; align-self: center; margin-left: 8px; margin-right: 2px; filter: none; }
+    .contenu-card__metric--reels-white .metric-prefix,
+    .contenu-card__metric--reels-white .metric-value,
+    .contenu-card__metric--reels-white .metric-separator,
+    .contenu-card__metric--reels-white .metric-icon {
+      color: rgba(0, 30, 84, 0.92);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+    }
+
+    .metric-press__outer {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 300ms ease; will-change: box-shadow;
+      box-shadow:
+        0 0.05em 0.05em -0.01em rgba(5,5,5,1),
+        0 0.01em 0.01em -0.01em rgba(5,5,5,0.5),
+        0.15em 0.3em 0.1em -0.01em rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__outer { box-shadow: 0 0 0 0 rgba(5,5,5,1), 0 0 0 0 rgba(5,5,5,0.5), 0 0 0 0 rgba(5,5,5,0.25); }
+    .metric-press__inner {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 2px; padding: 0 8px 0 0;
+      transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease;
+      will-change: box-shadow, clip-path, transform; overflow: hidden;
+      clip-path: inset(0 0 0 0 round 8.77px);
+    }
+
+    .contenu-card__metric-inline {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 3px; min-width: 0; line-height: 1; flex: 1 1 auto;
+      white-space: nowrap; text-align: center; margin-left: 0;
+      overflow: hidden;
+    }
+    .contenu-card__metric-inline .metric-value,
+    .contenu-card__metric-inline .metric-separator,
+    .contenu-card__metric-inline .metric-prefix,
+    .contenu-card__metric-inline .metric-icon {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif; font-size: clamp(11px, 1.05vw, 14px); font-weight: 800;
+      color: rgba(255, 255, 255, 0.97); line-height: 1; display: inline-flex; align-items: center;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 1100px) {
+      .contenu-card.contenu-card--solo { max-width: 251px; }
+      .holo, .holo--right { width: 130px; padding: 13px 11px; }
+      .holo__num { font-size: 1.44rem; }
+      .contenu-solo { gap: 24px; }
+    }
+    @media (max-width: 1024px) {
+      .contenus-section { width: 92%; }
+      .contenu-card.contenu-card--solo { max-width: 238px; }
+      .contenu-solo {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        max-width: 500px;
+      }
+      .contenu-solo__side { justify-content: center !important; }
+      .contenu-solo__side--left  { order: 2; }
+      .contenu-card.contenu-card--solo { order: 1; justify-self: center; }
+      .contenu-solo__side--right { order: 3; }
+      .holo, .holo--right { transform: scale(0.85); width: 216px; padding: 16px 13px; }
+      .holo:hover, .holo--right:hover { transform: translateY(-4px) scale(0.85); }
+      .holo__num { font-size: 1.58rem; }
+    }
+    @media (max-width: 640px)  {
+      .contenus-section { width: 94%; gap: 36px; }
+      .contenu-card.contenu-card--solo { max-width: 204px; }
+      .holo, .holo--right { width: 187px; padding: 14px 12px; }
+      .holo__num { font-size: 1.44rem; }
+      .autres-contenus-section { margin-top: 90px; }
+    }
+
+    /* ══ MES AUTRES CONTENUS — CARROUSEL (adapté PS) ══ */
+    .autres-contenus-section {
+      width: 82%; max-width: 1200px; margin: 130px auto 0;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+    .autres-carousel-wrapper { width: 100%; display: flex; align-items: center; gap: 16px; position: relative; }
+    .autres-track-clip { flex: 1; overflow: hidden; }
+    .autres-track { display: flex; gap: 20px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .autres-card {
+      flex-shrink: 0; width: calc((100% - 20px) / 2); aspect-ratio: 16/9;
+      border-radius: 20px; overflow: hidden; position: relative; cursor: default;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .autres-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0, 30, 84, 0.4); }
+    .autres-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .autres-card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0, 30, 84, 0.7) 0%, rgba(0, 0, 0, 0.55) 100%);
+      display: flex; align-items: center; justify-content: center; padding: 16px;
+      opacity: 0; transition: opacity 0.25s ease;
+    }
+    .autres-card:hover .autres-card__overlay { opacity: 1; }
+    .autres-card__label {
+      font-family: 'Poppins',sans-serif; font-weight: 800;
+      font-size: 1.25rem; letter-spacing: 0.06em;
+      color: #fff; text-transform: uppercase; line-height: 1.5; text-align: center;
+    }
+    .autres-arrow {
+      flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: none;
+      background: rgba(0, 30, 84, 0.72);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+    .autres-arrow:hover { background: rgba(0, 112, 209, 0.85); transform: scale(1.08); }
+    .autres-arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .autres-dots { display: flex; gap: 8px; align-items: center; }
+    .autres-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); border: none; padding: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .autres-dot.is-active { background: var(--ps-cyan); transform: scale(1.3); box-shadow: 0 0 10px rgba(61, 208, 255, 0.6); }
+
+    @media (max-width: 1440px) { .projet-hero { min-height: 32vh; height: 32vh; padding: 0 4%; } .hero-thumb { height: 185px; } .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); } .projet-card { width: 86%; } .projet-main { padding-top: 40px; gap: 36px; } }
+    @media (max-width: 1280px) { .projet-hero { min-height: 28vh; height: 28vh; padding: 0 3%; } .hero-thumb { height: 150px; margin-left: -18px; } .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); } .projet-card { width: 90%; } .projet-main { gap: 32px; } }
+    @media (max-width: 1024px) { .projet-hero { flex-direction: column; height: auto; min-height: auto; padding: 60px 5% 32px; align-items: flex-start; gap: 24px; } .projet-hero__left { width: 100%; } .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0 0 8px; height: auto; } .hero-thumb { height: 190px; width: 114px; margin-left: -18px; } .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); } .projet-card { width: 94%; max-width: 94%; } }
+    @media (max-width: 768px) { .projet-hero { padding: 56px 4% 24px; gap: 20px; } .hero-thumb { height: 155px; width: 93px; margin-left: -14px; } .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); } .projet-card { width: 96%; max-width: 96%; } .projet-main { padding-top: 24px; gap: 24px; } }
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations PlayStation : 0 résultats (pas de .red-card--results),
+       TikTok+Shorts+Reels (64×64 / 64×39 / 64×41).
+       Watermarks .hero-symbol (spans 60-165px) shrinkés à 30px / opacity 0.30. */
+    @media (max-width: 480px) {
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(17.05px, 4.96vw, 20.93px) !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .ps-title-mobile-br { display: inline !important; }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+      /* Watermarks PlayStation (.hero-symbol spans 60-165px) — shrink uniforme */
+      .hero-watermark .hero-symbol {
+        font-size: 30px !important;
+        opacity: 0.30 !important;
+      }
+
+      /* ───────── ESPACEMENT main ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+        gap: 72px !important;
+      }
+      .ps-row { gap: 72px !important; }
+      .red-row > .red-card { padding: 30px 19px 24px !important; }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok + Shorts + Reels ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      .contenu-card__metric--featured img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+        width: 64px !important;
+        height: 39px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+        width: 64px !important;
+        height: 41px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--shorts-red .contenu-card__metric-inline,
+      .contenu-card__metric--featured.contenu-card__metric--reels-white .contenu-card__metric-inline {
+        transform: translateX(-4px) !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── CAPSULES Shorts + Reels — MÊME LIGNE ───────── */
+      .contenu-solo {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-areas:
+          "video video"
+          "left  right" !important;
+        gap: 24px 12px !important;
+        max-width: 100% !important;
+        justify-items: center !important;
+      }
+      .contenu-card.contenu-card--solo {
+        grid-area: video !important;
+        order: 0 !important;
+      }
+      .contenu-solo__side--left {
+        grid-area: left !important;
+        order: 0 !important;
+        justify-content: center !important;
+        width: 100% !important;
+      }
+      .contenu-solo__side--right {
+        grid-area: right !important;
+        order: 0 !important;
+        justify-content: center !important;
+        width: 100% !important;
+      }
+      .holo, .holo--right {
+        width: 100% !important;
+        max-width: 160px !important;
+        padding: 12px 10px !important;
+        transform: none !important;
+      }
+      .holo:hover, .holo--right:hover {
+        transform: translateY(-4px) !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+  
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-dark" data-page="playstation">
+
+  <!-- Définitions SVG des dégradés trophées -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="grad-platine" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#f4fbff"/>
+        <stop offset="50%" stop-color="#9bd6f5"/>
+        <stop offset="100%" stop-color="#3a87b8"/>
+      </linearGradient>
+      <linearGradient id="grad-or" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#fff4c2"/>
+        <stop offset="50%" stop-color="#f5c74e"/>
+        <stop offset="100%" stop-color="#a87106"/>
+      </linearGradient>
+      <linearGradient id="grad-argent" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#f7fafd"/>
+        <stop offset="50%" stop-color="#c8d2dd"/>
+        <stop offset="100%" stop-color="#6c7785"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="playstation">
+        <!-- Cartes par défaut (fallback statique) — JS randomise à chaque ouverture -->
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-yop.html" class="hms-drawer__card" data-project="yop">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-yop.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- 1. HERO BANNER -->
+    <div class="projet-hero">
+      <div class="hero-watermark">
+        <span class="hero-symbol hero-symbol--triangle">△</span>
+        <span class="hero-symbol hero-symbol--circle">◯</span>
+        <span class="hero-symbol hero-symbol--cross">✕</span>
+        <span class="hero-symbol hero-symbol--square">□</span>
+        <span class="hero-symbol hero-symbol--triangle">△</span>
+        <span class="hero-symbol hero-symbol--cross">✕</span>
+        <span class="hero-symbol hero-symbol--circle">◯</span>
+        <span class="hero-symbol hero-symbol--square">□</span>
+        <span class="hero-symbol hero-symbol--triangle">△</span>
+        <span class="hero-symbol hero-symbol--circle">◯</span>
+      </div>
+
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Short le + viral sur <br class="ps-title-mobile-br">le compte PlayStationFR</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenu Organique</span>
+          <span class="badge">2023</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/playstation/vignette-play1.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/playstation/vignette-play1.webp" alt="PlayStation vignette 1"></picture>
+        <picture><source srcset="assets/brand-projects/playstation/vignette-play2.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/playstation/vignette-play2.webp" alt="PlayStation vignette 2"></picture>
+        <picture><source srcset="assets/brand-projects/playstation/vignette-play3.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/playstation/vignette-play3.webp" alt="PlayStation vignette 3"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <!-- CONTEXTE + MES MISSIONS -->
+      <div class="projet-card">
+        <div class="ps-row">
+
+          <div class="ps-card">
+            <div class="ps-card__label">Contexte</div>
+            <p class="ps-card__text">Début 2022, l'agence The Source remporte le budget PlayStation France pour la gestion social media, avec une production hebdomadaire de contenus natifs Instagram et YouTube.</p>
+          </div>
+
+          <div class="ps-card">
+            <div class="ps-card__label">Mes Missions</div>
+            <ul class="ps-card__list">
+              <li>Conception et supervision d'une vidéo originale intégrant l'univers PlayStation à mon image et celle de mon jumeau.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS — CHIFFRES XXL SANS BOÎTE -->
+        <div class="ps-card ps-card--results">
+          <div class="ps-card__label">Résultats clés</div>
+          <div class="ps-stats-clean">
+
+            <div class="ps-stat-clean ps-stat-clean--platine">
+              <span class="ps-stat-clean__halo"></span>
+              <span class="ps-stat-clean__value">N°1</span>
+              <span class="ps-stat-clean__divider"></span>
+              <span class="ps-stat-clean__label">Short le + viral sur PlayStationFR</span>
+            </div>
+
+            <span class="ps-stats-clean__sep"></span>
+
+            <div class="ps-stat-clean ps-stat-clean--or">
+              <span class="ps-stat-clean__halo"></span>
+              <span class="ps-stat-clean__value">+1.7<span class="ps-suffix">M</span></span>
+              <span class="ps-stat-clean__divider"></span>
+              <span class="ps-stat-clean__label">Vues cumulées</span>
+            </div>
+
+            <span class="ps-stats-clean__sep"></span>
+
+            <div class="ps-stat-clean ps-stat-clean--argent">
+              <span class="ps-stat-clean__halo"></span>
+              <span class="ps-stat-clean__value">+90<span class="ps-suffix">K</span></span>
+              <span class="ps-stat-clean__divider"></span>
+              <span class="ps-stat-clean__label">Likes cumulés</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MES CONTENUS SUR SHORTS / REELS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mon contenu sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-shorts.png" alt="Shorts">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-reels.png" alt="Reels">
+          </span>
+        </div>
+
+        <div class="contenu-solo">
+
+          <div class="contenu-solo__side contenu-solo__side--left">
+            <a href="https://www.youtube.com/shorts/SgqlGHCxZTM?si=_ui53YlBiRVw_IYb" target="_blank" rel="noopener noreferrer" class="holo">
+              <span class="holo__corner holo__corner--tl"></span>
+              <span class="holo__corner holo__corner--tr"></span>
+              <span class="holo__corner holo__corner--bl"></span>
+              <span class="holo__corner holo__corner--br"></span>
+              <div class="holo__inner">
+                <div class="holo__logo"><img decoding="async" loading="lazy" src="assets/hero-section/logo-shorts.png" alt="Shorts"></div>
+                <span class="holo__platform">Shorts</span>
+                <span class="holo__sep"></span>
+                <div class="holo__stat">
+                  <span class="holo__num">1.4M</span>
+                  <span class="holo__lbl">Views</span>
+                </div>
+                <div class="holo__stat">
+                  <span class="holo__num">78K</span>
+                  <span class="holo__lbl">Likes</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="contenu-card contenu-card--solo">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <video src="assets/hero-section/playstation.mp4" playsinline preload="metadata" muted disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen noplaybackrate noremoteplayback"></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contenu-solo__side contenu-solo__side--right">
+            <a href="https://www.instagram.com/reel/CyS2dUaInI_/?utm_source=ig_web_copy_link" target="_blank" rel="noopener noreferrer" class="holo holo--right">
+              <span class="holo__corner holo__corner--tl"></span>
+              <span class="holo__corner holo__corner--tr"></span>
+              <span class="holo__corner holo__corner--bl"></span>
+              <span class="holo__corner holo__corner--br"></span>
+              <div class="holo__inner">
+                <div class="holo__logo"><img decoding="async" loading="lazy" src="assets/hero-section/logo-reels.png" alt="Reels"></div>
+                <span class="holo__platform">Reels</span>
+                <span class="holo__sep"></span>
+                <div class="holo__stat">
+                  <span class="holo__num">350K</span>
+                  <span class="holo__lbl">Views</span>
+                </div>
+                <div class="holo__stat">
+                  <span class="holo__num">17K</span>
+                  <span class="holo__lbl">Likes</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman Marry Me"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span></div>
+              </div>
+            </div>
+          </div>
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

@@ -1,0 +1,688 @@
+/* ══ PAGE PROJET — STYLES PARTAGÉS ══
+   Chargé sur toutes les pages projet-*.html après style.css.
+   Contient uniquement ce qui est identique sur chaque page.
+   Les couleurs, hauteurs et décorations spécifiques restent
+   dans le bloc <style> de chaque page.
+══════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'PoppinsEB';
+  src: url('assets/fonts/poppins/Poppins-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* ── Header : on hérite du style global de style.css (glassmorphique unifié) ── */
+
+/* ── Hero banner — mise en page commune ── */
+.projet-hero {
+  width: 100%;
+  margin-top: 0;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+  gap: 24px;
+}
+
+/* ── Main layout ── */
+.projet-main {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 52px;
+  padding-bottom: 100px;
+  /* `clip` au lieu de `hidden` : coupe le débordement horizontal sans
+     créer de scroll container interne. Avec `hidden`, la spec CSS résout
+     overflow-y en `auto` → la molette était piégée dans .projet-main
+     quand le curseur passait dessus, le hero restait figé. */
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ── Colonne gauche du hero ── */
+.projet-hero__left {
+  flex: 1 1 auto;
+  min-width: 0;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 62%;
+  padding-left: 2%;
+  padding-top: 28px;
+}
+
+/* ── Titre du projet ── */
+.projet-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.04rem, 2vw, 1.84rem);
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  margin: 0 0 18px 0;
+  text-shadow: 0 4px 22px rgba(0,0,0,0.45);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+/* ── Badges verre dans le hero ── */
+.hero-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+.hero-badges .badge {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 4px 16px rgba(0,0,0,0.20),
+    0 1px 0 rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 0 -2px 6px rgba(0,0,0,0.18);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.30);
+  flex: none;
+  white-space: nowrap;
+}
+
+/* ── Miniatures du hero — base commune ── */
+.hero-thumb {
+  height: 210px;
+  width: auto;
+  object-fit: cover;
+  border-radius: 14px;
+  position: relative;
+  margin-left: 0;
+  flex-shrink: 0;
+  filter: brightness(1.1);
+}
+.hero-thumb:nth-child(1) { transform: rotate(-6deg); z-index: 1; }
+.hero-thumb:nth-child(2) { transform: rotate(0deg);  z-index: 3; }
+.hero-thumb:nth-child(3) { transform: rotate(6deg);  z-index: 2; }
+
+/* ── Bouton retour ── */
+.projet-back {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.8);
+  background: transparent;
+  border: 1.5px solid rgba(240,237,232,0.35);
+  border-radius: 999px;
+  padding: 12px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.projet-back:hover { border-color: rgba(240,237,232,0.75); color: #F0EDE8; }
+
+
+/* ═════════════════════════════════════════════════════════════════════
+   MOBILE — Flèche de retour vers la page principale (≤480px)
+   Injectée par back-button.js. Design ALIGNÉ sur le burger button
+   (.hms-burger) pour cohérence visuelle : fond crème/lavande gradient,
+   bordure violette, multi-shadow, flèche sombre #1a1230.
+   ═════════════════════════════════════════════════════════════════════ */
+.projet-back-arrow {
+  display: none; /* caché par défaut (desktop / tablette) */
+}
+@media (max-width: 480px) {
+  .projet-back-arrow {
+    display: flex;
+    position: fixed;
+    top: 14px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    /* Mêmes propriétés que .hms-burger pour matching visuel */
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(245,240,255,0.78) 100%);
+    backdrop-filter: blur(24px) saturate(1.05);
+    -webkit-backdrop-filter: blur(24px) saturate(1.05);
+    border: 1.5px solid rgba(160,130,230,0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.92),
+      inset 0 -1px 0 rgba(60,40,120,0.10),
+      0 4px 14px rgba(60,40,120,0.15),
+      0 2px 4px rgba(0,0,0,0.04);
+    align-items: center;
+    justify-content: center;
+    z-index: 10001; /* au-dessus du header fixed (z-index 1000/1001) */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .projet-back-arrow:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(60,40,120,0.20);
+  }
+  .projet-back-arrow:active {
+    transform: scale(0.95);
+  }
+  /* Masquer la flèche de retour quand le drawer mobile est ouvert :
+     le bouton X du drawer suffit, et l'arrow remontait par-dessus
+     (z-index 10001) en faisant doublon avec le X. */
+  body:has(.hms-drawer.is-open) .projet-back-arrow {
+    display: none;
+  }
+  .projet-back-arrow svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    /* La couleur de la flèche est forcée via stroke inline mais on garde
+       un fallback ici pour les SVG qui utiliseraient currentColor. */
+    color: #1a1230;
+  }
+  /* Masque le logo GM "GEOFFREY MORENO" / "GM" pendant que la flèche
+     prend sa place — évite le doublon visuel au même endroit.
+     IMPORTANT : on utilise visibility:hidden (et non display:none) sur
+     .hms-logo pour préserver son slot dans le flex space-between du
+     header mobile split → ça garde le burger côté droit. Sinon la
+     suppression du logo pousserait le burger à gauche (sous la flèche). */
+  body.has-back-arrow .header-logo {
+    display: none !important;
+  }
+  body.has-back-arrow .hms-logo {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+
+/* ═════════════════════════════════════════════════════════════════════
+   MOBILE — Carrousel "Mes autres contenus sur" (≤480px)
+   Refonte complète : swipe natif avec scroll-snap, peek 10-15%, sans
+   flèches, sans dots, avec compteur "X / N" et mini-label par bannière.
+
+   IMPORTANT : ces règles sont AVANT les inline <style> dans la cascade ?
+   NON — projet.css est chargé en <head> AVANT les <style> inline.
+   Donc on doit utiliser !important pour battre les inline.
+
+   Toutes les règles sont scopées sur @media max-width: 480px
+   ⇒ aucun impact sur desktop, tablette, MacBook.
+   ═════════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* (1) Header rouge "MES AUTRES CONTENUS SUR" — +23% sur l'ensemble
+     des dimensions (font/padding/gap/radius/logos). */
+  .autres-contenus-section .contenus-title {
+    font-size: 0.885rem !important;       /* 0.72 × 1.23 */
+    padding: 10px 17px !important;        /* 8×1.23 / 14×1.23 */
+    gap: 10px !important;                 /* 8 × 1.23 */
+    border-radius: 12px !important;       /* 10 × 1.23 */
+    letter-spacing: 0.12em !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35) !important;
+    filter: none !important;
+  }
+  .autres-contenus-section .contenus-title__logos img {
+    height: 22px !important;              /* 18 × 1.23 */
+  }
+
+  /* (2) Section — full width, marge top réduite */
+  .autres-contenus-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 40px auto 0 !important;
+    gap: 18px !important;
+  }
+
+  /* (3) Wrapper carousel — pas de gap (plus de flèches), full width */
+  .autres-carousel-wrapper {
+    gap: 0 !important;
+  }
+
+  /* (4) Flèches navigation — MASQUÉES sur mobile (swipe natif uniquement) */
+  .autres-arrow--prev,
+  .autres-arrow--next {
+    display: none !important;
+  }
+
+  /* (5) Track clip — scrollable horizontalement avec snap.
+     padding-left réduit (4vw) pour aligner la 1ère carte avec la marge
+     gauche du viewport ; padding-right généreux (30vw+) pour permettre
+     à la dernière carte de snap à la même position. */
+  .autres-track-clip {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding: 8px 30vw 8px 4vw !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  .autres-track-clip::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* (6) Track — aucun transform JS, layout flex pur. gap réduit. */
+  .autres-track {
+    transform: none !important;
+    gap: 12px !important;
+    transition: none !important;
+  }
+
+  /* (7) Cards — 64vw (= 85vw × 0.75, -25% vs version précédente).
+     scroll-snap-align: START (vs center) ⇒ permet 30% de peek de la
+     carte suivante à droite tout en gardant 4vw de marge gauche.
+     Aspect ratio 16/9 conservé ⇒ hauteur shrink proportionnellement.
+     Hover désactivé (pas pertinent sur tactile). */
+  .autres-contenus-section .autres-card {
+    width: 64vw !important;
+    max-width: 64vw !important;
+    flex: 0 0 64vw !important;
+    aspect-ratio: 16 / 9 !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+    border-radius: 16px !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.32) !important;
+  }
+  .autres-contenus-section .autres-card:hover {
+    transform: none !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.32) !important;
+  }
+
+  /* (7bis) Tap-to-reveal — réplique le comportement de la home page
+     (.gallery-card--preview.is-tap-active). 1er tap = révèle overlay,
+     2e tap = navigation (gérée par carousel-autres.js).
+     L'overlay reste hidden au repos sur mobile (pas de hover). */
+  .autres-contenus-section .autres-card__overlay {
+    opacity: 0 !important;
+  }
+  .autres-contenus-section .autres-card.is-tap-active .autres-card__overlay {
+    opacity: 1 !important;
+  }
+  .autres-contenus-section .autres-card.is-tap-active .ov-title,
+  .autres-contenus-section .autres-card.is-tap-active .ov-year {
+    transform: translateY(0) !important;
+  }
+
+  /* (7ter) Typo overlay alignée pile sur la HOME PAGE à 430px :
+     home title = 14.4px (0.9rem), padding 0 18px ; year = 11.25px.
+     L'inline CSS des pages projet force 1.7rem ⇒ surcharge ici pour
+     que le format des titres des bannières du carrousel matche
+     EXACTEMENT celui des bannières de la home (même typo, même padding,
+     même proportions du décor ::before/::after). */
+  .autres-contenus-section .autres-card .ov-title {
+    font-size: 0.9rem !important;
+    padding: 0 18px !important;
+    line-height: 1.18 !important;
+  }
+  .autres-contenus-section .autres-card .ov-title::before,
+  .autres-contenus-section .autres-card .ov-title::after {
+    width: 14px !important;
+    height: 1.6px !important;
+  }
+  .autres-contenus-section .autres-card .ov-year {
+    font-size: 0.7rem !important;
+    margin-top: 8px !important;
+    letter-spacing: 0.16em !important;
+  }
+
+  /* (8) Dots de pagination — MASQUÉES sur mobile (remplacées par counter) */
+  .autres-dots {
+    display: none !important;
+  }
+
+  /* (9) Counter "X / N" — généré par carousel-autres.js sur mobile.
+     ENCAPSULÉ dans une pilule glassmorphism qui réutilise EXACTEMENT
+     la grammaire visuelle de .va2-pill (style.css L618) et de
+     .xp-floating-title (style.css L1265) : même gradient blanc→lavande,
+     même backdrop-blur, même bordure violette, même multi-shadow.
+     Seule différence : border-radius: 999px pour un effet stadium
+     (extrémités complètement arrondies, vs 12/14px sur les autres).
+
+     Typo : chiffre actif en ROUGE NETFLIX (#e5091a, exact pixel du
+     header "MES AUTRES CONTENUS SUR" juste au-dessus), bold 800.
+     Le "/ N" en navy #2a1f54 (couleur design-system pastel), plus
+     léger (sep 500, total 600), opacités atténuées. */
+  .autres-counter {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    /* Glassmorphism pill — pattern partagé avec .va2-pill / .xp-floating-title.
+       -10% : padding 7x22→6x20, font 0.95rem→0.855rem. */
+    padding: 6px 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(245,240,255,0.78) 100%);
+    backdrop-filter: blur(10px) saturate(1.2);
+    -webkit-backdrop-filter: blur(10px) saturate(1.2);
+    border: 1.5px solid rgba(160,130,230,0.40);
+    border-radius: 999px; /* stadium / pill */
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.85),
+      inset 0 -1px 0 rgba(60,40,120,0.10),
+      0 6px 18px rgba(60,40,120,0.18),
+      0 2px 4px rgba(0,0,0,0.06);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    /* Typo */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.855rem;
+    letter-spacing: 0.06em;
+    /* Layout — centrée horizontalement sous le carrousel */
+    width: fit-content;
+    margin: 12px auto 0;
+    user-select: none;
+  }
+  .autres-counter__current {
+    color: #e5091a; /* Rouge Netflix exact (= header au-dessus) */
+    font-weight: 800;
+    margin-right: 3px;
+    display: inline-block;
+    min-width: 0.7em; /* évite le reflow de la pill quand 1→9→10... */
+    text-align: right;
+  }
+  /* Transition douce sur changement de chiffre : animation déclenchée
+     par carousel-autres.js qui toggle .is-flipping à chaque update.
+     ~350ms fade-up = élément vivant qui répond au swipe. */
+  .autres-counter__current.is-flipping {
+    animation: autresCounterFlip 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes autresCounterFlip {
+    0%   { opacity: 0; transform: translateY(-4px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .autres-counter__separator {
+    color: #2a1f54; /* navy design-system */
+    font-weight: 500;
+    margin: 0 4px;
+    opacity: 0.55;
+  }
+  .autres-counter__total {
+    color: #2a1f54;
+    font-weight: 600;
+    opacity: 0.80;
+  }
+
+  /* (10) Mini-label MASQUÉ — remplacé par le mécanisme tap-to-reveal
+     (overlay du composant gallery-card). Garde la règle pour cleanup
+     au cas où d'anciennes pages auraient encore le label en DOM. */
+  .autres-card__label-mobile {
+    display: none !important;
+  }
+
+  /* (11) Back button "← Retour aux projets" — masqué sur mobile.
+     La flèche ronde .projet-back-arrow (injectée par back-button.js,
+     visible ≤480px) joue déjà ce rôle ⇒ le pill ferait doublon. */
+  .projet-back {
+    display: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   GRAND MONITEUR (≥1800px) — Kit responsive pour pages projet
+   ───────────────────────────────────────────────────────────────────────
+   Phase 1 : tests sur projet-netflix.html
+   Phase 2 : généralisation à toutes les pages projet (via cette media query
+             commune dans projet.css, automatiquement appliquée).
+   N'AFFECTE PAS les MacBook (max effectif 1728px).
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 1800px) {
+
+  /* ── HERO ──────────────────────────────────────────────────────────
+     Vignettes (3 thumbnails à droite) : décalage modéré vers la gauche
+     pour que toutes soient visibles à l'écran + scale 1.15.
+     Origin right center : le bord droit reste fixe (pas de touche à
+     la bordure de l'écran), les vignettes grandissent vers la gauche. */
+  .projet-hero__thumbs {
+    transform: translateX(-100px) scale(1.15);
+    transform-origin: right center;
+  }
+
+  /* Bloc gauche du hero (titre + 3 badges) : +30%, ancré à gauche
+     pour grandir vers la droite (vers l'espace libéré par les vignettes). */
+  .projet-hero__left {
+    transform: scale(1.30);
+    transform-origin: left center;
+  }
+
+  /* ── CONTENU PRINCIPAL ─────────────────────────────────────────────
+     Toutes les sections sous le hero (.projet-card → contexte/missions/
+     résultats, .contenus-section → vidéos, .autres-contenus-section →
+     carousel) +35%. On scale .projet-main directement : tout le contenu
+     grandit ensemble sans risque de chevauchement entre sections. */
+  .projet-main {
+    transform: scale(1.35);
+    transform-origin: top center;
+  }
+
+  /* "Mes autres contenus" + bannières du carousel : -14% par rapport
+     au rendu courant (1.35 × 0.86 ≈ 1.161, soit +16% sur la base). */
+  .autres-contenus-section {
+    transform: scale(0.86);
+    transform-origin: top center;
+  }
+
+  /* "Retour aux projets" remonté pour combler le vide laissé par
+     le scale(0.86) sur .autres-contenus-section (le layout garde la
+     hauteur originale, donc ~14% de gap fantôme au bas du carousel).
+     Reste sous les pagination dots — pas de chevauchement avec les bannières. */
+  .projet-back {
+    margin-top: -150px;
+  }
+
+  /* ── OVERRIDES SPÉCIFIQUES PAR PAGE ────────────────────────────────
+     Certaines pages ont des contenus plus denses : on réduit la section
+     Contexte/Missions/Résultats par scale additionnel sur .projet-card.
+     (Le parent .projet-main reste à 1.35 ; ces scales s'y composent.) */
+
+  /* Candyman & Marry Me :
+     - Gros rectangles .projet-card : 0.78 × 1.12 = 0.87 (+12% par rapport à avant)
+     - Étiquettes .red-card__label : +15% (translateX(-50%) préservé)
+     - "Mes contenus sur" rapproché de Résultats clés (60px de plus)
+     - "Mes autres contenus" rapproché de la vignette 560K */
+  body[data-page="candyman-marryme"] .projet-card {
+    transform: scale(0.87);
+    transform-origin: top center;
+  }
+  body[data-page="candyman-marryme"] .red-card__label {
+    transform: translateX(-50%) scale(1.15);
+  }
+  body[data-page="candyman-marryme"] .contenus-section {
+    transform: translateY(-160px);
+  }
+  body[data-page="candyman-marryme"] .autres-contenus-section {
+    margin-top: -180px;
+  }
+
+  /* Mercredi :
+     - Contexte/Missions/Résultats à scale 0.825 (= -25% original × +10% ajout récent)
+     - Capsules labels (Contexte / Mes Missions / Résultats clés) +10% supplémentaire
+     - "Mes contenus sur" rapproché de la section "Résultats clés" */
+  body[data-page="mercredi"] .projet-card {
+    transform: scale(0.825);
+    transform-origin: top center;
+  }
+  body[data-page="mercredi"] .red-card__label {
+    transform: translateX(-50%) scale(1.10);
+  }
+  body[data-page="mercredi"] .contenus-section {
+    transform: translateY(-100px);
+  }
+  /* "Mes autres contenus" rapproché de la dernière vignette (1.7M).
+     translateY sur .contenus-section ne déplace pas le layout, donc
+     .autres-contenus-section reste à sa position d'origine et le gap
+     visuel augmente. margin-top négatif compense + resserre légèrement.
+     Détendu à -80px pour laisser un peu plus de respiration entre 1.7M
+     et "Mes autres contenus sur". */
+  body[data-page="mercredi"] .autres-contenus-section {
+    margin-top: -80px;
+  }
+  /* Grand rectangle "Résultats clés" un peu plus haut : +20px de padding
+     top et bottom (≈ +33px visuels après scale(0.825)). */
+  body[data-page="mercredi"] .red-card--results {
+    padding: 45px 8px 41px;
+  }
+
+  /* Yop (contenus homemade pour le compte TikTok) :
+     - Titre hero -20% : remplace scale 1.30 par 1.04 (= 1.30 × 0.80)
+     - Contexte/Missions/Résultats : 0.95 × 0.85 = 0.81 (-15% par rapport à avant)
+     - "Mes contenus sur TikTok" rapproché de "Résultats clés"
+     - "Mes autres contenus" remonté proportionnellement (margin-top
+       → le back button suit aussi, pas de gap fantôme)
+     - Background fixé forcé : le scale(1.35) global sur .projet-main
+       casse le background-attachment: fixed natif du body. */
+  body[data-page="yop"] .projet-hero__left {
+    transform: scale(1.04);
+  }
+  body[data-page="yop"] .projet-card {
+    transform: scale(0.81);
+    transform-origin: top center;
+  }
+  /* Étiquettes (Contexte / Mes Missions / Résultats clés) :
+     1.15 × 1.10 = 1.27 (+10% par rapport à avant).
+     translateX(-50%) préservé pour conserver le centrage absolute. */
+  body[data-page="yop"] .red-card__label {
+    transform: translateX(-50%) scale(1.27);
+  }
+  /* Rapproche "Mes contenus sur" de Résultats clés (40px de plus). */
+  body[data-page="yop"] .contenus-section {
+    transform: translateY(-180px);
+  }
+  /* Rapproche "Mes autres contenus sur" de la vignette 1.5M (70px de plus
+     vs -150px précédent). Marge de sécurité conservée pour ne pas toucher. */
+  body[data-page="yop"] .autres-contenus-section {
+    margin-top: -220px;
+  }
+  body[data-page="yop"] {
+    background-attachment: fixed !important;
+  }
+
+  /* Emmaüs Connect :
+     - Contexte/Missions/Résultats -18%
+     - Les 2 portables + leurs vignettes statistiques -20%
+     - Remontée de "Mes contenus sur" pour combler le vide créé par
+       le scale-down de .projet-card (sans toucher le bord bas de
+       "Résultats clés"). */
+  body[data-page="emmaus"] .projet-card {
+    transform: scale(0.82);
+    transform-origin: top center;
+  }
+  /* Étiquettes (Contexte / Mes Missions / Résultats clés) +15%.
+     translateX(-50%) préservé pour conserver le centrage absolute. */
+  body[data-page="emmaus"] .red-card__label {
+    transform: translateX(-50%) scale(1.15);
+  }
+  body[data-page="emmaus"] .contenus-grid {
+    transform: scale(0.80);
+    transform-origin: top center;
+  }
+  body[data-page="emmaus"] .contenus-section {
+    transform: translateY(-195px);
+  }
+  /* "Mes autres contenus" rapproché des vignettes 230K/368K : comble le
+     vide fantôme laissé par scale(0.80) sur .contenus-grid + scale(0.86)
+     global sur .autres-contenus-section (~20% + 14% de gap layout). */
+  body[data-page="emmaus"] .autres-contenus-section {
+    margin-top: -380px;
+  }
+
+  /* Armée de l'Air :
+     - Contexte/Missions/Résultats à scale 0.92 (= -20% original × +15% ajout récent)
+     - Les 3 portables + leurs statistiques -20%
+     - Remontée de "Mes contenus sur" pour combler le vide créé par
+       le scale-down de .projet-card (un petit espace conservé avec
+       "Résultats de la campagne"). */
+  body[data-page="armee-de-lair"] .projet-card {
+    transform: scale(0.92);
+    transform-origin: top center;
+  }
+  body[data-page="armee-de-lair"] .contenus-grid {
+    transform: scale(0.80);
+    transform-origin: top center;
+  }
+  body[data-page="armee-de-lair"] .contenus-section {
+    transform: translateY(-150px);
+  }
+
+  /* Collaborations commerciales sur TikTok :
+     - Contexte/Missions/Résultats à scale 0.92 (= -20% original × +15% ajout récent)
+     - Espace Résultats clés ↔ Mes contenus réduit
+     - Espace dernière vidéo ↔ Mes autres contenus réduit */
+  body[data-page="collaborations-commerciales"] .projet-card {
+    transform: scale(0.92);
+    transform-origin: top center;
+  }
+  /* Étiquettes (Contexte / Mes Missions / Résultats clés) +15%.
+     translateX(-50%) préservé pour conserver le centrage absolute. */
+  body[data-page="collaborations-commerciales"] .red-card__label {
+    transform: translateX(-50%) scale(1.15);
+  }
+  body[data-page="collaborations-commerciales"] .contenus-section {
+    transform: translateY(-100px);
+  }
+  body[data-page="collaborations-commerciales"] .autres-contenus-section {
+    margin-top: -150px;
+  }
+  /* "Mes autres contenus" remonté avec margin-top (affecte le layout
+     → le back button suit) + scale(0.86) conservé.
+     Puis .projet-back encore remonté pour fermer l'espace résiduel. */
+  body[data-page="armee-de-lair"] .autres-contenus-section {
+    margin-top: -500px;
+    transform: scale(0.86);
+    transform-origin: top center;
+  }
+  body[data-page="armee-de-lair"] .projet-back {
+    margin-top: 20px;
+  }
+
+  /* Renforcement : background dotted reste fixé même avec les
+     transforms scale 1.35 sur .projet-main. */
+  body[data-page="armee-de-lair"] {
+    background-attachment: fixed !important;
+  }
+
+  /* Netflix events (Stranger / Bridgerton / One Piece) :
+     réduction proportionnelle -19% (-10% × 2 cumulés) sur l'ensemble
+     des 3 events — titres de section, capsules Contexte/Missions/
+     Résultats clés (textes + stats +500K / +4M / +150K…), vidéos et
+     vignettes statistiques.
+     Méthode : on remplace le scale 1.35 générique de .projet-main par
+     1.0935 (= 1.35 × 0.81) sur cette page. Avantage : tous les blocs
+     internes ET tous les gaps de layout (gap: 48px de .projet-main,
+     padding-top/bottom, espacements entre Résultats clés ↔ Contenus
+     produits sur, entre dernière vignette ↔ titre event suivant) sont
+     réduits proportionnellement par le scale parent — pas de phantom
+     space à compenser. */
+  body[data-page="netflix-events"] .projet-main {
+    transform: scale(1.0935);
+  }
+  /* Compensation : on restaure le carousel "Mes autres contenus" à
+     sa taille générique (1.35 × 0.86 = 1.161). Comme .projet-main
+     descend à 1.0935, on remonte le scale enfant à 1.062
+     (1.0935 × 1.062 ≈ 1.161). Le carousel reste donc hors-scope
+     visuel du -19%. */
+  body[data-page="netflix-events"] .autres-contenus-section {
+    transform: scale(1.062);
+    transform-origin: top center;
+  }
+  /* Étiquettes Contexte / Mes Missions / Résultats clés des 3 events
+     remontées de +5% pour conserver leur lisibilité après le -19%
+     global. translateX(-50%) préservé pour le centrage absolute. */
+  body[data-page="netflix-events"] .red-card__label {
+    transform: translateX(-50%) scale(1.05);
+  }
+}

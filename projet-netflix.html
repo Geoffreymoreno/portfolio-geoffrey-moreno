@@ -1,0 +1,2997 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix France TikTok — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260515-drawer-portfolio">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* Styles partagés → projet.css */
+
+    /* 1. HERO BANNER */
+    .projet-hero {
+      min-height: 42vh;
+      height: 42vh;
+      background: linear-gradient(120deg, #5a0000 0%, #880008 40%, #a80515 70%, #880008 100%);
+      padding: 64px 0 0 8%;
+    }
+
+    .hero-watermark {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-watermark img {
+      position: absolute;
+      filter:
+        drop-shadow(0 2px 4px rgba(0,0,0,0.6))
+        drop-shadow(0 8px 20px rgba(0,0,0,0.35))
+        drop-shadow(0 -1px 2px rgba(255,255,255,0.04));
+    }
+    /* Répartition sur toute la largeur, tailles variées, opacité 30–40%, partiels sur les bords */
+    .hero-watermark img:nth-child(1)  { width: 160px; opacity: 0.38; top: -18%;  left: -3%;   transform: rotate(-18deg) perspective(500px) rotateY(22deg); }
+    .hero-watermark img:nth-child(2)  { width:  90px; opacity: 0.30; top:  58%;  left:  6%;   transform: rotate(12deg)  perspective(500px) rotateY(-18deg); }
+    .hero-watermark img:nth-child(3)  { width: 210px; opacity: 0.35; top:  15%;  left: 18%;   transform: rotate(-6deg)  perspective(500px) rotateY(28deg); }
+    .hero-watermark img:nth-child(4)  { width:  80px; opacity: 0.32; top:  65%;  left: 32%;   transform: rotate(20deg)  perspective(500px) rotateX(12deg); }
+    .hero-watermark img:nth-child(5)  { width: 130px; opacity: 0.37; top:  -8%;  left: 44%;   transform: rotate(-14deg) perspective(500px) rotateY(-22deg); }
+    .hero-watermark img:nth-child(6)  { width: 100px; opacity: 0.31; top:  52%;  left: 56%;   transform: rotate(8deg)   perspective(500px) rotateY(18deg); }
+    .hero-watermark img:nth-child(7)  { width: 185px; opacity: 0.36; top:  20%;  left: 66%;   transform: rotate(-10deg) perspective(500px) rotateY(-26deg); }
+    .hero-watermark img:nth-child(8)  { width:  75px; opacity: 0.30; top:  72%;  left: 78%;   transform: rotate(16deg)  perspective(500px) rotateX(8deg); }
+    .hero-watermark img:nth-child(9)  { width: 145px; opacity: 0.38; top:  -5%;  left: 88%;   transform: rotate(-20deg) perspective(500px) rotateY(24deg); }
+    .hero-watermark img:nth-child(10) { width: 110px; opacity: 0.33; top:  50%;  left: 96%;   transform: rotate(6deg)   perspective(500px) rotateY(-14deg); }
+
+    /* projet-hero__left, projet-title, hero-badges → projet.css */
+
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 10px;
+      margin-left: auto;
+      margin-right: -40px;
+      z-index: 2;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+
+    /* hero-thumb base + nth-child transforms → projet.css */
+    .hero-thumb { box-shadow: 0 16px 40px rgba(0,0,0,0.55); }
+
+    /* 3. MAIN CARD — nouveau design Figma (cartes rouges) */
+    .projet-card {
+      width: 82%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    /* S'assurer que le contenu passe au-dessus des pseudo-éléments */
+    .projet-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Nouveau design : blocs rouges avec label flottant ── */
+    .red-card {
+      position: relative;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1.5px) 0 0 / 14px 14px,
+        linear-gradient(135deg, #c40412 0%, #880009 50%, #640007 100%);
+      border: 1.5px solid rgba(255, 80, 90, 0.55);
+      border-radius: 22px;
+      padding: 38px 42px 34px;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.55),
+        0 2px 0 rgba(255,255,255,0.06) inset,
+        0 -2px 0 rgba(0,0,0,0.25) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      filter: brightness(1.1);
+    }
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      -webkit-text-stroke: 0.4px #ffffff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30);
+      padding: 8px 24px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #e5091a 0%, #a8050f 100%);
+      border: 1.5px solid rgba(255, 110, 120, 0.75);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #f5d8d8;
+      text-shadow: 0 1px 8px rgba(229, 9, 20, 0.2);
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text {
+      margin-top: 14px;
+    }
+    .red-card__text strong {
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+      color: #f5d8d8;
+      text-shadow: 0 1px 8px rgba(229, 9, 20, 0.2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      width: 100%;
+    }
+    .red-card__list li {
+      display: block;
+      text-align: center;
+    }
+    .red-card__list li::before {
+      content: "•  ";
+      display: inline;
+    }
+    .red-card__list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Barre résultats pleine largeur */
+    .red-card--results {
+      padding: 36px 40px 32px;
+    }
+    .results-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      width: 100%;
+      padding-top: 16px;
+    }
+    .results-item__number {
+      font-size: 1.32em;
+      vertical-align: middle;
+    }
+    .results-item__suffix-stack {
+      vertical-align: middle;
+    }
+    .results-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .results-item__value {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.1rem, 1.7vw, 1.6rem);
+      color: #ffffff;
+      line-height: 1.05;
+      margin-bottom: 6px;
+      white-space: nowrap;
+    }
+    .results-item__value .results-item__suffix {
+      font-weight: 500;
+      font-size: 0.65em;
+    }
+    .results-item__suffix-stack {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      vertical-align: middle;
+      line-height: 1.15;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.65rem, 0.82vw, 0.82rem);
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+    .results-divider {
+      width: 1px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.35);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* BADGES */
+    .projet-badges {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .badge {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: none;
+      color: #ffffff;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .badge--blue   { color: #fff; }
+    .badge--red    { color: #fff; }
+    .badge--orange { color: #fff; }
+    .badge--purple { color: #fff; }
+
+    /* 2 COLONNES contexte + missions */
+    .projet-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      padding-bottom: 64px;
+    }
+
+    /* MINI RECTANGLES — style bento */
+    .projet-section {
+      position: relative;
+      background: #080808;
+      border: 1px solid rgba(229, 9, 20, 0.3);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Header: icône + badge statut */
+    .bento-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .bento-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      flex-shrink: 0;
+    }
+    .projet-section:hover .bento-card-icon {
+      background: rgba(229, 9, 20, 0.15);
+    }
+    .bento-card-status {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(4px);
+      transition: background 0.3s ease;
+    }
+    .projet-section:hover .bento-card-status {
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    /* Ligne titre + méta */
+    .bento-card-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+    .bento-card-meta {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    /* Footer: tags + CTA */
+    .bento-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .bento-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .bento-card-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(4px);
+      transition: background 0.2s ease;
+    }
+    .bento-card-tag:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .bento-card-cta {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.38);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .projet-section:hover .bento-card-cta {
+      opacity: 1;
+    }
+    .projet-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(
+        circle at center,
+        rgba(229, 9, 20, 0.035) 1px,
+        transparent 1px
+      );
+      background-size: 4px 4px;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: inherit;
+    }
+    .projet-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        to bottom right,
+        transparent 20%,
+        rgba(255, 255, 255, 0.04) 45%,
+        rgba(255, 255, 255, 0.07) 50%,
+        rgba(255, 255, 255, 0.04) 55%,
+        transparent 80%
+      );
+      pointer-events: none;
+      opacity: 1;
+    }
+    .projet-section:hover {
+      transform: translateY(-4px);
+      border-color: rgba(229, 9, 20, 0.6);
+      box-shadow:
+        0 0 20px rgba(229, 9, 20, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.6);
+    }
+    /* @font-face PoppinsEB → projet.css */
+    .projet-section-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      height: 100%;
+      justify-content: flex-start;
+    }
+    .projet-section-wrap--full {
+      width: 100%;
+    }
+    .projet-section-label {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1rem, 1.35vw, 1.4rem);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.60);
+      text-shadow: none;
+      text-align: center;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px 20px;
+      border-radius: 14px;
+      background: rgba(229, 9, 20, 0.1);
+      box-shadow: none;
+    }
+    .projet-section-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(17px, 1.3vw, 20px);
+      line-height: 1.8;
+      color: rgba(245, 242, 238, 0.77);
+      text-align: justify;
+      margin: 20px 0 0 0;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .projet-section-text + .projet-section-text {
+      margin-top: 18px;
+    }
+    
+    .projet-missions-list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: clamp(17px, 1.3vw, 20px);
+      line-height: 1.8;
+      color: rgba(245, 242, 238, 0.77);
+      margin: 20px 0 0 0;
+      padding: 0 32px 0 58px;
+      position: relative;
+      z-index: 1;
+      text-align: justify;
+      list-style-type: disc;
+      flex: 1;
+      text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .projet-missions-list li {
+      margin-bottom: 12px;
+      padding-left: 6px;
+    }
+    .projet-missions-list li::marker {
+      color: rgba(229, 9, 20, 0.85);
+    }
+
+    /* MES RÉSULTATS pleine largeur */
+    .projet-section--full {
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .projet-section--empty {
+      min-height: clamp(150px, 16vw, 185px);
+    }
+
+    .projet-section--full.projet-section--empty {
+      min-height: clamp(170px, 18vw, 220px);
+    }
+
+    /* 5. MES CONTENUS — grille de vidéos avec cartes rouges */
+    .contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 48px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(17.25px, 1.32vw, 20.7px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #e5091a 0%, #a8050f 100%);
+      border: 1.5px solid rgba(255, 110, 120, 0.75);
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -2px 4px rgba(0,0,0,0.30);
+      white-space: nowrap;
+      filter: brightness(1.1);
+    }
+    .contenus-title__logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contenus-title__logos img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px 36px;
+      width: 100%;
+      justify-items: center;
+      align-items: start;
+      position: relative;
+    }
+    .contenus-grid--cols-2 { grid-template-columns: repeat(2, 1fr); gap: 64px 80px; }
+    .contenus-grid--cols-2 .contenu-card { max-width: 283px; }
+
+    /* Contenu des labels proportionnel en vue 2 colonnes (facteur ×1.53 = ×1.8×0.85) */
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-value,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-separator,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-icon,
+    .contenus-grid--cols-2 .contenu-card__metric-inline .metric-prefix {
+      font-size: 20px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric-inline {
+      gap: 6px;
+      margin-left: -11px;
+    }
+    .contenus-grid--cols-2 .metric-press__inner {
+      gap: 3px;
+      padding: 0 8px 0 4px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured img {
+      width: 72px !important;
+      height: 72px !important;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+      width: 37px !important;
+      height: 46px !important;
+      margin-left: 12px;
+      margin-right: 3px;
+    }
+    .contenus-grid--cols-2 .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+      width: 43px !important;
+      height: 43px !important;
+      margin-left: 12px;
+      margin-right: 3px;
+    }
+    .contenus-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .contenus-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+    /* Centrage automatique des cartes orphelines sur la dernière ligne */
+    .contenus-grid--cols-2 > .contenu-card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid:not(.contenus-grid--cols-2):not(.contenus-grid--cols-4) > .contenu-card:last-child:nth-child(3n+1) { grid-column: 1 / -1; justify-self: center; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+1) { grid-column: 1 / -1; justify-self: center; }
+    /* 2 cartes orphelines en vue 4 col → centrées sous col 2 et 3 */
+    .contenus-grid--cols-4 > .contenu-card:nth-last-child(2):nth-child(4n+1) { grid-column: 2 / 3; }
+    .contenus-grid--cols-4 > .contenu-card:last-child:nth-child(4n+2) { grid-column: 3 / 4; }
+    @keyframes layoutFade {
+      from { opacity: 0.6; transform: scale(0.97); }
+      to   { opacity: 1;   transform: scale(1); }
+    }
+    .layout-changing .contenu-card {
+      animation: layoutFade 0.32s ease forwards;
+    }
+
+    .layout-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: linear-gradient(180deg, #e5091a 0%, #a8050f 100%);
+      border: 1.5px solid rgba(255, 110, 120, 0.75);
+      border-radius: 999px;
+      padding: 5px 7px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -2px 4px rgba(0,0,0,0.30);
+    }
+    .layout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease;
+    }
+    .layout-btn svg {
+      width: 19px;
+      height: 14px;
+      fill: rgba(255,255,255,0.55);
+      transition: fill 0.2s ease, filter 0.2s ease;
+    }
+    .layout-btn.is-active {
+      background: rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.12), 0 0 8px rgba(255,255,255,0.08);
+    }
+    .layout-btn.is-active svg {
+      fill: #ffffff;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.55));
+    }
+    .layout-btn:hover:not(.is-active) {
+      background: rgba(255,255,255,0.09);
+    }
+    .layout-btn:hover svg {
+      fill: rgba(255,255,255,0.85);
+    }
+
+    .contenu-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 185px;
+      z-index: 0;
+    }
+    .contenus-grid > .contenu-card:first-child::before,
+    .contenu-card--premium::before {
+      content: none;
+    }
+
+    /* Cadre = device : visuel Uiverse — bord rouge externe + couche sombre interne */
+    .contenu-card__frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
+      padding: 0;
+      background: #E50914;
+      border: 1.5px solid #E50914;
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        0 0 18px rgba(229, 9, 20, 0.15);
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+    }
+    .contenu-card__frame:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 28px 52px rgba(0, 0, 0, 0.5),
+        0 12px 24px rgba(0, 0, 0, 0.35),
+        0 0 26px rgba(229, 9, 20, 0.35);
+    }
+
+    /* Glow blanc flou coin haut-gauche (Uiverse) */
+    .contenu-card__frame::before {
+      content: "";
+      position: absolute;
+      width: 14rem;
+      height: 12rem;
+      background: white;
+      filter: blur(50px);
+      left: -50%;
+      top: -50%;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 0;
+      mix-blend-mode: normal;
+      opacity: 1;
+    }
+
+    .contenu-card__frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 9px;
+      background: #000;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Bouton play centré (s'efface dès lecture) */
+    .contenu-card__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .contenu-card__play::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 14px solid #ffffff;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      margin-left: 4px;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+    .contenu-card__frame:hover .contenu-card__play {
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+    .contenu-card__frame.is-playing .contenu-card__play {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    /* Couche sombre interne inset 4px (Uiverse) — toutes les cards */
+    .contenu-card__frame--player {
+      cursor: pointer;
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 0.5s ease;
+    }
+    .contenu-card__frame--player::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      background: #141414;
+      border-radius: 9px;
+      z-index: 1;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    /* Blobs flous animés derrière la vidéo */
+    .contenu-card__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(28px);
+      z-index: 3;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      transition: transform 0.5s ease;
+    }
+    .contenu-card__blob--blue {
+      width: 56px;
+      height: 56px;
+      background: #38bdf8; /* sky-400 */
+      top: 28%;
+      right: 18%;
+    }
+    .contenu-card__blob--orange {
+      width: 44px;
+      height: 44px;
+      background: #fb923c; /* orange-400 */
+      bottom: 32%;
+      right: 22%;
+    }
+    .contenu-card__frame--player:hover .contenu-card__blob--blue {
+      transform: translate(44px, -44px);
+    }
+    .contenu-card__frame--player:hover .contenu-card__blob--orange {
+      transform: translate(44px, 64px);
+    }
+
+    /* La vidéo doit passer au-dessus des blobs mais sous le bouton/progress */
+    .contenu-card__frame--player video {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Bouton play — toutes les cards */
+    .contenu-card__frame--player .contenu-card__play--toggle,
+    .contenu-card__frame--player .contenu-card__play {
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(229, 9, 20, 0.55);
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+      width: 56px;
+      height: 56px;
+      opacity: 1;
+    }
+
+    .contenu-card__frame--player .contenu-card__play--toggle::after,
+    .contenu-card__frame--player .contenu-card__play::after {
+      border-left-color: #E50914;
+    }
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .contenu-card__frame--player:hover.is-playing .contenu-card__play--toggle {
+      opacity: 0.85;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    /* Icône pause quand la vidéo joue + survol */
+    .contenu-card__frame--player.is-playing .contenu-card__play--toggle::after {
+      content: "";
+      width: 14px;
+      height: 16px;
+      border: 0;
+      margin-left: 0;
+      background:
+        linear-gradient(#fff, #fff) left/4px 100% no-repeat,
+        linear-gradient(#fff, #fff) right/4px 100% no-repeat;
+    }
+
+    /* Bouton son — haut droite */
+    .contenu-card__sound {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 5;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.52);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .contenu-card__sound:hover {
+      background: rgba(0, 0, 0, 0.78);
+      transform: scale(1.1);
+    }
+    .contenu-card__sound svg {
+      width: 13px;
+      height: 13px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: block;
+    }
+
+    /* Bouton zoom — palette alignée sur la barre de progression :
+       fond rgba(255,255,255,0.25) (= track de la barre), accent #e50914 (= fill de la barre) */
+    .contenu-card__fullscreen {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      z-index: 5;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .contenu-card__fullscreen:hover {
+      background: #e50914;
+      box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+      transform: scale(1.08);
+    }
+    .contenu-card__fullscreen svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+    /* Si une carte contient un bouton zoom, on raccourcit la barre de progression côté droit
+       et on remonte son axe pour que son centre s'aligne avec celui du carré (bottom 16px). */
+    .contenu-card__frame--player:has(.contenu-card__fullscreen) .contenu-card__progress {
+      right: 34px;
+      bottom: 14.5px;
+    }
+    /* Zoom modal — la frame est déplacée au niveau <body> par lecteur-video.js
+       pour échapper au stacking context local de .contenu-card. */
+    body.has-video-zoom { overflow: hidden; }
+    .contenu-card__frame.is-zoomed {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 99999;
+      /* Fond identique à body (style.css : radial pastels + linéaire lavande→pêche)
+         ⇒ continuité visuelle entre la page et le mode plein écran de la vidéo. */
+      background-image:
+        radial-gradient(ellipse 85% 65% at 8% 8%,   rgba(175, 109, 255, 0.34),  transparent 60%),
+        radial-gradient(ellipse 75% 60% at 75% 35%,  rgba(255, 235, 170, 0.445), transparent 62%),
+        radial-gradient(ellipse 70% 60% at 15% 80%,  rgba(255, 100, 180, 0.324), transparent 62%),
+        radial-gradient(ellipse 70% 60% at 92% 92%,  rgba(120, 190, 255, 0.364), transparent 62%),
+        linear-gradient(180deg, #dfd0e6 0%, #e3ccd2 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: none;
+      border-radius: 0;
+      aspect-ratio: unset;
+      max-width: none;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      cursor: zoom-out;
+      overflow: hidden;
+      animation: zoomFadeIn 0.22s ease-out;
+    }
+    /* Désactiver les décorations de la carte dans la modale */
+    .contenu-card__frame.is-zoomed:hover { transform: none; box-shadow: none; }
+    .contenu-card__frame.is-zoomed::before,
+    .contenu-card__frame.is-zoomed::after { display: none; content: none; }
+    @keyframes zoomFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .contenu-card__frame.is-zoomed video {
+      object-fit: contain;
+      width: auto;
+      height: 82vh;
+      max-height: 82vh;
+      max-width: calc(82vh * 9 / 16);
+      border-radius: 14px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
+      cursor: default;
+    }
+    /* Boutons & barre repositionnés sur le rectangle vidéo visible (9:16 à 82vh) */
+    .contenu-card__frame.is-zoomed .contenu-card__play--toggle,
+    .contenu-card__frame.is-zoomed .contenu-card__play {
+      width: 64px;
+      height: 64px;
+    }
+    .contenu-card__frame.is-zoomed .contenu-card__sound {
+      top: calc(9vh + 14px);
+      right: calc(50vw - (82vh * 9 / 16) / 2 + 14px);
+    }
+    /* Carré zoom : 32×32, collé au coin bas-droit du rectangle vidéo (8px de marge),
+       même langage visuel que dans la carte normale. */
+    .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      bottom: calc(9vh + 8px);
+      right: calc(50vw - (82vh * 9 / 16) / 2 + 8px);
+    }
+    .contenu-card__frame.is-zoomed .contenu-card__fullscreen svg {
+      width: 16px;
+      height: 16px;
+    }
+    /* Barre : 6px d'épaisseur, son centre tombe pile sur celui du carré
+       (carré center = 8 + 16 = 24px du bord vidéo → barre bottom = 24 - 3 = 21px) */
+    .contenu-card__frame.is-zoomed .contenu-card__progress {
+      left: calc(50vw - (82vh * 9 / 16) / 2 + 8px);
+      right: calc(50vw - (82vh * 9 / 16) / 2 + 50px);
+      bottom: calc(9vh + 21px);
+    }
+    /* Les blobs décoratifs de la carte sont cachés en mode zoomé pour ne pas polluer le fond */
+    .contenu-card__frame.is-zoomed .contenu-card__blob { display: none; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       MOBILE (≤480px) — Vidéo plein écran edge-to-edge.
+       Phone ≈ 9/19.5, vidéo 9/16 ⇒ object-fit: cover pour remplir
+       les 4 bords du téléphone (bord vidéo = bord viewport).
+       Les contrôles s'alignent sur les bords du viewport.
+       ═══════════════════════════════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+    }
+
+    /* Barre de progression */
+    .contenu-card__progress {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 10px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      z-index: 4;
+      overflow: visible;
+      transition: height 0.18s ease;
+      /* touch-action: none ⇒ empêche le browser de hijack le swipe pour scroller
+         la page → indispensable pour que pointerdown/pointermove du seek marche
+         sur mobile (sinon le tap déclenche un scroll natif au lieu d'un seek). */
+      touch-action: none;
+    }
+    /* Hit area étendue : zone tactile invisible de ~30px de haut (12px au-dessus
+       + 12px au-dessous + hauteur visuelle). Le doigt peut viser approximativement
+       la zone du fil sans avoir à toucher exactement le filet de 3px.
+       L'élément est totalement transparent, donc visuellement inchangé. */
+    .contenu-card__progress::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -12px;
+      bottom: -12px;
+      /* Transparent ⇒ aucun impact visuel. Les events de pointer sont quand même
+         captés par ::before puis bubble jusqu'à .contenu-card__progress (le
+         handler de seek). */
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 5px;
+    }
+    /* En mode zoomé : barre épaissie à 6px, override placé après la règle hover pour gagner sur tie de spécificité */
+    .contenu-card__frame.contenu-card__frame--player.is-zoomed .contenu-card__progress,
+    .contenu-card__frame.contenu-card__frame--player.is-zoomed:hover .contenu-card__progress {
+      height: 6px;
+    }
+    .contenu-card__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #e50914;
+      border-radius: 999px;
+      box-shadow: 0 0 6px rgba(229, 9, 20, 0.6);
+      transition: width 0.1s linear;
+    }
+
+    /* BADGE : compact, horizontal, largeur uniforme */
+    .contenu-card__metric {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+      padding: 9px 14px 9px 12px;
+      border-radius: 12px;
+      background: rgba(6, 3, 4, 0.78);
+      backdrop-filter: blur(18px) saturate(1.6);
+      -webkit-backdrop-filter: blur(18px) saturate(1.6);
+      border: 1px solid rgba(229, 9, 20, 0.30);
+      box-shadow:
+        0 4px 16px rgba(0,0,0,0.55),
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 -1px 0 rgba(0,0,0,0.5) inset;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      white-space: nowrap;
+    }
+    .contenu-card__metric--reels {
+      background: linear-gradient(135deg, #8a0310 0%, #5c0009 100%);
+      border-color: rgba(255, 90, 110, 0.45);
+    }
+    .contenu-card__metric--shorts-red {
+      background: rgba(212, 62, 70, 0.63);
+      border-color: rgba(163, 38, 47, 0.7);
+      box-shadow:
+        0 2.51px 2.51px rgba(10, 0, 0, 0.7),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.42);
+    }
+    .contenu-card__metric--shorts-red img {
+      width: 24px !important;
+      height: 30px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+    }
+    .contenu-card__metric--shorts-red .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--shorts {
+      background: linear-gradient(135deg, #f5d7de 0%, #ebbfc8 100%);
+      color: #1a0306;
+      border-color: rgba(229, 9, 20, 0.25);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .contenu-card__metric--reels-white {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 239, 239, 0.96) 100%);
+      color: #2b0408;
+      border-color: rgba(176, 4, 16, 0.18);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+    }
+    .contenu-card__metric--reels-white img {
+      width: 28px !important;
+      height: 28px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+    }
+    .contenu-card__metric--reels-white .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--reels-white .metric-prefix,
+    .contenu-card__metric--reels-white .metric-value,
+    .contenu-card__metric--reels-white .metric-separator,
+    .contenu-card__metric--reels-white .metric-icon {
+      color: #2b0408;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+    }
+    .contenu-card__metric img {
+      height: 28px;
+      width: 28px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter:
+        drop-shadow(0 1px 2px rgba(0,0,0,0.75))
+        contrast(1.05);
+    }
+    .contenu-card__metric {
+      padding: 8px 16px 8px 12px;
+    }
+    .contenu-card__metric--player {
+      height: auto;
+      padding: 8px 16px 8px 12px;
+      box-sizing: border-box;
+      white-space: nowrap;
+    }
+    .contenu-card__metric--player img {
+      height: 28px !important;
+      width: 28px !important;
+    }
+    .contenu-card__metric--player .likes {
+      font-weight: 700 !important;
+      font-size: 0.92em !important;
+      opacity: 1 !important;
+    }
+    .contenu-card__metric--featured {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      aspect-ratio: 235.76 / 44.49;
+      height: auto;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 5px 0 3px;
+      background: rgba(16, 0, 1, 0.63);
+      border: 0;
+      border-radius: 8.77px;
+      box-shadow:
+        0 2.51px 2.51px rgba(12, 0, 0, 0.9),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.59);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .contenu-card__metric--featured:hover {
+      animation: none;
+    }
+
+    /* Tous les labels : effet bouton pression (Uiverse - FColombati) */
+    .contenu-card__metric--featured {
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      overflow: visible !important;
+      box-shadow:
+        -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+        0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1);
+      padding: 0 !important;
+    }
+    .contenu-card__metric--featured::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      width: calc(100% + 0.3em);
+      height: calc(100% + 0.3em);
+      top: -0.15em;
+      left: -0.15em;
+      border-radius: inherit;
+      background: linear-gradient(
+        -135deg,
+        rgba(5, 5, 5, 0.5),
+        transparent 20%,
+        transparent 100%
+      );
+      filter: blur(0.0125em);
+      opacity: 0.25;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .metric-press__outer {
+      position: relative;
+      z-index: 1;
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 300ms ease;
+      will-change: box-shadow;
+      box-shadow:
+        0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1),
+        0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5),
+        0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__outer {
+      box-shadow:
+        0 0 0 0 rgba(5, 5, 5, 1),
+        0 0 0 0 rgba(5, 5, 5, 0.5),
+        0 0 0 0 rgba(5, 5, 5, 0.25);
+    }
+    .metric-press__inner {
+      position: relative;
+      z-index: 1;
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 5px 0 3px;
+      transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease;
+      will-change: box-shadow, clip-path, transform;
+      overflow: clip;
+      clip-path: inset(0 0 0 0 round 8.77px);
+      box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        -0.05em -0.05em 0.05em 0 inset rgba(5, 5, 5, 0.25),
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        0 0 0.05em 0.2em inset rgba(255, 255, 255, 0.08),
+        0.025em 0.05em 0.1em 0 inset rgba(255, 255, 255, 0.15),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.25em 0.25em 0.1em inset rgba(5, 5, 5, 0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__inner {
+      clip-path: inset(
+        clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px)
+        clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 8.77px
+      );
+      background: rgba(229, 9, 20, 0.55);
+      box-shadow:
+        0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+        -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+        0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+        0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.05),
+        0 0 0 0 inset rgba(255, 255, 255, 1),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25),
+        inset 0 0 12px rgba(229, 9, 20, 0.4);
+    }
+    .contenu-card__metric--featured:active .metric-press__inner {
+      transform: scale(0.975);
+      background: rgba(229, 9, 20, 0.55);
+      box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        inset 0 0 12px rgba(229, 9, 20, 0.4),
+        inset 0 0 4px rgba(255, 80, 80, 0.3);
+    }
+
+    @keyframes jello-horizontal {
+      0%   { transform: scale3d(1,    1,    1); }
+      30%  { transform: scale3d(1.25, 0.75, 1); }
+      40%  { transform: scale3d(0.75, 1.25, 1); }
+      50%  { transform: scale3d(1.15, 0.85, 1); }
+      65%  { transform: scale3d(0.95, 1.05, 1); }
+      75%  { transform: scale3d(1.05, 0.95, 1); }
+      100% { transform: scale3d(1,    1,    1); }
+    }
+
+    .contenu-card__metric--featured img {
+      width: 47px !important;
+      height: 47px !important;
+      flex-shrink: 0;
+      filter: none;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--shorts-red {
+      background: rgba(212, 62, 70, 0.63);
+      border: 1px solid rgba(163, 38, 47, 0.7);
+      box-shadow:
+        0 2.51px 2.51px rgba(10, 0, 0, 0.7),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.42);
+    }
+    .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+      width: 24px !important;
+      height: 30px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--shorts-red .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 239, 239, 0.96) 100%);
+      border: 1px solid rgba(176, 4, 16, 0.18);
+      box-shadow:
+        0 2.51px 2.51px rgba(10, 0, 0, 0.18),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.16);
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+      width: 28px !important;
+      height: 28px !important;
+      align-self: center;
+      margin-left: 8px;
+      margin-right: 2px;
+      filter: none;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .contenu-card__metric-inline {
+      margin-left: -2px;
+      gap: 3px;
+    }
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-prefix,
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-value,
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-separator,
+    .contenu-card__metric--featured.contenu-card__metric--reels-white .metric-icon {
+      color: rgba(251, 252, 254, 0.97);
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25),
+        0 0 1px rgba(0, 0, 0, 0.95);
+    }
+    .contenu-card__metric-inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-width: 0;
+      line-height: 1;
+      flex: 1 1 auto;
+      white-space: nowrap;
+      text-align: center;
+      margin-left: -7px;
+    }
+    .contenu-card__metric-inline .metric-value,
+    .contenu-card__metric-inline .metric-separator {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(251, 252, 254, 0.97);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25);
+    }
+    .contenu-card__metric-inline .metric-separator {
+      letter-spacing: 0;
+    }
+    .contenu-card__metric-inline .metric-icon {
+      font-size: 13px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25);
+    }
+    .contenu-card__metric-inline .metric-prefix {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(251, 252, 254, 0.97);
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      text-transform: uppercase;
+      text-shadow:
+        0 6.86px 6.86px rgba(12, 7, 46, 0.2),
+        0 2.68px 2.68px rgba(0, 0, 0, 0.25);
+    }
+    /* Layout horizontal : vues à gauche, likes à droite */
+    .contenu-card__metric .stats {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      line-height: 1;
+      font-family: 'Poppins', sans-serif;
+    }
+    .contenu-card__metric .views {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 0.95em;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.95);
+    }
+    .contenu-card__metric .likes {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.88em;
+      color: rgba(255,255,255,0.80);
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Variante "clean" : ligne unique parfaitement alignée (premier card uniquement) */
+    .contenu-card__metric--clean {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .contenu-card__metric--clean > * {
+      flex-shrink: 0;
+    }
+    .contenu-card__metric--clean img {
+      height: 10px !important;
+      width: auto !important;
+      display: block;
+      margin-top: -1px;
+    }
+    .contenu-card__metric--clean .metric-value,
+    .contenu-card__metric--clean .metric-sep {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1;
+      color: #ffffff;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+    }
+    .contenu-card__metric--clean .metric-icon {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      margin-top: -1px;
+    }
+    .contenu-card__metric-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      width: 100%;
+    }
+
+    @media (max-width: 1280px) {
+      .contenus-grid { grid-template-columns: repeat(3, 1fr); gap: 52px 38px; }
+    }
+    @media (max-width: 1024px) {
+      .contenus-grid { grid-template-columns: repeat(2, 1fr); gap: 44px 32px; }
+      .contenus-section { width: 92%; }
+    }
+    @media (max-width: 640px) {
+      .contenus-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contenus-section { width: 94%; gap: 36px; }
+      .contenu-card { max-width: 230px; }
+      .contenu-card__frame { padding: 0; border-radius: 12px; }
+      .contenu-card__frame video { border-radius: 9px; }
+    }
+
+    /* BLOC wrapper rangée 2col + séparateur */
+    .separateur-bloc {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+    }
+
+    /* Trait vertical : dégradé rouge, plein au centre, transparent aux extrémités */
+    .separateur-vertical {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(
+        to bottom,
+        rgba(229, 9, 20, 0.0) 0%,
+        rgba(229, 9, 20, 0.55) 50%,
+        rgba(229, 9, 20, 0.0) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Rangée 2col dans le bloc */
+    .separateur-bloc .projet-row-2col {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ligne horizontale : dégradé rouge, plein au centre, transparent aux bords */
+    .separateur-horizontal {
+      width: calc(100% + 96px);
+      margin-left: -48px;
+      height: 1.5px;
+      margin-top: 0;
+      flex-shrink: 0;
+      background: linear-gradient(
+        to right,
+        rgba(229, 9, 20, 0.0) 0%,
+        rgba(229, 9, 20, 0.55) 50%,
+        rgba(229, 9, 20, 0.0) 100%
+      );
+      box-shadow: none;
+    }
+
+    /* Card Stack Carousel */
+
+    /* projet-back → projet.css */
+
+    /* BOUTON BENTO HOVER */
+    .bento-hover-btn {
+      position: relative;
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
+      margin-top: 0;
+      margin-bottom: 0;
+      z-index: 1;
+      background: rgba(229, 9, 20, 0.12);
+      box-shadow:
+        inset 0 0 0 1px rgba(229, 9, 20, 0.45),
+        inset 0 0 14px 0 rgba(229, 9, 20, 0.12),
+        inset 0 -3px 10px 0 rgba(229, 9, 20, 0.1),
+        0 2px 8px 0 rgba(0, 0, 0, 0.45),
+        0 4px 16px 0 rgba(229, 9, 20, 0.08);
+      transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
+      border: none;
+    }
+    .bento-card-title-row--meta {
+      margin-bottom: 0;
+    }
+    .bento-card-title-row--meta .bento-card-meta {
+      font-size: 12px;
+    }
+    .bento-hover-btn:hover {
+      background: rgba(229, 9, 20, 0.2);
+      box-shadow:
+        inset 0 0 0 1px rgba(229, 9, 20, 0.7),
+        inset 0 0 20px 0 rgba(229, 9, 20, 0.2),
+        0 4px 20px 0 rgba(229, 9, 20, 0.25),
+        0 8px 30px 0 rgba(0, 0, 0, 0.5);
+      transform: translateY(-1px);
+    }
+    .bento-hover-btn:active {
+      transform: scale(0.975);
+    }
+    .bento-hover-btn .btn-particle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(8px);
+      opacity: 0;
+      background: radial-gradient(circle, rgba(229,9,20,0.9), rgba(180,0,0,0.4));
+      transition: opacity 0.3s ease;
+    }
+    .bento-hover-btn .btn-particle.fade-in  { opacity: 0.7; }
+    .bento-hover-btn .btn-particle.fade-out {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    /* ── ≤ 1440px : MacBook Pro ── */
+    @media (max-width: 1440px) {
+      .projet-hero {
+        min-height: 32vh;
+        height: 32vh;
+        padding: 0 4%;
+      }
+      .projet-hero::before {
+        width: 400px;
+        height: 400px;
+      }
+      .hero-thumb { height: 185px; width: auto; }
+      .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); }
+      .projet-card { width: 86%; }
+      .projet-main { padding-top: 40px; gap: 36px; }
+      .concepts-section { width: 92%; max-width: 92%; }
+    }
+
+    /* ── ≤ 1280px : MacBook Air / petit écran ── */
+    @media (max-width: 1280px) {
+      .projet-hero {
+        min-height: 28vh;
+        height: 28vh;
+        padding: 0 3%;
+      }
+      .hero-thumb { height: 150px; width: auto; margin-left: -18px; }
+      .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); }
+      .projet-card { width: 90%; }
+      .projet-main { gap: 32px; }
+    }
+
+    /* ── ≤ 1024px : tablette / hero en colonne ── */
+    @media (max-width: 1024px) {
+      .projet-hero {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        padding: 60px 5% 32px;
+        align-items: flex-start;
+        gap: 24px;
+      }
+      .projet-hero::before {
+        width: 300px;
+        height: 300px;
+        right: 10%;
+      }
+      .projet-hero__left { width: 100%; }
+      .projet-hero__thumbs {
+        width: 100%;
+        justify-content: center;
+        padding: 0 0 8px;
+        height: auto;
+      }
+      .hero-thumb { height: 190px; width: 114px; margin-left: -18px; }
+      .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); }
+      .projet-card { width: 94%; max-width: 94%; }
+      .concepts-section { width: 94%; max-width: 94%; }
+    }
+
+    /* ── ≤ 768px : mobile ── */
+    @media (max-width: 768px) {
+      .projet-hero { padding: 56px 4% 24px; gap: 20px; }
+      .hero-thumb { height: 155px; width: 93px; margin-left: -14px; }
+      .hero-thumb:first-child { margin-left: 0; }
+      .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); }
+      .projet-card { width: 96%; max-width: 96%; }
+      .projet-badges { flex-wrap: wrap; gap: 8px; }
+      .badge { font-size: 0.75rem; padding: 8px 14px; }
+      .concepts-section { width: 96%; max-width: 96%; }
+      .concepts-videos { grid-template-columns: 1fr; gap: 12px; }
+      .concepts-video { aspect-ratio: 9 / 16; max-width: 280px; margin: 0 auto; }
+      .projet-main { padding-top: 24px; gap: 24px; }
+      .bento-card-header { margin-bottom: 10px; }
+    }
+
+    /* Saut de ligne mobile-only pour le titre — par défaut caché sur desktop. */
+    .projet-netflix-br-mobile { display: none; }
+
+    /* ── ≤ 480px : petit mobile ── */
+    @media (max-width: 480px) {
+      .bento-card-title-row { flex-wrap: wrap; }
+      .bento-hover-btn { font-size: 12px; padding: 6px 16px; }
+
+      /* ═══════════════════════════════════════════════════════════════
+         HERO BANNER mobile — VIGNETTES SUPPRIMÉES.
+         Layout : (titre + capsules) en colonne, centrés V+H dans la bannière.
+         Le titre tient sur 1 seule ligne avec font-size adaptée à la largeur
+         viewport (clamp ⇒ pas de débordement entre 320 et 480px).
+         ═══════════════════════════════════════════════════════════════ */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        /* padding-top: 70px ⇒ titre placé sous le header fixe (logo GM + burger
+           occupent y=14→58). padding-bottom: 24px pour rester compact. */
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      /* Sortir .projet-hero__left du flow pour ordonner titre + capsules via flex.
+         (Les vignettes hors de .projet-hero__left sont gérées séparément.) */
+      .projet-hero__left {
+        display: contents !important;
+      }
+
+      /* VIGNETTES : SUPPRIMÉES sur mobile (demandé). */
+      .projet-hero__thumbs {
+        display: none !important;
+      }
+
+      /* TITRE — 2 LIGNES (br mobile actif), centré V+H. +25% vs base.
+         font-size clamp : 13.75px à 320px → 16.9px à 480px. */
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(17.05px, 4.96vw, 20.96px) !important;
+        line-height: 1.2 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+      }
+      /* Saut de ligne mobile actif : "Lancement du compte" / "Netflixfr sur tiktok". */
+      .projet-netflix-br-mobile { display: inline !important; }
+
+      /* CAPSULES — centrées H sous le titre, sur 1 ligne. */
+      .hero-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+      }
+      .hero-badges .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* WATERMARK : logos N drastiquement réduits, opacité atténuée pour
+         qu'ils restent en arrière-plan sans empiéter sur le contenu. */
+      .hero-watermark img {
+        width: 50px !important;
+        opacity: 0.18 !important;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         1) HERO VIGNETTES — espacement élargi + rotations miroir
+         ═══════════════════════════════════════════════════════════════ */
+      .projet-hero__thumbs { gap: 18px !important; }
+      .hero-thumb { transform-origin: center !important; }
+      .hero-thumb:nth-child(1) { transform: rotate(-6deg) !important; }
+      .hero-thumb:nth-child(2) { transform: rotate(0deg)  !important; }
+      .hero-thumb:nth-child(3) { transform: rotate(6deg)  !important; }
+
+      /* ═══════════════════════════════════════════════════════════════
+         2) CONTEXTE + MES MISSIONS — bloc rétréci (~15%)
+         24 px de marge latérale + padding et label proportionnellement
+         réduits. Font corps reste à 14 px pour la lisibilité.
+         ═══════════════════════════════════════════════════════════════ */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card {
+        padding: 30px 19px 24px !important;
+      }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         3) RÉSULTATS CLÉS — label autonome + grille 5 mini-cartes
+         Layout : ligne1 (2 cartes 50/50), ligne2 (2 cartes 50/50),
+         ligne3 (1 carte pleine largeur centrée).
+         ═══════════════════════════════════════════════════════════════ */
+      .red-card--results {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+      }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+      }
+      .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      .red-card--results .results-item {
+        flex: unset !important;
+        background:
+          radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          linear-gradient(135deg, #c40412 0%, #880009 50%, #640007 100%) !important;
+        border: 1.5px solid rgba(255, 80, 90, 0.55) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(0, 0, 0, 0.45),
+          0 2px 0 rgba(255,255,255,0.06) inset,
+          0 -2px 0 rgba(0,0,0,0.25) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.1) !important;
+        min-height: 92px !important;
+      }
+      /* 5e item (créateurs recommandés) → pleine largeur, dernière ligne */
+      .red-card--results .results-item:last-of-type {
+        grid-column: 1 / -1 !important;
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         4) "MES CONTENUS SUR" + "MES AUTRES CONTENUS SUR" — capsule
+         réduite ~20% ; texte aligné sur "MES MISSIONS" (même police, même
+         gras, même dimension, même épaisseur visuelle).
+         Padding ≥12px pour éviter que le texte/icônes touchent les bords.
+         ═══════════════════════════════════════════════════════════════ */
+      .contenus-title {
+        font-size: 0.85rem !important;
+        padding: 12px 16px !important;
+        gap: 11px !important;
+        border-radius: 11px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      .contenus-title__logos { gap: 8px !important; }
+      .contenus-title__logos img { height: 26px !important; }
+
+      /* ═══════════════════════════════════════════════════════════════
+         5) TOGGLE VUE FRACTIONNÉE — supprimé sur iPhone SE
+         Le rendu mobile est déjà à 1 téléphone par ligne (voir media
+         640 px), donc le toggle n'a plus d'utilité ici.
+         ═══════════════════════════════════════════════════════════════ */
+      .layout-selector { display: none !important; }
+
+      /* ═══════════════════════════════════════════════════════════════
+         6) PILULES DE STATS — formatage UNIFIÉ pour toutes les pilules
+         (TikTok / Shorts / Reels). Une seule source de vérité.
+
+         Référence : la 1ère pilule (validée pixel-perfect). Toutes les
+         autres adoptent EXACTEMENT le même format.
+
+         Valeurs partagées :
+           - width: 100% (alignée sur la largeur de la card = vidéo)
+           - height: 53px, align-self: center
+           - inner padding: 0 6px 0 3px, gap 3px
+           - Logo : height: 58px (plateforme-agnostique), prend presque
+             toute la hauteur interne. Largeur AUTO (ratio natif préservé)
+           - Texte stats : font-size 17px (gras hérité de la base)
+           - Inline block : gap 4px, margin-left -9px
+           - Prefix « : » sans margins
+
+         Logos plateforme — même HAUTEUR (58), largeur ratio natif :
+           - TikTok    : 1:1     ⇒ 58×58
+           - Reels     : 1:1     ⇒ 58×58
+           - Shorts    : 30/38   ⇒ 46×58 (= 58 × 30/38 arrondi) */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      /* Logos plateforme — HAUTEUR 58 partout, LARGEUR selon ratio natif.
+         On utilise les classes COULEUR (--shorts-red, --reels-white) car
+         les classes génériques --shorts / --reels sont inversées dans
+         le HTML (la pilule Reels porte --shorts, et vice-versa). */
+      /* Default (TikTok et autres pilules sombres) — 58×58 (1:1) */
+      .contenu-card__metric--featured img {
+        width: 58px !important;
+        height: 58px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      /* YouTube Shorts (pilule rouge) — -5% additionnel ⇒ hauteur 35.
+         width: 58px (= largeur de flow IDENTIQUE à TikTok) ⇒ le ":" et
+         toutes les stats qui suivent s'alignent EXACTEMENT sur ceux de
+         la pilule TikTok au-dessus. object-fit: contain garde le ratio
+         natif du logo et le centre dans la boîte 58×35 ⇒ visuellement
+         le logo s'aligne aussi sur l'axe central des autres pilules.
+         margin-left/right: 0 ⇒ override des marges desktop à L1385. */
+      .contenu-card__metric--featured.contenu-card__metric--shorts-red img {
+        width: 58px !important;
+        height: 35px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      /* Instagram Reels (pilule blanche) — -5% additionnel ⇒ hauteur 37.
+         Même principe : width 58 (alignement des stats) + object-fit
+         contain (centrage visuel du logo). margin-left/right reset. */
+      .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+        width: 58px !important;
+        height: 37px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      /* Texte stats : 17px */
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      /* Inline block : gap 4, shift -9 */
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      /* Compensation pour Shorts/Reels : avec object-fit contain + width 58,
+         le rendu génère un offset visuel résiduel sur la position du ":" vs
+         TikTok. translateX(-4px) ramène le ":" pile sous le ":" de la pilule
+         TikTok au-dessus (transform = shift purement visuel, pas absorbé
+         par le layout flex). */
+      .contenu-card__metric--featured.contenu-card__metric--shorts-red .contenu-card__metric-inline,
+      .contenu-card__metric--featured.contenu-card__metric--reels-white .contenu-card__metric-inline {
+        transform: translateX(-4px) !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+
+    /* ══ REPRODUCTION CANVA AU PIXEL PRÈS (PUR HTML/CSS) ══ */
+    .stats-canva-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4.5rem; /* Espace vertical exact entre les deux lignes */
+      padding: 3rem 0;
+      width: 100%;
+    }
+
+    .stats-canva-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start; /* Aligne le haut des polices */
+      gap: clamp(1rem, 4vw, 4rem); /* Réduit un peu l'espace horizontal */
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .stats-canva-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stats-canva-item:hover {
+      transform: scale(1.05); /* Petite interaction micro-animation */
+    }
+
+    .stats-canva-value {
+      font-family: 'PoppinsEB', 'Poppins', sans-serif;
+      font-weight: 800; /* H1 compliant */
+      font-size: clamp(2rem, 3.5vw, 3rem); /* Taille plus imposante */
+      color: #FFFFFF;
+      line-height: 1.05; /* Rendu très serré pour "créateurs recommandés" */
+      /* Effet Ombre Portée de Canva (Solid block, sans diffusion) */
+      text-shadow: 4px 4px 0px rgba(120, 120, 120, 0.7);
+      margin-bottom: 0.1rem; /* Très proche du sous-texte */
+      letter-spacing: 0em;
+    }
+
+    .stats-canva-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500; 
+      /* Texte proportionnellement beaucoup plus petit pour matcher l'image */
+      font-size: clamp(0.5rem, 0.75vw, 0.65rem); 
+      color: #AAAAAA; 
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1024px) {
+      .stats-canva-row { gap: 3rem; }
+    }
+    @media (max-width: 768px) {
+      .stats-canva-container { gap: 3.5rem; }
+      .stats-canva-row { flex-direction: column; gap: 3.5rem; align-items: center; }
+    }
+
+    /* ══ MES AUTRES CONTENUS — CARROUSEL ══ */
+    .autres-contenus-section {
+      width: 82%;
+      max-width: 1200px;
+      margin: 64px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .autres-carousel-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+    }
+
+    .autres-track-clip {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .autres-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .autres-card {
+      flex-shrink: 0;
+      width: calc((100% - 20px) / 2);
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: default;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .autres-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.34);
+    }
+    .autres-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .autres-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .autres-card:hover .autres-card__overlay {
+      opacity: 1;
+    }
+    .autres-card__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.06em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .autres-arrow {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(30,10,10,0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    }
+    .autres-arrow:hover {
+      background: rgba(229,9,26,0.85);
+      transform: scale(1.08);
+    }
+    .autres-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+      transform: none;
+    }
+
+    .autres-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .autres-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .autres-dot.is-active {
+      background: #e5091a;
+      transform: scale(1.3);
+    }
+  
+    /* ── HARMONISATION HOVER BANNIÈRES ── */
+    .autres-card__overlay { background: linear-gradient(135deg, color-mix(in srgb, var(--c, #1E3A6B) 40%, transparent) 0%, color-mix(in srgb, var(--c2, #0c2233) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); flex-direction: column; padding: 0 7%; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; text-align: center; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+</head>
+<body class="header-dark" data-page="netflix">
+
+  <!-- ══ HEADER ══ -->
+  <header class="header">
+    <div class="header-pill">
+
+    <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+
+    <nav class="header-nav">
+      <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+      <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+      <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+    </nav>
+
+    <div class="header-socials">
+      <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+    </div>
+
+    </div><!-- /.header-pill -->
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="netflix">
+        <!-- Netflix masqué : le visiteur est déjà sur cette page -->
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>        </a>
+        <a href="projet-yop.html" class="hms-drawer__card" data-project="yop">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-yop.webp" alt="" loading="lazy" decoding="async"></picture>        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg></a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+    <!-- 1. HERO BANNER -->
+    <div class="projet-hero">
+      <!-- Logos Netflix watermark -->
+      <div class="hero-watermark">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+        <img decoding="async" loading="lazy" src="assets/hero-section/logo-netflix.png" alt="">
+      </div>
+
+      <!-- Gauche : titre + badges -->
+      <div class="projet-hero__left">
+        <h1 class="projet-title">Lancement du compte <br class="projet-netflix-br-mobile">Netflixfr sur tiktok</h1>
+        <div class="hero-badges">
+          <span class="badge">Agence : The Source</span>
+          <span class="badge">Contenus Organiques</span>
+          <span class="badge">2021 – 2023</span>
+        </div>
+      </div>
+
+      <!-- Droite : 3 vignettes inclinées -->
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/brand-projects/netflix-tiktok-launch/otis-vignette.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/netflix-tiktok-launch/otis-vignette.webp" alt="Otis"></picture>
+        <picture><source srcset="assets/brand-projects/netflix-tiktok-launch/shrek-vignette.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/netflix-tiktok-launch/shrek-vignette.webp" alt="Shrek"></picture>
+        <picture><source srcset="assets/brand-projects/netflix-tiktok-launch/paola-vignette.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/brand-projects/netflix-tiktok-launch/paola-vignette.webp" alt="Paola"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <!-- 3. MAIN CARD — nouveau design cartes rouges -->
+      <div class="projet-card">
+
+        <!-- CONTEXTE + MES MISSIONS -->
+        <div class="red-row">
+
+          <!-- CONTEXTE -->
+          <div class="red-card">
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">En 2021, <strong>Netflix France</strong> a confié à l'agence <strong>The Source</strong> le lancement de son compte TikTok.</p>
+            <p class="red-card__text">L'objectif était d'avoir un partenaire en capacité de produire du contenu innovant et en phase avec les codes de la plateforme.</p>
+          </div>
+
+          <!-- MES MISSIONS -->
+          <div class="red-card">
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Idéation &amp; production de contenus organiques &amp; publicitaires.</li>
+              <li>Conception &amp; gestion de campagnes d'influence innovantes.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- MES RÉSULTATS -->
+        <div class="red-card red-card--results">
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row">
+            <div class="results-item">
+              <span class="results-item__value">Marque n°<span class="results-item__suffix" style="font-weight:800;font-size:1em;">1</span></span>
+              <span class="results-item__label">Sur TikTok en France</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+4</span> <span class="results-item__suffix">millions</span></span>
+              <span class="results-item__label">Abonnés gagnés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+1.5</span> <span class="results-item__suffix">milliards</span></span>
+              <span class="results-item__label">De vues générées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+200</span> <span class="results-item__suffix">contenus</span></span>
+              <span class="results-item__label">Ads &amp; organiques produits</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">+400</span> <span class="results-item__suffix-stack"><span class="results-item__suffix">créateurs</span><span class="results-item__suffix">recommandés</span></span></span>
+              <span class="results-item__label">Dont 40 ont collaboré</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 5. MES CONTENUS SUR TIKTOK / REELS / SHORTS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          Mes contenus sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-shorts.png" alt="Shorts">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-reels.png" alt="Reels">
+          </span>
+        </div>
+
+        <div class="layout-selector" role="group" aria-label="Nombre de colonnes">
+          <button class="layout-btn" data-cols="2" aria-label="2 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="10" height="16" rx="1.5"/>
+              <rect x="12" y="0" width="10" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn is-active" data-cols="3" aria-label="3 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"    y="0" width="6" height="16" rx="1.5"/>
+              <rect x="8"    y="0" width="6" height="16" rx="1.5"/>
+              <rect x="16"   y="0" width="6" height="16" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="layout-btn" data-cols="4" aria-label="4 colonnes">
+            <svg viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0"    y="0" width="4" height="16" rx="1.5"/>
+              <rect x="6"    y="0" width="4" height="16" rx="1.5"/>
+              <rect x="12"   y="0" width="4" height="16" rx="1.5"/>
+              <rect x="18"   y="0" width="4" height="16" rx="1.5"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="contenus-grid" id="contenusGrid">
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/paola.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7220804245237353734" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">4.2 M</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">365 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/otis.mp4" playsinline preload="metadata" muted data-poster-time="2"></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7281637660815281440?is_from_webapp=1&sender_device=pc&web_id=7281703021229770272" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">360 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">30 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/outer-banks.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7270165208247635232" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">230 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">43 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/squid-game.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7014039946411511046?is_from_webapp=1&web_id=7220141382023300613" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">360 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">62 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/Shrek.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <div class="contenu-card__metric-stack">
+              <a href="https://www.tiktok.com/@netflixfr/video/7141418351422704902?is_from_webapp=1&web_id=7220141382023300613" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+                <span class="metric-press__outer">
+                  <span class="metric-press__inner">
+                    <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                    <span class="contenu-card__metric-inline">
+                      <span class="metric-prefix" aria-hidden="true">:</span>
+                      <span class="metric-value">220 K</span>
+                      <span class="metric-icon" aria-hidden="true">👁</span>
+                      <span class="metric-separator" aria-hidden="true">-</span>
+                      <span class="metric-value">44 K</span>
+                      <span class="metric-icon" aria-hidden="true">❤️</span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+              <a href="https://www.youtube.com/shorts/1DfLNR-V9P0" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--reels contenu-card__metric--featured contenu-card__metric--shorts-red" style="text-decoration:none;">
+                <span class="metric-press__outer">
+                  <span class="metric-press__inner">
+                    <img decoding="async" loading="lazy" src="assets/hero-section/logo-shorts.png" alt="Shorts">
+                    <span class="contenu-card__metric-inline">
+                      <span class="metric-prefix" aria-hidden="true">:</span>
+                      <span class="metric-value">3 M</span>
+                      <span class="metric-icon" aria-hidden="true">👁</span>
+                      <span class="metric-separator" aria-hidden="true">-</span>
+                      <span class="metric-value">230 K</span>
+                      <span class="metric-icon" aria-hidden="true">❤️</span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/rick-et-morty.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <div class="contenu-card__metric-stack">
+              <a href="https://www.tiktok.com/@netflixfr/video/7135471866260606214" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+                <span class="metric-press__outer">
+                  <span class="metric-press__inner">
+                    <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                    <span class="contenu-card__metric-inline">
+                      <span class="metric-prefix" aria-hidden="true">:</span>
+                      <span class="metric-value">420 K</span>
+                      <span class="metric-icon" aria-hidden="true">👁</span>
+                      <span class="metric-separator" aria-hidden="true">-</span>
+                      <span class="metric-value">50 K</span>
+                      <span class="metric-icon" aria-hidden="true">❤️</span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+              <a href="https://www.instagram.com/reel/CiXIsggrITV/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA%3D%3D" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--shorts contenu-card__metric--featured contenu-card__metric--reels-white" style="text-decoration:none;">
+                <span class="metric-press__outer">
+                  <span class="metric-press__inner">
+                    <img decoding="async" loading="lazy" src="assets/hero-section/logo-reels.png" alt="Reels">
+                    <span class="contenu-card__metric-inline">
+                      <span class="metric-prefix" aria-hidden="true">:</span>
+                      <span class="metric-value">1.8 M</span>
+                      <span class="metric-icon" aria-hidden="true">👁</span>
+                      <span class="metric-separator" aria-hidden="true">-</span>
+                      <span class="metric-value">92 K</span>
+                      <span class="metric-icon" aria-hidden="true">❤️</span>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/one-piece.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/photo/7276050749472165153" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">400 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">32 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/heartstopper.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7091209690754845958?is_from_webapp=1&sender_device=pc&web_id=7624567946694542870" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">153 K</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">38 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/brand-projects/netflix-tiktok-launch/camila-mendes.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@netflixfr/video/7145377421527649541" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--player contenu-card__metric--featured" style="text-decoration:none;">
+              <span class="metric-press__outer">
+                <span class="metric-press__inner">
+                  <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                  <span class="contenu-card__metric-inline">
+                    <span class="metric-prefix" aria-hidden="true">:</span>
+                    <span class="metric-value">3.7 M</span>
+                    <span class="metric-icon" aria-hidden="true">👁</span>
+                    <span class="metric-separator" aria-hidden="true">-</span>
+                    <span class="metric-value">420 K</span>
+                    <span class="metric-icon" aria-hidden="true">❤️</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 6. MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman Marry Me"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E5599;--c2:#0e3568;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne d'influence<br>sur l'Armée de l'Air</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span>
+                </div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay">
+                  <h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.querySelectorAll('.bento-hover-btn').forEach(btn => {
+      let isOver = false;
+      let lastTime = 0;
+
+      btn.addEventListener('pointerenter', () => { isOver = true; });
+      btn.addEventListener('pointerleave', () => { isOver = false; });
+
+      btn.addEventListener('pointermove', (e) => {
+        if (!isOver) return;
+        const now = Date.now();
+        if (now - lastTime < 100) return;
+        lastTime = now;
+
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const particle = document.createElement('div');
+        particle.className = 'btn-particle';
+        particle.style.left = x + 'px';
+        particle.style.top  = y + 'px';
+        btn.appendChild(particle);
+
+        requestAnimationFrame(() => particle.classList.add('fade-in'));
+
+        setTimeout(() => {
+          particle.classList.remove('fade-in');
+          particle.classList.add('fade-out');
+        }, 1000);
+
+        setTimeout(() => particle.remove(), 2200);
+      });
+    });
+  </script>
+
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById('contenusGrid');
+      const btns = document.querySelectorAll('.layout-btn');
+      if (!grid || !btns.length) return;
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const cols = btn.dataset.cols;
+          btns.forEach(b => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          grid.classList.remove('contenus-grid--cols-2', 'contenus-grid--cols-3', 'contenus-grid--cols-4');
+          grid.classList.add('contenus-grid--cols-' + cols);
+          grid.classList.add('layout-changing');
+          setTimeout(() => grid.classList.remove('layout-changing'), 350);
+        });
+      });
+    })();
+  </script>
+
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

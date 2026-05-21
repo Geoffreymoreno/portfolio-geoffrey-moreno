@@ -1,0 +1,3024 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes collaborations commerciales sur TikTok — Geoffrey Moreno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fredoka:wght@500;600;700&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260512-burger">
+  <link rel="stylesheet" href="projet.css">
+  <style>
+    /* ── PAGE BACKGROUND — [À ADAPTER : palette de la page] ── */
+    body {
+      background-color: #F4F8FC;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(30, 58, 107, 0.15) 1px, transparent 0),
+        linear-gradient(180deg, #EAF1FA 0%, #F8FAFC 55%, #FCF1F2 100%);
+      background-size: 28px 28px, 100% 100%;
+      background-attachment: fixed;
+    }
+
+    /* ── HERO BANNER ── */
+    .projet-hero {
+      min-height: 36vh;
+      height: 36vh;
+      background: linear-gradient(135deg, #1E3A6B 0%, #0F2347 60%, #0A1A38 100%);
+      padding: 0 0 0 8%;
+      isolation: isolate;
+    }
+    .projet-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 22% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .projet-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 75% at center, transparent 60%, rgba(5, 14, 38, 0.30) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Marque filigrane en coin haut droit (à remplacer par votre symbole) */
+    .hero-cocarde-mark {
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      width: 58px;
+      height: 58px;
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 3;
+      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Animation décorative dans le hero — courbes Bézier tracées progressivement */
+    .hero-show {
+      position: absolute;
+      left: 3%;
+      right: 33%;
+      top: 18%;
+      bottom: 10%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    .hero-show__paths {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .hero-curve {
+      stroke-width: 3;
+      fill: none;
+      filter: blur(0.4px);
+      stroke-dasharray: 1400;
+      stroke-dashoffset: 1400;
+      animation: heroDraw 6s ease-out forwards infinite;
+    }
+    .hero-curve--blue  { stroke: rgba(0, 85, 164, 0.95);  animation-delay: 0s; }
+    .hero-curve--white { stroke: rgba(255, 255, 255, 1);  animation-delay: 0.4s; }
+    .hero-curve--red   { stroke: rgba(200, 16, 46, 0.95); animation-delay: 0.8s; }
+    .hero-curve-glow {
+      stroke-width: 8;
+      fill: none;
+      filter: blur(6px);
+      opacity: 0.5;
+      stroke-dasharray: 1400;
+      stroke-dashoffset: 1400;
+      animation: heroDrawGlow 6s ease-out forwards infinite;
+    }
+    @keyframes heroDraw {
+      0%   { stroke-dashoffset: 1400; opacity: 0.55; }
+      50%  { stroke-dashoffset: 0;    opacity: 1;    }
+      85%  { stroke-dashoffset: 0;    opacity: 1;    }
+      100% { stroke-dashoffset: 0;    opacity: 0;    }
+    }
+    @keyframes heroDrawGlow {
+      0%   { stroke-dashoffset: 1400; opacity: 0.3; }
+      50%  { stroke-dashoffset: 0;    opacity: 0.55; }
+      85%  { stroke-dashoffset: 0;    opacity: 0.55; }
+      100% { stroke-dashoffset: 0;    opacity: 0;    }
+    }
+
+    /* Petits éléments en bout de courbe (à remplacer par votre visuel) */
+    .hero-jet {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      width: 50px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+      opacity: 0;
+      animation: heroJetFly 6s ease-out forwards infinite;
+    }
+    .hero-jet--blue  { top: 25%; left: 95%; transform: translate(-50%, -50%) rotate(-22deg); animation-delay: 0s;   }
+    .hero-jet--white { top: 50%; left: 97%; transform: translate(-50%, -50%) rotate(-8deg);  animation-delay: 0.4s; }
+    .hero-jet--red   { top: 78%; left: 95%; transform: translate(-50%, -50%) rotate(10deg);  animation-delay: 0.8s; }
+    @keyframes heroJetFly {
+      0%, 35% { opacity: 0; }
+      50%     { opacity: 1; }
+      85%     { opacity: 1; }
+      100%    { opacity: 0; }
+    }
+
+    /* Scintillements le long des traînées */
+    .hero-spark {
+      position: absolute;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: heroSpark 3s ease-in-out infinite;
+    }
+    .hero-spark--1 {
+      top: 50%; left: 28%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+      animation-delay: 0s;
+    }
+    .hero-spark--2 {
+      top: 45%; left: 50%;
+      background: rgba(255, 200, 180, 0.95);
+      box-shadow: 0 0 8px rgba(255, 200, 180, 0.9);
+      animation-delay: -1s;
+    }
+    .hero-spark--3 {
+      top: 80%; left: 55%;
+      background: rgba(180, 200, 255, 0.95);
+      box-shadow: 0 0 8px rgba(180, 200, 255, 0.9);
+      animation-delay: -2s;
+    }
+    @keyframes heroSpark {
+      0%, 100% { opacity: 0; transform: scale(0.3); }
+      50%      { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* ── VIGNETTES HERO ── */
+    .projet-hero__thumbs {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 28px 0 28px 20px;
+      margin-right: -40px;
+      z-index: 4;
+      position: relative;
+      overflow: visible;
+      gap: 10px;
+    }
+
+    .hero-thumb {
+      border: none;
+      filter: brightness(0.97) saturate(1.0) contrast(1.02);
+      box-shadow: 0 16px 40px rgba(10, 31, 79, 0.40), 0 4px 10px rgba(10, 31, 79, 0.18);
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .projet-hero__thumbs:hover .hero-thumb {
+      filter: blur(2px) brightness(0.7) saturate(0.85);
+      transform-origin: center;
+    }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(1) { transform: rotate(-6deg) scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(2) { transform: rotate(0deg)  scale(0.95); }
+    .projet-hero__thumbs:hover .hero-thumb:nth-child(3) { transform: rotate(6deg)  scale(0.95); }
+
+    .projet-hero__thumbs .hero-thumb:hover {
+      filter: blur(0) brightness(1.05) saturate(1.1) !important;
+      box-shadow: 0 24px 56px rgba(200, 16, 46, 0.45);
+      z-index: 10 !important;
+    }
+    .projet-hero__thumbs .hero-thumb:nth-child(1):hover { transform: rotate(-3deg) scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(2):hover { transform: rotate(0deg)  scale(1.08) translateY(-6px) !important; }
+    .projet-hero__thumbs .hero-thumb:nth-child(3):hover { transform: rotate(3deg)  scale(1.08) translateY(-6px) !important; }
+
+    /* Titre hero */
+    .projet-hero__left { z-index: 4; }
+    .projet-title {
+      color: #FFFFFF !important;
+      text-shadow: 0 2px 14px rgba(10, 31, 79, 0.65), 0 1px 2px rgba(10, 31, 79, 0.50);
+    }
+    /* Saut de ligne mobile-only pour le titre — caché sur desktop. */
+    .projet-coco-br-mobile { display: none; }
+    .contenus-title-br-mobile { display: none; }
+
+    /* Badges hero */
+    .hero-badges .badge {
+      box-shadow:
+        0 4px 14px rgba(10, 31, 79, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30);
+      backdrop-filter: blur(10px) saturate(1.4);
+      -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    }
+    .hero-badges .badge:nth-child(1) {
+      color: #FFFFFF;
+      background: rgba(0, 85, 164, 0.78);
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
+    }
+    .hero-badges .badge:nth-child(2) {
+      color: #0A1F4D;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      text-shadow: none;
+    }
+    .hero-badges .badge:nth-child(3) {
+      color: #FFFFFF;
+      background: rgba(200, 16, 46, 0.82);
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
+    }
+
+    /* ── MAIN CARD ── */
+    .projet-card {
+      width: 94%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      box-sizing: border-box;
+      background: transparent;
+      position: relative;
+      padding: 40px 0 0 0;
+    }
+    .projet-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CARTES (Contexte / Missions / Résultats) ── */
+    .red-card {
+      position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #F4F8FC 50%, #E8F0F9 100%);
+      border: none;
+      border-radius: 24px;
+      padding: 45px 34px 30px;
+      box-shadow:
+        0 18px 40px rgba(10, 31, 79, 0.16),
+        0 2px 0 rgba(255,255,255,0.65) inset,
+        0 -2px 0 rgba(30, 58, 107, 0.08) inset;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+
+    /* Pattern subtil de mini-pois dans les cartes */
+    .red-card__bg {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .red-card__bg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.22;
+    }
+    .red-card > .red-card__text,
+    .red-card > .red-card__list,
+    .red-card > .results-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Label flottant (Contexte / Mes Missions / Résultats) */
+    .red-card__label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(10, 31, 79, 0.40);
+      padding: 11px 29px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #1E3A6B 0%, #0E2B5C 100%);
+      border: 1.5px solid rgba(14, 43, 92, 0.85);
+      box-shadow:
+        0 6px 18px rgba(14, 43, 92, 0.40),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+      white-space: nowrap;
+      z-index: 3;
+    }
+    /* Variante pour la carte Résultats */
+    .red-card--results .red-card__label {
+      background: linear-gradient(180deg, #C8102E 0%, #9B0C24 100%);
+      border-color: rgba(155, 12, 36, 0.85);
+      box-shadow:
+        0 6px 18px rgba(200, 16, 46, 0.40),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+    }
+
+    .red-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+      gap: 32px;
+    }
+
+    .red-card__text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(15.4px, 1.188vw, 19.8px);
+      line-height: 1.65;
+      letter-spacing: 0.04em;
+      color: #0E2A3B;
+      text-align: center;
+      margin: 0;
+    }
+    .red-card__text + .red-card__text { margin-top: 22px; }
+
+    .red-card__list {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(15.4px, 1.188vw, 19.8px);
+      line-height: 1.65;
+      letter-spacing: 0.04em;
+      color: #0E2A3B;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      text-align: center;
+      width: 100%;
+    }
+    .red-card__list li { display: block; text-align: center; }
+    .red-card__list li::before { content: "• "; color: #C8102E; font-weight: 900; }
+
+    /* ── CARTE RÉSULTATS ── */
+    .red-card--results {
+      padding: 36px 22px 32px;
+      width: 64.74%;
+      align-self: center;
+      min-height: 180px;
+    }
+    .results-row {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-around;
+      gap: 18px;
+      width: 100%;
+      padding-top: 22px;
+      flex-wrap: nowrap;
+    }
+    .results-item {
+      flex: 0 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .results-item__label {
+      min-height: 2.8em;
+    }
+    .results-item__value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.56rem, 2.40vw, 2.28rem);
+      color: #0E2A3B;
+      line-height: 1.05;
+      margin-bottom: 9px;
+      white-space: nowrap;
+    }
+    .results-item__number { font-size: 1.32em; vertical-align: middle; color: #C8102E; }
+    .results-item__suffix {
+      font-weight: 800;
+      font-size: 0.8395em;
+      color: #0E2A3B;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .results-item__label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.86rem, 1.01vw, 1.01rem);
+      color: rgba(14, 42, 59, 0.78);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.4;
+    }
+    .results-divider {
+      width: 1px;
+      height: 68px;
+      background: rgba(30, 58, 107, 0.28);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .red-row { grid-template-columns: 1fr; gap: 48px; }
+      .red-card--results { width: 92%; }
+      .results-row { flex-wrap: wrap; gap: 24px 12px; }
+      .results-divider { display: none; }
+      .results-item { flex: 1 1 40%; }
+    }
+    @media (max-width: 640px) {
+      .red-card { padding: 36px 22px 28px; }
+      .red-card--results { padding: 28px 18px 24px; width: 96%; }
+      .results-item { flex: 1 1 100%; }
+    }
+
+    /* ── ÉLÉMENTS DÉCO PAGE ENTIÈRE : icônes flottantes ── */
+    main { position: relative; }
+    .page-armee-deco {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    /* Cartes / sections / vidéos passent au-dessus des icônes flottantes
+       (les icônes restent visibles uniquement dans les zones dorées vides) */
+    main .projet-hero,
+    main .projet-main,
+    main .red-card,
+    main .red-row,
+    main .section-separator,
+    main .contenus-section,
+    main .contenus-title,
+    main .contenus-grid,
+    main .contenu-card,
+    main .autres-contenus-section,
+    main .autres-carousel-wrapper,
+    main .autres-card { position: relative; z-index: 2; }
+
+    .ar-icon {
+      position: absolute;
+      font-size: 36px;
+      line-height: 1;
+      pointer-events: none;
+      filter:
+        contrast(1.15)
+        saturate(1.35)
+        drop-shadow(0 4px 10px rgba(40, 28, 12, 0.55))
+        drop-shadow(0 1px 2px rgba(40, 28, 12, 0.40));
+      will-change: transform;
+      user-select: none;
+      opacity: 1;
+    }
+
+    /* Petits "dots" lumineux */
+    .ar-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(30, 58, 107, 0.55);
+      box-shadow: 0 0 12px rgba(30, 58, 107, 0.55);
+      pointer-events: none;
+      will-change: transform;
+    }
+    .ar-dot--red {
+      background: rgba(200, 16, 46, 0.55);
+      box-shadow: 0 0 12px rgba(200, 16, 46, 0.55);
+    }
+
+    /* === COLONNE GAUCHE === */
+    .ar-icon--1  { top: 4%;   left: 2%;   font-size: 30px; animation: arFloatA 14s ease-in-out infinite; }
+    .ar-icon--2  { top: 18%;  left: 3%;   font-size: 32px; animation: arFloatB 13s ease-in-out -2s infinite; }
+    .ar-icon--3  { top: 32%;  left: 1.5%; font-size: 28px; animation: arFloatC 16s ease-in-out -1s infinite; }
+    .ar-icon--4  { top: 48%;  left: 2.5%; font-size: 30px; animation: arFloatA 15s ease-in-out -3s infinite; }
+    .ar-icon--5  { top: 62%;  left: 2%;   font-size: 26px; animation: arFloatB 13s ease-in-out -2.5s infinite; }
+    .ar-icon--6  { top: 78%;  left: 3%;   font-size: 32px; animation: arFloatC 14s ease-in-out -1.5s infinite; }
+    .ar-icon--7  { top: 92%;  left: 2%;   font-size: 28px; animation: arFloatA 15s ease-in-out -4s infinite; }
+
+    /* === COLONNE CENTRE === */
+    .ar-icon--8  { top: 23%;  left: 50%;  font-size: 26px; transform: translateX(-50%); animation: arFloatCenter 17s ease-in-out -1s infinite; }
+    .ar-icon--9  { top: 40%;  left: 50%;  font-size: 28px; transform: translateX(-50%); animation: arFloatCenter 14s ease-in-out -2.5s infinite; }
+    .ar-icon--10 { top: 56%;  left: 50%;  font-size: 30px; transform: translateX(-50%); animation: arFloatCenter 15s ease-in-out -3s infinite; }
+    .ar-icon--11 { top: 71%;  left: 50%;  font-size: 26px; transform: translateX(-50%); animation: arFloatCenter 13s ease-in-out -1.5s infinite; }
+
+    /* === COLONNE DROITE === */
+    .ar-icon--12 { top: 8%;   left: 95%;  font-size: 30px; transform: translateX(-100%); animation: arFloatRight 14s ease-in-out infinite; }
+    .ar-icon--13 { top: 22%;  left: 96%;  font-size: 28px; transform: translateX(-100%); animation: arFloatRight 16s ease-in-out -2s infinite; }
+    .ar-icon--14 { top: 38%;  left: 95%;  font-size: 32px; transform: translateX(-100%); animation: arFloatRight 15s ease-in-out -1s infinite; }
+    .ar-icon--15 { top: 54%;  left: 96%;  font-size: 26px; transform: translateX(-100%); animation: arFloatRight 13s ease-in-out -3s infinite; }
+    .ar-icon--16 { top: 70%;  left: 95%;  font-size: 30px; transform: translateX(-100%); animation: arFloatRight 14s ease-in-out -4s infinite; }
+    .ar-icon--17 { top: 86%;  left: 96%;  font-size: 28px; transform: translateX(-100%); animation: arFloatRight 15s ease-in-out -1.5s infinite; }
+
+    /* === Icônes diversifiées dispersées === */
+    .ar-icon--18 { top: 13%;  left: 18%;  font-size: 24px; animation: arFloatB 16s ease-in-out -1s infinite; }
+    .ar-icon--19 { top: 27%;  left: 80%;  font-size: 26px; animation: arFloatC 14s ease-in-out -2s infinite; }
+    .ar-icon--20 { top: 44%;  left: 22%;  font-size: 28px; animation: arFloatA 15s ease-in-out -3.5s infinite; }
+    .ar-icon--21 { top: 60%;  left: 78%;  font-size: 24px; animation: arFloatB 14s ease-in-out -1s infinite; }
+    .ar-icon--22 { top: 75%;  left: 20%;  font-size: 30px; animation: arFloatC 13s ease-in-out -2s infinite; }
+    .ar-icon--23 { top: 89%;  left: 78%;  font-size: 26px; animation: arFloatA 16s ease-in-out -3s infinite; }
+    .ar-icon--24 { top: 11%;  left: 38%;  font-size: 28px; animation: arFloatB 15s ease-in-out -2.5s infinite; }
+    .ar-icon--25 { top: 50%;  left: 88%;  font-size: 30px; animation: arFloatC 14s ease-in-out -1.5s infinite; }
+    .ar-icon--26 { top: 84%;  left: 42%;  font-size: 26px; animation: arFloatA 16s ease-in-out -4s infinite; }
+
+    /* === Petits dots === */
+    .ar-dot--1 { top: 10%; left: 30%; animation: arDotPulse 4s ease-in-out infinite; }
+    .ar-dot--2 { top: 22%; left: 65%; animation: arDotPulse 5s ease-in-out -1s infinite; }
+    .ar-dot--3 { top: 35%; left: 14%; animation: arDotPulse 4.5s ease-in-out -2s infinite; }
+    .ar-dot--4 { top: 50%; left: 70%; animation: arDotPulse 5.5s ease-in-out -1.5s infinite; }
+    .ar-dot--5 { top: 65%; left: 30%; animation: arDotPulse 4s ease-in-out -2.5s infinite; }
+    .ar-dot--6 { top: 80%; left: 60%; animation: arDotPulse 5s ease-in-out -3s infinite; }
+
+    @keyframes arFloatA {
+      0%   { transform: translate(0, 0)       rotate(-4deg); }
+      50%  { transform: translate(8px, -10px) rotate(4deg);  }
+      100% { transform: translate(-6px, 6px)  rotate(-2deg); }
+    }
+    @keyframes arFloatB {
+      0%   { transform: translate(0, 0)        rotate(3deg);  }
+      50%  { transform: translate(-6px, -8px)  rotate(-3deg); }
+      100% { transform: translate(8px, 4px)    rotate(2deg);  }
+    }
+    @keyframes arFloatC {
+      0%   { transform: translate(0, 0)        rotate(-2deg); }
+      50%  { transform: translate(4px, -12px)  rotate(2deg);  }
+      100% { transform: translate(-8px, 8px)   rotate(-4deg); }
+    }
+    @keyframes arFloatCenter {
+      0%   { transform: translateX(-50%) translateY(0)    rotate(-3deg); }
+      50%  { transform: translateX(-50%) translateY(-10px) rotate(3deg); }
+      100% { transform: translateX(-50%) translateY(6px)   rotate(-2deg); }
+    }
+    @keyframes arFloatRight {
+      0%   { transform: translateX(-100%) translateY(0)    rotate(-3deg); }
+      50%  { transform: translateX(-100%) translateY(-10px) rotate(3deg); }
+      100% { transform: translateX(-100%) translateY(6px)   rotate(-2deg); }
+    }
+    @keyframes arDotPulse {
+      0%, 100% { transform: scale(1);    opacity: 0.45; }
+      50%      { transform: scale(1.4);  opacity: 0.85; }
+    }
+
+    /* ── PROJET MAIN ── */
+    .projet-main {
+      position: relative;
+      z-index: 1;
+      padding-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    /* ── SECTION CONTENUS ── */
+    .contenus-section {
+      width: 80%;
+      max-width: 1300px;
+      margin: 24px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+    .contenus-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(10, 31, 79, 0.40);
+      padding: 11px 29px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #1E3A6B 0%, #0E2B5C 100%);
+      border: 1.5px solid rgba(14, 43, 92, 0.85);
+      box-shadow:
+        0 6px 18px rgba(14, 43, 92, 0.40),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -2px 4px rgba(0,0,0,0.18);
+      white-space: nowrap;
+      text-align: center;
+    }
+    .contenus-title__logos {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contenus-title__logos img {
+      height: 28px;
+      width: auto;
+      vertical-align: middle;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    /* ── SÉPARATEUR ORNEMENTAL ── */
+    .section-separator {
+      width: 82%;
+      max-width: 420px;
+      margin: 8px auto;
+      display: block;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .section-separator svg { width: 100%; height: auto; display: block; }
+
+    /* ── MES AUTRES CONTENUS ── */
+    .autres-contenus-section { width: 82%; max-width: 1200px; margin: 64px auto 0; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+    .autres-carousel-wrapper { width: 100%; display: flex; align-items: center; gap: 16px; position: relative; }
+    .autres-track-clip { flex: 1; overflow: hidden; }
+    .autres-track { display: flex; gap: 20px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .autres-card { flex-shrink: 0; width: calc((100% - 20px) / 2); aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; position: relative; cursor: default; box-shadow: 0 8px 32px rgba(10, 31, 79, 0.20); transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.55s cubic-bezier(0.25,0.46,0.45,0.94); --c: #E50914; --c2: #9c0710; }
+    .autres-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(200, 16, 46, 0.30); }
+    .autres-card img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .autres-card__overlay { position: absolute; inset: 0; background: linear-gradient(135deg, color-mix(in srgb, var(--c) 40%, transparent) 0%, color-mix(in srgb, var(--c2) 80%, transparent) 100%); backdrop-filter: blur(8px) saturate(1.3); -webkit-backdrop-filter: blur(8px) saturate(1.3); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 7%; opacity: 0; transition: opacity 0.45s ease; border-radius: inherit; }
+    .autres-card:hover .autres-card__overlay { opacity: 1; }
+    .autres-card .ov-title { font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800; line-height: 1.18; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); position: relative; padding: 0 36px; margin: 0; transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card .ov-title::before, .autres-card .ov-title::after { content: ''; position: absolute; top: 50%; width: 22px; height: 2px; background: rgba(255, 255, 255, 0.85); }
+    .autres-card .ov-title::before { left: 0; }
+    .autres-card .ov-title::after { right: 0; }
+    .autres-card .ov-year { display: block; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; font-style: italic; letter-spacing: 0.18em; color: #fff; opacity: 0.92; margin-top: 14px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); transform: translateY(8px); transition: transform 0.45s ease; }
+    .autres-card:hover .ov-title, .autres-card:hover .ov-year { transform: translateY(0); }
+    .autres-arrow { flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(10, 31, 79, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s ease, transform 0.2s ease; box-shadow: 0 4px 14px rgba(10, 31, 79, 0.30); }
+    .autres-arrow:hover { background: rgba(200, 16, 46, 0.92); transform: scale(1.08); }
+    .autres-arrow:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .autres-dots { display: flex; gap: 8px; align-items: center; }
+    .autres-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(10, 31, 79, 0.30); border: none; padding: 0; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .autres-dot.is-active { background: #C8102E; transform: scale(1.3); }
+
+    /* Bouton retour adapté fond clair */
+    .projet-back {
+      color: rgba(10, 31, 79, 0.85);
+      border-color: rgba(10, 31, 79, 0.40);
+    }
+    .projet-back:hover { border-color: #C8102E; color: #C8102E; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1440px) {
+      .projet-hero { min-height: 32vh; height: 32vh; padding: 0 4%; }
+      .hero-thumb { height: 185px; width: auto; }
+      .projet-title { font-size: clamp(0.92rem, 1.68vw, 1.52rem); }
+      .projet-card { width: 86%; }
+      .projet-main { padding-top: 40px; gap: 36px; }
+    }
+    @media (max-width: 1280px) {
+      .projet-hero { min-height: 28vh; height: 28vh; padding: 0 3%; }
+      .hero-thumb { height: 150px; width: auto; margin-left: -18px; }
+      .projet-title { font-size: clamp(0.88rem, 1.76vw, 1.36rem); }
+      .projet-card { width: 90%; }
+      .projet-main { gap: 32px; }
+    }
+    @media (max-width: 1024px) {
+      .projet-hero { flex-direction: column; height: auto; min-height: auto; padding: 60px 5% 32px; align-items: flex-start; gap: 24px; }
+      .projet-hero__left { width: 100%; }
+      .projet-hero__thumbs { width: 100%; justify-content: center; padding: 0 0 8px; height: auto; }
+      .hero-thumb { height: 190px; width: 114px; margin-left: -18px; }
+      .projet-title { white-space: normal; font-size: clamp(0.8rem, 2.24vw, 1.28rem); }
+      .projet-card { width: 94%; max-width: 94%; }
+      .hero-cocarde-mark { width: 44px; height: 44px; top: 14px; right: 16px; }
+      .hero-show { display: none; }
+    }
+    @media (max-width: 768px) {
+      .projet-hero { padding: 56px 4% 24px; gap: 20px; }
+      .hero-thumb { height: 155px; width: 93px; margin-left: -14px; }
+      .hero-thumb:first-child { margin-left: 0; }
+      .projet-title { font-size: clamp(0.8rem, 3.6vw, 1.2rem); }
+      .projet-card { width: 96%; max-width: 96%; }
+      .projet-main { padding-top: 24px; gap: 24px; }
+      .hero-cocarde-mark { display: none; }
+    }
+    /* ══════════════════════════════════════════════════════════════════
+       Bloc généré par le Skill responsive-mobile-portfolio.
+       Variations Collaborations Commerciales : 3 résultats (2+1 large),
+       TikTok+Reels (64×64 / 64×41), palette pastel bleu/blanc reprise du desktop. */
+    @media (max-width: 480px) {
+      /* ───────── HERO BANNER ───────── */
+      .projet-hero {
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 70px 16px 24px !important;
+        gap: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .projet-hero__left { display: contents !important; }
+      .projet-hero__thumbs { display: none !important; }
+      .projet-title {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        font-size: clamp(13.5px, 4vw, 17.5px) !important;
+        line-height: 1.22 !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      /* Saut de ligne mobile actif : "Mes collaborations commerciales" / "sur TikTok". */
+      .projet-coco-br-mobile { display: inline !important; }
+      .projet-title-l1 { white-space: nowrap !important; }
+      .hero-badges,
+      .projet-badges {
+        order: 2 !important;
+        width: 100% !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        position: relative !important;
+        z-index: 2 !important;
+      }
+      .hero-badges .badge,
+      .projet-badges .badge,
+      .badge {
+        font-size: 8.5px !important;
+        padding: 5px 8px !important;
+        letter-spacing: 0.04em !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
+      }
+
+      /* ───────── ESPACEMENT main ───────── */
+      .projet-main {
+        padding-top: 32px !important;
+        gap: 32px !important;
+      }
+
+      /* ───────── CONTEXTE + MES MISSIONS ───────── */
+      .projet-card {
+        width: calc(100% - 48px) !important;
+        max-width: calc(100% - 48px) !important;
+      }
+      .red-row > .red-card {
+        padding: 30px 19px 24px !important;
+        background: #ffffff !important;
+      }
+      .red-row > .red-card .red-card__label {
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+      }
+
+      /* ───────── RÉSULTATS CLÉS — 3 mini-cartes (2+1 large) ─────────
+         Spécificité bumpée (body[data-page=...]) pour battre la règle desktop
+         "body .red-card--results" déclarée plus bas (cascade) et supprimer
+         le bloc ivoire qui enveloppe les 3 stats sur mobile. */
+      body[data-page="collaborations-commerciales"] .red-card--results {
+        background: none !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        filter: none !important;
+        display: block !important;
+        text-align: center !important;
+        margin-top: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        align-self: stretch !important;
+      }
+      body[data-page="collaborations-commerciales"] .red-card--results .red-card__bg { display: none !important; }
+      .red-card--results .red-card__label {
+        position: static !important;
+        transform: none !important;
+        display: inline-block !important;
+        margin: 0 0 18px 0 !important;
+        top: auto !important;
+        left: auto !important;
+        font-size: 0.85rem !important;
+        padding: 7px 20px !important;
+      }
+      body[data-page="collaborations-commerciales"] .red-card--results .results-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 14px 6px !important;
+        padding-top: 0 !important;
+        flex-wrap: unset !important;
+        text-align: left !important;
+      }
+      .red-card--results .results-divider { display: none !important; }
+      .red-card--results .results-item:last-of-type { grid-column: 1 / -1 !important; }
+      /* Mini-cartes : palette BLEU PASTEL reprise du desktop */
+      .red-card--results .results-item {
+        flex: unset !important;
+        min-width: 0 !important;
+        background:
+          radial-gradient(circle at center, rgba(30,58,107,0.045) 1px, transparent 1.5px) 0 0 / 14px 14px,
+          linear-gradient(135deg, #ffffff 0%, #F4F8FC 50%, #E8F0F9 100%) !important;
+        border: 1.5px solid rgba(30, 58, 107, 0.30) !important;
+        border-radius: 16px !important;
+        padding: 16px 8px !important;
+        box-shadow:
+          0 10px 24px rgba(10, 31, 79, 0.16),
+          0 2px 0 rgba(255,255,255,0.65) inset,
+          0 -2px 0 rgba(30, 58, 107, 0.08) inset !important;
+        justify-content: center !important;
+        filter: brightness(1.05) !important;
+        min-height: 92px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .red-card--results .results-item__value {
+        color: #0E2A3B !important;
+        font-size: clamp(1.56rem, 5vw, 2.28rem) !important;
+      }
+      .red-card--results .results-item__label {
+        color: rgba(14, 42, 59, 0.78) !important;
+        font-size: 0.527rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: anywhere !important;
+        letter-spacing: 0.10em !important;
+        min-height: 0 !important;
+      }
+
+      /* Fix orphelines en grille 3-col desktop */
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+1),
+      .contenus-grid > .contenu-card:nth-last-child(2):nth-child(3n+1),
+      .contenus-grid > .contenu-card:last-child:nth-child(3n+2) {
+        transform: none !important;
+        grid-column: auto !important;
+        justify-self: center !important;
+      }
+
+      /* ───────── CAPSULE "CONTENUS SUR" ───────── */
+      .contenus-section {
+        width: 100% !important;
+        padding: 0 16px !important;
+      }
+      .contenus-title {
+        font-size: 0.843rem !important;
+        padding: 9.6px 12.8px !important;
+        gap: 8.8px !important;
+        border-radius: 8.8px !important;
+        -webkit-text-stroke: 0.4px #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.30) !important;
+      }
+      /* Première capsule "Mes contenus de collaboration sur TikTok" — bump +20% pour matcher visuellement la 2e capsule plus longue */
+      .contenus-section .contenus-title {
+        font-size: 1.012rem !important;
+        padding: 11.5px 15.4px !important;
+      }
+      .contenus-title-br-mobile { display: inline !important; }
+      .contenus-title__logos { gap: 6.4px !important; }
+      .contenus-title__logos img { height: 37.15px !important; }
+      .layout-selector { display: none !important; }
+
+      /* ───────── GRILLE VIDÉOS — 1 colonne, vignettes 230px ───────── */
+      .contenus-grid,
+      .contenus-grid--cols-2 {
+        grid-template-columns: 1fr !important;
+        gap: 56px !important;
+        max-width: 100% !important;
+        justify-content: stretch !important;
+      }
+      .contenu-card {
+        max-width: 230px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        justify-self: center !important;
+      }
+      .contenu-card__frame { padding: 0 !important; border-radius: 12px !important; }
+      .contenu-card__frame video { border-radius: 9px !important; }
+
+      /* ───────── PILULES STATS — TikTok + Reels ───────── */
+      .contenu-card__metric--featured {
+        width: 100% !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        min-height: 0 !important;
+        height: 53px !important;
+        max-height: 53px !important;
+        align-self: center !important;
+      }
+      .metric-press__inner {
+        padding: 0 6px 0 3px !important;
+        gap: 3px !important;
+      }
+      .contenu-card__metric--featured img {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        object-fit: contain !important;
+        object-position: center !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--reels-white img {
+        width: 64px !important;
+        height: 41px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix {
+        font-size: 17px !important;
+      }
+      .contenu-card__metric-inline {
+        gap: 4px !important;
+        margin-left: -9px !important;
+      }
+      .contenu-card__metric--featured.contenu-card__metric--reels-white .contenu-card__metric-inline {
+        transform: translateX(-12px) !important;
+      }
+      .contenu-card__metric-inline .metric-prefix {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      /* ───────── ZOOM PLEIN ÉCRAN VIDÉO ───────── */
+      .contenu-card__frame.is-zoomed {
+        border: none !important;
+        background: #000 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed video {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: cover !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__sound {
+        top: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__fullscreen {
+        bottom: 14px !important;
+        right: 14px !important;
+      }
+      .contenu-card__frame.is-zoomed .contenu-card__progress {
+        left: 14px !important;
+        right: 56px !important;
+        bottom: 24px !important;
+      }
+
+      /* ───────── DIVERS ───────── */
+      .hero-thumb { height: 120px; width: 72px; }
+      .bento-card-title-row { flex-wrap: wrap !important; }
+      .bento-hover-btn { font-size: 12px !important; padding: 6px 16px !important; }
+    }
+
+    /* ── CARDS VIDÉO (3 vidéos : 2 + 1 centrée en dessous) ── */
+    .contenus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(183px, 266px));
+      gap: 120px;
+      justify-content: center;
+      width: 100%;
+    }
+    .contenus-grid > .contenu-card:nth-child(3) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(266px, 100%);
+    }
+    .contenu-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .contenu-card__frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #0A1F4F;
+      box-shadow: 0 20px 50px rgba(10, 31, 79, 0.30), 0 4px 12px rgba(200, 16, 46, 0.18);
+      isolation: isolate;
+    }
+    .contenu-card__frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+    .contenu-card__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .contenu-card__blob--blue   { top: -20%; left: -20%; width: 70%; height: 70%; background: rgba(30, 58, 107, 0.55); }
+    .contenu-card__blob--orange { bottom: -20%; right: -20%; width: 60%; height: 60%; background: rgba(200, 16, 46, 0.50); }
+
+    .contenu-card__play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.92);
+      cursor: pointer;
+      z-index: 3;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.30);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .contenu-card__play::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 54%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-left: 18px solid #1E3A6B;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+    .contenu-card__play:hover { transform: translate(-50%, -50%) scale(1.08); }
+    .contenu-card__frame.is-playing .contenu-card__play { opacity: 0; pointer-events: none; }
+
+    .contenu-card__sound {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(10, 31, 79, 0.78);
+      cursor: pointer;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .contenu-card__sound:hover { background: rgba(200, 16, 46, 0.92); }
+    .contenu-card__sound svg { width: 18px; height: 18px; stroke: #fff; fill: #fff; stroke-width: 2; }
+
+    .contenu-card__progress {
+      position: absolute;
+      bottom: 14.5px;
+      left: 14px;
+      right: 14px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.20);
+      cursor: pointer;
+      z-index: 3;
+    }
+    .contenu-card__progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #1E3A6B 0%, #FFFFFF 50%, #C8102E 100%);
+      transition: width 0.1s linear;
+    }
+
+    /* Badge métrique sous chaque vidéo */
+    .contenu-card__metric {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+    .contenu-card__metric--featured {
+      width: 100%; max-width: 100%; min-width: 0;
+      aspect-ratio: 235.76 / 44.49; height: auto;
+      justify-content: center; gap: 2px; padding: 0 !important;
+      background: rgba(16, 0, 1, 0.72);
+      border: 0;
+      border-radius: 8.77px;
+      box-shadow:
+        0 2.51px 2.51px rgba(12, 0, 0, 0.9),
+        0 0.49px 2.5px rgba(24, 2, 2, 0.59);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-sizing: border-box;
+      cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0);
+      overflow: visible !important;
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s ease;
+      text-decoration: none;
+    }
+    .contenu-card__metric--featured:hover { transform: translateY(-1px); }
+    .metric-press__outer {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: box-shadow 300ms ease; will-change: box-shadow;
+      box-shadow: 0 0.05em 0.05em -0.01em rgba(5,5,5,1), 0 0.01em 0.01em -0.01em rgba(5,5,5,0.5), 0.15em 0.3em 0.1em -0.01em rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__outer { box-shadow: 0 0 0 0 rgba(5,5,5,1), 0 0 0 0 rgba(5,5,5,0.5), 0 0 0 0 rgba(5,5,5,0.25); }
+    .metric-press__inner {
+      position: relative; z-index: 1; border-radius: inherit; width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 3px; padding: 0 8px 0 4px;
+      transition: box-shadow 300ms ease, clip-path 250ms ease, transform 250ms ease;
+      will-change: box-shadow, clip-path, transform; overflow: clip;
+      clip-path: inset(0 0 0 0 round 8.77px);
+      box-shadow:
+        0 0 0 0 inset rgba(5,5,5,0.1),
+        -0.05em -0.05em 0.05em 0 inset rgba(5,5,5,0.25),
+        0 0 0 0 inset rgba(5,5,5,0.1),
+        0 0 0.05em 0.2em inset rgba(255,255,255,0.08),
+        0.025em 0.05em 0.1em 0 inset rgba(255,255,255,0.15),
+        0.12em 0.12em 0.12em inset rgba(255,255,255,0.08),
+        -0.075em -0.25em 0.25em 0.1em inset rgba(5,5,5,0.25);
+    }
+    .contenu-card__metric--featured:hover .metric-press__inner {
+      clip-path: inset(clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 8.77px);
+      background: rgba(200, 16, 46, 0.55);
+      box-shadow:
+        0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+        -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+        0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+        0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.05),
+        0 0 0 0 inset rgba(255, 255, 255, 1),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25),
+        inset 0 0 12px rgba(200, 16, 46, 0.4);
+    }
+    .contenu-card__metric--featured:active .metric-press__inner {
+      transform: scale(0.975);
+      background: rgba(200, 16, 46, 0.55);
+      box-shadow:
+        0 0 0 0 inset rgba(5, 5, 5, 0.1),
+        inset 0 0 12px rgba(200, 16, 46, 0.4),
+        inset 0 0 4px rgba(255, 100, 120, 0.3);
+    }
+    .contenu-card__metric--featured img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: none;
+    }
+    .contenu-card__metric-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: -11px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .contenu-card__metric-inline .metric-value,
+    .contenu-card__metric-inline .metric-separator,
+    .contenu-card__metric-inline .metric-icon,
+    .contenu-card__metric-inline .metric-prefix { font-size: 17px; }
+    .metric-prefix { opacity: 0.85; }
+    .metric-separator { opacity: 0.65; }
+
+    @media (max-width: 768px) {
+      .contenus-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contenus-grid > .contenu-card:nth-child(3) { grid-column: auto; justify-self: stretch; width: auto; }
+      .contenu-card { max-width: 280px; margin: 0 auto; }
+      .contenus-section { width: 92%; gap: 32px; }
+    }
+  
+    /* ─── PERF FIX SEEKBAR (uniforme à toutes les pages projet) ──────
+       Desktop : barre 3→6px (repos), 5→10px (hover) pour cible plus précise.
+       Mobile : visible 3px MAIS zone tactile invisible étendue 22px vers le haut
+                via padding-top + background-clip: content-box (technique Netflix/YouTube).
+       touch-action: none → pas de conflit scroll/seek sur mobile. */
+    .contenu-card__progress {
+      height: 6px;
+      touch-action: none;
+    }
+    .contenu-card__frame--player:hover .contenu-card__progress {
+      height: 10px;
+    }
+    @media (hover: none) {
+      .contenu-card__progress {
+        box-sizing: content-box; /* override le border-box global pour que height + padding additionnent */
+        height: 3px;
+        padding-top: 22px;
+        background-clip: content-box;
+      }
+    }
+
+  </style>
+
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       ATELIER COUTURE — refonte univers Timberland / Lanieri / Rêveur Lucid
+       Palette: ivoire #F5EDE0, doré #C9A96E, bleu nuit #1B2845, charbon #0F0F0F
+       ════════════════════════════════════════════════════════════ */
+    :root {
+      --atl-ivory:   #F5EDE0;
+      --atl-ivory-2: #ECE0CC;
+      --atl-cream:   #FBF6EC;
+      --atl-gold:    #C9A96E;
+      --atl-gold-d:  #A88848;
+      --atl-gold-l:  #E2C896;
+      --atl-navy:    #1B2845;
+      --atl-charcoal:#0F0F0F;
+      --atl-text:    #2A1F14;
+    }
+
+    /* ── BODY : tons dorés chauds + halos dorés (sans hue cool/violet) ── */
+    body {
+      background-color: #F4E8C8 !important;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 15% 10%, rgba(201, 169, 110, 0.22), transparent 60%),
+        radial-gradient(ellipse 55% 40% at 88% 25%, rgba(232, 200, 140, 0.20), transparent 65%),
+        radial-gradient(ellipse 70% 50% at 50% 90%, rgba(168, 136, 72, 0.16), transparent 70%),
+        radial-gradient(circle at 1px 1px, rgba(168, 136, 72, 0.20) 1px, transparent 0),
+        linear-gradient(180deg, #F4E8C8 0%, #F0DEB0 50%, #ECDCB0 100%) !important;
+      background-size: auto, auto, auto, 22px 22px, 100% 100% !important;
+      background-attachment: fixed !important;
+    }
+
+    /* ── HERO : Trottoir Éditorial — golden hour parisien ── */
+    .projet-hero {
+      background:
+        radial-gradient(ellipse 50% 80% at 92% 18%, rgba(255, 220, 140, 0.78), transparent 55%),
+        radial-gradient(ellipse 80% 100% at 95% 30%, rgba(255, 200, 110, 0.30), transparent 65%),
+        radial-gradient(ellipse 25% 60% at 8% 80%, rgba(255, 220, 160, 0.40), transparent 60%),
+        linear-gradient(180deg,
+          #FFE5B0 0%,
+          #F5D89A 22%,
+          #EFCD86 42%,
+          #E2BC78 62%,
+          #D4AB6E 82%,
+          #C29A60 100%) !important;
+    }
+    .projet-hero::before { background: transparent !important; }
+    .projet-hero::after  { background: transparent !important; }
+
+    /* Anciens éléments (courbes / sparks / jets / cocarde) supprimés */
+    .hero-show,
+    .hero-jet,
+    .hero-cocarde-mark,
+    .hero-spark { display: none !important; }
+
+    /* Titre hero : blanc, ombre portée légère */
+    .projet-title {
+      color: #FFFFFF !important;
+      text-shadow: 0 2px 8px rgba(40, 28, 12, 0.35), 0 1px 2px rgba(40, 28, 12, 0.25) !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.045em !important;
+    }
+
+    /* Badges hero : même fond navy que les capsules Contexte / Mes Missions */
+    .hero-badges .badge {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow:
+        0 0 0 2px rgba(232, 200, 140, 0.22),
+        0 0 24px rgba(255, 200, 110, 0.55),
+        0 0 48px rgba(232, 200, 140, 0.32),
+        0 8px 22px rgba(27, 40, 69, 0.45),
+        inset 0 1px 0 rgba(232, 200, 140, 0.45),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.30) !important;
+      animation: gh-label-glow 4.5s ease-in-out infinite;
+    }
+    .hero-badges .badge:nth-child(1),
+    .hero-badges .badge:nth-child(2),
+    .hero-badges .badge:nth-child(3) {
+      color: #FFFFFF !important;
+      background: linear-gradient(180deg, rgba(27, 40, 69, 0.65) 0%, rgba(14, 24, 48, 0.65) 100%) !important;
+      border: 1.5px solid rgba(232, 200, 140, 0.95) !important;
+      text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.55),
+        0 0 8px rgba(255, 220, 140, 0.25) !important;
+    }
+
+    /* Vignettes hero : ombre chaude */
+    .hero-thumb {
+      box-shadow:
+        0 16px 40px rgba(120, 90, 40, 0.30),
+        0 4px 10px rgba(120, 90, 40, 0.15) !important;
+    }
+    .projet-hero__thumbs .hero-thumb:hover {
+      box-shadow: 0 24px 56px rgba(201, 169, 110, 0.55) !important;
+    }
+
+    /* ── CARTES (Contexte / Missions / Résultats) ── */
+    .red-card {
+      background: linear-gradient(135deg, #FBF6EC 0%, #F5EDE0 50%, #ECE0CC 100%) !important;
+      border: none !important;
+      box-shadow:
+        0 18px 40px rgba(120, 90, 40, 0.16),
+        0 2px 0 rgba(255, 255, 255, 0.65) inset,
+        0 -2px 0 rgba(168, 136, 72, 0.18) inset !important;
+    }
+    .red-card__bg svg { opacity: 0.16 !important; }
+
+    /* Labels flottants : bleu nuit + liseré doré */
+    .red-card__label {
+      background: linear-gradient(180deg, var(--atl-navy) 0%, #131c33 100%) !important;
+      border: 1.5px solid var(--atl-gold) !important;
+      color: #FBF6EC !important;
+      box-shadow:
+        0 6px 18px rgba(27, 40, 69, 0.40),
+        inset 0 1px 0 rgba(201, 169, 110, 0.25),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.22) !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45) !important;
+    }
+    .red-card--results .red-card__label {
+      background: linear-gradient(180deg, var(--atl-charcoal) 0%, #1a1a1a 100%) !important;
+      border-color: var(--atl-gold) !important;
+      box-shadow:
+        0 6px 18px rgba(15, 15, 15, 0.45),
+        inset 0 1px 0 rgba(201, 169, 110, 0.30),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.30) !important;
+    }
+
+    /* Texte cartes */
+    .red-card__text,
+    .red-card__list { color: var(--atl-text) !important; }
+    .red-card__list li::before { color: var(--atl-gold-d) !important; }
+
+    /* Résultats : chiffres dorés */
+    .results-item__value { color: var(--atl-text) !important; }
+    .results-item__number { color: var(--atl-gold-d) !important; }
+    .results-item__suffix { color: var(--atl-text) !important; }
+    .results-item__label { color: rgba(42, 31, 20, 0.72) !important; }
+    .results-divider { background: var(--atl-gold) !important; opacity: 0.55 !important; }
+
+    /* ── TITRE SECTION CONTENUS ── */
+    .contenus-title {
+      background: linear-gradient(180deg, var(--atl-charcoal) 0%, #1a1a1a 100%) !important;
+      border: 1.5px solid var(--atl-gold) !important;
+      color: #FBF6EC !important;
+      box-shadow:
+        0 6px 18px rgba(15, 15, 15, 0.40),
+        inset 0 1px 0 rgba(201, 169, 110, 0.25),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.30) !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.40) !important;
+    }
+    .contenus-title__logos img {
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)) !important;
+    }
+
+    /* ── SÉPARATEURS : ligne dorée + bouton stylisé central ── */
+    .section-separator { opacity: 1 !important; height: 28px; position: relative; display: flex; align-items: center; justify-content: center; }
+    .section-separator svg { display: none !important; }
+    .section-separator::before {
+      content: "";
+      position: absolute;
+      left: 8%; right: 8%; top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--atl-gold) 30%, var(--atl-gold) 70%, transparent 100%);
+    }
+    .section-separator::after {
+      content: "";
+      position: relative;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, var(--atl-gold-l) 0%, var(--atl-gold) 60%, var(--atl-gold-d) 100%);
+      border: 1.5px solid var(--atl-gold-d);
+      box-shadow:
+        0 2px 6px rgba(120, 90, 40, 0.35),
+        inset 0 1px 2px rgba(255, 255, 255, 0.50),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.18);
+    }
+
+    /* ── VIDÉOS COLLABS ── */
+    .contenu-card__frame {
+      background: var(--atl-cream) !important;
+      box-shadow:
+        0 20px 50px rgba(120, 90, 40, 0.30),
+        0 4px 12px rgba(201, 169, 110, 0.20) !important;
+    }
+    .contenu-card__blob--blue   { background: rgba(201, 169, 110, 0.42) !important; }
+    .contenu-card__blob--orange { background: rgba(168, 136, 72, 0.40) !important; }
+    .contenu-card__progress-fill {
+      background: linear-gradient(90deg, var(--atl-gold-d) 0%, var(--atl-gold-l) 50%, var(--atl-gold) 100%) !important;
+    }
+    .contenu-card__play {
+      background: rgba(251, 246, 236, 0.95) !important;
+      border: 1.5px solid var(--atl-gold) !important;
+    }
+    .contenu-card__play::before { border-left-color: var(--atl-charcoal) !important; }
+    .contenu-card__sound {
+      background: rgba(15, 15, 15, 0.85) !important;
+      border: 1px solid var(--atl-gold) !important;
+    }
+    .contenu-card__sound:hover { background: var(--atl-gold-d) !important; }
+
+    /* Badge métrique sous vidéo : noir charbon + liseré doré */
+    .contenu-card__metric--featured {
+      background: rgba(15, 0, 0, 0.85) !important;
+      border: 1px solid var(--atl-gold) !important;
+    }
+    .contenu-card__metric--featured:hover .metric-press__inner {
+      background: rgba(201, 169, 110, 0.45) !important;
+      box-shadow:
+        0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+        -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+        0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+        0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.05),
+        0 0 0 0 inset rgba(255, 255, 255, 1),
+        0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.08),
+        -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25),
+        inset 0 0 12px rgba(201, 169, 110, 0.45) !important;
+    }
+
+    /* ── CAROUSEL "AUTRES CONTENUS" ── */
+    .autres-arrow {
+      background: rgba(15, 15, 15, 0.85) !important;
+      border: 1px solid var(--atl-gold) !important;
+    }
+    .autres-arrow:hover { background: var(--atl-gold-d) !important; }
+    .autres-card { box-shadow: 0 8px 32px rgba(120, 90, 40, 0.22) !important; }
+    .autres-card:hover { box-shadow: 0 14px 40px rgba(201, 169, 110, 0.45) !important; }
+    .autres-dot { background: rgba(15, 15, 15, 0.30) !important; }
+    .autres-dot.is-active { background: var(--atl-gold-d) !important; }
+
+    /* Bouton retour */
+    .projet-back {
+      color: var(--atl-text) !important;
+      border-color: var(--atl-gold) !important;
+    }
+    .projet-back:hover {
+      border-color: var(--atl-gold-d) !important;
+      color: var(--atl-gold-d) !important;
+    }
+
+    /* ── ICÔNES FLOTTANTES : couleurs vives, ombre prononcée ── */
+    .ar-icon {
+      filter: contrast(1.15) saturate(1.4)
+              drop-shadow(0 4px 10px rgba(40, 28, 12, 0.55))
+              drop-shadow(0 1px 2px rgba(40, 28, 12, 0.40)) !important;
+      opacity: 1 !important;
+    }
+    .ar-dot {
+      background: rgba(201, 169, 110, 0.55) !important;
+      box-shadow: 0 0 12px rgba(201, 169, 110, 0.55) !important;
+    }
+    .ar-dot--red {
+      background: rgba(168, 136, 72, 0.65) !important;
+      box-shadow: 0 0 12px rgba(168, 136, 72, 0.55) !important;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PISTE 2 — TROTTOIR ÉDITORIAL · scène SVG décorative
+       ════════════════════════════════════════════════════════════ */
+
+    /* Pavés parisiens (bottom, fade vers le haut) */
+    .tr-bg-cobble {
+      position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,1) 100%);
+              mask-image: linear-gradient(180deg, transparent 0%, transparent 30%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,1) 100%);
+    }
+    .tr-bg-cobble svg { width: 100%; height: 100%; display: block; }
+
+    /* Rayons de soleil */
+    .tr-bg-rays {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(228deg, rgba(255, 220, 140, 0.22) 0%, rgba(255, 220, 140, 0.10) 25%, transparent 45%),
+        linear-gradient(238deg, rgba(255, 230, 170, 0.18) 0%, transparent 35%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    /* Objets décor */
+    .tr-decor {
+      position: absolute; inset: 0; z-index: 2;
+      pointer-events: none;
+    }
+    .tr-obj { position: absolute; pointer-events: none; }
+
+    .tr-railing    { display: none !important; }
+    .tr-streetlamp { display: none !important; }
+    .tr-bistro     { display: none !important; }
+    .tr-boot       { display: none !important; }
+    .tr-polaroid-1 { display: none !important; }
+    .tr-polaroid-2 { display: none !important; }
+    .tr-leaf       { bottom: 14%; left: 33%; width: 2.4%; transform: rotate(40deg); opacity: 0.75; }
+
+    /* Vignette + grain */
+    .tr-bg-vignette {
+      position: absolute; inset: 0; z-index: 3;
+      background: radial-gradient(ellipse 95% 80% at center, transparent 55%, rgba(80, 55, 20, 0.28) 100%);
+      pointer-events: none;
+    }
+    .tr-bg-grain {
+      position: absolute; inset: 0; z-index: 3;
+      mix-blend-mode: overlay;
+      opacity: 0.20;
+      pointer-events: none;
+    }
+    .tr-bg-grain svg { width: 100%; height: 100%; display: block; }
+
+    /* Foreground au-dessus du décor */
+    .projet-hero__left   { z-index: 5 !important; position: relative; }
+    .projet-hero__thumbs { z-index: 5 !important; position: relative; }
+
+    /* Mobile : on cache la plupart des objets, garde botte légère */
+    @media (max-width: 720px) {
+      .tr-railing, .tr-streetlamp, .tr-polaroid-1, .tr-polaroid-2, .tr-leaf, .tr-bistro { display: none; }
+      .tr-boot { bottom: -8%; right: -8%; width: 36%; opacity: 0.55; }
+    }
+
+    /* ── HEADER : Pill dorée chaude (Option B) — surcharge header-dark ── */
+    body.header-dark .header-pill {
+      background: linear-gradient(135deg, #FBF6EC 0%, #F0E0BD 50%, #E2C896 100%) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1.5px solid rgba(168, 136, 72, 0.55) !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.70),
+        inset 0 -1px 0 rgba(168,136,72,0.18),
+        0 6px 22px rgba(120,85,30,0.18) !important;
+    }
+    body.header-dark .header-logo,
+    body.header-dark .nav-link,
+    body.header-dark .social-link { color: var(--atl-text) !important; }
+    body.header-dark .nav-link.is-active {
+      background: linear-gradient(135deg, var(--atl-gold) 0%, var(--atl-gold-d) 100%) !important;
+      color: #fff !important;
+      border: 1px solid var(--atl-gold-d) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.30), 0 1px 3px rgba(80,55,20,0.30) !important;
+      backdrop-filter: none !important;
+    }
+    body.header-dark .nav-link:not(.is-active):hover {
+      background: rgba(255,255,255,0.55) !important;
+      color: var(--atl-text) !important;
+    }
+    body.header-dark .social-link:hover {
+      background: rgba(255,255,255,0.55) !important;
+    }
+  </style>
+
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       PISTE 4 — GOLDEN HOUR CINÉMA
+       Prolonger la lumière dorée du hero sur toute la page :
+       — fond chaud cinématique + 2 halos lumineux + particules dorées
+       — cartes ivoire baignées de soleil, liseré doré dégradé clair→foncé
+       — capsules titres navy avec halo doré rayonnant pulsant
+       ════════════════════════════════════════════════════════════ */
+
+    /* ── BODY : dégradé chaud + halos lumineux + particules dorées ── */
+    body {
+      background-color: #F4E4B8 !important;
+      background-image:
+        radial-gradient(ellipse 55% 38% at 10% 6%, rgba(255, 225, 145, 0.62), transparent 65%),
+        radial-gradient(ellipse 60% 42% at 92% 96%, rgba(255, 195, 100, 0.50), transparent 65%),
+        radial-gradient(ellipse 75% 55% at 50% 50%, rgba(232, 200, 140, 0.22), transparent 75%),
+        radial-gradient(circle at 1px 1px, rgba(201, 169, 110, 0.40) 1px, transparent 0),
+        linear-gradient(180deg,
+          #FFE5B0 0%,
+          #F5D89A 22%,
+          #F0DEB0 48%,
+          #ECDCB0 72%,
+          #E8D29A 100%) !important;
+      background-size: auto, auto, auto, 26px 26px, 100% 100% !important;
+      background-attachment: fixed !important;
+      position: relative;
+    }
+
+    /* Particules dorées scintillantes (overlay animé) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        radial-gradient(circle at 14% 22%, rgba(255, 235, 180, 0.85) 0, transparent 2.5px),
+        radial-gradient(circle at 36% 64%, rgba(255, 220, 140, 0.75) 0, transparent 2.5px),
+        radial-gradient(circle at 64% 32%, rgba(255, 240, 190, 0.70) 0, transparent 2.5px),
+        radial-gradient(circle at 86% 76%, rgba(255, 220, 140, 0.75) 0, transparent 2.5px),
+        radial-gradient(circle at 50% 92%, rgba(255, 235, 180, 0.70) 0, transparent 2px),
+        radial-gradient(circle at 24% 48%, rgba(255, 240, 190, 0.65) 0, transparent 2px),
+        radial-gradient(circle at 76% 14%, rgba(255, 230, 160, 0.75) 0, transparent 2.5px),
+        radial-gradient(circle at 8% 78%, rgba(255, 235, 180, 0.65) 0, transparent 2px),
+        radial-gradient(circle at 92% 42%, rgba(255, 230, 160, 0.65) 0, transparent 2px),
+        radial-gradient(circle at 44% 18%, rgba(255, 240, 190, 0.55) 0, transparent 1.8px);
+      animation: gh-shimmer 5.5s ease-in-out infinite;
+    }
+
+    @keyframes gh-shimmer {
+      0%, 100% { opacity: 0.55; }
+      50%      { opacity: 1.00; }
+    }
+
+    /* ── CARTES (Contexte / Missions / Résultats) — Ivoire baigné de soleil ── */
+    .red-card {
+      position: relative;
+      background:
+        radial-gradient(ellipse 65% 55% at 28% 28%, rgba(255, 200, 170, 0.20), transparent 70%),
+        radial-gradient(ellipse 55% 48% at 72% 82%, rgba(255, 220, 150, 0.22), transparent 70%),
+        linear-gradient(135deg, #FFFDF7 0%, #FBF6EC 50%, #F5EDE0 100%) !important;
+      border: none !important;
+      border-radius: 24px !important;
+      box-shadow:
+        26px 30px 64px rgba(160, 110, 40, 0.20),
+        10px 12px 28px rgba(200, 140, 60, 0.16),
+        inset 0 2px 0 rgba(255, 255, 255, 0.65),
+        inset 0 -2px 0 rgba(168, 136, 72, 0.14) !important;
+    }
+
+    /* Liseré doré dégradé clair (haut, soleil) → foncé (bas, ombre) */
+    .red-card::before {
+      display: none !important;
+    }
+
+    /* Pattern dots intérieur masqué (fonds blancs nets) */
+    .red-card__bg { display: none !important; }
+
+    /* Texte cartes : tons chauds */
+    .red-card__text,
+    .red-card__list { color: #2A1F14 !important; }
+    .red-card__list li::before { color: #A88848 !important; }
+
+    /* Résultats : chiffres dorés profonds */
+    .results-item__value { color: #2A1F14 !important; }
+    .results-item__number { color: #A88848 !important; }
+    .results-item__suffix { color: #1B2845 !important; }
+    .results-item__label { color: rgba(42, 31, 20, 0.75) !important; }
+    .results-divider {
+      background: linear-gradient(180deg, transparent 0%, #C9A96E 50%, transparent 100%) !important;
+      opacity: 0.65 !important;
+      width: 1.5px !important;
+    }
+
+    /* ── CAPSULES TITRES — Navy + halo doré rayonnant pulsant ──
+       Sélecteur boosté (body ...) pour battre les overrides du 2e bloc. */
+    body .red-card__label,
+    body .contenus-title {
+      background: linear-gradient(180deg, #1B2845 0%, #0E1830 100%) !important;
+      border: 1.5px solid rgba(232, 200, 140, 0.95) !important;
+      color: #FFFFFF !important;
+      text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.55),
+        0 0 8px rgba(255, 220, 140, 0.25) !important;
+      box-shadow:
+        0 0 0 2px rgba(232, 200, 140, 0.22),
+        0 0 24px rgba(255, 200, 110, 0.55),
+        0 0 48px rgba(232, 200, 140, 0.32),
+        0 8px 22px rgba(27, 40, 69, 0.45),
+        inset 0 1px 0 rgba(232, 200, 140, 0.45),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.30) !important;
+      animation: gh-label-glow 4.5s ease-in-out infinite;
+    }
+
+    @keyframes gh-label-glow {
+      0%, 100% {
+        box-shadow:
+          0 0 0 2px rgba(232, 200, 140, 0.20),
+          0 0 22px rgba(255, 200, 110, 0.50),
+          0 0 44px rgba(232, 200, 140, 0.30),
+          0 8px 22px rgba(27, 40, 69, 0.45),
+          inset 0 1px 0 rgba(232, 200, 140, 0.45),
+          inset 0 -2px 4px rgba(0, 0, 0, 0.30);
+      }
+      50% {
+        box-shadow:
+          0 0 0 3px rgba(232, 200, 140, 0.32),
+          0 0 32px rgba(255, 210, 130, 0.78),
+          0 0 64px rgba(232, 200, 140, 0.50),
+          0 10px 26px rgba(27, 40, 69, 0.52),
+          inset 0 1px 0 rgba(232, 200, 140, 0.55),
+          inset 0 -2px 4px rgba(0, 0, 0, 0.30);
+      }
+    }
+
+    /* Variante Résultats : alignée sur le navy de "MES MISSIONS" */
+    body .red-card--results .red-card__label {
+      background: linear-gradient(180deg, #1B2845 0%, #0E1830 100%) !important;
+      border-color: rgba(232, 200, 140, 0.95) !important;
+      box-shadow:
+        0 0 0 2px rgba(232, 200, 140, 0.22),
+        0 0 24px rgba(255, 200, 110, 0.55),
+        0 0 48px rgba(232, 200, 140, 0.32),
+        0 8px 22px rgba(27, 40, 69, 0.45),
+        inset 0 1px 0 rgba(232, 200, 140, 0.45),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.30) !important;
+      animation: gh-label-glow 4.5s ease-in-out infinite;
+    }
+
+    /* Logos dans la capsule "MES CONTENUS" : drop-shadow doré */
+    .contenus-title__logos img {
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.55))
+              drop-shadow(0 0 6px rgba(255, 220, 140, 0.35)) !important;
+    }
+
+    /* ── SÉPARATEUR ORNEMENTAL : point doré incandescent ── */
+    .section-separator::after {
+      box-shadow:
+        0 0 14px rgba(255, 200, 110, 0.75),
+        0 0 28px rgba(232, 200, 140, 0.45),
+        0 2px 6px rgba(120, 90, 40, 0.35),
+        inset 0 1px 2px rgba(255, 255, 255, 0.55),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.18) !important;
+      animation: gh-dot-pulse 3.5s ease-in-out infinite;
+    }
+    @keyframes gh-dot-pulse {
+      0%, 100% { transform: scale(1);    filter: brightness(1); }
+      50%      { transform: scale(1.15); filter: brightness(1.15); }
+    }
+
+    /* ── ICÔNES FLOTTANTES : couleurs vives, ombre prononcée ── */
+    .ar-icon {
+      filter: contrast(1.15) saturate(1.4)
+              drop-shadow(0 4px 10px rgba(40, 28, 12, 0.55))
+              drop-shadow(0 1px 2px rgba(40, 28, 12, 0.40)) !important;
+      opacity: 1 !important;
+    }
+    .ar-dot {
+      background: rgba(255, 200, 110, 0.65) !important;
+      box-shadow: 0 0 14px rgba(255, 200, 110, 0.70) !important;
+    }
+    .ar-dot--red {
+      background: rgba(232, 160, 80, 0.72) !important;
+      box-shadow: 0 0 14px rgba(232, 160, 80, 0.65) !important;
+    }
+
+    /* ── CARDS VIDÉO : ombre sobre, pas de glow doré ── */
+    .contenu-card__frame {
+      box-shadow:
+        0 18px 40px rgba(20, 20, 20, 0.28),
+        0 4px 10px rgba(20, 20, 20, 0.18) !important;
+      transition: box-shadow 0.4s ease;
+    }
+    .contenu-card__frame:hover {
+      box-shadow:
+        0 22px 50px rgba(20, 20, 20, 0.36),
+        0 6px 14px rgba(20, 20, 20, 0.24) !important;
+    }
+    /* Masquer les blobs colorés à l'intérieur des cartes */
+    .contenu-card__blob { display: none !important; }
+
+    /* ── VIGNETTE STATS : variante Instagram Reels (fond blanc) ── */
+    .contenu-card__metric--reels-white {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 239, 239, 0.96) 100%) !important;
+      color: #0a0a14 !important;
+      border-color: rgba(212, 160, 74, 0.25) !important;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.75) !important;
+    }
+    .contenu-card__metric--reels-white .metric-press__inner {
+      justify-content: flex-start !important;
+    }
+    .contenu-card__metric--reels-white img {
+      width: 34px !important;
+      height: 34px !important;
+      align-self: center;
+      margin-left: 30px !important;
+    }
+    .contenu-card__metric--reels-white .contenu-card__metric-inline {
+      margin-left: 8px !important;
+    }
+    .contenu-card__metric--reels-white .contenu-card__metric-inline,
+    .contenu-card__metric--reels-white .metric-prefix,
+    .contenu-card__metric--reels-white .metric-value,
+    .contenu-card__metric--reels-white .metric-separator,
+    .contenu-card__metric--reels-white .metric-icon {
+      color: #ffffff !important;
+      text-shadow:
+        -0.5px -0.5px 0 #000,
+        0.5px -0.5px 0 #000,
+        -0.5px 0.5px 0 #000,
+        0.5px 0.5px 0 #000,
+        0 2px 4px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    /* ── BRAND GROUP : wrapper avec label de marque au-dessus des cartes ── */
+    .brand-group {
+      position: relative;
+      width: 100%;
+      padding-top: 84px;
+      margin-top: 20px;
+    }
+    .brand-group__label {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 1.02rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      padding: 11px 29px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #1B2845 0%, #0E1830 100%);
+      border: 1.5px solid rgba(232, 200, 140, 0.95);
+      text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.55),
+        0 0 8px rgba(255, 220, 140, 0.25);
+      box-shadow:
+        0 0 0 2px rgba(232, 200, 140, 0.22),
+        0 0 24px rgba(255, 200, 110, 0.55),
+        0 0 48px rgba(232, 200, 140, 0.32),
+        0 8px 22px rgba(27, 40, 69, 0.45),
+        inset 0 1px 0 rgba(232, 200, 140, 0.45),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.30);
+      white-space: nowrap;
+      z-index: 3;
+      animation: gh-label-glow 4.5s ease-in-out infinite;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── Variantes par marque : couleur de fond dédiée ── */
+    .brand-group__label--lanieri {
+      background: linear-gradient(180deg, #8FC3E8 0%, #5E9BCB 100%);
+    }
+    .brand-group__label--timberland {
+      background: linear-gradient(180deg, #8B5A2B 0%, #5C3A1A 100%);
+    }
+    .brand-group__label--reveur {
+      background: linear-gradient(180deg, #2A2A2A 0%, #0A0A0A 100%);
+    }
+
+    /* ── CARTE RÉSULTATS CLÉS — même fond ivoire que Contexte / Mes Missions ── */
+    body .red-card--results {
+      background-color: #FFFDF7 !important;
+      background-image:
+        radial-gradient(ellipse 65% 55% at 28% 28%, rgba(255, 200, 170, 0.20), transparent 70%),
+        radial-gradient(ellipse 55% 48% at 72% 82%, rgba(255, 220, 150, 0.22), transparent 70%),
+        linear-gradient(135deg, #FFFDF7 0%, #FBF6EC 50%, #F5EDE0 100%) !important;
+    }
+    /* Désactive la bordure dorée ::before qui transparaissait sur la carte Résultats */
+    body .red-card--results::before {
+      display: none !important;
+    }
+    /* Restaure une bordure dorée fine et discrète sur la carte Résultats */
+    body .red-card--results {
+      border: 1.5px solid rgba(201, 169, 110, 0.55) !important;
+    }
+
+    /* ── STATS : agrandissement +10 % (chiffres et labels) ── */
+    body .red-card--results .results-item__value {
+      font-size: clamp(1.716rem, 2.64vw, 2.508rem) !important;
+    }
+    body .red-card--results .results-item__label {
+      font-size: clamp(0.946rem, 1.111vw, 1.111rem) !important;
+      color: #1B2845 !important;
+      white-space: nowrap !important;
+    }
+    body .red-card--results .results-row {
+      gap: 36px !important;
+      padding-top: 26px !important;
+    }
+    body .red-card--results .results-divider {
+      height: 75px !important;
+    }
+
+    /* ── AUTRES CONTENUS : carrousel cards ── */
+    .autres-card {
+      box-shadow: 0 10px 36px rgba(160, 110, 40, 0.28) !important;
+    }
+    .autres-card:hover {
+      box-shadow: 0 16px 48px rgba(255, 200, 110, 0.55) !important;
+    }
+
+    /* ── RESPECT MOTION REDUCED ── */
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      .red-card__label,
+      .contenus-title,
+      .red-card--results .red-card__label,
+      .section-separator::after {
+        animation: none !important;
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       GRANDS MONITEURS (> 1800px) — réduction homothétique ×0.9
+       de tout le bloc sous la bannière hero.
+       Tailles, paddings, gaps, espacements, polices, dimensions
+       de cartes/vidéos/badges/séparateurs : tout divisé par 1,1111.
+       Ne touche pas au hero ni au header.
+       ════════════════════════════════════════════════════════════ */
+    @media (min-width: 1801px) {
+
+      /* ── Conteneur principal ── */
+      .projet-main {
+        padding-top: 57.6px;
+        gap: 50.4px;
+      }
+      .projet-card {
+        max-width: 1296px;
+        gap: 50.4px;
+        padding-top: 36px;
+      }
+
+      /* ── Cartes Contexte / Mes Missions / Résultats ── */
+      .red-row { gap: 28.8px; }
+      .red-card {
+        border-radius: 21.6px;
+        padding: 40.5px 30.6px 27px;
+        min-height: 180px;
+      }
+      .red-card__label {
+        top: -19.8px;
+        font-size: 0.918rem;
+        padding: 9.9px 26.1px;
+        border-radius: 12.6px;
+      }
+      .red-card__text,
+      .red-card__list {
+        font-size: clamp(13.86px, 1.069vw, 17.82px);
+      }
+      .red-card__text + .red-card__text { margin-top: 19.8px; }
+      .red-card__list { gap: 19.8px; }
+
+      .red-card--results {
+        padding: 32.4px 19.8px 28.8px;
+        min-height: 162px;
+      }
+      .results-row { gap: 16.2px; padding-top: 19.8px; }
+      .results-item__value {
+        font-size: clamp(1.404rem, 2.16vw, 2.052rem);
+        margin-bottom: 8.1px;
+      }
+      .results-item__label {
+        font-size: clamp(0.774rem, 0.909vw, 0.909rem);
+      }
+      .results-divider { height: 61.2px; }
+
+      /* Surcharges atelier-couture (boostées +10%) — on annule le boost */
+      body .red-card--results .results-item__value {
+        font-size: clamp(1.544rem, 2.376vw, 2.257rem) !important;
+      }
+      body .red-card--results .results-item__label {
+        font-size: clamp(0.851rem, 1.0vw, 1.0rem) !important;
+      }
+      body .red-card--results .results-row {
+        gap: 32.4px !important;
+        padding-top: 23.4px !important;
+      }
+      body .red-card--results .results-divider {
+        height: 67.5px !important;
+      }
+
+      /* ── Séparateurs ornementaux ── */
+      .section-separator {
+        max-width: 378px;
+        margin: 7.2px auto;
+        height: 25.2px;
+      }
+      .section-separator::after {
+        width: 14.4px;
+        height: 14.4px;
+      }
+
+      /* ── Section "Mes contenus collaboration" ── */
+      .contenus-section {
+        max-width: 1170px;
+        margin-top: 21.6px;
+        gap: 54px;
+      }
+      .contenus-title {
+        font-size: 0.918rem;
+        padding: 9.9px 26.1px;
+        border-radius: 12.6px;
+      }
+      .contenus-title__logos { gap: 7.2px; }
+      .contenus-title__logos img { height: 25.2px; }
+
+      /* Labels de marque au-dessus des grilles vidéos */
+      .brand-group {
+        padding-top: 75.6px;
+        margin-top: 18px;
+      }
+      .brand-group__label {
+        top: -12.6px;
+        font-size: 0.918rem;
+        padding: 9.9px 26.1px;
+        border-radius: 12.6px;
+      }
+
+      /* Grilles vidéos */
+      .contenus-grid {
+        grid-template-columns: repeat(2, minmax(164.7px, 239.4px));
+        gap: 108px;
+      }
+      .contenus-grid > .contenu-card:nth-child(3) {
+        width: min(239.4px, 100%);
+      }
+      .contenu-card { gap: 12.6px; }
+      .contenu-card__frame { border-radius: 21.6px; }
+      .contenu-card__play { width: 57.6px; height: 57.6px; }
+      .contenu-card__play::before {
+        border-left-width: 16.2px;
+        border-top-width: 10.8px;
+        border-bottom-width: 10.8px;
+      }
+      .contenu-card__sound {
+        width: 32.4px;
+        height: 32.4px;
+        bottom: 12.6px;
+        right: 12.6px;
+      }
+      .contenu-card__sound svg { width: 16.2px; height: 16.2px; }
+      .contenu-card__progress {
+        bottom: 13.05px;
+        left: 12.6px;
+        right: 12.6px;
+        height: 3.6px;
+      }
+      .contenu-card__metric--featured { border-radius: 7.893px; }
+      .contenu-card__metric--featured img { width: 54px; height: 54px; }
+      .contenu-card__metric-inline {
+        font-size: 15.3px;
+        gap: 5.4px;
+        margin-left: -9.9px;
+      }
+      .contenu-card__metric-inline .metric-value,
+      .contenu-card__metric-inline .metric-separator,
+      .contenu-card__metric-inline .metric-icon,
+      .contenu-card__metric-inline .metric-prefix { font-size: 15.3px; }
+
+      /* ── Section "Mes autres contenus" ── */
+      .autres-contenus-section {
+        max-width: 1080px;
+        margin-top: 57.6px;
+        gap: 36px;
+      }
+      .autres-carousel-wrapper { gap: 14.4px; }
+      .autres-track { gap: 18px; }
+      .autres-card {
+        width: calc((100% - 18px) / 2);
+        border-radius: 18px;
+      }
+      .autres-card .ov-title {
+        font-size: 1.53rem;
+        padding: 0 32.4px;
+      }
+      .autres-card .ov-title::before,
+      .autres-card .ov-title::after {
+        width: 19.8px;
+        height: 1.8px;
+      }
+      .autres-card .ov-year {
+        font-size: 0.855rem;
+        margin-top: 12.6px;
+      }
+      .autres-arrow { width: 37.8px; height: 37.8px; }
+      .autres-dots { gap: 7.2px; }
+      .autres-dot { width: 7.2px; height: 7.2px; }
+    }
+  </style>
+</head>
+<body class="header-dark" data-page="collaborations-commerciales">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-pill">
+      <a href="index.html" class="header-logo">GEOFFREY MORENO</a>
+      <nav class="header-nav">
+        <a href="index.html#projets" class="nav-link" data-nav="projets">Mes projets</a>
+        <a href="index.html#parcours" class="nav-link" data-nav="parcours">Mon parcours</a>
+        <a href="index.html#me-contacter" class="nav-link" data-nav="contact">Me contacter</a>
+      </nav>
+      <div class="header-socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@twins_moreno_" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.27 8.27 0 004.84 1.56V6.83a4.85 4.85 0 01-1.07-.14z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/moreno.geoffrey/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ HEADER MOBILE — split GM + burger rond (visible ≤768px) ══ -->
+  <div class="header-mobile-split" role="banner">
+    <a href="index.html" class="hms-logo" aria-label="Accueil — Geoffrey Moreno">GM</a>
+    <button class="hms-burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" id="hmsBurger">
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+      <span class="hms-burger__bar"></span>
+    </button>
+  </div>
+  <div class="hms-backdrop" id="hmsBackdrop" aria-hidden="true"></div>
+  <aside class="hms-drawer hms-drawer--portfolio" id="hmsDrawer" aria-hidden="true" aria-label="Menu principal">
+    <div class="hms-drawer__topbar">
+      <button type="button" class="hms-drawer__close" id="hmsClose" aria-label="Fermer le menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+      </button>
+    </div>
+    <div class="hms-drawer__content">
+      <p class="hms-drawer__section-label">Projets phares</p>
+      <div class="hms-drawer__ticker" data-current-project="collaborations-commerciales">
+        <a href="projet-netflix.html" class="hms-drawer__card" data-project="netflix">
+          <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img src="assets/brand-projects/netflix/lancement-netflix.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-lupin.html" class="hms-drawer__card" data-project="lupin">
+          <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img src="assets/brand-projects/netflix/lupin.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-playstation.html" class="hms-drawer__card" data-project="playstation">
+          <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+        <a href="projet-mannequinat.html" class="hms-drawer__card" data-project="mannequinat">
+          <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="" loading="lazy" decoding="async"></picture>
+        </a>
+      </div>
+      <div class="hms-drawer__divider"></div>
+      <nav class="hms-drawer__nav">
+        <a href="index.html" class="hms-drawer__link">Accueil</a>
+        <a href="index.html#projets" class="hms-drawer__link">Mes projets</a>
+        <a href="index.html#parcours" class="hms-drawer__link">Mon parcours</a>
+        <a href="index.html#me-contacter" class="hms-drawer__link hms-drawer__link--cta">Me contacter</a>
+      </nav>
+      <div class="hms-drawer__socials-divider"></div>
+      <div class="hms-drawer__socials">
+        <a href="https://www.linkedin.com/in/geoffrey-moreno-1a2a25184/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+        <a href="https://www.tiktok.com/@geoffreymoreno_" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.85a8.16 8.16 0 0 0 4.77 1.52V6.94a4.85 4.85 0 0 1-1.84-.25z"/></svg></a>
+        <a href="https://www.instagram.com/geoffreymoreno_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      </div>
+      <p class="hms-drawer__signature">Geoffrey Moreno · Creative Strategist</p>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- SYMBOLES SVG réutilisables -->
+    <svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
+      <defs>
+        <!-- Pattern dots décoratif -->
+        <pattern id="dotsPattern" width="36" height="36" patternUnits="userSpaceOnUse">
+          <circle cx="6"  cy="6"  r="1.6" fill="rgba(30, 58, 107, 0.55)"/>
+          <circle cx="22" cy="14" r="1.2" fill="rgba(200, 16, 46, 0.50)"/>
+          <circle cx="14" cy="26" r="1.5" fill="rgba(30, 58, 107, 0.45)"/>
+          <circle cx="30" cy="30" r="1.0" fill="rgba(14, 42, 59, 0.45)"/>
+        </pattern>
+        <!-- [À ADAPTER] Symbole filigrane (remplacer par votre logo/identité) -->
+        <symbol id="cocarde" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="48" fill="#C8102E"/>
+          <circle cx="50" cy="50" r="32" fill="#FFFFFF"/>
+          <circle cx="50" cy="50" r="16" fill="#1E3A6B"/>
+        </symbol>
+        <!-- [À ADAPTER] Visuel décoratif en bout de courbe -->
+        <symbol id="jet-side" viewBox="0 0 120 50">
+          <path d="M40 26 L20 42 L62 30 L72 26 Z" fill="#D8DDE6"/>
+          <path d="M3 24 Q3 20 9 19 L92 18 L110 24 L92 30 L9 29 Q3 28 3 26 Z" fill="#F0F2F6"/>
+          <path d="M110 24 L118 23 L118 25 Z" fill="#B8BFC9"/>
+          <path d="M76 19 Q86 12 96 17 L100 21 L76 21 Z" fill="rgba(20, 35, 70, 0.85)"/>
+          <path d="M82 14 Q88 12 94 14" stroke="rgba(180, 200, 230, 0.55)" stroke-width="0.8" fill="none"/>
+          <path d="M16 18 L10 4 L26 4 L32 18 Z" fill="#E0E4EB"/>
+          <circle cx="20" cy="11" r="2.5" fill="#C8102E"/>
+          <circle cx="20" cy="11" r="1.6" fill="#FFFFFF"/>
+          <circle cx="20" cy="11" r="0.7" fill="#1E3A6B"/>
+          <path d="M3 24 L-3 32 L18 28 Z" fill="#D8DDE6"/>
+          <ellipse cx="2" cy="24" rx="2.5" ry="3" fill="rgba(255, 140, 60, 0.85)"/>
+          <ellipse cx="0" cy="24" rx="1.5" ry="2" fill="rgba(255, 220, 180, 0.95)"/>
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ÉLÉMENTS DÉCORATIFS qui flottent sur toute la page -->
+    <!-- [À ADAPTER] Remplacer les emojis par des icônes liées à vos collaborations -->
+    <div class="page-armee-deco" aria-hidden="true">
+      <!-- Colonne gauche -->
+      <span class="ar-icon ar-icon--1">👕</span>
+      <span class="ar-icon ar-icon--2">💼</span>
+      <span class="ar-icon ar-icon--3">📸</span>
+      <span class="ar-icon ar-icon--4">🕴</span>
+      <span class="ar-icon ar-icon--5">👔</span>
+      <span class="ar-icon ar-icon--6">🥾</span>
+      <span class="ar-icon ar-icon--7">✨</span>
+
+      <!-- Colonne centre -->
+      <span class="ar-icon ar-icon--8">🕴</span>
+      <span class="ar-icon ar-icon--9">👕</span>
+      <span class="ar-icon ar-icon--10">💼</span>
+      <span class="ar-icon ar-icon--11">📸</span>
+
+      <!-- Colonne droite -->
+      <span class="ar-icon ar-icon--12">👔</span>
+      <span class="ar-icon ar-icon--13">🥾</span>
+      <span class="ar-icon ar-icon--14">💫</span>
+      <span class="ar-icon ar-icon--15">👕</span>
+      <span class="ar-icon ar-icon--16">✨</span>
+      <span class="ar-icon ar-icon--17">📸</span>
+
+      <!-- Icônes diversifiées dispersées -->
+      <span class="ar-icon ar-icon--18">💼</span>
+      <span class="ar-icon ar-icon--19">🕴</span>
+      <span class="ar-icon ar-icon--20">🥾</span>
+      <span class="ar-icon ar-icon--21">👔</span>
+      <span class="ar-icon ar-icon--22">💫</span>
+      <span class="ar-icon ar-icon--23">📸</span>
+      <span class="ar-icon ar-icon--24">📸</span>
+      <span class="ar-icon ar-icon--25">📸</span>
+      <span class="ar-icon ar-icon--26">📸</span>
+
+      <!-- Petits dots -->
+      <span class="ar-dot ar-dot--1"></span>
+      <span class="ar-dot ar-dot--red ar-dot--2"></span>
+      <span class="ar-dot ar-dot--3"></span>
+      <span class="ar-dot ar-dot--red ar-dot--4"></span>
+      <span class="ar-dot ar-dot--5"></span>
+      <span class="ar-dot ar-dot--red ar-dot--6"></span>
+    </div>
+
+    <!-- HERO — TROTTOIR ÉDITORIAL (Piste 2) -->
+    <div class="projet-hero">
+
+      <!-- Pavés parisiens -->
+      <div class="tr-bg-cobble">
+        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <pattern id="cobblePattern" x="0" y="0" width="200" height="80" patternUnits="userSpaceOnUse">
+              <rect width="200" height="80" fill="#C9A972"/>
+              <rect width="200" height="80" fill="#7B5F2E" opacity="0.15"/>
+              <polygon points="0,0 28,2 32,38 0,42"     fill="#D8B97A" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="28,2 62,0 65,38 32,38"   fill="#C9A972" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="62,0 95,3 100,38 65,38"  fill="#D2AD68" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="95,3 132,0 138,38 100,38" fill="#BFA060" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="132,0 168,2 172,38 138,38" fill="#D8B97A" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="168,2 200,0 200,38 172,38" fill="#C9A972" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="0,42 18,40 22,78 0,80"     fill="#BFA060" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="18,40 50,42 55,78 22,78"   fill="#D2AD68" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="50,42 88,40 92,78 55,78"   fill="#D8B97A" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="88,40 122,42 128,78 92,78" fill="#C9A972" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="122,42 155,40 160,78 128,78" fill="#BFA060" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="155,40 188,42 192,78 160,78" fill="#D2AD68" stroke="#7B5F2E" stroke-width="0.5"/>
+              <polygon points="188,42 200,40 200,80 192,78" fill="#C9A972" stroke="#7B5F2E" stroke-width="0.5"/>
+              <g fill="#FFFFFF" opacity="0.10">
+                <ellipse cx="14" cy="12" rx="6" ry="2"/>
+                <ellipse cx="46" cy="14" rx="7" ry="2"/>
+                <ellipse cx="80" cy="10" rx="6" ry="2"/>
+                <ellipse cx="114" cy="14" rx="7" ry="2"/>
+                <ellipse cx="148" cy="10" rx="6" ry="2"/>
+                <ellipse cx="184" cy="12" rx="6" ry="2"/>
+                <ellipse cx="6" cy="54" rx="5" ry="2"/>
+                <ellipse cx="36" cy="56" rx="7" ry="2"/>
+                <ellipse cx="70" cy="54" rx="6" ry="2"/>
+                <ellipse cx="106" cy="56" rx="7" ry="2"/>
+                <ellipse cx="140" cy="54" rx="6" ry="2"/>
+                <ellipse cx="174" cy="56" rx="7" ry="2"/>
+              </g>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#cobblePattern)"/>
+        </svg>
+      </div>
+
+      <!-- Rayons de soleil -->
+      <div class="tr-bg-rays"></div>
+
+      <!-- Objets décoratifs -->
+      <div class="tr-decor">
+
+        <!-- Garde-corps haussmannien -->
+        <svg class="tr-obj tr-railing" viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="0" y1="20" x2="500" y2="20"/>
+            <line x1="0" y1="118" x2="500" y2="118"/>
+            <line x1="0" y1="14" x2="500" y2="14" stroke-width="3"/>
+            <g>
+              <line x1="20"  y1="20" x2="20"  y2="118" stroke-width="3"/>
+              <line x1="120" y1="20" x2="120" y2="118" stroke-width="3"/>
+              <line x1="220" y1="20" x2="220" y2="118" stroke-width="3"/>
+              <line x1="320" y1="20" x2="320" y2="118" stroke-width="3"/>
+              <line x1="420" y1="20" x2="420" y2="118" stroke-width="3"/>
+              <line x1="490" y1="20" x2="490" y2="118" stroke-width="3"/>
+            </g>
+            <g>
+              <path d="M30,30 Q50,40 70,30 Q90,40 110,30"/>
+              <path d="M30,108 Q50,98 70,108 Q90,98 110,108"/>
+              <path d="M40,40 Q40,55 50,65 Q60,75 50,90 Q40,100 50,108"/>
+              <path d="M70,40 Q70,55 60,65 Q50,75 60,90 Q70,100 60,108"/>
+              <path d="M90,40 Q90,55 100,65 Q110,75 100,90 Q90,100 100,108"/>
+              <path d="M55,58 Q65,50 70,58 Q72,68 65,75 Q58,68 60,58 Z"/>
+              <path d="M130,30 Q150,40 170,30 Q190,40 210,30"/>
+              <path d="M130,108 Q150,98 170,108 Q190,98 210,108"/>
+              <path d="M140,40 Q140,55 150,65 Q160,75 150,90 Q140,100 150,108"/>
+              <path d="M170,40 Q170,55 160,65 Q150,75 160,90 Q170,100 160,108"/>
+              <path d="M190,40 Q190,55 200,65 Q210,75 200,90 Q190,100 200,108"/>
+              <path d="M155,58 Q165,50 170,58 Q172,68 165,75 Q158,68 160,58 Z"/>
+              <path d="M230,30 Q250,40 270,30 Q290,40 310,30"/>
+              <path d="M230,108 Q250,98 270,108 Q290,98 310,108"/>
+              <path d="M240,40 Q240,55 250,65 Q260,75 250,90 Q240,100 250,108"/>
+              <path d="M270,40 Q270,55 260,65 Q250,75 260,90 Q270,100 260,108"/>
+              <path d="M290,40 Q290,55 300,65 Q310,75 300,90 Q290,100 300,108"/>
+              <path d="M255,58 Q265,50 270,58 Q272,68 265,75 Q258,68 260,58 Z"/>
+              <path d="M330,30 Q350,40 370,30 Q390,40 410,30"/>
+              <path d="M330,108 Q350,98 370,108 Q390,98 410,108"/>
+              <path d="M340,40 Q340,55 350,65 Q360,75 350,90 Q340,100 350,108"/>
+              <path d="M370,40 Q370,55 360,65 Q350,75 360,90 Q370,100 360,108"/>
+              <path d="M390,40 Q390,55 400,65 Q410,75 400,90 Q390,100 400,108"/>
+              <path d="M355,58 Q365,50 370,58 Q372,68 365,75 Q358,68 360,58 Z"/>
+              <path d="M430,30 Q450,40 470,30 Q485,40 490,30"/>
+              <path d="M430,108 Q450,98 470,108 Q485,98 490,108"/>
+              <path d="M440,40 Q440,55 450,65 Q460,75 450,90 Q440,100 450,108"/>
+              <path d="M470,40 Q470,55 460,65 Q450,75 460,90 Q470,100 460,108"/>
+            </g>
+            <g stroke-width="2.5">
+              <path d="M20,14 L17,4 L23,4 Z" fill="#1a1a1a"/>
+              <path d="M120,14 L117,4 L123,4 Z" fill="#1a1a1a"/>
+              <path d="M220,14 L217,4 L223,4 Z" fill="#1a1a1a"/>
+              <path d="M320,14 L317,4 L323,4 Z" fill="#1a1a1a"/>
+              <path d="M420,14 L417,4 L423,4 Z" fill="#1a1a1a"/>
+              <path d="M490,14 L487,4 L493,4 Z" fill="#1a1a1a"/>
+            </g>
+          </g>
+        </svg>
+
+        <!-- Lampadaire parisien -->
+        <svg class="tr-obj tr-streetlamp" viewBox="0 0 80 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="lampGlow" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#FFEAA8"/>
+              <stop offset="50%" stop-color="#F2D88E"/>
+              <stop offset="100%" stop-color="#C9A96E"/>
+            </radialGradient>
+          </defs>
+          <circle cx="40" cy="58" r="28" fill="rgba(255, 220, 140, 0.45)"/>
+          <circle cx="40" cy="58" r="18" fill="rgba(255, 235, 170, 0.65)"/>
+          <rect x="32" y="340" width="16" height="16" fill="#1a1a1a"/>
+          <rect x="28" y="334" width="24" height="8" fill="#1a1a1a"/>
+          <rect x="37" y="80" width="6" height="260" fill="#1a1a1a"/>
+          <rect x="34" y="120" width="12" height="3" fill="#1a1a1a"/>
+          <rect x="34" y="200" width="12" height="3" fill="#1a1a1a"/>
+          <rect x="34" y="280" width="12" height="3" fill="#1a1a1a"/>
+          <path d="M40,80 Q56,72 60,58 Q62,52 68,52" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+          <path d="M40,80 Q24,72 20,58 Q18,52 12,52" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+          <circle cx="40" cy="50" r="14" fill="url(#lampGlow)" stroke="#1a1a1a" stroke-width="1.5"/>
+          <path d="M28,40 Q40,28 52,40" stroke="#1a1a1a" stroke-width="2" fill="#1a1a1a"/>
+          <rect x="36" y="22" width="8" height="8" fill="#1a1a1a"/>
+          <path d="M40,12 L36,22 L44,22 Z" fill="#1a1a1a"/>
+          <ellipse cx="35" cy="44" rx="4" ry="2" fill="#FFFFFF" opacity="0.55"/>
+        </svg>
+
+        <!-- Chaise bistro + veste tailleur drapée -->
+        <svg class="tr-obj tr-bistro" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="jacketCloth" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#26344E"/>
+              <stop offset="50%" stop-color="#1B2845"/>
+              <stop offset="100%" stop-color="#0E1830"/>
+            </linearGradient>
+            <linearGradient id="jacketLight" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#3B4A6A" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </linearGradient>
+            <filter id="weave">
+              <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="2" seed="9"/>
+              <feColorMatrix values="0 0 0 0 0.10  0 0 0 0 0.12  0 0 0 0 0.20  0 0 0 0.35 0"/>
+              <feComposite in2="SourceGraphic" operator="in"/>
+            </filter>
+          </defs>
+          <ellipse cx="120" cy="306" rx="105" ry="8" fill="#3a2a18" opacity="0.45"/>
+          <g stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" fill="none">
+            <path d="M64,70 Q120,42 176,70"/>
+            <path d="M64,70 L64,170"/>
+            <path d="M176,70 L176,170"/>
+            <g stroke-width="1.8">
+              <path d="M75,90 Q90,80 105,92 Q120,80 135,92 Q150,80 165,90"/>
+              <path d="M70,118 Q90,108 110,120 Q130,108 150,120 Q165,108 170,118"/>
+              <path d="M75,148 Q90,138 105,150 Q120,138 135,150 Q150,138 165,148"/>
+              <path d="M108,128 Q120,118 132,128 Q132,138 120,150 Q108,138 108,128 Z"/>
+            </g>
+          </g>
+          <ellipse cx="120" cy="180" rx="72" ry="11" fill="#5a4628" stroke="#1a1a1a" stroke-width="1.5"/>
+          <ellipse cx="120" cy="178" rx="72" ry="11" fill="#7B5F2E"/>
+          <ellipse cx="120" cy="178" rx="64" ry="9" fill="#5a4628" opacity="0.4"/>
+          <g stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none">
+            <line x1="60" y1="180" x2="38" y2="298"/>
+            <line x1="180" y1="180" x2="202" y2="298"/>
+            <line x1="92" y1="186" x2="84" y2="298"/>
+            <line x1="148" y1="186" x2="156" y2="298"/>
+            <path d="M52,240 Q120,230 188,240"/>
+            <path d="M88,260 Q120,256 152,260"/>
+          </g>
+          <g fill="#1a1a1a">
+            <ellipse cx="38" cy="298" rx="5" ry="2"/>
+            <ellipse cx="84" cy="298" rx="5" ry="2"/>
+            <ellipse cx="156" cy="298" rx="5" ry="2"/>
+            <ellipse cx="202" cy="298" rx="5" ry="2"/>
+          </g>
+          <g>
+            <path d="M50,80 Q70,52 100,46 Q120,42 140,46 Q170,52 190,80 L194,148 Q170,164 120,168 Q70,164 46,148 Z" fill="url(#jacketCloth)" stroke="#0a1428" stroke-width="0.6"/>
+            <path d="M50,80 Q70,52 100,46 Q120,42 140,46 Q170,52 190,80 L194,148 Q170,164 120,168 Q70,164 46,148 Z" filter="url(#weave)" opacity="0.7"/>
+            <path d="M50,80 Q70,52 100,46 Q120,42 140,46" stroke="url(#jacketLight)" stroke-width="6" fill="none" opacity="0.6"/>
+            <path d="M88,55 L100,90 L96,135 M152,55 L140,90 L144,135" stroke="#0a1428" stroke-width="1.6" fill="none"/>
+            <path d="M100,90 L120,98 L140,90" stroke="#0a1428" stroke-width="1.4" fill="none"/>
+            <line x1="78" y1="105" x2="92" y2="103" stroke="#0a1428" stroke-width="0.8"/>
+            <path d="M68,135 L88,133 L88,144 L66,146 Z" stroke="#0a1428" stroke-width="0.8" fill="none"/>
+            <path d="M152,133 L172,135 L174,146 L152,144 Z" stroke="#0a1428" stroke-width="0.8" fill="none"/>
+            <circle cx="120" cy="108" r="2.6" fill="#C9A96E" stroke="#7B5F2E" stroke-width="0.4"/>
+            <circle cx="119" cy="107" r="0.8" fill="#FFE8A8"/>
+            <circle cx="120" cy="124" r="2.6" fill="#C9A96E" stroke="#7B5F2E" stroke-width="0.4"/>
+            <circle cx="119" cy="123" r="0.8" fill="#FFE8A8"/>
+            <circle cx="120" cy="140" r="2.6" fill="#C9A96E" stroke="#7B5F2E" stroke-width="0.4"/>
+            <circle cx="119" cy="139" r="0.8" fill="#FFE8A8"/>
+            <path d="M50,80 Q34,120 38,200 L60,210 L72,162 L72,90 Z" fill="url(#jacketCloth)" stroke="#0a1428" stroke-width="0.6"/>
+            <path d="M50,80 Q34,120 38,200 L60,210 L72,162 L72,90 Z" filter="url(#weave)" opacity="0.7"/>
+            <path d="M52,90 Q42,140 48,200" stroke="#0a1428" stroke-width="0.6" fill="none" opacity="0.6"/>
+            <circle cx="50" cy="200" r="2" fill="#C9A96E" stroke="#7B5F2E" stroke-width="0.3"/>
+            <circle cx="55" cy="204" r="2" fill="#C9A96E" stroke="#7B5F2E" stroke-width="0.3"/>
+            <path d="M100,46 Q120,52 140,46 L138,52 Q120,58 102,52 Z" fill="#5a3a20" opacity="0.6"/>
+          </g>
+        </svg>
+
+        <!-- Botte Timberland -->
+        <svg class="tr-obj tr-boot" viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="timberUpper" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#E8BE6E"/>
+              <stop offset="35%" stop-color="#D9A654"/>
+              <stop offset="75%" stop-color="#B98A38"/>
+              <stop offset="100%" stop-color="#8E6824"/>
+            </linearGradient>
+            <linearGradient id="timberShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#5a3a20" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </linearGradient>
+            <linearGradient id="welt" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#FFF6DB"/>
+              <stop offset="100%" stop-color="#E0C68A"/>
+            </linearGradient>
+            <linearGradient id="sole" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#3a2a18"/>
+              <stop offset="100%" stop-color="#1a1008"/>
+            </linearGradient>
+            <linearGradient id="laces" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="#A87538"/>
+              <stop offset="100%" stop-color="#5a3a18"/>
+            </linearGradient>
+            <filter id="nubuckTexture">
+              <feTurbulence type="fractalNoise" baseFrequency="2.5" numOctaves="2" seed="11"/>
+              <feColorMatrix values="0 0 0 0 0.40  0 0 0 0 0.28  0 0 0 0 0.10  0 0 0 0.30 0"/>
+              <feComposite in2="SourceGraphic" operator="in"/>
+            </filter>
+          </defs>
+          <ellipse cx="120" cy="208" rx="105" ry="6" fill="#3a2a18" opacity="0.45"/>
+          <path d="M30,180 Q24,170 30,168 L210,168 Q218,170 214,182 L210,196 Q120,202 30,196 Z" fill="url(#sole)"/>
+          <g fill="#0a0a0a">
+            <rect x="38"  y="186" width="8" height="6" rx="1"/>
+            <rect x="54"  y="188" width="8" height="6" rx="1"/>
+            <rect x="70"  y="186" width="8" height="6" rx="1"/>
+            <rect x="86"  y="188" width="8" height="6" rx="1"/>
+            <rect x="102" y="186" width="8" height="6" rx="1"/>
+            <rect x="118" y="188" width="8" height="6" rx="1"/>
+            <rect x="134" y="186" width="8" height="6" rx="1"/>
+            <rect x="150" y="188" width="8" height="6" rx="1"/>
+            <rect x="166" y="186" width="8" height="6" rx="1"/>
+            <rect x="182" y="188" width="8" height="6" rx="1"/>
+            <rect x="198" y="186" width="6" height="6" rx="1"/>
+          </g>
+          <path d="M28,168 L212,168 L212,162 L28,162 Z" fill="url(#welt)"/>
+          <g stroke="#7B5F2E" stroke-width="0.4" stroke-dasharray="3 2" opacity="0.65">
+            <line x1="30" y1="165" x2="210" y2="165"/>
+          </g>
+          <path d="M40,162 Q28,140 30,90 Q35,50 78,32 L162,32 Q205,50 210,90 L212,162 Z" fill="url(#timberUpper)" stroke="#7B5F2E" stroke-width="0.5"/>
+          <path d="M40,162 Q28,140 30,90 Q35,50 78,32 L162,32 Q205,50 210,90 L212,162 Z" filter="url(#nubuckTexture)" opacity="0.55"/>
+          <path d="M40,162 Q28,140 30,90 Q35,50 78,32" fill="url(#timberShadow)" opacity="0.5"/>
+          <path d="M180,40 Q190,80 195,160" stroke="#7B5F2E" stroke-width="0.7" fill="none" stroke-dasharray="3 2" opacity="0.6"/>
+          <path d="M84,42 L156,42 L150,128 L90,128 Z" fill="#A87E2A" opacity="0.85"/>
+          <path d="M84,42 L156,42 L150,128 L90,128 Z" filter="url(#nubuckTexture)" opacity="0.4"/>
+          <ellipse cx="120" cy="40" rx="60" ry="11" fill="#C99440" stroke="#7B5F2E" stroke-width="0.5"/>
+          <ellipse cx="120" cy="38" rx="58" ry="9" fill="#D9A654"/>
+          <g>
+            <circle cx="92"  cy="60"  r="3.5" fill="#1a1a1a"/><circle cx="92"  cy="60"  r="2"   fill="#3a2a18"/>
+            <circle cx="148" cy="60"  r="3.5" fill="#1a1a1a"/><circle cx="148" cy="60"  r="2"   fill="#3a2a18"/>
+            <circle cx="92"  cy="78"  r="3.5" fill="#1a1a1a"/><circle cx="92"  cy="78"  r="2"   fill="#3a2a18"/>
+            <circle cx="148" cy="78"  r="3.5" fill="#1a1a1a"/><circle cx="148" cy="78"  r="2"   fill="#3a2a18"/>
+            <circle cx="92"  cy="96"  r="3.5" fill="#1a1a1a"/><circle cx="92"  cy="96"  r="2"   fill="#3a2a18"/>
+            <circle cx="148" cy="96"  r="3.5" fill="#1a1a1a"/><circle cx="148" cy="96"  r="2"   fill="#3a2a18"/>
+            <circle cx="94"  cy="114" r="3.5" fill="#1a1a1a"/><circle cx="94"  cy="114" r="2"   fill="#3a2a18"/>
+            <circle cx="146" cy="114" r="3.5" fill="#1a1a1a"/><circle cx="146" cy="114" r="2"   fill="#3a2a18"/>
+          </g>
+          <g stroke="url(#laces)" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M92,60  L148,78"/>
+            <path d="M148,60 L92,78"/>
+            <path d="M92,78  L148,96"/>
+            <path d="M148,78 L92,96"/>
+            <path d="M92,96  L146,114"/>
+            <path d="M148,96 L94,114"/>
+            <path d="M92,60 Q86,52 92,42"/>
+            <path d="M148,60 Q154,52 148,42"/>
+            <path d="M92,42 Q88,35 84,40 L82,52" stroke-linecap="round"/>
+            <path d="M148,42 Q152,35 156,40 L158,52" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(130, 142)">
+            <rect x="0" y="0" width="44" height="9" rx="1" fill="#5a3a20" opacity="0.7"/>
+            <text x="22" y="6.5" text-anchor="middle" font-family="Georgia, serif" font-size="5.5" font-weight="700" fill="#E8BE6E" letter-spacing="0.5">TIMBERLAND</text>
+          </g>
+          <ellipse cx="100" cy="50" rx="14" ry="3" fill="#FFE8A8" opacity="0.32"/>
+          <ellipse cx="180" cy="80" rx="10" ry="22" fill="#FFE8A8" opacity="0.18"/>
+        </svg>
+
+        <!-- Polaroïds éparpillés -->
+        <svg class="tr-obj tr-polaroid-1" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+          <rect x="6" y="6" width="112" height="142" rx="2" fill="#5a3a20" opacity="0.30"/>
+          <rect x="2" y="2" width="112" height="142" rx="2" fill="#FBF6EC" stroke="#D7C7A8" stroke-width="0.5"/>
+          <image href="assets/mannequinat/photo-geo-2.jpeg" xlink:href="assets/mannequinat/photo-geo-2.jpeg" x="10" y="10" width="96" height="100" preserveAspectRatio="xMidYMin slice"/>
+          <text x="58" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="8" font-style="italic" fill="#3a2a18" opacity="0.75">Suit · Lanieri</text>
+        </svg>
+
+        <svg class="tr-obj tr-polaroid-2" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+          <rect x="6" y="6" width="112" height="142" rx="2" fill="#5a3a20" opacity="0.28"/>
+          <rect x="2" y="2" width="112" height="142" rx="2" fill="#FBF6EC" stroke="#D7C7A8" stroke-width="0.5"/>
+          <image href="assets/mannequinat/geooo-phtoo.jpeg" xlink:href="assets/mannequinat/geooo-phtoo.jpeg" x="10" y="10" width="96" height="100" preserveAspectRatio="xMidYMid slice"/>
+          <text x="58" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="8" font-style="italic" fill="#3a2a18" opacity="0.75">Leather · Valentino</text>
+        </svg>
+
+        <!-- Feuille dorée -->
+        <svg class="tr-obj tr-leaf" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E8BE6E"/>
+              <stop offset="50%" stop-color="#A87538"/>
+              <stop offset="100%" stop-color="#5a3a18"/>
+            </linearGradient>
+          </defs>
+          <path d="M20,4 Q34,10 36,22 Q34,32 20,36 Q6,32 4,22 Q6,10 20,4 Z" fill="url(#leafGrad)" stroke="#5a3a18" stroke-width="0.4"/>
+          <line x1="20" y1="4" x2="20" y2="36" stroke="#5a3a18" stroke-width="0.6"/>
+          <path d="M20,12 L10,16 M20,12 L30,16 M20,20 L8,22 M20,20 L32,22 M20,28 L12,32 M20,28 L28,32" stroke="#5a3a18" stroke-width="0.4"/>
+        </svg>
+
+      </div>
+
+      <!-- Vignette + grain photo -->
+      <div class="tr-bg-vignette"></div>
+      <div class="tr-bg-grain">
+        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <filter id="grainFinal2">
+            <feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="2" seed="17"/>
+            <feColorMatrix values="0 0 0 0 0.55  0 0 0 0 0.45  0 0 0 0 0.30  0 0 0 0.6 0"/>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#grainFinal2)"/>
+        </svg>
+      </div>
+
+      <!-- Foreground : titre + badges -->
+      <div class="projet-hero__left">
+        <h1 class="projet-title"><span class="projet-title-l1">Mes collaborations commerciales</span> <br class="projet-coco-br-mobile">sur TikTok</h1>
+        <div class="hero-badges">
+          <span class="badge">Compte TikTok</span>
+          <span class="badge">Contenus organiques &amp; ads</span>
+          <span class="badge">2025-2026</span>
+        </div>
+      </div>
+
+      <div class="projet-hero__thumbs">
+        <picture><source srcset="assets/collaborations/lanerie/vignette-lanieri.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/collaborations/lanerie/vignette-lanieri.webp" alt="Vignette Lanieri"></picture>
+        <picture><source srcset="assets/collaborations/timberland/Vignette-timberland.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/collaborations/timberland/Vignette-timberland.webp" alt="Vignette Timberland"></picture>
+        <picture><source srcset="assets/collaborations/reveur-lucide/vignette-reveur-lucide.webp" type="image/webp"><img decoding="async" class="hero-thumb" src="assets/collaborations/reveur-lucide/vignette-reveur-lucide.webp" alt="Vignette Rêveur Lucide"></picture>
+      </div>
+    </div>
+
+    <div class="projet-main">
+
+      <div class="projet-card">
+
+        <!-- CONTEXTE + MES MISSIONS -->
+        <div class="red-row">
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Contexte</div>
+            <p class="red-card__text">Pour Timberland, Lanieri et Rêveur Lucide, nous avons imaginé des contenus TikTok capables de traduire l'univers de chaque marque en formats courts, naturels et engageants.</p>
+          </div>
+
+          <div class="red-card">
+            <div class="red-card__bg" aria-hidden="true">
+              <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+              </svg>
+            </div>
+            <div class="red-card__label">Mes Missions</div>
+            <ul class="red-card__list">
+              <li>Élaboration et production des contenus.</li>
+              <li>Adaptation du ton, du format et du storytelling à chaque marque.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- RÉSULTATS GLOBAUX -->
+        <div class="red-card red-card--results">
+          <div class="red-card__bg" aria-hidden="true">
+            <svg preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" fill="url(#dotsPattern)"/>
+            </svg>
+          </div>
+          <div class="red-card__label">Résultats clés</div>
+          <div class="results-row" style="justify-content:center;gap:32px;">
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">8.5</span><span class="results-item__suffix">M</span></span>
+              <span class="results-item__label">vues cumulées</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">106</span><span class="results-item__suffix">K</span></span>
+              <span class="results-item__label">likes cumulés</span>
+            </div>
+            <div class="results-divider"></div>
+            <div class="results-item">
+              <span class="results-item__value"><span class="results-item__number">5</span></span>
+              <span class="results-item__label">vidéos produites</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — cartes ↔ contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(30, 58, 107, 0)"/>
+              <stop offset="20%"  stop-color="rgba(30, 58, 107, 0.55)"/>
+              <stop offset="50%"  stop-color="rgba(30, 58, 107, 0.55)"/>
+              <stop offset="80%"  stop-color="rgba(30, 58, 107, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(30, 58, 107, 0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade1)" stroke-width="0.9"/>
+            <g transform="translate(150,12)" fill="rgba(30, 58, 107, 0.85)">
+              <polygon points="0,-6 1.6,-1.8 6,-1.8 2.4,1.4 3.7,6 0,3.2 -3.7,6 -2.4,1.4 -6,-1.8 -1.6,-1.8"/>
+            </g>
+            <g transform="translate(190,12)">
+              <circle r="7" fill="#C8102E"/>
+              <circle r="4.5" fill="#FFFFFF"/>
+              <circle r="2" fill="#1E3A6B"/>
+            </g>
+            <g transform="translate(230,12)" fill="rgba(30, 58, 107, 0.85)">
+              <polygon points="0,-6 1.6,-1.8 6,-1.8 2.4,1.4 3.7,6 0,3.2 -3.7,6 -2.4,1.4 -6,-1.8 -1.6,-1.8"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- LES CONTENUS DES COLLABORATIONS -->
+      <div class="contenus-section">
+        <div class="contenus-title">
+          <!-- [À ADAPTER] Titre de la section + logo plateforme -->
+          Mes contenus de<br class="contenus-title-br-mobile"> collaboration sur
+          <span class="contenus-title__logos">
+            <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+          </span>
+        </div>
+
+        <div class="brand-group">
+          <div class="brand-group__label brand-group__label--lanieri">LANIERI <span aria-hidden="true">👔</span></div>
+          <div class="contenus-grid" id="contenusGrid">
+
+          <!-- CARD 1 — Lanieri vidéo 1 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/collaborations/lanerie/lanieri-video-1.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@lanieriofficial/video/7587422837061831958?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">167K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">550</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 2 — Lanieri vidéo 2 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <span class="contenu-card__blob contenu-card__blob--blue" aria-hidden="true"></span>
+              <span class="contenu-card__blob contenu-card__blob--orange" aria-hidden="true"></span>
+              <video src="assets/collaborations/lanerie/lanieri-video-2.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@lanieriofficial/video/7588869218700070166?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">166K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">710</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          </div>
+        </div>
+
+        <div class="brand-group">
+          <div class="brand-group__label brand-group__label--timberland">Timberland <span aria-hidden="true">🪾</span></div>
+          <div class="contenus-grid">
+
+          <!-- CARD 1 — Timberland vidéo 2 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <video src="assets/collaborations/timberland/video-timberland-2.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@twins_moreno_/video/7631136807601573142" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">7.7M</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">14.3K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          <!-- CARD 2 — Timberland vidéo 3 -->
+          <div class="contenu-card">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <video src="assets/collaborations/timberland/video-timberland-3.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@twins_moreno_/video/7631986181537893654" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">911K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">3K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          </div>
+        </div>
+
+        <div class="brand-group">
+          <div class="brand-group__label brand-group__label--reveur">REVEUR LUCIDE <span aria-hidden="true">💭</span></div>
+          <div style="display: flex; justify-content: center; width: 100%;">
+
+          <!-- CARD — Rêveur Lucide -->
+          <div class="contenu-card" style="width: 266px; max-width: 100%;">
+            <div class="contenu-card__frame contenu-card__frame--player">
+              <video src="assets/collaborations/reveur-lucide/video-reveur.mp4" playsinline preload="metadata" muted></video>
+              <button type="button" class="contenu-card__play contenu-card__play--toggle" aria-label="Lire la vidéo"></button>
+              <button type="button" class="contenu-card__sound" aria-label="Activer le son"></button>
+              <button type="button" class="contenu-card__fullscreen" aria-label="Agrandir la vidéo en plein écran">
+                <svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 6V2h4"/>
+                  <path d="M14 6V2h-4"/>
+                  <path d="M2 10v4h4"/>
+                  <path d="M14 10v4h-4"/>
+                </svg>
+              </button>
+              <div class="contenu-card__progress" role="slider" aria-label="Progression de la vidéo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="contenu-card__progress-fill"></div>
+              </div>
+            </div>
+            <a href="https://www.tiktok.com/@reveurlucide/video/7467241703213157654?_r=1&_t=ZN-968eTpiuvQ6" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-tiktok.png" alt="TikTok">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">464K</span>
+                  <span class="metric-icon" aria-hidden="true">👁</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">53K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+            <a href="https://www.instagram.com/reels/DFniDDyCCmS/" target="_blank" rel="noopener noreferrer" class="contenu-card__metric contenu-card__metric--featured contenu-card__metric--reels-white" style="text-decoration:none;">
+              <span class="metric-press__outer"><span class="metric-press__inner">
+                <img decoding="async" loading="lazy" src="assets/hero-section/logo-reels.png" alt="Reels">
+                <span class="contenu-card__metric-inline">
+                  <span class="metric-prefix" aria-hidden="true">:</span>
+                  <span class="metric-value">587K</span>
+                  <span class="metric-icon" aria-hidden="true">👁️</span>
+                  <span class="metric-separator" aria-hidden="true">-</span>
+                  <span class="metric-value">42K</span>
+                  <span class="metric-icon" aria-hidden="true">❤️</span>
+                </span>
+              </span></span>
+            </a>
+          </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SÉPARATEUR ORNEMENTAL — contenus ↔ autres contenus -->
+      <div class="section-separator" aria-hidden="true">
+        <svg viewBox="0 0 380 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sepFade2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="rgba(30, 58, 107, 0)"/>
+              <stop offset="20%"  stop-color="rgba(30, 58, 107, 0.55)"/>
+              <stop offset="50%"  stop-color="rgba(30, 58, 107, 0.55)"/>
+              <stop offset="80%"  stop-color="rgba(30, 58, 107, 0.55)"/>
+              <stop offset="100%" stop-color="rgba(30, 58, 107, 0)"/>
+            </linearGradient>
+          </defs>
+          <g fill="none" stroke-linecap="round">
+            <line x1="0" y1="12" x2="380" y2="12" stroke="url(#sepFade2)" stroke-width="0.9"/>
+            <g transform="translate(150,12)" fill="rgba(30, 58, 107, 0.85)">
+              <polygon points="0,-6 1.6,-1.8 6,-1.8 2.4,1.4 3.7,6 0,3.2 -3.7,6 -2.4,1.4 -6,-1.8 -1.6,-1.8"/>
+            </g>
+            <g transform="translate(190,12)">
+              <circle r="7" fill="#C8102E"/>
+              <circle r="4.5" fill="#FFFFFF"/>
+              <circle r="2" fill="#1E3A6B"/>
+            </g>
+            <g transform="translate(230,12)" fill="rgba(30, 58, 107, 0.85)">
+              <polygon points="0,-6 1.6,-1.8 6,-1.8 2.4,1.4 3.7,6 0,3.2 -3.7,6 -2.4,1.4 -6,-1.8 -1.6,-1.8"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <!-- MES AUTRES CONTENUS -->
+      <div class="autres-contenus-section">
+        <div class="contenus-title" style="margin-bottom:0;">
+          Mes autres contenus sur <span style="font-size:1.2em;">📲</span>
+        </div>
+
+        <div class="autres-carousel-wrapper">
+          <button class="autres-arrow autres-arrow--prev" aria-label="Précédent">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="autres-track-clip">
+            <div class="autres-track" id="autresTrack">
+              <div class="autres-card" onclick="window.location.href='projet-playstation.html'" style="cursor:pointer;--c:#0070D1;--c2:#003087;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Short le + viral<br>sur le compte PlayStationFR</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-mercredi.html'" style="cursor:pointer;--c:#5C2E91;--c2:#3a1c5e;">
+                <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur la série Mercredi</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-candyman-marryme.html'" style="cursor:pointer;--c:#D4A03C;--c2:#8a6420;">
+                <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman & Marry Me"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Candyman &amp; Marry Me</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-lupin.html'" style="cursor:pointer;--c:#0E2C40;--c2:#061826;">
+                <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks Ads et organiques<br>sur la série Lupin</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-banlieusards.html'" style="cursor:pointer;--c:#1A3A52;--c2:#0c2233;">
+                <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Banlieusards 2</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-yop.html'" style="cursor:pointer;--c:#E63946;--c2:#a01e2a;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Contenus homemade<br>pour alimenter<br>le compte TikTok</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-armee-de-lair.html'" style="cursor:pointer;--c:#1E3A6B;--c2:#0E2B5C;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Armée de l'Air</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix.html'" style="cursor:pointer;--c:#E50914;--c2:#9c0710;">
+                <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix TikTok"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Lancement du compte Netflix France<br>sur TikTok</h3><span class="ov-year">2021 — 2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-minions-trolls.html'" style="cursor:pointer;--c:#E6A817;--c2:#a37700;">
+                <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions Trolls"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne TikTok<br>Minions 2 &amp; Trolls 3</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-events.html'" style="cursor:pointer;--c:#7E1620;--c2:#4d0d14;">
+                <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événements Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur les events Netflix</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-2.html'" style="cursor:pointer;--c:#FF3B47;--c2:#b8232d;">
+                <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks annonçant<br>les séries et films</h3><span class="ov-year">2022</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-emmaus.html'" style="cursor:pointer;--c:#E85A1F;--c2:#a03b0c;">
+                <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Campagne d'influence<br>Emmaüs Connect</h3><span class="ov-year">2023</span></div>
+              </div>
+              <div class="autres-card" onclick="window.location.href='projet-netflix-stranger.html'" style="cursor:pointer;--c:#C8102E;--c2:#7a0a1c;">
+                <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img loading="lazy" decoding="async" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things"></picture>
+                <div class="autres-card__overlay"><h3 class="ov-title">Les TikToks et Reels<br>sur Stranger Things</h3><span class="ov-year">2022</span></div>
+              </div>
+            </div>
+          </div>
+          <button class="autres-arrow autres-arrow--next" aria-label="Suivant">
+            <svg width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="autres-dots" id="autresDots"></div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="lecteur-video.js?v=20260513-zoom6"></script>
+  <script src="carousel-autres.js"></script>
+  <script src="header.js?v=20260519-contact-early"></script>
+  <script src="drawer-shuffle.js?v=20260515"></script>
+  <script src="back-button.js"></script>
+</body>
+</html>

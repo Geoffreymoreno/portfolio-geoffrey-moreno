@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Dossiers de sauvegarde / archives locales (pas dans le repo)
+_archives/
+_safety-launchagent/
+_safety-png-cleanup/
+_safety-posters/
+_safety-video-cleanup/
+
+# Drafts visuels & screenshots de test (locaux uniquement)
+preview/
+screens/
+
+# Backups
+*-BACKUP-*/
+*.bak
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (si jamais Node est ajouté plus tard)
+node_modules/
+
+# Claude / outils internes
+.claude/
+.agent/
+.playwright-mcp/
+CLAUDE-old.md
+CLAUDE.md
