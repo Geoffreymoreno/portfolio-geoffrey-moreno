@@ -18,22 +18,25 @@
     if (!location.hash) window.scrollTo(0, 0);
   </script>
   <script>
-    /* Retour depuis page projet — utilise le SCROLL NATIF du navigateur via
-       id="card-{slug}" sur chaque gallery card. Le browser scrolle sur la card
-       PENDANT le parsing du HTML (dès qu'il rencontre l'élément id="card-X"),
-       AVANT le first paint, sans aucun JS de scroll. L'overlay paint-level
-       masque tout pendant ce délai et est retiré au DOMContentLoaded.
-         1. Pose immédiatement l'overlay pastel ::before sur <html>
-         2. Si galerie dépliée, pose 'gallery-start-expanded' pour que script.js
-            l.65 démarre avec galleryCollapsed=false (évite que la card cible
-            soit masquée par is-collapsed-hidden quand applyGalleryState run)
-         3. Browser fait le scroll natif sur id="card-{slug}" pendant le parse
-         4. Au DOMContentLoaded : ajustement pixel-perfect via savedY si dispo
-            (la card était au centre du viewport pour le user, pas en haut),
-            puis retire l'overlay → page révélée à la position exacte
-       Latence visée : 500-1000ms (= DOMContentLoaded sur mobile), vs 3-4s
-       avant à cause d'une boucle rAF qui n'atterrissait jamais sur iOS. */
-    if (location.hash.startsWith('#card-')) {
+    /* Retour depuis page projet — masquage paint-level + scrollIntoView centré
+       au DOMContentLoaded. ZÉRO scroll animation visible.
+
+       BUG iOS Safari résolu : le browser fait son propre "scroll to fragment"
+       sur l'event 'load' (HTML spec §7.11.3) qui OVERRIDE notre scrollIntoView
+       et remet la card au top du viewport. La fix : retirer le hash de l'URL
+       IMMÉDIATEMENT (avant que le browser ne déclenche son anchor-scroll), via
+       history.replaceState. On garde origHash en mémoire pour notre propre
+       scrollIntoView({block:'center'}) qui center la card pile au milieu —
+       sous l'overlay, donc le user voit juste un flash pastel puis la card
+       déjà centrée. Aucun mouvement de scroll visible.
+
+       Latence = DOMContentLoaded (~600-1000ms mobile), incompressible sans
+       prerender. Sur desktop ~200-400ms. */
+    var origHash = location.hash;
+    if (origHash.startsWith('#card-')) {
+      /* Retire le hash de l'URL IMMÉDIATEMENT pour que le browser ne fasse
+         pas son anchor-scroll natif. Notre JS fera le scroll au DOMContentLoaded. */
+      history.replaceState(null, '', location.pathname + location.search);
       document.documentElement.classList.add('is-restoring-scroll');
       if (sessionStorage.getItem('homeGalleryExpanded') === '1') {
         document.documentElement.classList.add('gallery-start-expanded');
@@ -43,27 +46,25 @@
         if (revealed) return;
         revealed = true;
         document.documentElement.classList.remove('is-restoring-scroll');
+        document.documentElement.style.scrollBehavior = '';
         try {
           sessionStorage.removeItem('homeScrollY');
           sessionStorage.removeItem('homeGalleryExpanded');
         } catch (e) {}
       };
-      /* Reveal le PLUS TÔT POSSIBLE — 3 triggers en compétition, premier qui
-         fire gagne :
-         1. 'scroll' window : le browser vient de scroller natif sur la card hash
-            (typiquement pendant le parsing HTML, bien avant DOMContentLoaded)
-         2. DOMContentLoaded : DOM entièrement parsé, on ajuste pixel-perfect
-            via savedY si dispo
-         3. Safety 2s : si rien ne fire (shouldn't happen) */
-      window.addEventListener('scroll', reveal, { once: true, passive: true });
       document.addEventListener('DOMContentLoaded', function () {
-        var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
-        if (savedY > 0 && Math.abs(window.scrollY - savedY) > 50) {
-          window.scrollTo(0, savedY);
+        document.documentElement.style.scrollBehavior = 'auto';
+        var slug = origHash.replace('#card-', '');
+        var card = document.getElementById('card-' + slug);
+        if (card) {
+          card.scrollIntoView({ block: 'center', behavior: 'instant' });
+        } else {
+          var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+          if (savedY > 0) window.scrollTo(0, savedY);
         }
-        reveal();
+        requestAnimationFrame(reveal);
       }, { once: true });
-      setTimeout(reveal, 2000);
+      setTimeout(reveal, 3000);
     }
   </script>
   <style>
