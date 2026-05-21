@@ -3399,6 +3399,28 @@
           showPlayPause(false);
         }
       };
+
+      // Auto-pause du portable quand on scrolle hors-écran (mobile only).
+      // Économise la batterie/data et coupe le son qui restait audible quand
+      // l'utilisateur scrollait vers le bas de la page. Pas de reprise auto
+      // au retour : l'utilisateur doit recliquer play volontairement.
+      if ('IntersectionObserver' in window) {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.intersectionRatio < 0.3) {
+                const v = videos[activeIdx];
+                if (v && !v.paused) {
+                  v.pause();
+                  playpause.classList.add('is-paused');
+                }
+              }
+            });
+          }, { threshold: [0, 0.3] });
+          io.observe(wrap);
+        }
+      }
       wrap.addEventListener('click', (e) => {
         if (e.target.closest('.hmc-mute')) return;
         if (Math.abs(deltaX) >= TAP_TOLERANCE) return;
