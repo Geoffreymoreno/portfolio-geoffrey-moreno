@@ -78,10 +78,14 @@
 
       /* Double rAF pour laisser le filtre + l'expand recalculer la mise en
          page avant de scroller (1 frame ne suffit pas quand display:none
-         repasse à display:flex). */
+         repasse à display:flex). Scroll 'instant' (vs 'smooth') pour
+         apparaître pile sur la card sans transition visible — combiné au
+         visibility:hidden posé en <head>, le retour depuis une page projet
+         est totalement seamless sur mobile. */
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          targetCard.scrollIntoView({ behavior: 'instant', block: 'center' });
+          document.documentElement.classList.remove('is-restoring-scroll');
         });
       });
     };

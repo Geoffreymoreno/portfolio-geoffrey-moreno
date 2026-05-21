@@ -18,6 +18,18 @@
     if (!location.hash) window.scrollTo(0, 0);
   </script>
   <script>
+    /* Retour depuis page projet (mobile) — cache la page jusqu'à ce que le
+       scroll soit positionné sur la card cible, évite que l'utilisateur voie
+       le haut de la page puis un scroll vers la card. Le retour devient
+       instantané : on apparaît directement sur le projet. La classe est
+       retirée par back-button.js après scrollIntoView (avec safety timeout). */
+    if (location.hash.startsWith('#card-') && window.matchMedia('(max-width: 768px)').matches) {
+      document.documentElement.classList.add('is-restoring-scroll');
+      setTimeout(() => document.documentElement.classList.remove('is-restoring-scroll'), 800);
+    }
+  </script>
+  <style>html.is-restoring-scroll body { visibility: hidden; }</style>
+  <script>
     /* ══ Hero intro — affiche les animations d'entrée uniquement si la
        dernière "play" remonte à plus de 24h. Sinon, ajoute .no-hero-intro
        sur <html> pour neutraliser les animations (la hero apparaît dans
