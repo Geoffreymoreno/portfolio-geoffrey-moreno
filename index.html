@@ -997,7 +997,11 @@
       }
       /* Overlay anti-flash-noir iOS : positionné EXACTEMENT comme la vidéo,
          dessus en z-index. Visible uniquement pour le slot actif, fade-out
-         déclenché par le 1er event 'playing' de la vidéo correspondante. */
+         déclenché par requestVideoFrameCallback (= 1re frame physiquement
+         composée à l'écran), avec fallback 'playing' + 250ms.
+         translateZ(0) + will-change forcent un layer GPU dédié pour battre
+         le bug "video on top" d'iOS Safari (où le <video> peut être composé
+         au-dessus du HTML quoi que dise z-index). */
       .hmc-video-wrap > .hmc-video-cover {
         position: absolute;
         inset: 5.44px;
@@ -1007,8 +1011,10 @@
         object-fit: cover;
         opacity: 0;
         pointer-events: none;
-        z-index: 1; /* au-dessus de la vidéo (z=auto) mais sous .hmc-playpause */
-        transition: opacity 0.2s ease;
+        z-index: 1;
+        transition: opacity 0.25s ease;
+        transform: translateZ(0);
+        will-change: opacity;
       }
       .hmc-video-wrap > .hmc-video-cover.is-active {
         opacity: 1;
@@ -3285,9 +3291,11 @@
 
       // Anti-flash-noir iOS Safari : overlay <img> par-dessus chaque vidéo.
       // Sur iOS, dès que play() est appelé, le poster natif disparaît même si
-      // la 1re frame n'est pas encore décodée → écran noir bref. Les <img>
-      // cover restent affichés au-dessus de la vidéo jusqu'à ce que l'event
-      // 'playing' confirme que la frame est effectivement rendue → fade out.
+      // la 1re frame n'est pas encore décodée → écran noir bref de 50-300ms.
+      // L'event 'playing' se déclenche AVANT que la frame ne soit composée à
+      // l'écran sur iOS → trop tôt pour fader l'overlay.
+      // Solution : requestVideoFrameCallback (iOS 15.4+) déclenche PILE quand
+      // une frame est physiquement présente. Fallback : 'playing' + 250ms.
       const covers = Array.from(stage.querySelectorAll('.hmc-video-cover'));
       const hideCover = (slot) => {
         const c = covers.find(el => el.dataset.slot === String(slot));
@@ -3299,9 +3307,23 @@
           if (c.dataset.slot === String(slot)) c.classList.remove('is-hidden');
         });
       };
-      videos.forEach(v => {
-        v.addEventListener('playing', () => hideCover(v.dataset.slot));
-      });
+      const armCoverHide = (v) => {
+        const slot = v.dataset.slot;
+        if (typeof v.requestVideoFrameCallback === 'function') {
+          // Précision pixel-perfect : callback déclenché quand une frame est
+          // physiquement composée à l'écran. Plus de gap noir possible.
+          v.requestVideoFrameCallback(() => hideCover(slot));
+        } else {
+          // Fallback navigateurs anciens : 'playing' + 250ms (latence moyenne
+          // entre 'playing' event et apparition visuelle de la frame).
+          const onPlaying = () => {
+            setTimeout(() => hideCover(slot), 250);
+            v.removeEventListener('playing', onPlaying);
+          };
+          v.addEventListener('playing', onPlaying);
+        }
+      };
+      videos.forEach(v => armCoverHide(v));
 
       const setActive = (idx) => {
         idx = (idx + total) % total;
@@ -3318,8 +3340,11 @@
           el.classList.toggle('is-active', i === idx);
         });
         dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
-        // Affiche le cover du nouveau slot (sera retiré par event 'playing')
+        // Affiche le cover du nouveau slot et ré-arme le hide-callback
+        // (requestVideoFrameCallback est one-shot — il faut le ré-armer
+        // à chaque retour sur un slot déjà visité).
         showCover(idx);
+        armCoverHide(videos[idx]);
       };
 
       dots.forEach(dot => {
