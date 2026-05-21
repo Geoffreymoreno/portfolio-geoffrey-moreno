@@ -1531,9 +1531,9 @@
          du viewport (vs collé au header à 86px). */
       .hero {
         justify-content: flex-start !important;
-        padding-top: 120px !important;
+        padding-top: 70px !important; /* 120 → 70 : remonte le bloc +300 vers le header (50px gagnés) */
         padding-bottom: 0 !important;
-        min-height: calc(100vh + 50px) !important;
+        min-height: 100dvh !important; /* calc(100vh+50px) → 100dvh : hero = exactement viewport, compense la barre Safari (50px gagnés) */
       }
 
       /* (0bis) Carousel : pleine largeur de page (suppression du max-width
@@ -1567,7 +1567,7 @@
       .hero-mobile-carousel {
         max-width: none !important;
         padding: 0 !important;
-        transform: translateY(clamp(30px, calc(100vh - 852px), 120px)) !important;
+        transform: translateY(0) !important; /* clamp(30..120) → 0 : plus de push vers le bas (30-120px gagnés) */
       }
 
       /* (1) Bloc "+300" + capsules ADS/INF/ORG + "contenus imaginés" +
