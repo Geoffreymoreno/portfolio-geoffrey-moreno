@@ -1531,7 +1531,7 @@
          du viewport (vs collé au header à 86px). */
       .hero {
         justify-content: flex-start !important;
-        padding-top: 70px !important; /* 120 → 70 : remonte le bloc +300 vers le header (50px gagnés) */
+        padding-top: 25px !important; /* 70 → 25 : tout le contenu du hero (+300, portable, barres) remonte de 45px uniformément, distances internes inchangées. Objectif : éloigner les barres de progress de la barre Chrome/Safari du bas. */
         padding-bottom: 0 !important;
         min-height: 100svh !important; /* dvh → svh : hauteur figée (= barre Safari toujours visible) → plus de saut visuel au scroll quand la barre se rétracte */
       }

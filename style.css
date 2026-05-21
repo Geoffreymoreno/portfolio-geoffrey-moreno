@@ -2373,7 +2373,7 @@ body.header-light .header-burger__bar { background: #1a1230; }
 
 /* ── ≤ 480px : mobile petit (iPhone SE) ── */
 @media (max-width: 480px) {
-  .hero { padding: 36px 0 16px; min-height: 100svh; } /* dvh → svh : viewport figé, plus de saut quand la barre Safari/Chrome se rétracte au scroll */
+  .hero { padding: 10px 0 16px; min-height: 100svh; } /* padding-top 36→10 : tout le contenu du hero remonte de 26px uniformément (distances internes inchangées) pour éloigner les barres de progress de la barre Chrome/Safari du bas */
   .header-logo { font-size: 16px !important; }
   .va2-number { font-size: clamp(54px, 15.5vw, 76px); }
   .va2-line   { font-size: clamp(16px, 4.6vw, 20px); }
