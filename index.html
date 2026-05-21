@@ -945,7 +945,7 @@
          scale 1.251 → 1.314 (1.251 × 1.05 = +5%).
          Les .logo-particle étant enfants de .va2-stage, ils suivent l'agrandissement. */
       .hero .stats-bloc.va2-stage {
-        transform: translateY(5px) scale(1.183) !important; /* 1.314 → 1.183 (-10%) : libère ~20px verticaux pour rendre la fin du portable + progress bars visibles à l'arrivée */
+        transform: translateY(5px) scale(1.124) !important; /* 1.183 → 1.124 (-5% supplémentaire) : top bloc allégé visuellement sur iPhone SE */
         transform-origin: top center !important;
       }
       /* Phone + badge "Top créa" scalés ensemble (le badge est positionné absolute
@@ -1578,7 +1578,7 @@
          pour réduire le gap "POUR LES MARQUES" → phone (sans modifier les
          positions relatives internes du bloc — tout translate ensemble). */
       .hero .stats-bloc.va2-stage {
-        transform: translateY(30px) scale(1.301) !important; /* 1.4454 → 1.301 (-10%) : top bloc compressé, libère espace pour rendre portable + progress visibles sur iPhone 17 */
+        transform: translateY(30px) scale(1.236) !important; /* 1.301 → 1.236 (-5% supplémentaire) : top bloc encore réduit pour alléger visuellement la zone +300/capsules/logos */
         transform-origin: top center !important;
       }
 
@@ -1637,7 +1637,7 @@
          Cible : progress ~22px sous le perceived end ⇒ y = 746
            ⇒ nav_margin_top = 746 - 539 = 207 ⇒ on prend 210. */
       .hero-mobile-carousel .hmc-nav {
-        margin-top: 158px !important; /* 210 → 158 : suit le portable réduit (scale 1.7908→1.612 = -52px de hauteur visuelle, progress remonte d'autant pour rester sous le perceived end du mask) */
+        margin-top: 175px !important; /* 158 → 175 (+17) : barres descendues très légèrement dans le viewport, reste ~71px de marge avant la barre Chrome/Safari du bas */
       }
 
       /* (6) Réduire au max l'espace entre la barre de progression et la
