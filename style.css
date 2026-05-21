@@ -2282,7 +2282,7 @@ body.header-light .header-burger__bar { background: #1a1230; }
   .hero {
     padding: 70px 0 18px;
     gap: 8px;
-    min-height: 100vh;
+    min-height: 100svh; /* svh = barre navigateur considérée comme toujours visible → pas de saut au scroll mobile */
     justify-content: center;
   }
   .header-pill {
@@ -2373,7 +2373,7 @@ body.header-light .header-burger__bar { background: #1a1230; }
 
 /* ── ≤ 480px : mobile petit (iPhone SE) ── */
 @media (max-width: 480px) {
-  .hero { padding: 36px 0 16px; min-height: 100dvh; }
+  .hero { padding: 36px 0 16px; min-height: 100svh; } /* dvh → svh : viewport figé, plus de saut quand la barre Safari/Chrome se rétracte au scroll */
   .header-logo { font-size: 16px !important; }
   .va2-number { font-size: clamp(54px, 15.5vw, 76px); }
   .va2-line   { font-size: clamp(16px, 4.6vw, 20px); }

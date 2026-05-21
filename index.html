@@ -1533,7 +1533,7 @@
         justify-content: flex-start !important;
         padding-top: 70px !important; /* 120 → 70 : remonte le bloc +300 vers le header (50px gagnés) */
         padding-bottom: 0 !important;
-        min-height: 100dvh !important; /* calc(100vh+50px) → 100dvh : hero = exactement viewport, compense la barre Safari (50px gagnés) */
+        min-height: 100svh !important; /* dvh → svh : hauteur figée (= barre Safari toujours visible) → plus de saut visuel au scroll quand la barre se rétracte */
       }
 
       /* (0bis) Carousel : pleine largeur de page (suppression du max-width
