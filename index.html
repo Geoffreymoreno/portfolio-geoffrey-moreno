@@ -18,16 +18,50 @@
     if (!location.hash) window.scrollTo(0, 0);
   </script>
   <script>
-    /* Retour depuis page projet — couvre tout le viewport avec un overlay
-       paint-level (pseudo-élément ::before sur <html>) PENDANT la restauration
-       de scroll. Indépendant de l'inheritance visibility (qui n'hide pas les
-       éléments fixed/sticky sur iOS Safari) et de l'ordre de layout. La classe
-       est retirée par back-button.js APRÈS scrollTo (safety timeout 3s très
-       long pour ne JAMAIS retirer l'overlay avant que doScroll ait fini, même
-       si la galerie doit s'étendre et reflow). */
+    /* Retour depuis page projet — masquage paint-level + scroll AGGRESSIVE
+       qui s'exécute le PLUS TÔT POSSIBLE (n'attend NI DOMContentLoaded NI
+       l'exécution de script.js, ce qui coûtait ~500-1000ms sur mobile).
+         1. Pose immédiatement l'overlay pastel ::before sur <html>
+         2. Si l'utilisateur avait la galerie dépliée, pose 'gallery-start-expanded'
+            sur <html> pour que script.js l.65 démarre avec galleryCollapsed=false
+            (la galerie est dépliée DÈS son init, plus besoin de cliquer le bouton
+            "Voir mes X projets" puis attendre le reveal animation 0.55s)
+         3. Boucle rAF : tente window.scrollTo(0, savedY) à chaque frame, dès
+            que body est assez haut pour accueillir cette position de scroll
+         4. Retire l'overlay DÈS que le scroll est bon (typiquement quelques
+            frames après le 1er paint — bien avant DOMContentLoaded) */
     if (location.hash.startsWith('#card-')) {
       document.documentElement.classList.add('is-restoring-scroll');
-      setTimeout(() => document.documentElement.classList.remove('is-restoring-scroll'), 3000);
+      var wasExpanded = sessionStorage.getItem('homeGalleryExpanded') === '1';
+      if (wasExpanded) document.documentElement.classList.add('gallery-start-expanded');
+      var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+      if (savedY > 0) {
+        var frames = 0;
+        var tryRestore = function () {
+          frames++;
+          var el = document.scrollingElement;
+          if (el && el.scrollHeight > savedY + window.innerHeight * 0.5) {
+            window.scrollTo(0, savedY);
+            if (Math.abs(window.scrollY - savedY) < 10) {
+              document.documentElement.classList.remove('is-restoring-scroll');
+              try {
+                sessionStorage.removeItem('homeScrollY');
+                sessionStorage.removeItem('homeGalleryExpanded');
+              } catch (e) {}
+              return;
+            }
+          }
+          if (frames < 180) requestAnimationFrame(tryRestore);
+          else document.documentElement.classList.remove('is-restoring-scroll');
+        };
+        requestAnimationFrame(tryRestore);
+      } else {
+        /* Pas de savedY (visite directe via #card-X) — fallback back-button.js
+           qui scrollIntoView la card. Safety 3s pour retirer l'overlay si bug. */
+        setTimeout(function () {
+          document.documentElement.classList.remove('is-restoring-scroll');
+        }, 3000);
+      }
     }
   </script>
   <style>

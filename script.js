@@ -62,7 +62,11 @@ function getGalleryVisibleLimit() {
   if (grid && grid.classList.contains('grid-view-3')) return 9;
   return 8;
 }
-let galleryCollapsed = true;
+/* État initial : la galerie démarre dépliée si l'inline head script a posé
+   .gallery-start-expanded sur <html> (retour depuis page projet où l'utilisateur
+   avait dépliée la galerie avant de cliquer la card). Évite le clic différé sur
+   le bouton "Voir mes X projets" qui ralentissait la restauration de scroll. */
+let galleryCollapsed = !document.documentElement.classList.contains('gallery-start-expanded');
 let galleryFilter = 'all';
 
 function applyGalleryState({ animateReveal = false } = {}) {

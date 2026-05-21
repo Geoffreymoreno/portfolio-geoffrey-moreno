@@ -84,6 +84,11 @@
       const hash = window.location.hash;
       if (!hash.startsWith('#card-')) return;
 
+      /* Si l'inline head script a déjà fini la restauration (classe retirée
+         + savedY clean), on ne re-scrolle PAS : l'utilisateur voit déjà la
+         page à la bonne position, un scrollTo ici provoquerait un saut. */
+      if (!document.documentElement.classList.contains('is-restoring-scroll')) return;
+
       const slug = hash.replace('#card-', '');
       const targetCard = document.querySelector(
         '.gallery-card[data-href="projet-' + slug + '.html"]'
