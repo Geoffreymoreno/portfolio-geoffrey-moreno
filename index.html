@@ -18,50 +18,52 @@
     if (!location.hash) window.scrollTo(0, 0);
   </script>
   <script>
-    /* Retour depuis page projet — masquage paint-level + scroll AGGRESSIVE
-       qui s'exécute le PLUS TÔT POSSIBLE (n'attend NI DOMContentLoaded NI
-       l'exécution de script.js, ce qui coûtait ~500-1000ms sur mobile).
+    /* Retour depuis page projet — utilise le SCROLL NATIF du navigateur via
+       id="card-{slug}" sur chaque gallery card. Le browser scrolle sur la card
+       PENDANT le parsing du HTML (dès qu'il rencontre l'élément id="card-X"),
+       AVANT le first paint, sans aucun JS de scroll. L'overlay paint-level
+       masque tout pendant ce délai et est retiré au DOMContentLoaded.
          1. Pose immédiatement l'overlay pastel ::before sur <html>
-         2. Si l'utilisateur avait la galerie dépliée, pose 'gallery-start-expanded'
-            sur <html> pour que script.js l.65 démarre avec galleryCollapsed=false
-            (la galerie est dépliée DÈS son init, plus besoin de cliquer le bouton
-            "Voir mes X projets" puis attendre le reveal animation 0.55s)
-         3. Boucle rAF : tente window.scrollTo(0, savedY) à chaque frame, dès
-            que body est assez haut pour accueillir cette position de scroll
-         4. Retire l'overlay DÈS que le scroll est bon (typiquement quelques
-            frames après le 1er paint — bien avant DOMContentLoaded) */
+         2. Si galerie dépliée, pose 'gallery-start-expanded' pour que script.js
+            l.65 démarre avec galleryCollapsed=false (évite que la card cible
+            soit masquée par is-collapsed-hidden quand applyGalleryState run)
+         3. Browser fait le scroll natif sur id="card-{slug}" pendant le parse
+         4. Au DOMContentLoaded : ajustement pixel-perfect via savedY si dispo
+            (la card était au centre du viewport pour le user, pas en haut),
+            puis retire l'overlay → page révélée à la position exacte
+       Latence visée : 500-1000ms (= DOMContentLoaded sur mobile), vs 3-4s
+       avant à cause d'une boucle rAF qui n'atterrissait jamais sur iOS. */
     if (location.hash.startsWith('#card-')) {
       document.documentElement.classList.add('is-restoring-scroll');
-      var wasExpanded = sessionStorage.getItem('homeGalleryExpanded') === '1';
-      if (wasExpanded) document.documentElement.classList.add('gallery-start-expanded');
-      var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
-      if (savedY > 0) {
-        var frames = 0;
-        var tryRestore = function () {
-          frames++;
-          var el = document.scrollingElement;
-          if (el && el.scrollHeight > savedY + window.innerHeight * 0.5) {
-            window.scrollTo(0, savedY);
-            if (Math.abs(window.scrollY - savedY) < 10) {
-              document.documentElement.classList.remove('is-restoring-scroll');
-              try {
-                sessionStorage.removeItem('homeScrollY');
-                sessionStorage.removeItem('homeGalleryExpanded');
-              } catch (e) {}
-              return;
-            }
-          }
-          if (frames < 180) requestAnimationFrame(tryRestore);
-          else document.documentElement.classList.remove('is-restoring-scroll');
-        };
-        requestAnimationFrame(tryRestore);
-      } else {
-        /* Pas de savedY (visite directe via #card-X) — fallback back-button.js
-           qui scrollIntoView la card. Safety 3s pour retirer l'overlay si bug. */
-        setTimeout(function () {
-          document.documentElement.classList.remove('is-restoring-scroll');
-        }, 3000);
+      if (sessionStorage.getItem('homeGalleryExpanded') === '1') {
+        document.documentElement.classList.add('gallery-start-expanded');
       }
+      var revealed = false;
+      var reveal = function () {
+        if (revealed) return;
+        revealed = true;
+        document.documentElement.classList.remove('is-restoring-scroll');
+        try {
+          sessionStorage.removeItem('homeScrollY');
+          sessionStorage.removeItem('homeGalleryExpanded');
+        } catch (e) {}
+      };
+      /* Reveal le PLUS TÔT POSSIBLE — 3 triggers en compétition, premier qui
+         fire gagne :
+         1. 'scroll' window : le browser vient de scroller natif sur la card hash
+            (typiquement pendant le parsing HTML, bien avant DOMContentLoaded)
+         2. DOMContentLoaded : DOM entièrement parsé, on ajuste pixel-perfect
+            via savedY si dispo
+         3. Safety 2s : si rien ne fire (shouldn't happen) */
+      window.addEventListener('scroll', reveal, { once: true, passive: true });
+      document.addEventListener('DOMContentLoaded', function () {
+        var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+        if (savedY > 0 && Math.abs(window.scrollY - savedY) > 50) {
+          window.scrollTo(0, savedY);
+        }
+        reveal();
+      }, { once: true });
+      setTimeout(reveal, 2000);
     }
   </script>
   <style>
@@ -2150,7 +2152,7 @@
       <div class="gallery-wrap is-collapsed">
       <div class="gallery-grid grid-view-3">
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix.html" style="--c:#E50914;--c2:#9c0710;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-netflix" data-href="projet-netflix.html" style="--c:#E50914;--c2:#9c0710;">
             <picture><source srcset="assets/brand-projects/netflix/lancement-netflix.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/lancement-netflix.webp" alt="Lancement Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">01</span>
             <div class="gallery-card__overlay">
@@ -2159,7 +2161,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix-2.html" style="--c:#FF3B47;--c2:#b8232d;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-netflix-2" data-href="projet-netflix-2.html" style="--c:#FF3B47;--c2:#b8232d;">
             <picture><source srcset="assets/brand-projects/netflix/annonces-netflix.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/annonces-netflix.webp" alt="Annonces Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">02</span>
             <div class="gallery-card__overlay">
@@ -2169,7 +2171,7 @@
           </div>
 
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-mercredi.html" style="--c:#5C2E91;--c2:#3a1c5e;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-mercredi" data-href="projet-mercredi.html" style="--c:#5C2E91;--c2:#3a1c5e;">
             <picture><source srcset="assets/brand-projects/netflix/mercredi.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/mercredi.webp" alt="Mercredi Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">04</span>
             <div class="gallery-card__overlay">
@@ -2178,7 +2180,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-playstation.html" style="--c:#0070D1;--c2:#003087;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-playstation" data-href="projet-playstation.html" style="--c:#0070D1;--c2:#003087;">
             <picture><source srcset="assets/brand-projects/other-banners/banniere-playstation.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-playstation.webp" alt="PlayStation fond bleu" class="gallery-card__img" loading="lazy" decoding="async"></picture>
             <span class="gallery-card__num">11</span>
             <div class="gallery-card__overlay">
@@ -2187,7 +2189,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique publicitaire" data-href="projet-yop.html" style="--c:#E63946;--c2:#a01e2a;">
+          <div class="gallery-card gallery-card--preview" data-category="organique publicitaire" id="card-yop" data-href="projet-yop.html" style="--c:#E63946;--c2:#a01e2a;">
             <picture><source srcset="assets/brand-projects/other-banners/banniere-yop.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-yop.webp" alt="Yop" class="gallery-card__img" loading="lazy" decoding="async"></picture>
             <span class="gallery-card__num">14</span>
             <div class="gallery-card__overlay">
@@ -2196,7 +2198,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-banlieusards.html" style="--c:#1A3A52;--c2:#0c2233;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-banlieusards" data-href="projet-banlieusards.html" style="--c:#1A3A52;--c2:#0c2233;">
             <picture><source srcset="assets/brand-projects/netflix/banlieusards.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/banlieusards.webp" alt="Banlieusards Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">07</span>
             <div class="gallery-card__overlay">
@@ -2205,7 +2207,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="publicitaire" data-href="projet-lupin.html" style="--c:#0E2C40;--c2:#061826;">
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire" id="card-lupin" data-href="projet-lupin.html" style="--c:#0E2C40;--c2:#061826;">
             <picture><source srcset="assets/brand-projects/netflix/lupin.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/lupin.webp" alt="Lupin Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">08</span>
             <div class="gallery-card__overlay">
@@ -2214,7 +2216,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence" data-href="projet-armee-de-lair.html" style="--c:#1E5599;--c2:#0e3568;">
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence" id="card-armee-de-lair" data-href="projet-armee-de-lair.html" style="--c:#1E5599;--c2:#0e3568;">
             <picture><source srcset="assets/brand-projects/other-banners/banniere-armee-lair.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-armee-lair.webp" alt="Armée de l'Air et de l'Espace" class="gallery-card__img" loading="lazy" decoding="async"></picture>
             <span class="gallery-card__num">13</span>
             <div class="gallery-card__overlay">
@@ -2223,7 +2225,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix-events.html" style="--c:#7E1620;--c2:#4d0d14;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-netflix-events" data-href="projet-netflix-events.html" style="--c:#7E1620;--c2:#4d0d14;">
             <picture><source srcset="assets/brand-projects/netflix/evenement-netflix.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/evenement-netflix.webp" alt="Événement Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">05</span>
             <div class="gallery-card__overlay">
@@ -2232,7 +2234,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique influence" data-href="projet-minions-trolls.html" style="--c:#E6A817;--c2:#a37700;">
+          <div class="gallery-card gallery-card--preview" data-category="organique influence" id="card-minions-trolls" data-href="projet-minions-trolls.html" style="--c:#E6A817;--c2:#a37700;">
             <picture><source srcset="assets/brand-projects/universal/minions-trolls-3-banniere.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/universal/minions-trolls-3-banniere.webp" alt="Minions / Trolls 3 Universal" class="gallery-card__img"></picture>
             <span class="gallery-card__num">10</span>
             <div class="gallery-card__overlay">
@@ -2241,7 +2243,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence organique" data-href="projet-emmaus.html" style="--c:#E85A1F;--c2:#a03b0c;">
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence organique" id="card-emmaus" data-href="projet-emmaus.html" style="--c:#E85A1F;--c2:#a03b0c;">
             <picture><source srcset="assets/brand-projects/other-banners/banniere-emmmaus.webp" type="image/webp"><img src="assets/brand-projects/other-banners/banniere-emmmaus.webp" alt="Emmaüs Connect" class="gallery-card__img" loading="lazy" decoding="async"></picture>
             <span class="gallery-card__num">12</span>
             <div class="gallery-card__overlay">
@@ -2250,7 +2252,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence" data-href="projet-candyman-marryme.html" style="--c:#D4A03C;--c2:#8a6420;">
+          <div class="gallery-card gallery-card--preview" data-category="publicitaire influence" id="card-candyman-marryme" data-href="projet-candyman-marryme.html" style="--c:#D4A03C;--c2:#8a6420;">
             <picture><source srcset="assets/brand-projects/universal/candyman-marry-me-banniere.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/universal/candyman-marry-me-banniere.webp" alt="Candyman Marry Me Universal" class="gallery-card__img"></picture>
             <span class="gallery-card__num">09</span>
             <div class="gallery-card__overlay">
@@ -2259,7 +2261,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="organique" data-href="projet-netflix-stranger.html" style="--c:#C8102E;--c2:#7a0a1c;">
+          <div class="gallery-card gallery-card--preview" data-category="organique" id="card-netflix-stranger" data-href="projet-netflix-stranger.html" style="--c:#C8102E;--c2:#7a0a1c;">
             <picture><source srcset="assets/brand-projects/netflix/stranger-things-affiche.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/brand-projects/netflix/stranger-things-affiche.webp" alt="Stranger Things Netflix" class="gallery-card__img"></picture>
             <span class="gallery-card__num">06</span>
             <div class="gallery-card__overlay">
@@ -2268,7 +2270,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="marque-personnelle organique publicitaire influence" data-href="projet-collaborations-commerciales.html" style="--c:#d4b76a;--c2:#a88a3f;">
+          <div class="gallery-card gallery-card--preview" data-category="marque-personnelle organique publicitaire influence" id="card-collaborations-commerciales" data-href="projet-collaborations-commerciales.html" style="--c:#d4b76a;--c2:#a88a3f;">
             <picture><source srcset="assets/collaborations/banniere-lanieri.webp" type="image/webp"><img decoding="async" loading="lazy" src="assets/collaborations/banniere-lanieri.webp" alt="Marque personnelle — twins_moreno" class="gallery-card__img"></picture>
             <span class="gallery-card__num">15</span>
             <div class="gallery-card__overlay">
@@ -2277,7 +2279,7 @@
             </div>
           </div>
 
-          <div class="gallery-card gallery-card--preview" data-category="marque-personnelle" data-href="projet-mannequinat.html" style="--c:#c98b8b;--c2:#7a4a4a;">
+          <div class="gallery-card gallery-card--preview" data-category="marque-personnelle" id="card-mannequinat" data-href="projet-mannequinat.html" style="--c:#c98b8b;--c2:#7a4a4a;">
             <picture><source srcset="assets/mannequinat/Banniere-manequinat.webp" type="image/webp"><img src="assets/mannequinat/Banniere-manequinat.jpg" alt="Mannequinat" class="gallery-card__img" loading="lazy" decoding="async"></picture>
             <span class="gallery-card__num">16</span>
             <div class="gallery-card__overlay">
