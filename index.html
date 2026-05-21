@@ -1077,7 +1077,9 @@
         transition: opacity 0.25s ease !important;
       }
       .hmc-video-wrap .hmc-playpause svg { width: 14px !important; height: 14px !important; }
-      .hmc-video-wrap:hover .hmc-playpause,
+      /* :hover retiré du sélecteur sur mobile : l'état hover reste collé après un tap
+         sur touch device, ce qui maintenait le bouton play visible en permanence
+         et annulait le retrait JS de .is-visible après 1.5s. */
       .hmc-playpause.is-paused,
       .hmc-playpause.is-visible {
         opacity: 1 !important;
@@ -3254,6 +3256,17 @@
       // si un autre script ou le navigateur les démarrait). L'utilisateur doit
       // explicitement cliquer le bouton play pour activer son+lecture.
       videos.forEach(v => { try { v.pause(); } catch(e){} v.muted = true; v.currentTime = 0; });
+
+      // Pré-décodage de la première frame de chaque vidéo (anti-flash noir iOS Safari).
+      // Sur iOS, dès que play() est appelé, le poster disparaît avant que la frame 1
+      // ne soit décodée → écran noir bref. En forçant currentTime = 0.04 (juste après
+      // la frame 0) au chargement des metadata, le décodeur rend déjà la 1re frame
+      // dans le GPU avant le tap play → transition poster→vidéo sans flash noir.
+      videos.forEach(v => {
+        const prime = () => { try { v.currentTime = 0.04; } catch(e){} };
+        if (v.readyState >= 1) prime();
+        else v.addEventListener('loadedmetadata', prime, { once: true });
+      });
 
       const setActive = (idx) => {
         idx = (idx + total) % total;
