@@ -995,6 +995,27 @@
         -webkit-mask-image: none !important;
                 mask-image: none !important;
       }
+      /* Overlay anti-flash-noir iOS : positionné EXACTEMENT comme la vidéo,
+         dessus en z-index. Visible uniquement pour le slot actif, fade-out
+         déclenché par le 1er event 'playing' de la vidéo correspondante. */
+      .hmc-video-wrap > .hmc-video-cover {
+        position: absolute;
+        inset: 5.44px;
+        width: calc(100% - 10.88px);
+        height: calc(100% - 10.88px);
+        border-radius: 24px;
+        object-fit: cover;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1; /* au-dessus de la vidéo (z=auto) mais sous .hmc-playpause */
+        transition: opacity 0.2s ease;
+      }
+      .hmc-video-wrap > .hmc-video-cover.is-active {
+        opacity: 1;
+      }
+      .hmc-video-wrap > .hmc-video-cover.is-hidden {
+        opacity: 0;
+      }
       /* Boutons play/mute également repositionnés à l'intérieur du screen,
          pas dans le bezel. */
       .hmc-video-wrap .hmc-playpause {
@@ -1941,6 +1962,11 @@
                 <video class="hmc-video is-active" data-slot="0" src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="1" src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="2" src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" muted loop playsinline preload="auto"></video>
+                <!-- Overlays anti-flash-noir iOS Safari : couvrent la vidéo jusqu'à ce
+                     que la 1re frame soit réellement en lecture (event 'playing'). -->
+                <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation.webp" alt="" aria-hidden="true">
+                <img class="hmc-video-cover" data-slot="1" src="assets/hero-section/screen-minions.webp" alt="" aria-hidden="true">
+                <img class="hmc-video-cover" data-slot="2" src="assets/hero-section/screen-mercredi.webp" alt="" aria-hidden="true">
                 <button class="hmc-playpause is-paused" type="button" aria-label="Lecture / Pause" id="hmcPlayPause">
                   <svg class="icon-play"  viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg>
                   <svg class="icon-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
@@ -3257,15 +3283,24 @@
       // explicitement cliquer le bouton play pour activer son+lecture.
       videos.forEach(v => { try { v.pause(); } catch(e){} v.muted = true; v.currentTime = 0; });
 
-      // Pré-décodage de la première frame de chaque vidéo (anti-flash noir iOS Safari).
-      // Sur iOS, dès que play() est appelé, le poster disparaît avant que la frame 1
-      // ne soit décodée → écran noir bref. En forçant currentTime = 0.04 (juste après
-      // la frame 0) au chargement des metadata, le décodeur rend déjà la 1re frame
-      // dans le GPU avant le tap play → transition poster→vidéo sans flash noir.
+      // Anti-flash-noir iOS Safari : overlay <img> par-dessus chaque vidéo.
+      // Sur iOS, dès que play() est appelé, le poster natif disparaît même si
+      // la 1re frame n'est pas encore décodée → écran noir bref. Les <img>
+      // cover restent affichés au-dessus de la vidéo jusqu'à ce que l'event
+      // 'playing' confirme que la frame est effectivement rendue → fade out.
+      const covers = Array.from(stage.querySelectorAll('.hmc-video-cover'));
+      const hideCover = (slot) => {
+        const c = covers.find(el => el.dataset.slot === String(slot));
+        if (c) { c.classList.remove('is-active'); c.classList.add('is-hidden'); }
+      };
+      const showCover = (slot) => {
+        covers.forEach(c => {
+          c.classList.toggle('is-active', c.dataset.slot === String(slot));
+          if (c.dataset.slot === String(slot)) c.classList.remove('is-hidden');
+        });
+      };
       videos.forEach(v => {
-        const prime = () => { try { v.currentTime = 0.04; } catch(e){} };
-        if (v.readyState >= 1) prime();
-        else v.addEventListener('loadedmetadata', prime, { once: true });
+        v.addEventListener('playing', () => hideCover(v.dataset.slot));
       });
 
       const setActive = (idx) => {
@@ -3283,6 +3318,8 @@
           el.classList.toggle('is-active', i === idx);
         });
         dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+        // Affiche le cover du nouveau slot (sera retiré par event 'playing')
+        showCover(idx);
       };
 
       dots.forEach(dot => {
