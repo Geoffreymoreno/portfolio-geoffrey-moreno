@@ -361,6 +361,14 @@ document.querySelector('.gallery-grid')?.addEventListener('click', (e) => {
     return;
   }
 
+  // Sauve la position de scroll + état de la gallery juste avant de naviguer
+  // vers la page projet → permet au retour de restaurer EXACTEMENT cette
+  // position (via back-button.js sur index.html?#card-X). Plus de scroll
+  // visible : on revient pile au pixel près sur la card cliquée.
+  try {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+    sessionStorage.setItem('homeGalleryExpanded', galleryCollapsed ? '0' : '1');
+  } catch (e) {}
   window.location.href = card.dataset.href;
 });
 

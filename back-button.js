@@ -50,48 +50,76 @@
     return;
   }
 
-  /* ─── HOME PAGE : scroll vers la card si hash #card-X ─── */
+  /* ─── HOME PAGE : restauration de scroll au retour depuis page projet ───
+     Approche directe via sessionStorage : la position scrollY exacte a été
+     sauvegardée juste avant la navigation vers la page projet (cf. script.js
+     gallery-grid click handler). Ici on la restaure tel quel, sans calcul
+     ni scrollIntoView qui pourraient déclencher un scroll smooth visible. */
   if (isHomePage) {
     const handleHashScroll = () => {
       const hash = window.location.hash;
       if (!hash.startsWith('#card-')) return;
+
       const slug = hash.replace('#card-', '');
       const targetCard = document.querySelector(
         '.gallery-card[data-href="projet-' + slug + '.html"]'
       );
-      if (!targetCard) return;
 
-      /* Reset filtre à "all" pour s'assurer que la card cible est visible
-         (sinon le scroll ne peut pas la trouver en viewport). */
+      const savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+      const wasExpanded = sessionStorage.getItem('homeGalleryExpanded') === '1';
+
+      /* Reset filtre à "all" (la galerie filtrée pourrait cacher la card). */
       const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
       if (allBtn && !allBtn.classList.contains('is-active')) {
         allBtn.click();
       }
 
-      /* Déplier la galerie si la card cible est masquée par le collapse
-         (cards en position 9+ ont .is-collapsed-hidden → display:none, donc
-         scrollIntoView échoue silencieusement). */
-      if (targetCard.classList.contains('is-collapsed-hidden')) {
-        const expandBtn = document.querySelector('.gallery-expand-btn');
-        if (expandBtn) expandBtn.click();
+      /* Déplier la galerie si l'utilisateur l'avait dépliée (sessionStorage)
+         OU si la card est cachée par le collapse. */
+      const expandBtn = document.querySelector('.gallery-expand-btn');
+      const needExpand = wasExpanded || (targetCard && targetCard.classList.contains('is-collapsed-hidden'));
+      if (needExpand && expandBtn && expandBtn.dataset.expanded !== 'true') {
+        expandBtn.click();
       }
 
-      /* Double rAF pour laisser le filtre + l'expand recalculer la mise en
-         page avant de scroller (1 frame ne suffit pas quand display:none
-         repasse à display:flex).
-         Scroll DIRECT via scrollTop (vs scrollIntoView) : bypasse totalement
-         le CSS scroll-behavior:smooth de style.css qui faisait foirer le
-         'behavior: instant' sur iOS Safari (bug connu : la propriété CSS
-         écrase l'option JS sur Safari). Avec scrollTop direct, c'est
-         garanti instantané sur tous les navigateurs. */
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      const doScroll = () => {
+        /* Désactive le scroll-behavior smooth pendant la restauration
+           (style.css force scroll-behavior:smooth sur html — bug iOS Safari
+           qui l'applique malgré 'behavior:instant'). */
+        const prevScrollBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = 'auto';
+
+        if (savedY > 0) {
+          /* Position EXACTE sauvegardée → restauration au pixel près. */
+          window.scrollTo(0, savedY);
+          document.documentElement.scrollTop = savedY;
+          document.body.scrollTop = savedY;
+        } else if (targetCard) {
+          /* Fallback : centrer la card si pas de position sauvegardée
+             (ex : visiteur arrivant via lien externe avec #card-X). */
           const rect = targetCard.getBoundingClientRect();
           const targetY = window.pageYOffset + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+          window.scrollTo(0, targetY);
           document.documentElement.scrollTop = targetY;
-          document.body.scrollTop = targetY; /* fallback Safari */
-          document.documentElement.classList.remove('is-restoring-scroll');
-        });
+          document.body.scrollTop = targetY;
+        }
+
+        document.documentElement.style.scrollBehavior = prevScrollBehavior;
+        document.documentElement.classList.remove('is-restoring-scroll');
+
+        /* Nettoyage sessionStorage pour éviter restauration sur navigations
+           ultérieures non-back (ex : clic sur lien #projets). */
+        try {
+          sessionStorage.removeItem('homeScrollY');
+          sessionStorage.removeItem('homeGalleryExpanded');
+        } catch (e) {}
+      };
+
+      /* Double rAF pour laisser filtre + expand recalculer la mise en page
+         AVANT de scroller (1 frame ne suffit pas quand display:none repasse
+         à display:flex pour les cards dépliées). */
+      requestAnimationFrame(() => {
+        requestAnimationFrame(doScroll);
       });
     };
 
