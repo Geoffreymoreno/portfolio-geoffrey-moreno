@@ -28,7 +28,10 @@
       setTimeout(() => document.documentElement.classList.remove('is-restoring-scroll'), 800);
     }
   </script>
-  <style>html.is-restoring-scroll body { visibility: hidden; }</style>
+  <style>
+    html.is-restoring-scroll { scroll-behavior: auto !important; }
+    html.is-restoring-scroll body { visibility: hidden; }
+  </style>
   <script>
     /* ══ Hero intro — affiche les animations d'entrée uniquement si la
        dernière "play" remonte à plus de 24h. Sinon, ajoute .no-hero-intro

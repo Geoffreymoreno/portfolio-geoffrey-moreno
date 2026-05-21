@@ -78,13 +78,18 @@
 
       /* Double rAF pour laisser le filtre + l'expand recalculer la mise en
          page avant de scroller (1 frame ne suffit pas quand display:none
-         repasse à display:flex). Scroll 'instant' (vs 'smooth') pour
-         apparaître pile sur la card sans transition visible — combiné au
-         visibility:hidden posé en <head>, le retour depuis une page projet
-         est totalement seamless sur mobile. */
+         repasse à display:flex).
+         Scroll DIRECT via scrollTop (vs scrollIntoView) : bypasse totalement
+         le CSS scroll-behavior:smooth de style.css qui faisait foirer le
+         'behavior: instant' sur iOS Safari (bug connu : la propriété CSS
+         écrase l'option JS sur Safari). Avec scrollTop direct, c'est
+         garanti instantané sur tous les navigateurs. */
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          targetCard.scrollIntoView({ behavior: 'instant', block: 'center' });
+          const rect = targetCard.getBoundingClientRect();
+          const targetY = window.pageYOffset + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+          document.documentElement.scrollTop = targetY;
+          document.body.scrollTop = targetY; /* fallback Safari */
           document.documentElement.classList.remove('is-restoring-scroll');
         });
       });
