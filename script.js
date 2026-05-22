@@ -373,6 +373,20 @@ document.querySelector('.gallery-grid')?.addEventListener('click', (e) => {
     sessionStorage.setItem('homeScrollY', String(window.scrollY));
     sessionStorage.setItem('homeGalleryExpanded', galleryCollapsed ? '0' : '1');
   } catch (e) {}
+  /* Réécrit l'URL de l'entrée d'historique "home" en index.html#card-X AVANT
+     de naviguer vers le projet. Conséquence : la flèche RETOUR du navigateur
+     (Chrome/Safari) — qui revient sur CETTE entrée d'historique — recharge
+     index.html#card-X et déclenche EXACTEMENT le même chemin de restauration
+     que la flèche retour on-page (script inline index.html, branche
+     origHash '#card-' : scrollIntoView centré sous overlay paint-level, déjà
+     fiable). Les deux flèches deviennent identiques → retour garanti sur la
+     bannière du projet, qu'iOS recharge la page ou la sorte du bfcache.
+     replaceState ne déclenche ni navigation ni scroll : aucun saut visible. */
+  if (card.id) {
+    try {
+      history.replaceState(null, '', location.pathname + location.search + '#' + card.id);
+    } catch (e) {}
+  }
   window.location.href = card.dataset.href;
 });
 
