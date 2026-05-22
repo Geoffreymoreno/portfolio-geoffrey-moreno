@@ -76,19 +76,31 @@
       };
       document.addEventListener('DOMContentLoaded', function () {
         document.documentElement.style.scrollBehavior = 'auto';
+        /* On vise via getBoundingClientRect (et non scrollIntoView) : au-delà
+           de 1800px le contenu est sous un transform: scale (cf. style.css
+           .bigscreen-wrap), et scrollIntoView ignore ce scale → il viserait
+           des centaines de px trop loin. getBoundingClientRect, lui, renvoie
+           la position VISUELLE réelle (scale compris) → calcul fiable à
+           toutes les tailles d'écran. */
         if (isCardHash) {
           var card = document.getElementById('card-' + origHash.replace('#card-', ''));
           if (card) {
-            card.scrollIntoView({ block: 'center', behavior: 'instant' });
+            var cr = card.getBoundingClientRect();
+            window.scrollTo(0, Math.max(0,
+              window.scrollY + cr.top + cr.height / 2 - window.innerHeight / 2));
           } else {
             var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
             if (savedY > 0) window.scrollTo(0, savedY);
           }
         } else {
-          /* Ancre de section : saut instantané, section alignée en haut —
-             même position d'arrivée que le scroll natif, sans l'animation. */
+          /* Ancre de section : haut de section aligné sous le header (la
+             marge scroll-margin-top reproduit le décalage du scroll natif). */
           var section = document.getElementById(origHash.slice(1));
-          if (section) section.scrollIntoView({ block: 'start', behavior: 'instant' });
+          if (section) {
+            var sr = section.getBoundingClientRect();
+            var smt = parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+            window.scrollTo(0, Math.max(0, window.scrollY + sr.top - smt));
+          }
         }
         requestAnimationFrame(reveal);
       }, { once: true });
@@ -164,7 +176,7 @@
   <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20260522-rgpd">
+  <link rel="stylesheet" href="style.css?v=20260522-bigscreen">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du
@@ -2137,6 +2149,11 @@
 
     </section>
 
+    <!-- Conteneur du contenu post-hero — réduit proportionnellement à 87 %
+         au-delà de 1800px de large (cf. style.css → .bigscreen-wrap). La
+         hero, elle, n'est pas concernée. -->
+    <div class="bigscreen-wrap">
+
     <!-- ══ TICKER ══ -->
     <div class="ticker-section">
       <p class="ticker-label">Elles m'ont fait confiance</p>
@@ -2590,8 +2607,6 @@
 
     </section>
 
-  </main>
-
   <footer class="site-footer">
     <p class="site-footer__copy">© 2026 Geoffrey Moreno</p>
     <nav class="site-footer__links" aria-label="Liens légaux">
@@ -2600,6 +2615,9 @@
       <a href="politique-confidentialite.html">Politique de confidentialité</a>
     </nav>
   </footer>
+
+  </div><!-- /.bigscreen-wrap -->
+  </main>
 
   <script src="script.js?v=20260522-backnav"></script>
 
@@ -3972,6 +3990,38 @@
           btn.disabled = false;
         }
       });
+    })();
+  </script>
+
+  <script>
+    /* ══ GRAND ÉCRAN (>1800px) — finitions du scale −13 % de .bigscreen-wrap ══
+       transform: scale ne reflowe pas : le bloc occupe sa hauteur d'origine
+       bien qu'il n'en peigne que 87 %, et les marges body/scrollbar le
+       décalent de ~15px. On corrige :
+       1) marge négative = comble le vide vertical sous le contenu ;
+       2) translateX mesuré = recentrage horizontal au pixel près.
+       Sous 1800px : le script ne pose aucun style. */
+    (function () {
+      var w = document.querySelector('.bigscreen-wrap');
+      if (!w) return;
+      function fit() {
+        w.style.transform = 'scale(0.87)';
+        w.style.marginBottom = '';
+        if (!window.matchMedia('(min-width: 1800px)').matches) {
+          w.style.transform = '';
+          return;
+        }
+        var gap = w.offsetHeight - w.getBoundingClientRect().height;
+        if (gap > 0) w.style.marginBottom = (-gap) + 'px';
+        requestAnimationFrame(function () {
+          var r = w.getBoundingClientRect();
+          var vw = document.documentElement.clientWidth;
+          var shift = (vw - r.width) / 2 - r.left;
+          w.style.transform = 'translateX(' + shift + 'px) scale(0.87)';
+        });
+      }
+      window.addEventListener('load', function () { fit(); setTimeout(fit, 250); });
+      window.addEventListener('resize', fit);
     })();
   </script>
 

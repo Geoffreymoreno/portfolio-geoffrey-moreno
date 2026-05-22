@@ -6036,3 +6036,23 @@ body[data-page="minions-trolls"] .hms-drawer__signature { color: rgba(80,40,0,0.
 }
 .site-footer__dot { color: rgba(42, 31, 84, 0.35); }
 
+/* ══ GRAND ÉCRAN — réduction proportionnelle −13 % au-delà de 1800px ══
+   Tout le contenu SOUS la hero (.bigscreen-wrap : ticker marques, Mes
+   projets, galerie, parcours, contact, footer) est rendu à 87 % via un
+   transform: scale unique → réduction strictement uniforme, zéro
+   déformation des proportions internes. La hero n'est pas concernée.
+   Le recentrage horizontal au pixel et le comblement du vide vertical
+   laissé par le scale sont gérés par le script inline de index.html.
+   La restauration de scroll (#card-, ancres) vise via getBoundingClientRect
+   (fidèle au transform) — cf. script inline <head>.
+   Sous 1800px : aucune règle ne s'applique, rendu identique à avant. */
+@media (min-width: 1800px) {
+  .bigscreen-wrap {
+    transform: scale(0.87);
+    transform-origin: top center;
+  }
+  /* Empêche la marge négative compensatoire (script) de se "collapser"
+     avec celle de <main> — sinon la hauteur de page ne se réduit pas. */
+  main { padding-bottom: 0.02px; }
+}
+
