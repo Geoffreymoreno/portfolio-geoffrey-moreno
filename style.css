@@ -3104,7 +3104,14 @@ body.has-video-zoom { overflow: hidden; }
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
+  /* height = grand viewport (barre navigateur rétractée = viewport le plus
+     haut). Avec l'ancien `bottom:0`, iOS calait le bas du drawer sur le petit
+     viewport (barre Chrome visible) → quand la barre se rétracte, un trou
+     apparaissait en bas, laissant voir la page derrière. 100lvh garantit que
+     le drawer couvre TOUJOURS le viewport le plus grand, quel que soit l'état
+     de la barre. Fallback 100vh pour les rares navigateurs sans unité lvh. */
+  height: 100vh;
+  height: 100lvh;
   width: 100vw;
   background-image:
     radial-gradient(ellipse 85% 65% at 8% 8%,   rgba(175, 109, 255, 0.34),  transparent 60%),

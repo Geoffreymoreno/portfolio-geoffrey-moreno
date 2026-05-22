@@ -15,7 +15,15 @@
     if (_navEntry && _navEntry.type === 'reload' && location.hash) {
       history.replaceState(null, '', location.pathname + location.search);
     }
-    if (!location.hash) window.scrollTo(0, 0);
+    /* Retour navigateur (flèche Chrome en bas, ≠ flèche du site en haut à
+       gauche) depuis une page projet : navigation de type 'back_forward' +
+       position d'accueil sauvegardée (homeScrollY, posée au clic sur une
+       bannière dans script.js). Dans ce cas on NE force PAS le scroll en haut
+       — la restauration sur la bannière est gérée par le 2e script inline. */
+    var _backNavRestore = !location.hash && _navEntry
+      && _navEntry.type === 'back_forward'
+      && parseInt(sessionStorage.getItem('homeScrollY') || '0', 10) > 0;
+    if (!location.hash && !_backNavRestore) window.scrollTo(0, 0);
   </script>
   <script>
     /* Retour depuis page projet — masquage paint-level + scrollIntoView centré
@@ -72,6 +80,34 @@
         requestAnimationFrame(reveal);
       }, { once: true });
       setTimeout(reveal, 3000);
+    } else if (_backNavRestore) {
+      /* Retour navigateur (flèche Chrome) depuis une page projet → restaure le
+         scroll de l'accueil sur la bannière du projet. Même machinerie que le
+         retour via #card- (overlay paint-level → pas de flash) mais sans hash :
+         on restaure directement la position homeScrollY sauvegardée au clic.
+         gallery-start-expanded : la galerie démarre dépliée pour que la hauteur
+         de page corresponde à celle d'origine (homeScrollY a été mesuré galerie
+         dépliée si la bannière était dans la zone repliée). */
+      var backY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+      document.documentElement.classList.add('is-restoring-scroll');
+      document.documentElement.classList.add('gallery-start-expanded');
+      var revealedB = false;
+      var revealB = function () {
+        if (revealedB) return;
+        revealedB = true;
+        document.documentElement.classList.remove('is-restoring-scroll');
+        document.documentElement.style.scrollBehavior = '';
+        try {
+          sessionStorage.removeItem('homeScrollY');
+          sessionStorage.removeItem('homeGalleryExpanded');
+        } catch (e) {}
+      };
+      document.addEventListener('DOMContentLoaded', function () {
+        document.documentElement.style.scrollBehavior = 'auto';
+        window.scrollTo(0, backY);
+        requestAnimationFrame(revealB);
+      }, { once: true });
+      setTimeout(revealB, 3000);
     }
   </script>
   <style>
@@ -116,7 +152,7 @@
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260522-galfix">
+  <link rel="stylesheet" href="style.css?v=20260522-galfix2">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du

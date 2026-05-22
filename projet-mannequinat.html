@@ -10,7 +10,7 @@
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Poppins:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260522-galfix">
+  <link rel="stylesheet" href="style.css?v=20260522-galfix2">
   <link rel="stylesheet" href="projet.css">
   <style>
     /* ════════════════════════════════════════════════════
@@ -884,12 +884,10 @@
         padding: 0 !important;
         margin: 0 !important;
         text-align: center !important;
-        /* +5% cumul puis +9% = +14.45% sur la baseline 1-ligne-fit originale :
-           18.9/5.67vw/24.57 → 21.64/6.486vw/28.12.
-           Vérifié canvas @390 : 25.30px → texte 366px dans 375px hero usable.
-           Marge ~9px à 390vp ✓ ; tight à 360vp (~2px overflow) ;
-           overflow ~17px à 320vp (iPhone SE) — accepté. */
-        font-size: clamp(21.64px, 6.486vw, 28.12px) !important;
+        /* Réduit de 14 % sur portable : 21.64/6.486vw/28.12 ×0.86
+           → 18.61/5.578vw/24.18. Plus petit donc marge accrue, aucun
+           risque d'overflow (le titre tient déjà sur 1 ligne). */
+        font-size: clamp(18.61px, 5.578vw, 24.18px) !important;
         line-height: 1.15 !important;
         white-space: nowrap !important;
         overflow: visible !important;
