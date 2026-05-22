@@ -179,5 +179,42 @@
       handleHashScroll();
     }
     window.addEventListener('hashchange', handleHashScroll);
+
+    /* ─── RETOUR VIA LA FLÈCHE DU NAVIGATEUR (bfcache) ───
+       La flèche retour du navigateur (Chrome/Safari iOS, en bas de l'écran)
+       ne RECHARGE PAS la home : iOS la ressort du "back-forward cache" — une
+       photo gelée de la page gardée en mémoire. Lors d'une restauration
+       bfcache, AUCUN script de la page ne se ré-exécute : ni les <script>
+       inline du <head>, ni le corps de back-button.js. handleHashScroll et
+       les scripts inline de restauration ne tournent donc JAMAIS dans ce cas
+       → iOS repose la page en haut, rien ne corrige.
+
+       pageshow est le SEUL évènement déclenché sur une restauration bfcache
+       (avec event.persisted === true). Un listener attaché au 1er chargement
+       reste vivant dans la photo gelée et se redéclenche à la restauration.
+       → C'est le maillon manquant : ici on restaure le scroll sur la
+       bannière du projet quand on revient via la flèche du navigateur.
+
+       Sur un chargement normal (persisted === false) on ne fait rien : les
+       scripts inline du <head> s'en occupent déjà. */
+    window.addEventListener('pageshow', function (e) {
+      if (!e.persisted) return;
+      var y = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+      if (y <= 0) return;
+      var el = document.documentElement;
+      el.classList.add('is-restoring-scroll');           /* overlay pastel → 0 flash */
+      var prevBehavior = el.style.scrollBehavior;
+      el.style.scrollBehavior = 'auto';                  /* coupe le smooth-scroll */
+      window.scrollTo(0, y);
+      requestAnimationFrame(function () {
+        window.scrollTo(0, y);                           /* 2e passe : iOS peut repositionner après le 1er paint */
+        el.style.scrollBehavior = prevBehavior;
+        el.classList.remove('is-restoring-scroll');
+        try {
+          sessionStorage.removeItem('homeScrollY');
+          sessionStorage.removeItem('homeGalleryExpanded');
+        } catch (err) {}
+      });
+    });
   }
 })();
