@@ -15,15 +15,17 @@
     if (_navEntry && _navEntry.type === 'reload' && location.hash) {
       history.replaceState(null, '', location.pathname + location.search);
     }
-    /* Retour navigateur (flèche Chrome en bas, ≠ flèche du site en haut à
-       gauche) depuis une page projet : navigation de type 'back_forward' +
-       position d'accueil sauvegardée (homeScrollY, posée au clic sur une
-       bannière dans script.js). Dans ce cas on NE force PAS le scroll en haut
-       — la restauration sur la bannière est gérée par le 2e script inline. */
-    var _backNavRestore = !location.hash && _navEntry
-      && _navEntry.type === 'back_forward'
-      && parseInt(sessionStorage.getItem('homeScrollY') || '0', 10) > 0;
-    if (!location.hash && !_backNavRestore) window.scrollTo(0, 0);
+    /* Retour vers la home depuis une page projet : homeScrollY a été posé au
+       clic sur une bannière (script.js). S'il existe, on revient d'un projet
+       → on NE force PAS le scroll en haut, la restauration sur la bannière
+       est gérée par le 2e script inline.
+       On NE teste PLUS le type de navigation 'back_forward' : iOS Safari/
+       Chrome ne le rapporte pas de façon fiable (c'était la cause du bug).
+       À la place, les liens "Accueil"/logo effacent eux-mêmes homeScrollY au
+       clic (cf back-button.js) → la home s'ouvre bien sur la hero quand c'est
+       explicitement voulu, et restaure la bannière uniquement sur un retour. */
+    var _homeScrollY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+    if (!location.hash && _homeScrollY <= 0) window.scrollTo(0, 0);
   </script>
   <script>
     /* Retour depuis page projet — masquage paint-level + scrollIntoView centré
@@ -80,15 +82,17 @@
         requestAnimationFrame(reveal);
       }, { once: true });
       setTimeout(reveal, 3000);
-    } else if (_backNavRestore) {
-      /* Retour navigateur (flèche Chrome) depuis une page projet → restaure le
-         scroll de l'accueil sur la bannière du projet. Même machinerie que le
-         retour via #card- (overlay paint-level → pas de flash) mais sans hash :
-         on restaure directement la position homeScrollY sauvegardée au clic.
-         gallery-start-expanded : la galerie démarre dépliée pour que la hauteur
-         de page corresponde à celle d'origine (homeScrollY a été mesuré galerie
-         dépliée si la bannière était dans la zone repliée). */
-      var backY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+    } else if (_homeScrollY > 0 && !origHash) {
+      /* Retour vers la home depuis une page projet (flèche retour du
+         navigateur, ou tout retour sans hash) → restaure le scroll sur la
+         bannière du projet. Indépendant du type de navigation (iOS ne
+         rapporte pas 'back_forward' de façon fiable). Déclenché par la simple
+         présence de homeScrollY : posé au clic sur une bannière, effacé par
+         les liens "Accueil" → ne reste vrai que sur un vrai retour.
+         Même machinerie que le retour via #card- (overlay paint-level → pas
+         de flash). gallery-start-expanded : galerie dépliée pour que la
+         hauteur de page corresponde à celle d'origine. */
+      var backY = _homeScrollY;
       document.documentElement.classList.add('is-restoring-scroll');
       document.documentElement.classList.add('gallery-start-expanded');
       var revealedB = false;
@@ -3729,7 +3733,7 @@
   </script>
 
   <script src="header.js?v=20260519-contact-early"></script>
-  <script src="back-button.js?v=20260522-galfix"></script>
+  <script src="back-button.js?v=20260522-galfix3"></script>
 
   <!-- ══ TIMELINE EXPERIENCE — chemin SVG dynamique + glow au scroll ══ -->
   <script>

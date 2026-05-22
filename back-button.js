@@ -15,6 +15,27 @@
   const isProjetPage = filename.startsWith('projet-') && filename.endsWith('.html');
   const isHomePage   = filename === '' || filename === 'index.html' || filename === '/';
 
+  /* ─── Liens "Accueil"/logo vers la home SANS hash : on efface homeScrollY
+     au clic ─── Toutes pages. La home restaure le scroll sur une bannière dès
+     que homeScrollY existe (cf index.html script inline) — sans tester le
+     type de navigation, peu fiable sur iOS. Pour qu'un clic EXPLICITE sur
+     "Accueil"/logo ouvre quand même la home sur la hero (et non sur une
+     bannière), ces liens effacent homeScrollY avant de naviguer. Un retour
+     via la flèche du navigateur, lui, ne passe pas par un clic <a> → ne
+     l'efface pas → la bannière est bien restaurée. */
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    const href = (a.getAttribute('href') || '').trim();
+    /* home "nue", sans hash : index.html | / | ./ | . */
+    if (/^(index\.html|\.?\/?)$/.test(href)) {
+      try {
+        sessionStorage.removeItem('homeScrollY');
+        sessionStorage.removeItem('homeGalleryExpanded');
+      } catch (err) {}
+    }
+  }, true);
+
   /* ─── PROJET PAGE : injection de la flèche de retour ─── */
   if (isProjetPage) {
     /* slug = nom de fichier sans préfixe "projet-" et sans ".html"
