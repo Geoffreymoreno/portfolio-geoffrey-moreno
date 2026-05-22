@@ -43,21 +43,26 @@
        Latence = DOMContentLoaded (~600-1000ms mobile), incompressible sans
        prerender. Sur desktop ~200-400ms. */
     var origHash = location.hash;
-    if (origHash.startsWith('#card-')) {
+    var isCardHash = origHash.startsWith('#card-');
+    /* Ancres de section du header : #projets / #parcours / #me-contacter.
+       Cliquées depuis une page projet, la home s'ouvre sur l'ancre. SANS
+       traitement, le navigateur charge la home EN HAUT puis scrolle en SMOOTH
+       jusqu'à la section (scroll-behavior:smooth) → effet "remonte puis
+       redescend". On les traite comme #card- : hash retiré + saut INSTANTANÉ
+       sous l'overlay → la home apparaît directement sur la bonne section. */
+    var isSectionHash = origHash === '#projets' || origHash === '#parcours' || origHash === '#me-contacter';
+    if (isCardHash || isSectionHash) {
       /* Retire le hash de l'URL IMMÉDIATEMENT pour que le browser ne fasse
          pas son anchor-scroll natif. Notre JS fera le scroll au DOMContentLoaded. */
       history.replaceState(null, '', location.pathname + location.search);
       document.documentElement.classList.add('is-restoring-scroll');
-      /* Déplie TOUJOURS la galerie au retour via la flèche. Les 6 dernières
-         cartes (#10-15 : minions-trolls, emmaus, candyman-marryme,
-         netflix-stranger, collaborations-commerciales, mannequinat) sont dans
-         la zone repliée → display:none quand la galerie est repliée, et
-         scrollIntoView ne peut PAS atteindre un élément display:none (le retour
-         tombe alors en haut de la page). On ne dépend plus du flag sessionStorage
-         'homeGalleryExpanded' (fragile : perdu sur iOS Safari via bfcache ou
-         timing tactile). gallery-start-expanded → script.js l.65 démarre avec
-         galleryCollapsed=false → toutes les cartes visibles → scroll fiable. */
-      document.documentElement.classList.add('gallery-start-expanded');
+      /* Déplie la galerie UNIQUEMENT pour un retour #card-. Les 6 dernières
+         cartes (#10-15) sont dans la zone repliée → display:none, et
+         scrollIntoView ne peut PAS atteindre un élément display:none.
+         gallery-start-expanded → script.js l.65 démarre galleryCollapsed=false
+         → toutes les cartes visibles → scroll fiable. Inutile pour une ancre
+         de section (les sections sont toujours présentes). */
+      if (isCardHash) document.documentElement.classList.add('gallery-start-expanded');
       var revealed = false;
       var reveal = function () {
         if (revealed) return;
@@ -71,13 +76,19 @@
       };
       document.addEventListener('DOMContentLoaded', function () {
         document.documentElement.style.scrollBehavior = 'auto';
-        var slug = origHash.replace('#card-', '');
-        var card = document.getElementById('card-' + slug);
-        if (card) {
-          card.scrollIntoView({ block: 'center', behavior: 'instant' });
+        if (isCardHash) {
+          var card = document.getElementById('card-' + origHash.replace('#card-', ''));
+          if (card) {
+            card.scrollIntoView({ block: 'center', behavior: 'instant' });
+          } else {
+            var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
+            if (savedY > 0) window.scrollTo(0, savedY);
+          }
         } else {
-          var savedY = parseInt(sessionStorage.getItem('homeScrollY') || '0', 10);
-          if (savedY > 0) window.scrollTo(0, savedY);
+          /* Ancre de section : saut instantané, section alignée en haut —
+             même position d'arrivée que le scroll natif, sans l'animation. */
+          var section = document.getElementById(origHash.slice(1));
+          if (section) section.scrollIntoView({ block: 'start', behavior: 'instant' });
         }
         requestAnimationFrame(reveal);
       }, { once: true });
