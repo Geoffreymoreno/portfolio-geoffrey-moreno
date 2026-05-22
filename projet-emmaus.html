@@ -1124,6 +1124,22 @@
       .contenus-grid { grid-template-columns: 1fr; gap: 36px; }
       .contenu-card { max-width: 280px; margin: 0 auto; }
       .contenus-section { width: 92%; gap: 32px; }
+
+      /* Bouton son : en HAUT à droite (au lieu de bas-droite), vidéo non
+         agrandie. L'état .is-zoomed garde son placement dédié (top/right 14px
+         en !important). */
+      .contenu-card__frame:not(.is-zoomed) .contenu-card__sound {
+        top: 14px;
+        bottom: auto;
+      }
+
+      /* Barre de progression : retire le box-shadow (ombre sombre translucide
+         0 -2px 8px qui formait une "surcouche" visible au-dessus de la barre
+         dans la zone tactile de 22px). Aligne le rendu sur les autres pages
+         projet, dont la barre n'a aucun box-shadow. */
+      .contenu-card__progress {
+        box-shadow: none;
+      }
     }
   
     /* ── HARMONISATION HOVER BANNIÈRES ── */
