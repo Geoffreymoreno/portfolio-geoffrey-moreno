@@ -22,7 +22,7 @@
    ════════════════════════════════════════════════════════════════════ */
 
 /* ▼▼▼  SEUL RÉGLAGE À MODIFIER POUR (DÉS)ACTIVER LE CDN  ▼▼▼ */
-window.CDN_BASE = '';
+window.CDN_BASE = 'https://cdn.geoffrey-moreno.com';
 /* ▲▲▲                                                    ▲▲▲ */
 
 /* Résout un chemin de vidéo : renvoie l'URL CDN si CDN_BASE est défini,
