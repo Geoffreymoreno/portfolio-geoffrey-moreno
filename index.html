@@ -38,9 +38,16 @@
          pas son anchor-scroll natif. Notre JS fera le scroll au DOMContentLoaded. */
       history.replaceState(null, '', location.pathname + location.search);
       document.documentElement.classList.add('is-restoring-scroll');
-      if (sessionStorage.getItem('homeGalleryExpanded') === '1') {
-        document.documentElement.classList.add('gallery-start-expanded');
-      }
+      /* Déplie TOUJOURS la galerie au retour via la flèche. Les 6 dernières
+         cartes (#10-15 : minions-trolls, emmaus, candyman-marryme,
+         netflix-stranger, collaborations-commerciales, mannequinat) sont dans
+         la zone repliée → display:none quand la galerie est repliée, et
+         scrollIntoView ne peut PAS atteindre un élément display:none (le retour
+         tombe alors en haut de la page). On ne dépend plus du flag sessionStorage
+         'homeGalleryExpanded' (fragile : perdu sur iOS Safari via bfcache ou
+         timing tactile). gallery-start-expanded → script.js l.65 démarre avec
+         galleryCollapsed=false → toutes les cartes visibles → scroll fiable. */
+      document.documentElement.classList.add('gallery-start-expanded');
       var revealed = false;
       var reveal = function () {
         if (revealed) return;
