@@ -1130,6 +1130,26 @@
       .contenus-grid > .contenu-card:nth-child(3) { grid-column: auto; justify-self: stretch; width: auto; }
       .contenu-card { max-width: 227px; margin: 0 auto; }
       .contenus-section { width: 92%; gap: 32px; }
+
+      /* Bouton son : réduit de 10 %, UNIQUEMENT quand la vidéo n'est PAS
+         agrandie (le bouton est déjà en haut à droite par défaut sur cette
+         page). L'état .is-zoomed garde sa taille pleine. */
+      .contenu-card__frame:not(.is-zoomed) .contenu-card__sound {
+        width: 32.4px;   /* 36 × 0.90 → −10 % */
+        height: 32.4px;
+      }
+      .contenu-card__frame:not(.is-zoomed) .contenu-card__sound svg {
+        width: 16.2px;   /* 18 × 0.90 → −10 % */
+        height: 16.2px;
+      }
+
+      /* Bouton play : rétréci de 12 % (transform scale → proportionnel, le
+         triangle ::before suit automatiquement). Hover override pour éviter
+         un saut de taille. */
+      .contenu-card__play,
+      .contenu-card__play:hover {
+        transform: translate(-50%, -50%) scale(0.88);
+      }
     }
 
     /* Header : pill clair + texte noir pour contraste max sur fond bleu marine (override local) */

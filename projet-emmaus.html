@@ -1125,12 +1125,26 @@
       .contenu-card { max-width: 280px; margin: 0 auto; }
       .contenus-section { width: 92%; gap: 32px; }
 
-      /* Bouton son : en HAUT à droite (au lieu de bas-droite), vidéo non
-         agrandie. L'état .is-zoomed garde son placement dédié (top/right 14px
-         en !important). */
+      /* Bouton son : en HAUT à droite (au lieu de bas-droite) + réduit de
+         10 %, vidéo non agrandie. L'état .is-zoomed garde son placement et
+         sa taille pleine via sa règle dédiée en !important. */
       .contenu-card__frame:not(.is-zoomed) .contenu-card__sound {
         top: 14px;
         bottom: auto;
+        width: 32.4px;   /* 36 × 0.90 → −10 % */
+        height: 32.4px;
+      }
+      .contenu-card__frame:not(.is-zoomed) .contenu-card__sound svg {
+        width: 16.2px;   /* 18 × 0.90 → −10 % */
+        height: 16.2px;
+      }
+
+      /* Bouton play : rétréci de 12 % (transform scale → proportionnel, le
+         triangle ::before suit automatiquement). Hover override pour éviter
+         un saut de taille. */
+      .contenu-card__play,
+      .contenu-card__play:hover {
+        transform: translate(-50%, -50%) scale(0.88);
       }
 
       /* Barre de progression : retire le box-shadow (ombre sombre translucide
