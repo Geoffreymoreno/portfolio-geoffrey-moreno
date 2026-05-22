@@ -150,13 +150,10 @@
       } catch (e) { console.log('[HERO-INTRO] localStorage error:', e); }
     })();
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260522-galfix2">
+  <link rel="stylesheet" href="style.css?v=20260522-rgpd">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du
@@ -2556,6 +2553,15 @@
                 <label for="mc-f-message">Votre message</label>
                 <textarea id="mc-f-message" name="message" rows="3" required placeholder="Quelques mots sur votre projet ou votre besoin"></textarea>
               </div>
+              <!-- Consentement RGPD : case obligatoire (required) → le
+                   formulaire ne peut être envoyé sans accord explicite.
+                   name="consentement" → la valeur figure dans le mail reçu
+                   (trace du consentement). -->
+              <div class="mc-consent">
+                <input type="checkbox" id="mc-f-consent" name="consentement"
+                       value="Oui — politique de confidentialité acceptée" required>
+                <label for="mc-f-consent">J'accepte que mes données (nom, email, message) soient utilisées par Geoffrey Moreno dans le seul but de répondre à ma demande. Voir la <a href="politique-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.</label>
+              </div>
               <button type="submit" class="mc-submit" id="mc-submit-btn">
                 <span class="mc-submit-label">Envoyer mon message</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -2574,6 +2580,15 @@
     </section>
 
   </main>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">© 2026 Geoffrey Moreno</p>
+    <nav class="site-footer__links" aria-label="Liens légaux">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <span class="site-footer__dot" aria-hidden="true">·</span>
+      <a href="politique-confidentialite.html">Politique de confidentialité</a>
+    </nav>
+  </footer>
 
   <script src="script.js?v=20260522-backnav"></script>
 
@@ -2754,7 +2769,9 @@
     }
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+    /* Décodeur Draco hébergé EN LOCAL (RGPD). Avant : chargé depuis
+       www.gstatic.com (Google) → transmettait l'IP du visiteur à Google. */
+    dracoLoader.setDecoderPath('assets/draco/');
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
 
