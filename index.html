@@ -1823,17 +1823,27 @@
        les affiche ENSEMBLE avec un fondu doux. Garantit qu'aucun élément
        (canvas, capsule, +300…) ne peut être visible avant la synchro,
        donc plus de carré blanc. La classe .hero-ready est posée par le
-       JS sur <html> juste après .is-ready sur .podium-stage. */
-    html.no-hero-intro .hero .va2-stage,
-    html.no-hero-intro .hero .podium-stage {
-      animation: none !important;
-      opacity: 0;
-      --podium-tx: 0px;
-      transition: opacity 0.45s ease;
-    }
-    html.no-hero-intro.hero-ready .hero .va2-stage,
-    html.no-hero-intro.hero-ready .hero .podium-stage {
-      opacity: 1;
+       JS sur <html> juste après .is-ready sur .podium-stage.
+
+       DESKTOP UNIQUEMENT : ce mécanisme sert à masquer le carré blanc du
+       canvas WebGL le temps que la 3D charge. Sur mobile, .podium-stage est
+       display:none (carousel HTML à la place) — donc aucun risque de carré
+       blanc, et gater .va2-stage derrière .hero-ready (posée à la FIN du
+       chargement du modèle 3D, ~2s) faisait apparaître la section +300 en
+       retard de ~2s par rapport au reste de la page. Hors media query,
+       sur mobile la section +300 s'affiche immédiatement avec le portable. */
+    @media (min-width: 769px) {
+      html.no-hero-intro .hero .va2-stage,
+      html.no-hero-intro .hero .podium-stage {
+        animation: none !important;
+        opacity: 0;
+        --podium-tx: 0px;
+        transition: opacity 0.45s ease;
+      }
+      html.no-hero-intro.hero-ready .hero .va2-stage,
+      html.no-hero-intro.hero-ready .hero .podium-stage {
+        opacity: 1;
+      }
     }
 
     /* Canvas 3D — masqué jusqu'à la 1ʳᵉ frame WebGL. Belt-and-suspenders
