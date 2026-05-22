@@ -1786,6 +1786,21 @@
     /* Masquer les blobs colorés à l'intérieur des cartes */
     .contenu-card__blob { display: none !important; }
 
+    /* Bouton son : en HAUT à droite (au lieu de bas-droite) + réduit de 12 %,
+       UNIQUEMENT quand la vidéo n'est PAS agrandie. L'état .is-zoomed garde
+       son propre placement (top/right 14px, taille pleine) via sa règle
+       dédiée en !important. */
+    .contenu-card__frame:not(.is-zoomed) .contenu-card__sound {
+      top: 14px;
+      bottom: auto;
+      width: 31.68px;   /* 36 × 0.88 → −12 % */
+      height: 31.68px;
+    }
+    .contenu-card__frame:not(.is-zoomed) .contenu-card__sound svg {
+      width: 15.84px;   /* 18 × 0.88 → −12 % */
+      height: 15.84px;
+    }
+
     /* ── VIGNETTE STATS : variante Instagram Reels (fond blanc) ── */
     .contenu-card__metric--reels-white {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 239, 239, 0.96) 100%) !important;
