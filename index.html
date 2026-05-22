@@ -2103,9 +2103,9 @@
 
             <div class="hmc-phone-shell">
               <div class="hmc-video-wrap" id="hmcWrap">
-                <video class="hmc-video is-active" data-slot="0" src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" muted loop playsinline preload="auto"></video>
-                <video class="hmc-video" data-slot="1" src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" muted loop playsinline preload="auto"></video>
-                <video class="hmc-video" data-slot="2" src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video" data-slot="1" data-src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" muted loop playsinline preload="auto"></video>
                 <!-- Overlays anti-flash-noir iOS Safari : couvrent la vidéo jusqu'à ce
                      que la 1re frame soit réellement en lecture (event 'playing'). -->
                 <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation.webp" alt="" aria-hidden="true">
@@ -2623,9 +2623,9 @@
 
   <!-- ══ PODIUM : vidéos cachées (lazy-load — seule la vidéo centrale est préchargée) ══ -->
   <div class="video-pool">
-    <video id="video-minions"     src="assets/hero-section/minions.mp4"     muted loop playsinline preload="auto" poster="assets/hero-section/screen-minions.webp"></video>
-    <video id="video-playstation" src="assets/hero-section/playstation.mp4" muted loop playsinline preload="auto" poster="assets/hero-section/screen-playstation.webp"></video>
-    <video id="video-mercredi"    src="assets/hero-section/mercredi.mp4"    muted loop playsinline preload="auto" poster="assets/hero-section/screen-mercredi.webp"></video>
+    <video crossorigin="anonymous" id="video-minions"     data-src="assets/hero-section/minions.mp4"     muted loop playsinline preload="auto" poster="assets/hero-section/screen-minions.webp"></video>
+    <video crossorigin="anonymous" id="video-playstation" data-src="assets/hero-section/playstation.mp4" muted loop playsinline preload="auto" poster="assets/hero-section/screen-playstation.webp"></video>
+    <video crossorigin="anonymous" id="video-mercredi"    data-src="assets/hero-section/mercredi.mp4"    muted loop playsinline preload="auto" poster="assets/hero-section/screen-mercredi.webp"></video>
   </div>
 
   <script type="importmap">
@@ -4041,5 +4041,6 @@
     })();
   </script>
 
+  <script src="cdn-video.js?v=20260522-cdn1"></script>
 </body>
 </html>
