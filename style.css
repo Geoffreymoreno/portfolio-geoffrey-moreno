@@ -2070,6 +2070,14 @@ body.header-light .header-burger__bar { background: #1a1230; }
   padding: 0 2px;
 }
 
+/* Portable : le chiffre du compteur ("6" dans "6 autres projets") agrandi
+   de 15 % par rapport à la taille héritée du bouton (1.15em = +15 %). */
+@media (max-width: 768px) {
+  .gallery-expand-btn__num {
+    font-size: 1.15em;
+  }
+}
+
 .gallery-expand-btn__num::after {
   content: '';
   position: absolute;
