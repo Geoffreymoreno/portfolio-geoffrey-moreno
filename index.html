@@ -3030,6 +3030,13 @@
     // ─── État global des contrôles ───
     // paused:true au boot → PlayStation figée sur poster, attend un clic explicite.
     const userControls = { muted: true, paused: true, hoveringCenter: false };
+    /* Grand écran (>1800px) : le glyph play/pause du téléphone central ne se
+       montre QU'À l'arrêt. En lecture, il reste visible 2s après le démarrage
+       puis disparaît, et ne réapparaît PAS au survol — il ne revient qu'à la
+       mise en pause. matchMedia est "live" → bascule seule au redimensionnement.
+       Sous 1800px : comportement d'origine (visible au survol). */
+    const bigScreenGlyphMQ = window.matchMedia('(min-width: 1800px)');
+    let glyphPlayStartedAt = 0;
     const phoneControlsEl = document.getElementById('phoneControls');
     const phoneCtrlSound  = document.getElementById('phoneCtrlSound');
     const podiumStageEl   = document.querySelector('.podium-stage');
@@ -3081,6 +3088,7 @@
       if (userControls.paused) {
         c.videoEl.pause();
       } else {
+        glyphPlayStartedAt = performance.now(); /* démarre le compte des 2s (grand écran) */
         userControls.muted = false;
         applyAudioStateToCenter();
         const pl = c.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
@@ -3353,10 +3361,18 @@
         // ─── Glyph play/pause dans la texture (centre uniquement) ───
         const isCenter = (p.slotIndex === 1) && !p.anim;
         if (isCenter) {
-          // mode = pause si l'user a mis pause OU vidéo en pause, sinon play (visible au hover)
+          // mode = pause si l'user a mis pause OU vidéo en pause, sinon play
           p.glyphMode = userControls.paused ? 'play' : 'pause';
-          // visibilité : toujours visible si pause, sinon seulement au hover du téléphone
-          const visible = userControls.paused || userControls.hoveringCenter;
+          let visible;
+          if (bigScreenGlyphMQ.matches) {
+            // >1800px : visible à l'arrêt ; en lecture, encore 2s après le
+            // démarrage puis caché — aucun reveal au survol.
+            visible = userControls.paused ||
+                      (performance.now() - glyphPlayStartedAt < 2000);
+          } else {
+            // ≤1800px : visible à l'arrêt, ou au survol du téléphone central.
+            visible = userControls.paused || userControls.hoveringCenter;
+          }
           p.targetGlyphOpacity = visible ? 0.95 : 0;
         } else {
           p.targetGlyphOpacity = 0;
