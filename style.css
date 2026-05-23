@@ -2455,7 +2455,7 @@ body.header-light .header-burger__bar { background: #1a1230; }
   .va2-number { font-size: clamp(54px, 15.5vw, 76px); }
   .va2-line   { font-size: clamp(16px, 4.6vw, 20px); }
   .va2-pill   { font-size: clamp(10px, 2.8vw, 13px); padding: 3px 12px; }
-  .hmc-video-wrap { width: min(146px, 42vw); }
+  .hmc-video-wrap { width: min(146px, 42vw); height: calc(min(146px, 42vw) * 19.5 / 9); }  /* Fallback hauteur ≤480px : voir explication règle principale */
   .va2-stage .logo-cloud { transform: translate(-50%, -50%) scale(0.5); }
 }
 
@@ -3449,6 +3449,7 @@ body.has-video-zoom { overflow: hidden; }
 
 .hmc-video-wrap {
   width: min(154px, 44vw);
+  height: calc(min(154px, 44vw) * 19.5 / 9);  /* Fallback hauteur explicite : si aspect-ratio CSS n'est pas supporté (vieux WKWebView des in-app browsers Google/LinkedIn), le wrapper a quand même une hauteur dès le 1er rendu → zéro CLS au chargement de la vidéo */
   aspect-ratio: 9 / 19.5;
   border-radius: 28px;
   overflow: hidden;

@@ -184,23 +184,36 @@
        pour empêcher les éléments de bouger pendant le scroll dans les in-app
        browsers (Google app, LinkedIn, Instagram…) qui font varier dynamiquement
        l'unité CSS "vh" selon la rétraction de leur barre URL.
-       Technique standard documentée depuis 2017 (CSS-Tricks). On lit
-       window.innerHeight au chargement (et uniquement sur resize réel), on
-       le stocke dans --vh. Le CSS utilise calc(var(--vh) * 100) au lieu de
-       100vh → valeur figée, plus jamais changée pendant le scroll. ══ */
+
+       RAFFINEMENT CRITIQUE : on N'écoute PAS resize aveuglément. Le navigateur
+       in-app de Google FIRE un event "resize" à chaque fois que sa barre URL
+       se rétracte/réapparaît au scroll → si on setVH() à ce moment-là, on
+       INVALIDE le verrou et le bug réapparaît (c'était exactement la cause
+       des 480px de décalage observés). Solution : ne ré-évaluer --vh que
+       quand la LARGEUR change (= vraie rotation/redimensionnement), jamais
+       sur un simple changement de hauteur (= URL bar show/hide). ══ */
     (function () {
+      var lockedWidth = window.innerWidth;
       var setVH = function () {
         document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
       };
       setVH();
-      window.addEventListener('resize', setVH, { passive: true });
-      window.addEventListener('orientationchange', setVH, { passive: true });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth !== lockedWidth) {
+          lockedWidth = window.innerWidth;
+          setVH();
+        }
+      }, { passive: true });
+      window.addEventListener('orientationchange', function () {
+        lockedWidth = window.innerWidth;
+        setVH();
+      }, { passive: true });
     })();
   </script>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20260523-jsvh">
+  <link rel="stylesheet" href="style.css?v=20260523-cls">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du
@@ -2102,7 +2115,7 @@
               <div class="hmc-info-slot is-active" data-slot="0">
                 <span class="hmc-badge">
                   <span class="hmc-badge__icon" aria-hidden="true">
-                    <img class="hmc-badge__logo hmc-badge__logo--ps" src="assets/scrolling-logos/playstation-logo-2.png" alt="">
+                    <img class="hmc-badge__logo hmc-badge__logo--ps" src="assets/scrolling-logos/playstation-logo-2.png" width="13" height="13" alt="">
                   </span>
                   Top créa du compte en 2022
                 </span>
@@ -2110,7 +2123,7 @@
               <div class="hmc-info-slot" data-slot="1">
                 <span class="hmc-badge hmc-badge--universal">
                   <span class="hmc-badge__icon" aria-hidden="true">
-                    <img class="hmc-badge__logo" src="assets/scrolling-logos/universal-logo.webp" alt="">
+                    <img class="hmc-badge__logo" src="assets/scrolling-logos/universal-logo.webp" width="13" height="13" alt="">
                   </span>
                   Top créa du compte en 2022
                 </span>
@@ -2118,7 +2131,7 @@
               <div class="hmc-info-slot" data-slot="2">
                 <span class="hmc-badge hmc-badge--netflix">
                   <span class="hmc-badge__icon" aria-hidden="true">
-                    <img class="hmc-badge__logo" src="assets/hero-section/logo-netflix-blanc.png" alt="">
+                    <img class="hmc-badge__logo" src="assets/hero-section/logo-netflix-blanc.png" width="13" height="13" alt="">
                   </span>
                   Top créa du compte en 2023
                 </span>
@@ -2127,14 +2140,14 @@
 
             <div class="hmc-phone-shell">
               <div class="hmc-video-wrap" id="hmcWrap">
-                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" muted loop playsinline preload="auto"></video>
-                <video class="hmc-video" data-slot="1" data-src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" muted loop playsinline preload="auto"></video>
-                <video class="hmc-video" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video" data-slot="1" data-src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <!-- Overlays anti-flash-noir iOS Safari : couvrent la vidéo jusqu'à ce
                      que la 1re frame soit réellement en lecture (event 'playing'). -->
-                <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation.webp" alt="" aria-hidden="true">
-                <img class="hmc-video-cover" data-slot="1" src="assets/hero-section/screen-minions.webp" alt="" aria-hidden="true">
-                <img class="hmc-video-cover" data-slot="2" src="assets/hero-section/screen-mercredi.webp" alt="" aria-hidden="true">
+                <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation.webp" width="154" height="334" alt="" aria-hidden="true">
+                <img class="hmc-video-cover" data-slot="1" src="assets/hero-section/screen-minions.webp" width="154" height="334" alt="" aria-hidden="true">
+                <img class="hmc-video-cover" data-slot="2" src="assets/hero-section/screen-mercredi.webp" width="154" height="334" alt="" aria-hidden="true">
                 <button class="hmc-playpause is-paused" type="button" aria-label="Lecture / Pause" id="hmcPlayPause">
                   <svg class="icon-play"  viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg>
                   <svg class="icon-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
