@@ -1918,20 +1918,6 @@
        que WebGL ne prenne le relais. */
     #podium-canvas { opacity: 0; transition: opacity 0.25s ease; }
     #podium-canvas.is-canvas-ready { opacity: 1; }
-
-    /* PERF — saute le rendu des 4 cartes "Mon parcours" hors-écran.
-       Le backdrop-filter blur(22px) de chaque .tl-card est lourd à repeindre
-       au scroll ; content-visibility: auto laisse le navigateur sauter ces
-       cartes quand elles sont hors-viewport.
-       contain-intrinsic-size: auto 400px → après le 1er rendu, le navigateur
-       mémorise la vraie hauteur de chaque carte (mot-clé "auto"), donc aucun
-       saut de scroll possible aux passages suivants. 400px = moyenne mesurée
-       des 4 cartes (346 / 395 / 336 / 359), utilisée uniquement comme repli
-       avant le 1er rendu. */
-    .tl-stage .tl-row {
-      content-visibility: auto;
-      contain-intrinsic-size: auto 400px;
-    }
   </style>
 </head>
 <body>
