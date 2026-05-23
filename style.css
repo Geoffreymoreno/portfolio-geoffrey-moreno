@@ -2536,10 +2536,15 @@ body.header-light .header-burger__bar { background: #1a1230; }
 .tl-timeline-path path.tl-glow {
   stroke-width: 5.1;
 }
-.tl-timeline-path path.tl-glow[data-section="0"] { stroke: rgba(160,130,230,0.95); filter: drop-shadow(0 0 10px rgba(160,130,230,0.55)) drop-shadow(0 0 20px rgba(160,130,230,0.28)); }
-.tl-timeline-path path.tl-glow[data-section="1"] { stroke: rgba(80,210,165,0.95);  filter: drop-shadow(0 0 10px rgba(80,210,165,0.55))  drop-shadow(0 0 20px rgba(80,210,165,0.28)); }
-.tl-timeline-path path.tl-glow[data-section="2"] { stroke: rgba(95,180,228,0.95);  filter: drop-shadow(0 0 10px rgba(95,180,228,0.55))  drop-shadow(0 0 20px rgba(95,180,228,0.28)); }
-.tl-timeline-path path.tl-glow[data-section="3"] { stroke: rgba(220,185,120,0.98); filter: drop-shadow(0 0 10px rgba(220,185,120,0.60)) drop-shadow(0 0 20px rgba(220,185,120,0.30)); }
+/* PERF — Option B : drop-shadow unique 8px (au lieu de 10+20 empilés).
+   Le double drop-shadow empilé créait 2 passes de gaussian blur GPU à chaque
+   scroll-tick (strokeDashoffset met à jour le tracé glow en continu) → cause
+   prouvée des frames >50ms uniques au parcours. Halo légèrement plus serré
+   mais identité "glow timeline coloré" préservée. */
+.tl-timeline-path path.tl-glow[data-section="0"] { stroke: rgba(160,130,230,0.95); filter: drop-shadow(0 0 8px rgba(160,130,230,0.70)); }
+.tl-timeline-path path.tl-glow[data-section="1"] { stroke: rgba(80,210,165,0.95);  filter: drop-shadow(0 0 8px rgba(80,210,165,0.70)); }
+.tl-timeline-path path.tl-glow[data-section="2"] { stroke: rgba(95,180,228,0.95);  filter: drop-shadow(0 0 8px rgba(95,180,228,0.70)); }
+.tl-timeline-path path.tl-glow[data-section="3"] { stroke: rgba(220,185,120,0.98); filter: drop-shadow(0 0 8px rgba(220,185,120,0.75)); }
 
 /* ─── Carte ─── */
 .tl-card {
