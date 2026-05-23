@@ -139,6 +139,10 @@ body {
     radial-gradient(ellipse 70% 60% at 92% 92%,  rgba(120, 190, 255, 0.364), transparent 62%),
     linear-gradient(180deg, #dfd0e6 0%, #e3ccd2 100%);
   background-attachment: fixed;
+  /* Mobile : désactive le background-attachment:fixed (non supporté correctement
+     par iOS Safari / in-app browsers LinkedIn/Instagram/TikTok → glitch visuel
+     pendant le scroll où les éléments semblent "bouger" contre le fond cassé).
+     Sur desktop la règle au-dessus reste active. */
   color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -150,6 +154,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Mobile (≤768px) : override du background-attachment:fixed.
+   iOS Safari et les in-app browsers (LinkedIn, Instagram, TikTok) ne supportent
+   pas correctement "fixed" → glitch visuel pendant le scroll, surtout quand la
+   barre URL se rétracte. Les éléments comme "Elles m'ont fait confiance" /
+   "+40 marques accompagnées" semblent bouger contre le fond cassé.
+   Solution : force le fond à scroller normalement sur mobile. Desktop intact. */
+@media (max-width: 768px) {
+  body { background-attachment: scroll !important; }
 }
 
 main {
