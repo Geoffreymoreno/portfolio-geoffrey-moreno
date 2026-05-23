@@ -1073,7 +1073,7 @@
          scale 1.251 → 1.314 (1.251 × 1.05 = +5%).
          Les .logo-particle étant enfants de .va2-stage, ils suivent l'agrandissement. */
       .hero .stats-bloc.va2-stage {
-        transform: translateY(5px) scale(1.124) !important; /* 1.183 → 1.124 (-5% supplémentaire) : top bloc allégé visuellement sur iPhone SE */
+        transform: translateY(12px) scale(1.090) !important; /* -3% proportionnel + shift +7px vers le bas pour éloigner ADS du burger top-right */
         transform-origin: top center !important;
       }
       /* Phone + badge "Top créa" scalés ensemble (le badge est positionné absolute
@@ -1735,7 +1735,7 @@
          pour réduire le gap "POUR LES MARQUES" → phone (sans modifier les
          positions relatives internes du bloc — tout translate ensemble). */
       .hero .stats-bloc.va2-stage {
-        transform: translateY(30px) scale(1.236) !important; /* 1.301 → 1.236 (-5% supplémentaire) : top bloc encore réduit pour alléger visuellement la zone +300/capsules/logos */
+        transform: translateY(40px) scale(1.199) !important; /* -3% proportionnel + shift +10px vers le bas : ADS ne frôle plus le burger (gap ~7px), gap stats→phone reste ~35px */
         transform-origin: top center !important;
       }
 
