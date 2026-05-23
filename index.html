@@ -160,14 +160,21 @@
         var WINDOW_MS = 24 * 60 * 60 * 1000;
         var last = parseInt(localStorage.getItem(KEY), 10);
         var now = Date.now();
-        if (last && (now - last) < WINDOW_MS) {
+        /* Mobile (≤768px) : on FORCE le skip systématiquement, peu importe
+           le localStorage. Raison : les in-app browsers (LinkedIn, Instagram,
+           TikTok) ont chacun leur localStorage isolé → l'animation rejouait
+           à chaque clic depuis ces apps, provoquant l'impression d'éléments
+           qui bougent à l'ouverture. Sur mobile l'animation d'entrée est
+           sacrifiée au profit d'une apparition stable et instantanée. */
+        var isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile || (last && (now - last) < WINDOW_MS)) {
           document.documentElement.classList.add('no-hero-intro');
-          console.log('%c[HERO-INTRO] SKIP animations (visite récente)', 'color:#5d3f9b;font-weight:bold');
+          console.log('%c[HERO-INTRO] SKIP animations (' + (isMobile ? 'mobile' : 'visite récente') + ')', 'color:#5d3f9b;font-weight:bold');
           console.log('  → classe sur <html> :', document.documentElement.className || '(vide)');
-          console.log('  → dernière visite il y a', Math.round((now-last)/1000), 'secondes');
+          if (!isMobile && last) console.log('  → dernière visite il y a', Math.round((now-last)/1000), 'secondes');
         } else {
           localStorage.setItem(KEY, String(now));
-          console.log('%c[HERO-INTRO] PLAY animations (1ère visite ou > 24h)', 'color:#e09020;font-weight:bold');
+          console.log('%c[HERO-INTRO] PLAY animations (1ère visite desktop ou > 24h)', 'color:#e09020;font-weight:bold');
           console.log('  → classe sur <html> :', document.documentElement.className || '(vide)');
         }
       } catch (e) { console.log('[HERO-INTRO] localStorage error:', e); }
@@ -176,7 +183,7 @@
   <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20260523-attach">
+  <link rel="stylesheet" href="style.css?v=20260523-introskip">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du
