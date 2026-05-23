@@ -1918,6 +1918,20 @@
        que WebGL ne prenne le relais. */
     #podium-canvas { opacity: 0; transition: opacity 0.25s ease; }
     #podium-canvas.is-canvas-ready { opacity: 1; }
+
+    /* PERF — saute le rendu des 4 cartes "Mon parcours" hors-écran.
+       Le backdrop-filter blur(22px) de chaque .tl-card est lourd à repeindre
+       au scroll ; content-visibility: auto laisse le navigateur sauter ces
+       cartes quand elles sont hors-viewport.
+       contain-intrinsic-size: auto 400px → après le 1er rendu, le navigateur
+       mémorise la vraie hauteur de chaque carte (mot-clé "auto"), donc aucun
+       saut de scroll possible aux passages suivants. 400px = moyenne mesurée
+       des 4 cartes (346 / 395 / 336 / 359), utilisée uniquement comme repli
+       avant le 1er rendu. */
+    .tl-stage .tl-row {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 400px;
+    }
   </style>
 </head>
 <body>
@@ -3922,10 +3936,16 @@
       function updateScrollProgress() {
         const stage = document.querySelector('.tl-stage');
         if (!stage) return;
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        // PERF — bail si la timeline est entièrement hors-écran (avec buffer
+        // de 200px pour que le glow se mette en place juste avant l'arrivée).
+        // Économise ~13 opérations DOM par scroll tick (4 getBoundingClientRect
+        // forcés + 8 querySelectorAll SVG) quand l'user est ailleurs sur la page.
+        const sr = stage.getBoundingClientRect();
+        if (sr.bottom < -200 || sr.top > vh + 200) return;
         const svg = stage.querySelector('.tl-timeline-path');
         if (!svg) return;
         const rows = Array.from(stage.querySelectorAll('.tl-row'));
-        const vh = window.innerHeight || document.documentElement.clientHeight;
         const startVH = 0.70;
         const endVH   = 0.25;
 
