@@ -4075,5 +4075,34 @@
   </script>
 
   <script src="cdn-video.js?v=20260522-cdn2"></script>
+
+  <!-- ══ PERF — Pause des animations CSS hors-écran ══
+       Le ticker (logos défilants) et les ~25 logos flottants du hero ont des
+       animations CSS infinies qui tournent en permanence et chargent le GPU
+       (compositor) pendant tout le scroll du reste de la page. Quand chaque
+       zone sort du viewport, on fige son animation via animation-play-state.
+       Reprise instantanée (CSS preserve l'instant figé) au retour. -->
+  <script>
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      function pauseWhenOffscreen(stageSelector, targetSelector) {
+        var stage = document.querySelector(stageSelector);
+        if (!stage) return;
+        var targets = stage.querySelectorAll(targetSelector);
+        if (!targets.length) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var state = entry.isIntersecting ? 'running' : 'paused';
+            for (var i = 0; i < targets.length; i++) {
+              targets[i].style.animationPlayState = state;
+            }
+          });
+        }, { threshold: 0, rootMargin: '200px 0px 200px 0px' });
+        io.observe(stage);
+      }
+      pauseWhenOffscreen('.ticker-section', '.ticker-track');
+      pauseWhenOffscreen('.va2-stage', '.logo-particle');
+    })();
+  </script>
 </body>
 </html>
