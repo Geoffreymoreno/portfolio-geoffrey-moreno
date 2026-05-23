@@ -3386,10 +3386,43 @@
 
       renderer.render(scene, camera);
       if (!_canvasReady) { _canvasReady = true; canvas.classList.add('is-canvas-ready'); }
-      requestAnimationFrame(tick);
+      if (_rafRunning) requestAnimationFrame(tick);
     }
     let _canvasReady = false;
+    let _rafRunning = true;
     tick();
+
+    /* Pause de la boucle WebGL + des 3 vidéos textures quand le hero sort du
+       viewport. Reprise instantanée dès qu'il redevient visible. Aucun impact
+       visuel (loop muet) ; économise GPU/CPU pendant le scroll du reste de la
+       page sur tous formats (desktop + mobile + tablette).
+       Sur retour : on ne reprend que la vidéo du téléphone CENTER (les LEFT/
+       RIGHT restent en pause, conforme à initVideoStates), et uniquement si
+       l'utilisateur n'a pas mis pause manuellement (userControls.paused). */
+    (function () {
+      const stage = document.querySelector('.podium-stage');
+      if (!stage || !('IntersectionObserver' in window)) return;
+      const texVids = [
+        document.getElementById('video-minions'),
+        document.getElementById('video-playstation'),
+        document.getElementById('video-mercredi'),
+      ].filter(Boolean);
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!_rafRunning) { _rafRunning = true; tick(); }
+            const c = (typeof getCenterPhone === 'function') ? getCenterPhone() : null;
+            if (c && c.videoEl && !userControls.paused) {
+              const pl = c.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
+            }
+          } else {
+            _rafRunning = false;
+            texVids.forEach((v) => { try { v.pause(); } catch(e){} });
+          }
+        });
+      }, { threshold: 0, rootMargin: '200px 0px 200px 0px' });
+      io.observe(stage);
+    })();
   </script>
 
   <script>
