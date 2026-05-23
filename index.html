@@ -179,11 +179,28 @@
         }
       } catch (e) { console.log('[HERO-INTRO] localStorage error:', e); }
     })();
+
+    /* ══ --vh JS trick : verrouille la hauteur de viewport au chargement
+       pour empêcher les éléments de bouger pendant le scroll dans les in-app
+       browsers (Google app, LinkedIn, Instagram…) qui font varier dynamiquement
+       l'unité CSS "vh" selon la rétraction de leur barre URL.
+       Technique standard documentée depuis 2017 (CSS-Tricks). On lit
+       window.innerHeight au chargement (et uniquement sur resize réel), on
+       le stocke dans --vh. Le CSS utilise calc(var(--vh) * 100) au lieu de
+       100vh → valeur figée, plus jamais changée pendant le scroll. ══ */
+    (function () {
+      var setVH = function () {
+        document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+      };
+      setVH();
+      window.addEventListener('resize', setVH, { passive: true });
+      window.addEventListener('orientationchange', setVH, { passive: true });
+    })();
   </script>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20260523-lvh">
+  <link rel="stylesheet" href="style.css?v=20260523-jsvh">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du

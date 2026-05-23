@@ -153,8 +153,9 @@ body {
   color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  min-height: 100vh;   /* fallback navigateurs anciens */
-  min-height: 100lvh;  /* large viewport — TOUJOURS la grande taille, garanti stable dans les in-app browsers Google/LinkedIn qui interprètent vh dynamiquement */
+  min-height: 100vh;   /* fallback navigateurs sans JS */
+  min-height: 100lvh;  /* fallback CSS moderne */
+  min-height: calc(var(--vh, 1vh) * 100);  /* JS-locked : valeur figée au chargement, garantie stable dans TOUS les in-app browsers (Google app, LinkedIn, Instagram…) — c'est cette règle qui résout vraiment le bug d'éléments qui bougent */
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -518,9 +519,11 @@ body.header-light .header-burger__bar { background: #1a1230; }
 /* ══ HERO ══ */
 .hero {
   min-height: 100vh;   /* fallback */
-  min-height: 100lvh;  /* large viewport stable — empêche le hero de changer de taille quand la barre URL des in-app browsers (Google app, LinkedIn) se rétracte, ce qui poussait "Elles m'ont fait confiance" vers le bas pendant le scroll */
-  padding: calc(128px + 2vh) calc(40px - 4vw) 100px calc(80px + 4vw);    /* fallback */
-  padding: calc(128px + 2lvh) calc(40px - 4vw) 100px calc(80px + 4vw);   /* lvh stable : padding-top ne change plus pendant le scroll */
+  min-height: 100lvh;  /* fallback CSS moderne */
+  min-height: calc(var(--vh, 1vh) * 100);  /* JS-locked : hauteur figée au chargement → in-app browsers (Google app, LinkedIn) ne peuvent plus la faire varier pendant le scroll */
+  padding: calc(128px + 2vh) calc(40px - 4vw) 100px calc(80px + 4vw);                  /* fallback */
+  padding: calc(128px + 2lvh) calc(40px - 4vw) 100px calc(80px + 4vw);                 /* lvh fallback */
+  padding: calc(128px + var(--vh, 1vh) * 2) calc(40px - 4vw) 100px calc(80px + 4vw);   /* JS-locked padding-top */
   display: flex;
   align-items: center;
   gap: 56px;
@@ -1223,7 +1226,8 @@ body.header-light .header-burger__bar { background: #1a1230; }
   align-items: center;
   justify-content: center;
   min-height: 100vh;   /* fallback */
-  min-height: 100lvh;  /* large viewport stable, idem .hero */
+  min-height: 100lvh;  /* fallback CSS moderne */
+  min-height: calc(var(--vh, 1vh) * 100);  /* JS-locked, idem .hero */
   width: 100%;
   gap: 32px;
   padding: 60px 0 140px;
@@ -2446,7 +2450,7 @@ body.header-light .header-burger__bar { background: #1a1230; }
 
 /* ── ≤ 480px : mobile petit (iPhone SE) ── */
 @media (max-width: 480px) {
-  .hero { padding: 10px 0 16px; min-height: 100svh; } /* padding-top 36→10 : tout le contenu du hero remonte de 26px uniformément (distances internes inchangées) pour éloigner les barres de progress de la barre Chrome/Safari du bas */
+  .hero { padding: 10px 0 16px; min-height: 100svh; min-height: calc(var(--vh, 1vh) * 100); } /* min-height JS-locked via --vh : empêche le hero de varier pendant le scroll dans les in-app browsers (Google app, LinkedIn, Instagram) qui peuvent interpréter même 100svh comme dynamique. Fallback 100svh pour pré-iOS 15.4. */
   .header-logo { font-size: 16px !important; }
   .va2-number { font-size: clamp(54px, 15.5vw, 76px); }
   .va2-line   { font-size: clamp(16px, 4.6vw, 20px); }
