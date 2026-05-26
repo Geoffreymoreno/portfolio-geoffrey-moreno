@@ -658,8 +658,22 @@
     const startTime = performance.now();
     let prevTime = startTime;
 
+    /* Limite le rendu WebGL à ~30 fps (au lieu de 60). Les animations du
+       podium sont volontairement lentes (wobble 700ms, slide 1800ms) et
+       restent visuellement fluides à 30 fps. Économise ~50% du travail GPU
+       constant tant que le hero est visible — gros gain sur la fluidité du
+       scroll de la page (le compositor a plus de marge pour repeindre le
+       reste). Le delta-time (dt) reste correct car basé sur performance.now(). */
+    const TARGET_FRAME_INTERVAL = 1000 / 30;
+    let lastRenderTime = 0;
+
     function tick() {
       const now = performance.now();
+      if (now - lastRenderTime < TARGET_FRAME_INTERVAL - 0.5) {
+        if (_rafRunning) requestAnimationFrame(tick);
+        return;
+      }
+      lastRenderTime = now;
       const elapsed = (now - startTime) / 1000;
       const dt = Math.max(0.001, (now - prevTime) / 1000);
       prevTime = now;
