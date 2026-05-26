@@ -1727,7 +1727,8 @@
         justify-content: flex-start !important;
         padding-top: 25px !important; /* 70 → 25 : tout le contenu du hero (+300, portable, barres) remonte de 45px uniformément, distances internes inchangées. Objectif : éloigner les barres de progress de la barre Chrome/Safari du bas. */
         padding-bottom: 0 !important;
-        min-height: 100svh !important; /* dvh → svh : hauteur figée (= barre Safari toujours visible) → plus de saut visuel au scroll quand la barre se rétracte */
+        min-height: 100svh !important; /* fallback : barre Safari considérée toujours visible (iOS 15.4+ sans JS) */
+        min-height: calc(var(--vh, 1vh) * 100) !important; /* JS-locked : valeur figée au chargement, gagne sur svh — empêche les in-app browsers (LinkedIn, Google app, Instagram) de faire varier la hauteur du hero au scroll, ce qui causait le mouvement vertical de la capsule "Elles m'ont fait confiance", "+40 marques accompagnées" et la barre des logos */
       }
 
       /* (0bis) Carousel : pleine largeur de page (suppression du max-width
