@@ -3161,6 +3161,7 @@
           }
         });
 
+        rebuildTimelineCache();
         updateScrollProgress();
       }
 
@@ -3170,46 +3171,65 @@
         scrollTicking = true;
         requestAnimationFrame(() => { updateScrollProgress(); scrollTicking = false; });
       }
-      function updateScrollProgress() {
+
+      /* PERF — Cache des références DOM de la timeline.
+         Rempli par drawTimelinePath() une seule fois après dessin du SVG, et
+         invalidé (=null) au début de chaque redraw. Évite à updateScrollProgress
+         (appelé à 60Hz pendant le scroll dans la zone parcours) de refaire
+         querySelectorAll + parseFloat à chaque frame. Stocke aussi cardLen /
+         connLen / perGlowLen pré-calculés. */
+      let _tlCache = null;
+
+      function rebuildTimelineCache() {
         const stage = document.querySelector('.tl-stage');
-        if (!stage) return;
+        if (!stage) { _tlCache = null; return; }
+        const svg = stage.querySelector('.tl-timeline-path');
+        if (!svg) { _tlCache = null; return; }
+        const rows = Array.from(stage.querySelectorAll('.tl-row'));
+        if (rows.length === 0) { _tlCache = null; return; }
+        const entries = rows.map((row, i) => {
+          const glowCards = Array.from(svg.querySelectorAll('path.tl-glow[data-segment^="card"][data-row="' + i + '"]'));
+          const glowConn  = svg.querySelector('path.tl-glow[data-segment="connector"][data-row="' + i + '"]');
+          const cardLen = glowCards.length > 0 ? (parseFloat(glowCards[0].dataset.len) || 0) : 0;
+          const connLen = glowConn ? (parseFloat(glowConn.dataset.len) || 0) : 0;
+          const perGlowLen = glowCards.map((gc) => parseFloat(gc.dataset.len) || cardLen);
+          return { row, glowCards, glowConn, cardLen, connLen, perGlowLen };
+        });
+        _tlCache = { stage, entries };
+      }
+
+      function updateScrollProgress() {
+        if (!_tlCache) return;
+        const { stage, entries } = _tlCache;
         const vh = window.innerHeight || document.documentElement.clientHeight;
         // PERF — bail si la timeline est entièrement hors-écran (avec buffer
         // de 200px pour que le glow se mette en place juste avant l'arrivée).
-        // Économise ~13 opérations DOM par scroll tick (4 getBoundingClientRect
-        // forcés + 8 querySelectorAll SVG) quand l'user est ailleurs sur la page.
         const sr = stage.getBoundingClientRect();
         if (sr.bottom < -200 || sr.top > vh + 200) return;
-        const svg = stage.querySelector('.tl-timeline-path');
-        if (!svg) return;
-        const rows = Array.from(stage.querySelectorAll('.tl-row'));
         const startVH = 0.70;
         const endVH   = 0.25;
+        const startTrigger = vh * startVH;
+        const endTrigger   = vh * endVH;
+        const triggerRange = startTrigger - endTrigger;
 
-        rows.forEach((row, i) => {
-          const rect = row.getBoundingClientRect();
+        entries.forEach((entry) => {
+          const rect = entry.row.getBoundingClientRect();
           const top = rect.top;
           const height = rect.height;
-          const startTrigger = vh * startVH;
-          const endTrigger   = vh * endVH;
           let progress = 0;
           if (top <= startTrigger) {
             const traveled = startTrigger - top;
-            const total    = height + (startTrigger - endTrigger);
+            const total    = height + triggerRange;
             progress = Math.min(1, Math.max(0, traveled / total));
           }
-          const glowCards = svg.querySelectorAll('path.tl-glow[data-segment^="card"][data-row="' + i + '"]');
-          const glowConn = svg.querySelector('path.tl-glow[data-segment="connector"][data-row="' + i + '"]');
+          const { glowCards, glowConn, cardLen, connLen, perGlowLen } = entry;
           if (glowCards.length === 0) return;
-          const cardLen = parseFloat(glowCards[0].dataset.len) || 0;
-          const connLen = glowConn ? (parseFloat(glowConn.dataset.len) || 0) : 0;
           const totalLen = cardLen + connLen;
           const cardThreshold = totalLen > 0 ? cardLen / totalLen : 1;
           if (progress <= cardThreshold) {
             const cardProgress = cardThreshold > 0 ? progress / cardThreshold : 1;
-            glowCards.forEach((gc) => {
-              const len = parseFloat(gc.dataset.len) || cardLen;
-              gc.style.strokeDashoffset = String(len * (1 - cardProgress));
+            glowCards.forEach((gc, idx) => {
+              gc.style.strokeDashoffset = String(perGlowLen[idx] * (1 - cardProgress));
             });
             if (glowConn) glowConn.style.strokeDashoffset = String(connLen);
           } else {
