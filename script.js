@@ -1,7 +1,16 @@
-/* ══ HEADER — SHRINK ON SCROLL ══ */
+/* ══ HEADER — SHRINK ON SCROLL ══
+   rAF-throttle : le scroll fire 60-100 fois/sec, mais une seule classList
+   toggle par frame du navigateur suffit. Évite des micro-interruptions
+   pendant le scroll → meilleure fluidité ressentie. */
 const header = document.querySelector('.header');
+let _headerShrinkTicking = false;
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 50);
+  if (_headerShrinkTicking) return;
+  _headerShrinkTicking = true;
+  requestAnimationFrame(() => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+    _headerShrinkTicking = false;
+  });
 }, { passive: true });
 
 /* ══ RESPONSIVE BANNER SWAP — PlayStation en position 2 uniquement sur iPhone SE ══
