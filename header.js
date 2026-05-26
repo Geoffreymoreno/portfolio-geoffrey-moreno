@@ -36,6 +36,43 @@
   const RANGE = 320;
   const ease = x => 1 - Math.pow(1 - x, 2.2);
   let ticking = false;
+
+  /* PERF — Cache des positions absolues des sections (document-relative).
+     Auparavant : update() faisait 4-5 getBoundingClientRect() à chaque
+     scroll tick → 1 forced reflow par frame, à ~60 Hz.
+     Maintenant : positions stockées en absolu (top + scrollY), comparaison
+     en pure arithmétique pendant le scroll. Rafraîchi sur resize/load et
+     à chaque changement de mise en page via ResizeObserver(body). */
+  const navCache = {
+    headerH: 80,
+    vh: window.innerHeight,
+    docHeight: 0,
+    filtersTop: 0,
+    parcoursTop: 0,
+    parcoursBottom: 0,
+    contactTop: 0,
+    contactBottom: 0,
+  };
+  function refreshNavCache() {
+    if (headerEl) navCache.headerH = headerEl.offsetHeight;
+    navCache.vh = window.innerHeight;
+    navCache.docHeight = document.documentElement.scrollHeight;
+    const sy = window.scrollY;
+    if (filtersSection) {
+      navCache.filtersTop = filtersSection.getBoundingClientRect().top + sy;
+    }
+    if (parcoursBlock) {
+      const r = parcoursBlock.getBoundingClientRect();
+      navCache.parcoursTop = r.top + sy;
+      navCache.parcoursBottom = r.bottom + sy;
+    }
+    if (contactSection) {
+      const r = contactSection.getBoundingClientRect();
+      navCache.contactTop = r.top + sy;
+      navCache.contactBottom = r.bottom + sy;
+    }
+  }
+
   const update = () => {
     if (pill && !usesV2) {
       const raw = Math.min(1, Math.max(0, window.scrollY / RANGE));
@@ -43,32 +80,24 @@
     }
 
     if (isIndex && window.innerWidth > 768) {
-      const headerH = headerEl ? headerEl.offsetHeight : 80;
-      const lineY = headerH + 40;
+      const scrollY = window.scrollY;
+      const lineY = scrollY + navCache.headerH + 40;
 
       let projetsActive = false;
       let parcoursActive = false;
       let contactActive = false;
 
       if (filtersSection && parcoursBlock) {
-        const top    = filtersSection.getBoundingClientRect().top;
-        const bottom = parcoursBlock.getBoundingClientRect().top;
-        projetsActive = top <= lineY && bottom > lineY;
+        projetsActive = navCache.filtersTop <= lineY && navCache.parcoursTop > lineY;
       }
       if (parcoursBlock) {
-        const rect = parcoursBlock.getBoundingClientRect();
-        parcoursActive = rect.top <= lineY && rect.bottom > lineY;
+        parcoursActive = navCache.parcoursTop <= lineY && navCache.parcoursBottom > lineY;
       }
       if (contactSection) {
-        const rect = contactSection.getBoundingClientRect();
-        // Trigger anticipé : on allume dès que le haut de la section approche
-        // sous lineY (offset EARLY). Fallback : section visible + scroll en
-        // butée bas (cas où la page n'a pas assez de hauteur pour ancrer pile).
         const EARLY = 240;
-        const atBottom = (window.innerHeight + Math.ceil(window.scrollY)) >=
-                         (document.documentElement.scrollHeight - 2);
-        contactActive = (rect.top <= lineY + EARLY && rect.bottom > lineY) ||
-                        (atBottom && rect.top < window.innerHeight && rect.bottom > 0);
+        const atBottom = (navCache.vh + Math.ceil(scrollY)) >= (navCache.docHeight - 2);
+        contactActive = (navCache.contactTop <= lineY + EARLY && navCache.contactBottom > lineY) ||
+                        (atBottom && navCache.contactTop < scrollY + navCache.vh && navCache.contactBottom > scrollY);
         // Mutuellement exclusif avec parcours : contact prioritaire dès qu'il s'allume
         if (contactActive) parcoursActive = false;
       }
@@ -84,9 +113,17 @@
   window.addEventListener('scroll', () => {
     if (!ticking) { requestAnimationFrame(update); ticking = true; }
   }, { passive: true });
-  window.addEventListener('resize', update);
-  window.addEventListener('load', update);
-  window.addEventListener('hashchange', update);
+  window.addEventListener('resize', () => { refreshNavCache(); update(); });
+  window.addEventListener('load', () => { refreshNavCache(); update(); });
+  window.addEventListener('hashchange', () => { refreshNavCache(); update(); });
+  /* Refresh du cache quand la mise en page bouge (chargement d'images, fonts,
+     ouverture/fermeture de drawer, etc.). ResizeObserver ne fire PAS sur le
+     scroll, uniquement sur de vrais changements de taille → safe. */
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(refreshNavCache);
+    ro.observe(document.body);
+  }
+  refreshNavCache();
   update();
 
   // ══ HEADER MOBILE SPLIT — capsule GM (gauche) + burger rond (droite) ══
