@@ -429,6 +429,30 @@
         try { p.videoEl.currentTime = 0; } catch(e) {}
         p.videoEl.muted = true;
         p.videoEl.pause();
+
+        /* SAFARI — force le décodage d'une 1ère VRAIE frame sur une vidéo en
+           pause. Safari ne décode rien tant qu'on n'a pas lu → écran noir du
+           téléphone central. Un micro-seek (currentTime ~0.04s) force le
+           décodeur à produire une frame ; à 'seeked', videoWidth>0 et
+           readyState>=2 → _render() peint enfin la vidéo. On pousse aussi la
+           texture (needsUpdate). Sur Chrome la frame existe déjà → inoffensif. */
+        var _frameKick = function () {
+          try {
+            if (!p.videoEl.videoWidth || p.videoEl.readyState < 2) {
+              p.videoEl.currentTime = 0.04;
+            }
+          } catch(e) {}
+        };
+        var _onSeeked = function () {
+          if (p.screenTex) p.screenTex.needsUpdate = true;
+          if (p.screenTex && p.screenTex._render) p.screenTex._render();
+        };
+        p.videoEl.addEventListener('seeked', _onSeeked);
+        if (p.videoEl.readyState >= 1) _frameKick();
+        else p.videoEl.addEventListener('loadedmetadata', _frameKick, { once: true });
+        // Filet de sécurité : si rien n'a décodé après 600ms, on retente.
+        setTimeout(_frameKick, 600);
+
         // Auto-advance : à la fin de la vidéo du centre, on cycle vers le prochain
         p.videoEl.addEventListener('ended', () => {
           if (p.slotIndex !== 1) return;
