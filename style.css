@@ -2558,7 +2558,12 @@ body.header-light .header-burger__bar { background: #1a1230; }
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.65),
     0 14px 38px rgba(60,40,120,0.14);
+  outline: 3.75px solid #a082e6;
+  outline-offset: 3.75px;
 }
+.tl-row--creative-strategist .tl-card { outline-color: #50d2a5; }
+.tl-row--au-pair .tl-card             { outline-color: #5fb4e4; }
+.tl-row--mannequin .tl-card           { outline-color: #dcb978; }
 .tl-card__body { min-width: 0; }
 
 /* Cartouche du titre */
@@ -2868,25 +2873,8 @@ body.header-light .header-burger__bar { background: #1a1230; }
     width: 3.75px;
     border-radius: 4px;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
-
-  .tl-contour {
-    position: absolute;
-    top: 32.25px;
-    left: -3.75px;
-    right: -3.75px;
-    bottom: -3.75px;
-    border: 3.75px solid;
-    border-radius: 27.95px;
-    pointer-events: none;
-    z-index: -1;
-  }
-  .tl-row:first-of-type .tl-contour { top: 52.25px; }
-  .tl-row--phones .tl-contour              { border-color: #a082e6; }
-  .tl-row--creative-strategist .tl-contour { border-color: #50d2a5; }
-  .tl-row--au-pair .tl-contour             { border-color: #5fb4e4; }
-  .tl-row--mannequin .tl-contour           { border-color: #dcb978; }
 
   .tl-row::after {
     top: -55px;
