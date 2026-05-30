@@ -452,7 +452,6 @@
         userControls.muted = false;
         applyAudioStateToCenter();
         const pl = c.videoEl.play(); if (pl && pl.catch) pl.catch(() => {});
-        if (typeof wake === 'function') wake(); // Safari : relance la boucle pour rafraîchir la vidéo
       }
       syncControlsUI();
     }
@@ -541,7 +540,6 @@
     let isAnimating = false;
     function cycle(direction) {
       if (isAnimating || phoneInstances.length < 3) return;
-      if (typeof wake === 'function') wake(); // Safari : relance la boucle figée pour jouer la transition
       isAnimating = true;
       podiumStageEl.classList.add('is-cycling');
       const now = performance.now();
@@ -762,49 +760,10 @@
 
       renderer.render(scene, camera);
       if (!_canvasReady) { _canvasReady = true; canvas.classList.add('is-canvas-ready'); }
-      /* Safari : si la scène est au repos, on vient de rendre une dernière
-         frame (perspective 3D figée) → on STOPPE la boucle au lieu de
-         redemander une frame. wake() la relancera au prochain mouvement. */
-      if (_isSafariDesktop && !_sceneIsActive()) { _rafRunning = false; return; }
       if (_rafRunning) requestAnimationFrame(tick);
     }
     let _canvasReady = false;
     let _rafRunning = true;
-
-    /* ── PERF SAFARI (desktop uniquement) — « 3D figée au repos » ──
-       Safari peint la scène WebGL beaucoup moins efficacement que Chrome :
-       la boucle tick() tournant en continu (respiration/flottement) à 30 fps
-       sature son processeur (mesuré : ~9 s de script + CPU à 276 %).
-       Solution : sur Safari, on ARRÊTE la boucle dès que la scène est au
-       repos (aucune transition en cours + vidéo centre en pause) et on la
-       RELANCE (wake) uniquement quand quelque chose doit bouger :
-         • clic sur une flèche (cycle) → transition 3D rejouée,
-         • lecture vidéo (play) → texture rafraîchie,
-         • hero qui redevient visible.
-       => l'effet 3D (perspective, profondeur) reste affiché (dernière frame),
-          les transitions au clic restent animées, mais le coût permanent
-          disparaît. Chrome et mobile ne sont PAS concernés (3D off en mobile). */
-    const _isSafariDesktop = (function () {
-      const ua = navigator.userAgent;
-      const isSafari = /^((?!chrome|android|crios|fxios|edg).)*safari/i.test(ua);
-      const isDesktop = window.matchMedia('(min-width: 769px)').matches;
-      return isSafari && isDesktop;
-    })();
-    /* Vrai si la scène doit continuer à s'animer (transition en cours OU une
-       vidéo joue). Au repos → on peut figer. */
-    function _sceneIsActive() {
-      for (const p of phoneInstances) {
-        if (p.anim) return true;
-        if (p.wobble) return true;
-      }
-      return !userControls.paused; // une vidéo joue → besoin de rafraîchir la texture
-    }
-    /* Relance la boucle si elle était figée (Safari). No-op ailleurs. */
-    function wake() {
-      if (!_rafRunning) { _rafRunning = true; tick(); }
-    }
-    window.__podiumWake = wake; // accessible depuis cycle()/play handlers
-
     tick();
 
     /* Pause de la boucle WebGL + des 3 vidéos textures quand le hero sort du
