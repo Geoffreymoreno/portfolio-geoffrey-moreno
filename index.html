@@ -2431,9 +2431,6 @@
       <div class="parcours-capsule">
 
         <section class="tl-stage">
-          <!-- Chemin SVG dynamique : tracé droite/gauche autour des cartes
-               et coloré par section, avec glow progressif au scroll. -->
-          <svg class="tl-timeline-path" aria-hidden="true"></svg>
 
           <!-- ─── 2020 — 2026 · Créateur fashion ─── -->
           <article class="tl-row tl-row--phones" style="margin-top:40px;">
@@ -3082,10 +3079,10 @@
   <script src="header.js?v=20260526-navcache"></script>
   <script src="back-button.js?v=20260522-bfcache"></script>
 
-  <!-- ══ TIMELINE EXPERIENCE — chemin SVG dynamique + glow au scroll ══ -->
+  <!-- ══ TIMELINE EXPERIENCE — chemin SVG dynamique + glow au scroll (supprimé) ══ -->
   <script>
     (function () {
-      function drawTimelinePath() {
+      function drawTimelinePath() { return;
         const stage = document.querySelector('.tl-stage');
         if (!stage) return;
         const svg = stage.querySelector('.tl-timeline-path');

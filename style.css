@@ -2540,40 +2540,7 @@ body.header-light .header-burger__bar { background: #1a1230; }
     0 8px 24px rgba(150, 110, 40, 0.30);
 }
 
-/* SVG du trait de timeline */
-.tl-timeline-path {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  overflow: visible;
-}
-.tl-timeline-path path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-/* Trait de base (translucide, toujours visible) */
-.tl-timeline-path path.tl-base {
-  stroke-width: 4.25;
-}
-.tl-timeline-path path.tl-base[data-section="0"] { stroke: rgba(124,106,214,0.45); filter: drop-shadow(0 1px 2px rgba(60,40,120,0.12)); }
-.tl-timeline-path path.tl-base[data-section="1"] { stroke: rgba(80,200,160,0.45);  filter: drop-shadow(0 1px 2px rgba(40,130,95,0.12)); }
-.tl-timeline-path path.tl-base[data-section="2"] { stroke: rgba(80,170,220,0.45);  filter: drop-shadow(0 1px 2px rgba(40,110,170,0.12)); }
-.tl-timeline-path path.tl-base[data-section="3"] { stroke: rgba(210,180,120,0.55); filter: drop-shadow(0 1px 2px rgba(140,100,40,0.15)); }
-/* Couche glow (révèle progressive au scroll) */
-.tl-timeline-path path.tl-glow {
-  stroke-width: 5.1;
-}
-/* PERF — Option B : drop-shadow unique 8px (au lieu de 10+20 empilés).
-   Le double drop-shadow empilé créait 2 passes de gaussian blur GPU à chaque
-   scroll-tick (strokeDashoffset met à jour le tracé glow en continu) → cause
-   prouvée des frames >50ms uniques au parcours. Halo légèrement plus serré
-   mais identité "glow timeline coloré" préservée. */
-.tl-timeline-path path.tl-glow[data-section="0"] { stroke: rgba(160,130,230,0.95); filter: drop-shadow(0 0 8px rgba(160,130,230,0.70)); }
-.tl-timeline-path path.tl-glow[data-section="1"] { stroke: rgba(80,210,165,0.95);  filter: drop-shadow(0 0 8px rgba(80,210,165,0.70)); }
-.tl-timeline-path path.tl-glow[data-section="2"] { stroke: rgba(95,180,228,0.95);  filter: drop-shadow(0 0 8px rgba(95,180,228,0.70)); }
-.tl-timeline-path path.tl-glow[data-section="3"] { stroke: rgba(220,185,120,0.98); filter: drop-shadow(0 0 8px rgba(220,185,120,0.75)); }
+/* SVG du trait de timeline — supprimé */
 
 /* ─── Carte ─── */
 .tl-card {
@@ -2889,66 +2856,6 @@ body.header-light .header-burger__bar { background: #1a1230; }
       0 8px 24px rgba(150,110,40,0.30);
   }
 
-  .tl-row::before,
-  .tl-row::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3.75px;
-    border-radius: 4px;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* ───── CONTOUR : wrap complet concentrique à la card (4 côtés) ─────
-     - card border-radius 24.2 → contour radius 24.2 + 3.75 = 27.95
-     - inset 0 px : le bord intérieur du trait kiss-perfect le bord extérieur de la card
-     - z-index −1 : passe DERRIÈRE la card (cache la partie interne, ne laisse visible
-       que les 3.75 px qui débordent : effet "outline" qui épouse la card) */
-  .tl-contour {
-    position: absolute;
-    top: 32.25px;            /* padding-top row (36) − 3.75 → bord top du trait kiss le card top */
-    left: -3.75px;
-    right: -3.75px;
-    bottom: -3.75px;
-    border: 3.75px solid;
-    border-radius: 27.95px;  /* card radius 24.2 + thickness 3.75 → concentrique */
-    pointer-events: none;
-    z-index: -1;
-  }
-  .tl-row:first-of-type .tl-contour { top: 52.25px; /* padding-top first row (56) − 3.75 */ }
-  .tl-row--phones .tl-contour              { border-color: #a082e6; }
-  .tl-row--creative-strategist .tl-contour { border-color: #50d2a5; }
-  .tl-row--au-pair .tl-contour             { border-color: #5fb4e4; }
-  .tl-row--mannequin .tl-contour           { border-color: #dcb978; }
-
-  /* ───── CONNECTEURS verticaux : capsule ↔ contour (centre row) ─────
-     Passent derrière la capsule (z:-1) ; la capsule (z:5) les masque visuellement
-     pour donner l'illusion d'une entrée/sortie nette de chaque côté de la capsule.
-     ::after  = capsule → top du contour (intra-row)
-     ::before = bas du contour précédent → capsule courante (T junction sur bottom border) */
-  .tl-row::after {
-    top: -55px;
-    height: 90px;     /* de mi-capsule (-55) jusqu'au top du contour (+32.25), overlap pour T junction */
-  }
-  .tl-row:first-of-type::after {
-    top: 15px;
-    height: 40px;     /* de mi-capsule (+15) jusqu'au top du contour (+52.25) */
-  }
-  .tl-row:not(:first-of-type)::before {
-    top: -140px;      /* commence dans la bottom border du contour précédent (-140 à -136.25) */
-    height: 100px;    /* descend en T junction puis traverse la capsule jusqu'à y=-40 */
-  }
-
-  /* Couleurs (solide par section + gradient inter-sections sur le ::before) */
-  .tl-row--phones::after              { background: #a082e6; }
-  .tl-row--creative-strategist::before { background: linear-gradient(180deg, #a082e6 0%, #50d2a5 100%); }
-  .tl-row--creative-strategist::after  { background: #50d2a5; }
-  .tl-row--au-pair::before             { background: linear-gradient(180deg, #50d2a5 0%, #5fb4e4 100%); }
-  .tl-row--au-pair::after              { background: #5fb4e4; }
-  .tl-row--mannequin::before           { background: linear-gradient(180deg, #5fb4e4 0%, #dcb978 100%); }
-  .tl-row--mannequin::after            { background: #dcb978; }
 }
 @media (max-width: 640px) {
   .tl-card { padding: 22px; }
