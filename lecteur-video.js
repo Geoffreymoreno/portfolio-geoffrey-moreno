@@ -38,8 +38,20 @@
       frame.classList.toggle('is-playing', playing);
       toggle.setAttribute('aria-label', playing ? 'Mettre en pause' : 'Lire la vidéo');
     };
+    /* Sécurité : si la vidéo n'a pas encore reçu son src (cdn-video.js charge
+       les vidéos de façon différée), on le résout à la volée au moment du clic
+       pour que la lecture démarre toujours, même avant le flush différé. */
+    const ensureSrc = () => {
+      if (video.getAttribute('src')) return;
+      var ds = video.getAttribute('data-src');
+      if (!ds) return;
+      var url = (typeof window.cdnVideo === 'function') ? window.cdnVideo(ds) : ds;
+      video.setAttribute('src', url);
+      video.dataset.cdnLoaded = '1';
+    };
     const togglePlay = () => {
       if (video.paused) {
+        ensureSrc();
         video.muted = false;
         setSoundIcon();
         video.play();

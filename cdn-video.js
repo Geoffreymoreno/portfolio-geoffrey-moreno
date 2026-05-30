@@ -82,9 +82,19 @@ window.cdnVideo = function (path) {
     return v.classList.contains('hmc-video') && v.getAttribute('data-slot') === '0';
   }
 
+  /* Pertinence par viewport — CORRECTIF.
+     Ancienne version : "non-hmc-video => desktop only", ce qui excluait à tort
+     TOUTES les vidéos des pages projet en mobile (elles n'ont pas .hmc-video)
+     → jamais de src → clic sans effet sur mobile. Bug introduit le 26/05.
+     Désormais :
+       • .hmc-video        = carrousel hero MOBILE        → mobile uniquement
+       • #video-minions / -playstation / -mercredi = podium 3D DESKTOP → desktop uniquement
+       • toutes les autres (vidéos de pages projet)        → pertinentes PARTOUT */
+  var HERO_DESKTOP_IDS = { 'video-minions': 1, 'video-playstation': 1, 'video-mercredi': 1 };
   function isRelevantForViewport(v, isDesktop) {
-    var isMobileVideo = v.classList.contains('hmc-video');
-    return isMobileVideo ? !isDesktop : isDesktop;
+    if (v.classList.contains('hmc-video')) return !isDesktop;   // hero mobile
+    if (HERO_DESKTOP_IDS[v.id]) return isDesktop;               // hero 3D desktop
+    return true;                                                // pages projet : tous formats
   }
 
   function flushDeferred() {
