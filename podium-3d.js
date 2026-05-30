@@ -298,7 +298,19 @@
 
       tex._render = function () {
         const vw = videoEl.videoWidth, vh = videoEl.videoHeight;
-        const hasFrame = vw && vh && videoEl.readyState >= 2;
+        /* CAUSE DE L'ÉCRAN NOIR CENTRAL SUR SAFARI :
+           Le téléphone central reçoit son src vidéo dès le boot (vidéo
+           prioritaire via cdn-video.js), donc videoWidth>0 et readyState>=2
+           très vite — MÊME si Safari n'a décodé AUCUNE frame (vidéo en pause).
+           L'ancien test "hasFrame" devenait alors true → on dessinait la vidéo
+           → Safari peint du NOIR (pas de frame réelle). Les latéraux, eux, n'ont
+           pas encore de src → ils tombent sur le poster → s'affichent bien.
+           FIX : on ne dessine la vidéo QUE si elle joue réellement (currentTime
+           avance / pas en pause). Tant qu'elle est en pause → on force le poster,
+           comme pour les latéraux. Identique sur Chrome (la vidéo y joue/affiche
+           normalement une fois lancée). */
+        const isActuallyPlaying = !videoEl.paused && videoEl.readyState >= 2 && videoEl.currentTime > 0;
+        const hasFrame = vw && vh && isActuallyPlaying;
         if (hasFrame) {
           // Stretch : la vidéo remplit toute la surface de l'écran (peut étirer légèrement)
           ctx.drawImage(videoEl, 0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
