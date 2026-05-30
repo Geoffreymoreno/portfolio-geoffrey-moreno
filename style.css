@@ -225,8 +225,12 @@ a {
   background:
     radial-gradient(ellipse at 20% -30%, rgba(140,110,220, calc(0.22 - 0.10 * var(--t))) 0%, transparent 60%),
     linear-gradient(135deg, rgba(255,255,255, calc(0.92 - 0.32 * var(--t))) 0%, rgba(245,240,255, calc(0.86 - 0.32 * var(--t))) 100%);
-  backdrop-filter: blur(24px) saturate(1.05);
-  -webkit-backdrop-filter: blur(24px) saturate(1.05);
+  /* PERF Safari home : flou du header réduit 24px -> 12px. Le header est fixe
+     et refloute tout le scroll derrière lui à chaque frame -> gros coût de
+     "rendu" sur Safari (mesuré). N'affecte QUE la home : les pages projet
+     (body.header-dark) redéfinissent ce backdrop-filter en blur(30px). */
+  backdrop-filter: blur(12px) saturate(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
   border: 1.5px solid rgba(160,130,230, calc(0.55 - 0.25 * var(--t)));
   border-radius: 999px;
   box-shadow:
