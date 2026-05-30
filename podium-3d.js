@@ -353,12 +353,36 @@
         // Crée la texture composite (vidéo + glyph) liée à cette instance
         const screenTex = createScreenTexture(videoEl, inst, phone.poster);
         inst.screenTex = screenTex;
+        inst.useVideoTex = false;
         clone.traverse((obj) => {
           if (obj.isMesh && obj.material) {
             const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
             mats.forEach((mat) => {
-              if (mat.name === SCREEN_MATERIAL_NAME) obj.material = new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false });
+              if (mat.name === SCREEN_MATERIAL_NAME) {
+                const m = new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false });
+                inst.screenMat = m;
+                obj.material = m;
+              }
             });
+          }
+        });
+
+        /* SOLUTION GARANTIE Safari — texture-IMAGE poster séparée.
+           Le canvas-texture ne s'uploade pas de façon fiable sur Safari (écran
+           noir). Une texture-image, elle, s'affiche toujours. On charge donc le
+           poster comme texture Three.js dédiée et on l'utilise comme map de
+           l'écran TANT QUE la vidéo n'a pas de frame. Au clic (vidéo joue), la
+           bascule vers la texture vidéo (canvas) se fait dans tick(). */
+        new THREE.TextureLoader().load(phone.poster, (ptex) => {
+          ptex.colorSpace = THREE.SRGBColorSpace;
+          ptex.flipY = false;
+          ptex.wrapS = ptex.wrapT = THREE.ClampToEdgeWrapping;
+          ptex.minFilter = ptex.magFilter = THREE.LinearFilter;
+          ptex.generateMipmaps = false;
+          inst.posterTex = ptex;
+          if (!inst.useVideoTex && inst.screenMat && inst.screenMat.map !== ptex) {
+            inst.screenMat.map = ptex;
+            inst.screenMat.needsUpdate = true;
           }
         });
         const wrapper = new THREE.Group();
@@ -792,8 +816,23 @@
         p.glyphOpacity = lerp(p.glyphOpacity, p.targetGlyphOpacity, 0.18);
         p.showPlay = p.glyphOpacity > 0.01;
 
-        // Rendu de la texture composite (vidéo + glyph éventuel)
-        if (p.screenTex && p.screenTex._render) p.screenTex._render();
+        /* Bascule poster-image ↔ canvas-vidéo selon que la vidéo a une frame.
+           Tant qu'aucune frame (Safari, vidéo en pause) → on garde la texture
+           poster-image (fiable). Dès qu'une frame existe → canvas vidéo+glyph. */
+        if (p.screenMat) {
+          const vEl = p.videoEl;
+          const videoHasFrame = !!(vEl && vEl.videoWidth && vEl.videoHeight && vEl.readyState >= 2);
+          if (videoHasFrame) {
+            if (!p.useVideoTex) { p.useVideoTex = true; }
+            if (p.screenMat.map !== p.screenTex) { p.screenMat.map = p.screenTex; p.screenMat.needsUpdate = true; }
+          } else {
+            p.useVideoTex = false;
+            if (p.posterTex && p.screenMat.map !== p.posterTex) { p.screenMat.map = p.posterTex; p.screenMat.needsUpdate = true; }
+          }
+        }
+
+        // Le canvas (vidéo + glyph ▶) n'est rendu que lorsqu'on l'affiche.
+        if (p.useVideoTex && p.screenTex && p.screenTex._render) p.screenTex._render();
       });
 
       renderer.render(scene, camera);
