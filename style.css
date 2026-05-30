@@ -2904,6 +2904,53 @@ body.header-light .header-burger__bar { background: #1a1230; }
   .tl-row--mannequin::after            { background: #dcb978; }
 
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   CONNECTEURS VERTICAUX — DESKTOP (≥ 1101px)
+   Même système que mobile : trait vertical au centre de chaque capsule
+   reliant la grande section AVANT et la grande section APRÈS, touchant
+   les bordures sans entrer dedans, continu à travers la capsule.
+   Épaisseur = 4.46px = celle des bordures (outline) des cartes en desktop.
+   Géométrie ancrée aux bords réels mesurés (pré-zoom, relatif au box .tl-row) :
+     haut carte = 0 ; capsule = [-101.7 .. -38.3], centre -70 ;
+     bas carte précédente = -140.
+       ::after  = capsule → bord HAUT de cette carte (-70 → 0).
+       ::before = bas carte précédente → capsule (-140 → -101.7).
+   ════════════════════════════════════════════════════════════════════ */
+@media (min-width: 1101px) {
+  .tl-row::before,
+  .tl-row::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4.46px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .tl-row::after {
+    top: -70px;
+    height: 70px;
+  }
+  .tl-row:first-of-type::after {
+    display: none;
+  }
+  .tl-row:not(:first-of-type)::before {
+    top: -140px;
+    height: 38.3px;
+  }
+
+  .tl-row--phones::after               { background: #a082e6; }
+  .tl-row--creative-strategist::before { background: linear-gradient(180deg, #a082e6 0%, #50d2a5 100%); }
+  .tl-row--creative-strategist::after  { background: #50d2a5; }
+  .tl-row--au-pair::before             { background: linear-gradient(180deg, #50d2a5 0%, #5fb4e4 100%); }
+  .tl-row--au-pair::after              { background: #5fb4e4; }
+  .tl-row--mannequin::before           { background: linear-gradient(180deg, #5fb4e4 0%, #dcb978 100%); }
+  .tl-row--mannequin::after            { background: #dcb978; }
+}
+
 @media (max-width: 640px) {
   .tl-card { padding: 22px; }
   .tl-card__media { grid-template-columns: 1fr 1fr; }
