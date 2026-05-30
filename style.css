@@ -2857,6 +2857,8 @@ body.header-light .header-burger__bar { background: #1a1230; }
   }
 
 
+}
+@media (min-width: 769px) {
   .tl-row::before,
   .tl-row::after {
     content: "";
@@ -2906,7 +2908,6 @@ body.header-light .header-burger__bar { background: #1a1230; }
   .tl-row--au-pair::after              { background: #5fb4e4; }
   .tl-row--mannequin::before           { background: linear-gradient(180deg, #5fb4e4 0%, #dcb978 100%); }
   .tl-row--mannequin::after            { background: #dcb978; }
-
 }
 @media (max-width: 640px) {
   .tl-card { padding: 22px; }
