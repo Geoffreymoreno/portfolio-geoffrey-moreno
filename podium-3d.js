@@ -196,8 +196,16 @@
       let posterReady = false;
       posterImg.onload = () => {
         posterReady = true;
-        const vw = videoEl.videoWidth, vh = videoEl.videoHeight;
-        if (!vw || !vh || videoEl.readyState < 2) {
+        /* Dessine le poster dès qu'il est prêt SI la vidéo n'a pas encore de
+           frame décodée. Sur Safari, une vidéo en pause ne décode aucune frame
+           (readyState peut rester < 2 ou videoWidth=0) → sans ce dessin garanti,
+           l'écran du téléphone central reste NOIR jusqu'au clic. On force aussi
+           tex.needsUpdate pour pousser le poster au GPU immédiatement, même si la
+           boucle tick() a déjà tourné avant que le poster soit chargé (race).
+           Si la vidéo joue déjà (Chrome), le prochain tick réécrit la frame
+           par-dessus → aucun impact visuel sur Chrome. */
+        const hasFrame = videoEl.videoWidth && videoEl.videoHeight && videoEl.readyState >= 2;
+        if (!hasFrame) {
           ctx.drawImage(posterImg, 0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
           tex.needsUpdate = true;
         }
