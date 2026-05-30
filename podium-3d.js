@@ -309,9 +309,16 @@
            avance / pas en pause). Tant qu'elle est en pause → on force le poster,
            comme pour les latéraux. Identique sur Chrome (la vidéo y joue/affiche
            normalement une fois lancée). */
-        const isActuallyPlaying = !videoEl.paused && videoEl.readyState >= 2 && videoEl.currentTime > 0;
-        const hasFrame = vw && vh && isActuallyPlaying;
-        if (hasFrame) {
+        /* Deux cas distincts pour "vidéo pas en train de jouer" :
+           1) Jamais lancée (boot) : currentTime === 0 → Safari n'a aucune frame
+              décodée → on affiche le POSTER (sinon écran noir).
+           2) En PAUSE après avoir joué : currentTime > 0 → la vidéo A une frame
+              décodée (celle de l'instant de pause) → on dessine cette frame, pas
+              le poster, pour que l'image figée corresponde au moment du clic.
+           On dessine donc la frame vidéo dès qu'une vraie frame existe
+           (currentTime > 0 && readyState >= 2), qu'elle joue ou soit en pause. */
+        const hasRealFrame = vw && vh && videoEl.readyState >= 2 && videoEl.currentTime > 0;
+        if (hasRealFrame) {
           // Stretch : la vidéo remplit toute la surface de l'écran (peut étirer légèrement)
           ctx.drawImage(videoEl, 0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
         } else if (posterReady) {
