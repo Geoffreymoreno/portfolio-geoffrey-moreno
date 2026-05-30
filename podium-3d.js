@@ -189,26 +189,32 @@
       tex.minFilter = tex.magFilter = THREE.LinearFilter;
       tex.generateMipmaps = false;
 
-      // Poster image: drawn as fallback while the video has no decoded frame
-      // (preload="auto" doesn't guarantee a frame at t=0 on a paused video).
+      // Poster image: drawn as fallback while the video has no decoded frame.
+      // Safari ne décode AUCUNE frame d'une vidéo en pause → sans ce poster
+      // l'écran central reste noir. On garantit son affichage.
       const posterImg = new Image();
+      posterImg.crossOrigin = 'anonymous';
       posterImg.decoding = 'async';
       let posterReady = false;
+      // Dessine le poster dans le canvas-texture et pousse-le au GPU. Répété
+      // plusieurs fois au boot car Safari peut ignorer le 1er needsUpdate si
+      // la texture n'est pas encore liée au matériau au moment du dessin.
+      const paintPoster = () => {
+        if (!posterReady) return;
+        const hasFrame = videoEl.videoWidth && videoEl.videoHeight && videoEl.readyState >= 2;
+        if (hasFrame) return; // la vidéo joue : on la laisse (Chrome)
+        ctx.clearRect(0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
+        ctx.drawImage(posterImg, 0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
+        tex.needsUpdate = true;
+      };
+      tex._paintPoster = paintPoster;
+      tex._posterIsReady = () => posterReady;
       posterImg.onload = () => {
         posterReady = true;
-        /* Dessine le poster dès qu'il est prêt SI la vidéo n'a pas encore de
-           frame décodée. Sur Safari, une vidéo en pause ne décode aucune frame
-           (readyState peut rester < 2 ou videoWidth=0) → sans ce dessin garanti,
-           l'écran du téléphone central reste NOIR jusqu'au clic. On force aussi
-           tex.needsUpdate pour pousser le poster au GPU immédiatement, même si la
-           boucle tick() a déjà tourné avant que le poster soit chargé (race).
-           Si la vidéo joue déjà (Chrome), le prochain tick réécrit la frame
-           par-dessus → aucun impact visuel sur Chrome. */
-        const hasFrame = videoEl.videoWidth && videoEl.videoHeight && videoEl.readyState >= 2;
-        if (!hasFrame) {
-          ctx.drawImage(posterImg, 0, 0, SCREEN_TEX_W, SCREEN_TEX_H);
-          tex.needsUpdate = true;
-        }
+        paintPoster();
+        // Re-paint forcé à plusieurs reprises pour contourner le timing Safari
+        // (la texture peut ne pas encore être attachée au mesh au 1er paint).
+        [50, 150, 350, 700, 1200].forEach((d) => setTimeout(paintPoster, d));
       };
       if (posterUrl) posterImg.src = posterUrl;
 
