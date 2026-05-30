@@ -2873,16 +2873,26 @@ body.header-light .header-burger__bar { background: #1a1230; }
     z-index: 0;
   }
 
+  /* Géométrie ancrée aux bords réels (mesurée en pré-zoom, relative au
+     box de .tl-row). Repères : haut carte = +36 ; capsule = [-59.7 .. -14.2],
+     centre -37 ; bas de la carte précédente = -110.
+       ::after  = segment capsule → bord HAUT de cette carte
+                  (de -37 centre-capsule jusqu'à +36 = touche le bord, sans entrer).
+       ::before = segment bas carte précédente → capsule
+                  (de -110 = bord bas carte du dessus, jusqu'à -59.7 = haut capsule,
+                   sans dépasser dans la carte du dessus).
+     Les extrémités internes passent SOUS la capsule (z-index 5 > 0) → trait
+     visuellement continu à travers la capsule, des deux côtés. */
   .tl-row::after {
-    top: -55px;
-    height: 55px;
+    top: -37px;
+    height: 73px;
   }
   .tl-row:first-of-type::after {
     display: none;
   }
   .tl-row:not(:first-of-type)::before {
-    top: -140px;
-    height: 85px;
+    top: -110px;
+    height: 50.3px;
   }
 
   .tl-row--phones::after              { background: #a082e6; }
