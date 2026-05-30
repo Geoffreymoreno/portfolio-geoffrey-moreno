@@ -174,6 +174,18 @@ body {
   body { background-attachment: scroll !important; }
 }
 
+/* Safari DESKTOP : même problème que mobile. WebKit re-peint très mal un fond
+   multi-gradient en background-attachment:fixed à chaque frame de scroll →
+   clignotement / superposition de l'arrière-plan dans le haut de la page
+   (confirmé sur Safari ordinateur). Chrome/Blink le gère bien → on garde
+   "fixed" partout sauf sur Safari. Le ciblage @supports(-webkit-hyphens:none)
+   ne matche QUE Safari/WebKit (Chrome ne valide pas cette condition).
+   Visuellement quasi imperceptible : le fond couvre tout le viewport, "scroll"
+   vs "fixed" sur un dégradé pleine page est indistinguable à l'œil. */
+@supports (-webkit-hyphens: none) {
+  body { background-attachment: scroll; }
+}
+
 main {
   width: 100%;
   max-width: 100vw;
