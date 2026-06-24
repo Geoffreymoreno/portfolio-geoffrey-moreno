@@ -213,7 +213,7 @@
   <link rel="preload" href="assets/fonts/poppins/Poppins-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20260526-perf">
+  <link rel="stylesheet" href="style.css?v=20260530-safaribg">
   <style>
     /* Couleur de secours du fond — évite le flash blanc entre le moment
        où le navigateur a vidé l'écran et celui où le dégradé pastel du
@@ -2113,15 +2113,7 @@
           <div class="hmc-phone-frame">
             <!-- Badge titre — capsule "Top créa" avec logo brand par slide -->
             <div class="hmc-info">
-              <div class="hmc-info-slot is-active" data-slot="2">
-                <span class="hmc-badge hmc-badge--netflix">
-                  <span class="hmc-badge__icon" aria-hidden="true">
-                    <img class="hmc-badge__logo" src="assets/hero-section/logo-netflix-blanc.webp" width="13" height="13" alt="">
-                  </span>
-                  Top créa du compte en 2023
-                </span>
-              </div>
-              <div class="hmc-info-slot" data-slot="0">
+              <div class="hmc-info-slot is-active" data-slot="0">
                 <span class="hmc-badge">
                   <span class="hmc-badge__icon" aria-hidden="true">
                     <img class="hmc-badge__logo hmc-badge__logo--ps" src="assets/scrolling-logos/playstation-logo-2.png" width="13" height="13" alt="">
@@ -2137,18 +2129,26 @@
                   Top créa du compte en 2022
                 </span>
               </div>
+              <div class="hmc-info-slot" data-slot="2">
+                <span class="hmc-badge hmc-badge--netflix">
+                  <span class="hmc-badge__icon" aria-hidden="true">
+                    <img class="hmc-badge__logo" src="assets/hero-section/logo-netflix-blanc.webp" width="13" height="13" alt="">
+                  </span>
+                  Top créa du compte en 2023
+                </span>
+              </div>
             </div>
 
             <div class="hmc-phone-shell">
               <div class="hmc-video-wrap" id="hmcWrap">
-                <video class="hmc-video is-active" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
-                <video class="hmc-video" data-slot="0" data-src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="1" data-src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <!-- Overlays anti-flash-noir iOS Safari : couvrent la vidéo jusqu'à ce
                      que la 1re frame soit réellement en lecture (event 'playing'). -->
-                <img class="hmc-video-cover is-active" data-slot="2" src="assets/hero-section/screen-mercredi.webp" width="154" height="334" alt="" aria-hidden="true">
-                <img class="hmc-video-cover" data-slot="0" src="assets/hero-section/screen-playstation.webp" width="154" height="334" alt="" aria-hidden="true">
+                <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation.webp" width="154" height="334" alt="" aria-hidden="true">
                 <img class="hmc-video-cover" data-slot="1" src="assets/hero-section/screen-minions.webp" width="154" height="334" alt="" aria-hidden="true">
+                <img class="hmc-video-cover" data-slot="2" src="assets/hero-section/screen-mercredi.webp" width="154" height="334" alt="" aria-hidden="true">
                 <button class="hmc-playpause is-paused" type="button" aria-label="Lecture / Pause" id="hmcPlayPause">
                   <svg class="icon-play"  viewBox="0 0 24 24"><polygon points="7,5 19,12 7,19"/></svg>
                   <svg class="icon-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
@@ -2431,9 +2431,6 @@
       <div class="parcours-capsule">
 
         <section class="tl-stage">
-          <!-- Chemin SVG dynamique : tracé droite/gauche autour des cartes
-               et coloré par section, avec glow progressif au scroll. -->
-          <svg class="tl-timeline-path" aria-hidden="true"></svg>
 
           <!-- ─── 2020 — 2026 · Créateur fashion ─── -->
           <article class="tl-row tl-row--phones" style="margin-top:40px;">
@@ -2675,7 +2672,7 @@
   }
   </script>
 
-  <script type="module" src="podium-3d.js?v=20260526-30fps"></script>
+  <script type="module" src="podium-3d.js?v=20260530-pauseframe"></script>
 
   <script>
     // ── VA2 logo-cloud generation ──
@@ -3082,10 +3079,10 @@
   <script src="header.js?v=20260526-navcache"></script>
   <script src="back-button.js?v=20260522-bfcache"></script>
 
-  <!-- ══ TIMELINE EXPERIENCE — chemin SVG dynamique + glow au scroll ══ -->
+  <!-- ══ TIMELINE EXPERIENCE — chemin SVG dynamique + glow au scroll (supprimé) ══ -->
   <script>
     (function () {
-      function drawTimelinePath() {
+      function drawTimelinePath() { return;
         const stage = document.querySelector('.tl-stage');
         if (!stage) return;
         const svg = stage.querySelector('.tl-timeline-path');
@@ -3352,7 +3349,7 @@
     })();
   </script>
 
-  <script src="cdn-video.js?v=20260624-heroreorder"></script>
+  <script src="cdn-video.js?v=20260530-mobilefix"></script>
 
   <!-- ══ PERF — Pause des animations CSS hors-écran ══
        Le ticker (logos défilants) et les ~25 logos flottants du hero ont des
