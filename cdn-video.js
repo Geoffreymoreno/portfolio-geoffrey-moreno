@@ -75,11 +75,12 @@ window.cdnVideo = function (path) {
   }
 
   /* La vidéo centre se distingue par : sur desktop l'ID #video-playstation
-     (téléphone central du podium 3D), sur mobile la classe .hmc-video
-     avec data-slot="0" (premier slot du carousel, .is-active au boot). */
+     (téléphone central du podium 3D), sur mobile la 1re vidéo du carousel
+     (celle qui porte .is-active au boot — indépendant de l'ordre des data-slot,
+     qui encodent l'identité marque/couleur et non la position). */
   function isPriorityVideo(v, isDesktop) {
     if (isDesktop) return v.id === 'video-playstation';
-    return v.classList.contains('hmc-video') && v.getAttribute('data-slot') === '0';
+    return v.classList.contains('hmc-video') && v.classList.contains('is-active');
   }
 
   /* Pertinence par viewport — CORRECTIF.
