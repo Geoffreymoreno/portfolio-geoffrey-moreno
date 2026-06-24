@@ -55,7 +55,12 @@ window.CDN_BASE = 'https://cdn.geoffrey-moreno.com';
 /* Résout un chemin de vidéo : renvoie l'URL CDN si CDN_BASE est défini,
    sinon le chemin local inchangé. */
 window.cdnVideo = function (path) {
-  var local = String(path || '').replace(/^\/+/, '');
+  var raw = String(path || '');
+  /* URL déjà absolue (http(s)://…) → on la respecte telle quelle. Permet de
+     forcer une vidéo précise à être servie ailleurs que par le CDN (ex. une
+     vidéo présente sur Vercel mais pas encore copiée sur le CDN R2). */
+  if (/^https?:\/\//i.test(raw)) return raw;
+  var local = raw.replace(/^\/+/, '');
   if (!window.CDN_BASE) return local;
   return window.CDN_BASE.replace(/\/+$/, '') + '/' + local;
 };

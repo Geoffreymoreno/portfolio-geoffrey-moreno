@@ -2153,7 +2153,8 @@
 
             <div class="hmc-phone-shell">
               <div class="hmc-video-wrap" id="hmcWrap">
-                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation-mobile.mp4" poster="assets/hero-section/screen-playstation-mobile.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
+                <!-- data-src en URL ABSOLUE Vercel : cette vidéo (9:18) n'est pas sur le CDN R2, on la sert depuis le site. cdnVideo() respecte les URLs absolues. -->
+                <video class="hmc-video is-active" data-slot="0" data-src="https://www.geoffrey-moreno.com/assets/hero-section/playstation-mobile.mp4" poster="assets/hero-section/screen-playstation-mobile.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="1" data-src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <!-- Overlays anti-flash-noir iOS Safari : couvrent la vidéo jusqu'à ce
@@ -3361,7 +3362,7 @@
     })();
   </script>
 
-  <script src="cdn-video.js?v=20260530-mobilefix"></script>
+  <script src="cdn-video.js?v=20260624-vercelfallback"></script>
 
   <!-- ══ PERF — Pause des animations CSS hors-écran ══
        Le ticker (logos défilants) et les ~25 logos flottants du hero ont des
