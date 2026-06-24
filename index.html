@@ -1167,15 +1167,10 @@
         -webkit-mask-image: none !important;
                 mask-image: none !important;
       }
-      /* Universal (slot 1) et Netflix (slot 2) : "contain" + calage HAUT → vidéo
-         visible en entier, toute la largeur. Le petit vide en bas est estompé par le fondu.
-         PlayStation (slot 0) fait EXCEPTION : sa vidéo plus courte laissait un grand vide
-         noir en bas mal masqué → on la REMET dans son état initial (cover centré, comme
-         avant toute modif) : téléphone plein, pas de bande noire. */
-      .hmc-phone-frame:has(.hmc-video.is-active[data-slot="0"]) .hmc-video-wrap > .hmc-video {
-        object-fit: cover !important;
-        object-position: center !important;
-      }
+      /* Les 3 vidéos sont en "contain" + calage HAUT → visibles en entier, toute la largeur.
+         PlayStation utilise désormais une vidéo au format 9:18 (= format du téléphone),
+         donc "contain" la fait remplir pile le cadre : aucune bande noire, aucun rognage.
+         Universal/Netflix (plus courtes) ont un petit vide en bas estompé par le fondu. */
       /* Overlay anti-flash-noir iOS : positionné EXACTEMENT comme la vidéo,
          dessus en z-index. Visible uniquement pour le slot actif, fade-out
          déclenché par requestVideoFrameCallback (= 1re frame physiquement
@@ -1197,11 +1192,6 @@
         transition: opacity 0.25s ease;
         transform: translateZ(0);
         will-change: opacity;
-      }
-      /* Overlay slot 0 (PlayStation) aligné sur sa vidéo remise en cover centré. */
-      .hmc-phone-frame:has(.hmc-video.is-active[data-slot="0"]) .hmc-video-wrap > .hmc-video-cover {
-        object-fit: cover;
-        object-position: center;
       }
       .hmc-video-wrap > .hmc-video-cover.is-active {
         opacity: 1;
@@ -2163,12 +2153,12 @@
 
             <div class="hmc-phone-shell">
               <div class="hmc-video-wrap" id="hmcWrap">
-                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation.mp4" poster="assets/hero-section/screen-playstation.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
+                <video class="hmc-video is-active" data-slot="0" data-src="assets/hero-section/playstation-mobile.mp4" poster="assets/hero-section/screen-playstation-mobile.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="1" data-src="assets/hero-section/minions.mp4" poster="assets/hero-section/screen-minions.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <video class="hmc-video" data-slot="2" data-src="assets/hero-section/mercredi.mp4" poster="assets/hero-section/screen-mercredi.webp" width="154" height="334" muted loop playsinline preload="auto"></video>
                 <!-- Overlays anti-flash-noir iOS Safari : couvrent la vidéo jusqu'à ce
                      que la 1re frame soit réellement en lecture (event 'playing'). -->
-                <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation.webp" width="154" height="334" alt="" aria-hidden="true">
+                <img class="hmc-video-cover is-active" data-slot="0" src="assets/hero-section/screen-playstation-mobile.webp" width="154" height="334" alt="" aria-hidden="true">
                 <img class="hmc-video-cover" data-slot="1" src="assets/hero-section/screen-minions.webp" width="154" height="334" alt="" aria-hidden="true">
                 <img class="hmc-video-cover" data-slot="2" src="assets/hero-section/screen-mercredi.webp" width="154" height="334" alt="" aria-hidden="true">
                 <button class="hmc-playpause is-paused" type="button" aria-label="Lecture / Pause" id="hmcPlayPause">
