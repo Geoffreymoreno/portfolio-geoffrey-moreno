@@ -415,11 +415,10 @@ if (galleryGrid && galleryViewBtns.length) {
     if (typeof applyGalleryState === 'function') applyGalleryState();
   }
 
-  /* Défaut 2 colonnes sur tous les MacBook Pro (13/14" → 1440px, 16" → 1728px).
-     Au-dessus de 1728px (écran externe) et en dessous de 1101px, défaut 3 cols.
+  /* Défaut 3 colonnes sur tous les écrans d'ordinateur (MacBook Pro 13/14/16"
+     comme écrans externes). En dessous de 900px, le CSS rabat à 2 puis 1 col.
      L'utilisateur peut toujours changer via les boutons de la galerie. */
-  const isMacBookPro = window.matchMedia('(min-width: 1101px) and (max-width: 1728px)').matches;
-  setGridView(isMacBookPro ? 2 : 3);
+  setGridView(3);
 
   galleryViewBtns.forEach((btn) => {
     btn.addEventListener('click', () => setGridView(btn.dataset.cols));
