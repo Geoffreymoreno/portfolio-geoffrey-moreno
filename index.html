@@ -1167,10 +1167,15 @@
         -webkit-mask-image: none !important;
                 mask-image: none !important;
       }
-      /* Les 3 vidéos (PlayStation, Universal, Netflix) sont en "contain" + calage HAUT :
-         priorité = voir TOUTE la vidéo, surtout en largeur (bannière de texte et bords
-         gauche/droite entiers). PlayStation laisse un peu plus de vide en bas (vidéo
-         plus courte), assumé : tout voir prime sur le remplissage. */
+      /* Universal (slot 1) et Netflix (slot 2) : "contain" + calage HAUT → vidéo
+         visible en entier, toute la largeur. Le petit vide en bas est estompé par le fondu.
+         PlayStation (slot 0) fait EXCEPTION : sa vidéo plus courte laissait un grand vide
+         noir en bas mal masqué → on la REMET dans son état initial (cover centré, comme
+         avant toute modif) : téléphone plein, pas de bande noire. */
+      .hmc-phone-frame:has(.hmc-video.is-active[data-slot="0"]) .hmc-video-wrap > .hmc-video {
+        object-fit: cover !important;
+        object-position: center !important;
+      }
       /* Overlay anti-flash-noir iOS : positionné EXACTEMENT comme la vidéo,
          dessus en z-index. Visible uniquement pour le slot actif, fade-out
          déclenché par requestVideoFrameCallback (= 1re frame physiquement
@@ -1192,6 +1197,11 @@
         transition: opacity 0.25s ease;
         transform: translateZ(0);
         will-change: opacity;
+      }
+      /* Overlay slot 0 (PlayStation) aligné sur sa vidéo remise en cover centré. */
+      .hmc-phone-frame:has(.hmc-video.is-active[data-slot="0"]) .hmc-video-wrap > .hmc-video-cover {
+        object-fit: cover;
+        object-position: center;
       }
       .hmc-video-wrap > .hmc-video-cover.is-active {
         opacity: 1;
