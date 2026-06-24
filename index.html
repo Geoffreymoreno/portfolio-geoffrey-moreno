@@ -1139,7 +1139,7 @@
          en suivant la courbure des coins arrondis (pas d'artefact rectangulaire). */
       .hmc-video-wrap {
         width: min(145px, 42vw) !important;
-        aspect-ratio: 9 / 18 !important;
+        aspect-ratio: 9 / 18 !important;  /* téléphone FIGÉ : même forme pour les 3 vidéos (largeur + hauteur constantes) */
         padding: 5.44px !important;
         box-sizing: border-box !important;
         background: linear-gradient(160deg, #1a1422 0%, #050308 50%, #1a1422 100%) !important;
@@ -1155,10 +1155,27 @@
         width: calc(100% - 10.88px) !important;
         height: calc(100% - 10.88px) !important;
         border-radius: 24px !important;
+        /* "contain" + calage HAUT : la vidéo est dézoomée pour être visible EN ENTIER
+           (notamment sur toute la largeur), sans crop. Comme les vidéos sont moins
+           allongées que le téléphone figé (9/18), il reste un vide en bas → reporté
+           tout en bas via object-position:top (haut net, aucune barre en haut). Ce vide
+           tombe sous le fondu blanc du mask (commence à 57%) → estompé, invisible. */
+        object-fit: contain !important;
+        object-position: top center !important;
         /* Mask gradient retiré : il créait un fade transparent qui révélait le
            chassis noir derrière → effet d'"ombre noire" sur le bas du screen. */
         -webkit-mask-image: none !important;
                 mask-image: none !important;
+      }
+      /* EXCEPTION PlayStation (slot 0) : sa vidéo (9:16) est plus trapue que le
+         téléphone figé (9/18) → en "contain" elle laissait un grand vide en bas
+         (~26%, téléphone à moitié vide). On la repasse donc en "cover" + calage
+         HAUT : elle remplit le téléphone, le haut reste 100% visible et net, et
+         seul le bas est rogné — bas qui tombe sous le fondu blanc, donc discret.
+         Netflix (slot 2) et Universal (slot 1) restent en "contain" (tout voir). */
+      .hmc-phone-frame:has(.hmc-video.is-active[data-slot="0"]) .hmc-video-wrap > .hmc-video {
+        object-fit: cover !important;
+        object-position: top center !important;
       }
       /* Overlay anti-flash-noir iOS : positionné EXACTEMENT comme la vidéo,
          dessus en z-index. Visible uniquement pour le slot actif, fade-out
@@ -1173,13 +1190,19 @@
         width: calc(100% - 10.88px);
         height: calc(100% - 10.88px);
         border-radius: 24px;
-        object-fit: cover;
+        object-fit: contain;        /* aligné sur .hmc-video (contain + haut) pour que l'overlay anti-flash recouvre exactement la vidéo, sans décalage */
+        object-position: top center;
         opacity: 0;
         pointer-events: none;
         z-index: 1;
         transition: opacity 0.25s ease;
         transform: translateZ(0);
         will-change: opacity;
+      }
+      /* L'overlay anti-flash du slot 0 (PlayStation) suit le "cover" de sa vidéo (voir exception ci-dessus) pour rester aligné pixel près. */
+      .hmc-phone-frame:has(.hmc-video.is-active[data-slot="0"]) .hmc-video-wrap > .hmc-video-cover {
+        object-fit: cover;
+        object-position: top center;
       }
       .hmc-video-wrap > .hmc-video-cover.is-active {
         opacity: 1;
